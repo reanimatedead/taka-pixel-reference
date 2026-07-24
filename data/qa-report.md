@@ -76,3 +76,36 @@ Agent 4 (qa-verifier) による `#fold` 追加分の機械検証。
 - リンク: BROKEN 0（403偽陰性1、実害なし）。
 - ローカル配信: OK（`id="fold"` = 1、HTTP 200。※ローカルツール制約により compat date 一時オーバーライドで確認）。
 - `.env` 系ファイルへの接触: なし。破壊的削除: なし（新規スクラッチdirのみ使用）。
+
+---
+
+## UPDATE-002: GitHub Pages 移行 QA — 2026-07-24
+
+Agent 3 (qa-verifier) による Pages 移行後の機械検証。配信ディレクトリは `public/` → `docs/` に変更済み。
+
+### 1. HTML構文（html-validate）
+- `npx html-validate docs/index.html` → **exit 0 / エラー0**。パス変更後も直下の `.htmlvalidate.json`（`html-validate:recommended` + 2ルール off）が有効。設定はパス非依存のため修正不要だった。
+
+### 2. Fold アンカー存在確認
+- `grep -c 'id="fold"' docs/index.html` → **1**。移動でセクションが失われていないことを確認。
+
+### 3. .nojekyll 存在確認
+- `ls docs/.nojekyll` → 存在（空ファイル）。GitHub Pages の Jekyll 処理は無効化される。
+
+### 4. 旧パス（`public/`）参照の残置スキャン
+`grep -rn "public/" README.md INSTRUCTION.md UPDATE-001.md` の結果：
+
+| ファイル | 行 | 内容 | 扱い |
+| --- | --- | --- | --- |
+| README.md | — | 該当なし（本更新で `docs/` へ全面書き換え済み） | 対応済 |
+| INSTRUCTION.md | 29, 48, 75, 103, 111 | `public/index.html` 等への参照 | **historical**（当時の記録として保持・修正しない） |
+| UPDATE-001.md | 24, 55 | `public/index.html` への参照 | **historical**（当時の記録として保持・修正しない） |
+
+> 注: INSTRUCTION.md / UPDATE-001.md は過去の作業指示書であり、当時の配信構成（`public/`）を正しく記録している歴史的文書。現行の運用パスは README.md と本 report が示す `docs/`。歴史的文書は原文保持のため修正しない。
+
+### 総括（UPDATE-002）
+- HTML構文: OK（`docs/index.html` エラー0、設定パス非依存で有効）。
+- Fold アンカー: OK（`id="fold"` = 1）。
+- `.nojekyll`: OK（存在）。
+- 旧パス参照: 現行運用文書（README.md）には残置なし。歴史的文書2件の参照は意図的に保持。
+- `.env` 系ファイルへの接触: なし。
