@@ -12,6 +12,9 @@ Pixel a シリーズ（4a → 10a）の個人用リファレンスページ「**
 .
 ├── docs/
 │   ├── index.html      # 本体（静的1ページ）
+│   ├── dict/           # 不具合辞書（データと表示を分離した別ページ）
+│   │   ├── index.html          # 表示・検索（entries.json を fetch して描画）
+│   │   └── data/entries.json   # 不具合データ本体（スキーマは UPDATE-004.md）
 │   └── .nojekyll        # GitHub Pages の Jekyll 処理を無効化
 ├── data/               # 検証ログ（sources / linkcheck / qa-report など）
 ├── README.md
@@ -43,6 +46,16 @@ Android の月例セキュリティパッチ配信後に、以下を回す：
 4. 人間が `git push` を実行 → 1〜2 分で自動反映される
 
 出典は Google 公式ヘルプ（support.google.com 系）を一次ソースとし、国内報道は補助として扱う。
+
+## 不具合辞書（dict/）
+
+整備手帳とは別ページの「不具合 × 対処法 辞書」。1000件を書くのではなく、1000件が貯まって腐らない構造（データ JSON と表示 HTML の分離）を先に作るという思想で運用する。
+
+- **URL**: `https://reanimatedead.github.io/taka-pixel-reference/dict/`
+- **データ本体**: `docs/dict/data/entries.json`（スキーマ定義は `UPDATE-004.md` を参照。`id` は PXD-連番4桁で欠番・再利用禁止、`yomi` はあいうえお索引の生成キー、`category` は10分類のみ、`severity` = critical/high/medium/low、`fix_status` = patched/open/wontfix/spec、`verify_state` は新規 UNVERIFIED 開始が既定）
+- **表示**: `docs/dict/index.html`（単一ファイル。あいうえお索引 / A-Z 索引 / 全文検索 / カテゴリ・重要度・修正状況・機種フィルタ。ビルド工程なし）
+- **収録基準（3条件をすべて満たすもののみ収録）**: ①独立した複数ソースで報告 ②再現時に実害がある ③対処法または回避策が記述できる。満たさない情報は件数が欲しくても入れない
+- **項目の追加手順**: `docs/dict/data/entries.json` に追記 → `python3 -m json.tool docs/dict/data/entries.json > /dev/null` で構文検証 → push。**HTML は触らない**
 
 ## 移行履歴
 
