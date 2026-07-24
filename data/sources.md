@@ -64,3 +64,54 @@ Agent 2 (research-verifier) による `#fold` セクションの検証ログ。`
 
 - 事実誤りは発見されなかったため本文の数値・日付修正は行っていない（`data/corrections.md` への記録なし）。UNVERIFIED→VERIFIED の状態更新のみ実施。
 - 保証到達年月は一次ソースが「販売開始日+年数」で規定するため、月単位の値は算出値。年数（duration）自体は一次ソースで直接確認できるため VERIFIED とした。
+
+---
+
+# 専門TS（#ts-pro）コードネーム検証ログ — UPDATE-003 / Agent 2
+
+検証日: **2026-07-24**。一次ソース指定: `https://developers.google.com/android/images`（Factory Images）。
+
+## 検証結果サマリ: 全項目 UNVERIFIED のまま据え置き
+
+**理由（重要・偽の検証成功を出さないための記録）:**
+一次ソースに指定された Factory Images ページ（`https://developers.google.com/android/images`）は、
+コードネーム→ダウンロードリンクの本体テーブルが、利用規約への同意（acknowledgement）後に
+JavaScript で動的挿入される構造。今回利用した取得系（HTML→Markdown 変換・JS非実行）では
+当該テーブルが本文として取得できず、ページ本文からコードネーム文字列を一件も確認できなかった。
+
+- 取得試行1: `WebFetch` で当該ページ本文取得 → 導入文・警告・規約のみ。ダウンロード表は本文に含まれず（NOT LISTED）。
+- 取得試行2: `WebSearch`（allowed_domains=developers.google.com）→ ページの存在は確認できるが個別コードネームは列挙されず。
+
+指示書の絶対ルール「確認できない項目は UNVERIFIED のまま残す／推測で埋めない／偽の検証成功を報告しない」に従い、
+**既存記載（sunfish, bramble, barbet, bluejay, lynx, akita, tegu, felix, comet）を一次ソースで照合できなかったため、
+これらを VERIFIED に昇格させない。** 一般に流通している値と一致はしているが、
+指定された一次ソース上での実照合が取れていない以上、UNVERIFIED を維持する。
+
+## 各項目の状態
+
+| デバイス | HTML記載 | 一次ソース照合 | 状態 |
+| --- | --- | --- | --- |
+| Pixel 4a | sunfish | 未取得（JS-gated table） | UNVERIFIED |
+| Pixel 4a (5G) | bramble | 未取得 | UNVERIFIED |
+| Pixel 5a | barbet | 未取得 | UNVERIFIED |
+| Pixel 6a | bluejay | 未取得 | UNVERIFIED |
+| Pixel 7a | lynx | 未取得 | UNVERIFIED |
+| Pixel 8a | akita | 未取得 | UNVERIFIED |
+| Pixel 9a | tegu | 未取得 | UNVERIFIED |
+| **Pixel 10a（最優先）** | 要確認 | 未取得（そもそもページで存在確認できず） | **UNVERIFIED** |
+| Pixel Fold（初代） | felix | 未取得 | UNVERIFIED |
+| Pixel 9 Pro Fold | comet | 未取得 | UNVERIFIED |
+| **Pixel 10 Pro Fold** | 要確認 | 未取得 | **UNVERIFIED** |
+
+## Play Integrity（ブートローダーアンロックで決済系アプリ不可）
+
+- HTML記載: `#ts-pro` Lv3 C の caveat に UNVERIFIED 付きで記載。
+- 一次ソース照合: 決済/銀行アプリの Play Integrity(旧SafetyNet) 判定はデバイス完全性(MEETS_DEVICE_INTEGRITY)を要求し、
+  ブートローダーアンロック端末では当該判定が通らない、という挙動は Play Integrity API の一般的仕様として広く知られる。
+  ただし本 UPDATE で指定された一次ソース（Factory Images ページ）はこの事項の出典ではなく、
+  Google Play Integrity 公式ドキュメントでの実照合を今回実施していないため **UNVERIFIED を維持**。
+
+## 結論
+
+- 本文修正なし（誤りを一次ソース上で確認できていないため、修正の根拠がない = `data/corrections.md` への記録事項なし）。
+- 10a / 10 Pro Fold を含む全コードネームは UNVERIFIED のまま。完了条件「10a コードネームが VERIFIED 化 or 理由付き UNVERIFIED」→ **理由付き UNVERIFIED で確定**。
