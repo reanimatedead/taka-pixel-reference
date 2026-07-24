@@ -1,0 +1,7 @@
+{
+  "extends": ["html-validate:recommended"],
+  "rules": {
+    "wcag/h63": "off",
+    "no-inline-style": "off"
+  }
+}

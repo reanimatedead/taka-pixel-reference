@@ -1,0 +1,16 @@
+{
+  "name": "taka-pixel-reference",
+  "version": "1.0.0",
+  "description": "Pixel a シリーズ（4a → 10a）の個人用リファレンスページ。スペック比較・サポート期限・公式ヘルプリンク・電話/Gmail 機能・OS別不具合マトリクス・トラブルシューティングを 1 枚の静的 HTML に集約したもの。",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "html-validate": "^11.5.6"
+  }
+}
