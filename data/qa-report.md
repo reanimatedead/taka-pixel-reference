@@ -157,3 +157,37 @@ Agent 3 (qa-verifier) による Pages 移行後の機械検証。配信ディレ
 - コードネーム表の全エントリ・Play Integrity 記述は `UNVERIFIED`（一次ソースの動的テーブルが取得系で非取得のため。詳細は `data/sources.md`）。QA としては「UNVERIFIED が意図的に残っていること」を確認 = 正常。
 
 総合判定: **PASS**（構文0エラー・必須grep全一致・死リンク0）。
+
+---
+
+# QA報告 — UPDATE-004: 不具合辞書システム構築（Agent 4: qa-verifier）
+
+検証日: 2026-07-25 / 対象コミット: c6300ff 時点の作業ツリー
+
+## 機械検証
+
+| チェック | コマンド | 期待 | 結果 |
+| --- | --- | --- | --- |
+| JSON構文 | `python3 -m json.tool docs/dict/data/entries.json` | エラーなし | **PASS** |
+| ID一意 | python3 ワンライナー（重複検出） | 重複0 | **PASS**（34件全一意） |
+| ID連番 | PXD-0001〜0034 の欠番検出 | 欠番0 | **PASS** |
+| yomi必須 | 全項目に非空 yomi | 欠落0 | **PASS** |
+| category | 10分類内のみ | 違反0 | **PASS** |
+| severity | critical/high/medium/low | 違反0 | **PASS** |
+| fix_status | patched/open/wontfix/spec | 違反0 | **PASS** |
+| verify_state整合 | VERIFIEDなのに sources 空の項目なし | 0 | **PASS**（VERIFIED 13件は全て sources あり） |
+| HTML構文 | `npx html-validate docs/dict/index.html` | エラー0 | **PASS**（exit 0） |
+| ローカル配信 | `python3 -m http.server 8000 --directory docs` → `curl -s localhost:8000/dict/ \| grep -c 'entries.json'` | =1 | **PASS**（=1・後述の差し戻し修正後） |
+| 件数一致 | `data/dict-migration.md` の記録 vs JSON 実件数 | 一致 | **PASS**（34 = 34） |
+
+## 差し戻し修正（1件）
+
+- 初回の配信チェックで `grep -c 'entries.json'` が **4** となり期待値 1 と不一致。原因は fetch 参照（正）以外に、ヘッダー説明文・フッター運用注記・fetch 失敗時エラーメッセージの3箇所で同文字列を使用していたため。表示文言側を言い換え、`entries.json` の出現を fetch の1箇所のみに修正 → 再検証で =1 を確認。データ・機能への影響なし。
+
+## 内容確認
+
+- 総件数 34（#os-bugs 22 / #ts・#fold 機種別 11 / #ts-pro 1）。新規創作 0。
+- VERIFIED 13 / UNVERIFIED 21。UNVERIFIED の全件が sources 空配列（sources.md で URL 対応が特定できない項目に勝手に URL を充てていないことを機械確認）。
+- ローカル配信で /dict/data/entries.json が HTTP 経由で 34 件返ることを確認。
+
+総合判定: **PASS**（スキーマ違反0・構文エラー0・件数一致）。
