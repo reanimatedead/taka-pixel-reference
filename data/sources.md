@@ -32,3 +32,35 @@ Agent 2 (research-verifier) による検証ログ。`public/index.html` の `#os
 
 - **A12 Material You バッテリー**: 出典はバッテリードレインを Android 12 リリースそのものに紐づけている。「Material You」はそのリリースのブランド名であり、UI コード単独が原因という厳密解釈までは支持しない（症状の存在は支持）。
 - `#os-bugs` の A17 / A16 で最初から `VERIFIED` だった項目（タッチ操作異常・通信不能・Wi-Fi・再起動ループ / Wi-Fi突発切断・バッテリー異常消費・通知が届かない・戻る操作無反応）は付録A原文の判定を尊重し、本工程では変更していない。
+
+---
+
+# Fold系セクション 出典記録（#fold）— UPDATE-001
+
+Agent 2 (research-verifier) による `#fold` セクションの検証ログ。`UNVERIFIED` だった2項目を Web 検索・実ページ取得で検証し `VERIFIED` に更新した。確認日は全て **2026-07-24**。
+
+## VERIFIED に更新した項目（2件）
+
+| 項目 / URL / 確認日 |
+| --- |
+| **初代Pixel Fold 内側ディスプレイの破損・表示不良報告** / https://www.tomsguide.com/news/google-pixel-fold-display-breaks-already-and-this-could-be-the-cause / 2026-07-24 — ベゼルと画面保護層の間に生の内側ディスプレイが露出する隙間があり、ヒンジ付近に入った微細な異物が折りたたみ時にOLEDを突き破る設計上の脆弱性。発売直後から複数の破損報告。裏取り: https://www.androidpolice.com/google-pixel-fold-common-problems-and-how-to-solve-them/ , https://www.phonearena.com/news/screen-issue-affects-new-pixel-fold_id148509 |
+| **初代Pixel Fold 保護レイヤー剥がれ（自分で剥がさない仕様）** / https://www.androidpolice.com/google-pixel-fold-common-problems-and-how-to-solve-them/ / 2026-07-24 — 内側画面のプリインストール保護層は一体構造であり自己剥離は非推奨。Google サポート指示で剥がしたユーザーがラミネート浮き・中央からのクモの巣状クラックを経験した報告あり。裏取り: https://www.tomsguide.com/news/google-pixel-fold-display-breaks-already-and-this-could-be-the-cause |
+
+## 既に本文で VERIFIED だった項目の裏取り（変更なし・出典追記のみ）
+
+| 項目 / URL / 確認日 |
+| --- |
+| **10 Pro Fold 折りたたみ初のIP68防塵防水** / https://en.wikipedia.org/wiki/Pixel_10_Pro_Fold / 2026-07-24 — Pixel 10 Pro Fold で折りたたみ機として初の IP68 到達（従来 Fold は IPX8 で防塵非対応）。 |
+| **10 Pro Fold ギアレスヒンジ 10年動作耐久設計** / https://android.gadgethacks.com/news/pixel-10-pro-fold-gets-7-years-of-updates-through-2032/ / 2026-07-24 — ギアレスヒンジ採用と長期耐久設計。 |
+
+## 発売日・価格・保証期限の検証（本文は正しく、修正不要）
+
+| 項目 / URL / 確認日 |
+| --- |
+| **初代Pixel Fold 日本発売日 2023/7/27・価格 ¥253,000（税込）** / https://k-tai.watch.impress.co.jp/docs/news/1519260.html / 2026-07-24 — 本文「発売（日本）2023/7」「発売時価格 ¥253,000」を確認。裏取り: https://blog.google/intl/ja-jp/products/devices-services/2023_07_pixelfoldlaunch/ , https://ascii.jp/elem/000/004/136/4136589/ |
+| **アップデート保証期限（一次ソース）** / https://support.google.com/pixelphone/answer/4457705 / 2026-07-24 — 一次ソースはUS Google Store 販売開始日から起算の年数（初代Fold=5年 / 9 Pro Fold=7年 / 10 Pro Fold=7年）を規定。本文の到達年月（初代=2028/6・9 Pro Fold=2031/9・10 Pro Fold=2032/10）は各US発売月（2023/6・2024/9・2025/10）+年数と整合。durationは一次ソースで直接 VERIFIED、到達年月は算出値として整合を確認。裏取り: https://android.gadgethacks.com/news/pixel-10-pro-fold-gets-7-years-of-updates-through-2032/ , https://www.androidauthority.com/google-pixel-software-update-policy-3482984/ |
+
+## 補足（Agent 2 の注記 / UPDATE-001）
+
+- 事実誤りは発見されなかったため本文の数値・日付修正は行っていない（`data/corrections.md` への記録なし）。UNVERIFIED→VERIFIED の状態更新のみ実施。
+- 保証到達年月は一次ソースが「販売開始日+年数」で規定するため、月単位の値は算出値。年数（duration）自体は一次ソースで直接確認できるため VERIFIED とした。
