@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pixel 不具合辞書 | 不具合 × 対処法</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --porcelain:#F6F7F4;
+  --charcoal:#2B2F2C;
+  --sage:#9DB8A2;
+  --sage-deep:#4F7059;
+  --hazel:#B7BCB4;
+  --alert:#C2542E;
+  --card:#FFFFFF;
+  --mono:'IBM Plex Mono',monospace;
+  --sans:'Zen Kaku Gothic New','Hiragino Kaku Gothic ProN',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:var(--sans);background:var(--porcelain);color:var(--charcoal);line-height:1.7;font-size:15px}
+a{color:var(--sage-deep)}
+a:focus-visible,button:focus-visible,input:focus-visible{outline:3px solid var(--sage-deep);outline-offset:2px}
+header{padding:48px 24px 24px;max-width:1080px;margin:0 auto}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.18em;color:var(--sage-deep);text-transform:uppercase}
+h1{font-size:clamp(26px,5vw,40px);font-weight:700;letter-spacing:-.01em;margin:6px 0 10px}
+h1 .thin{font-weight:400;color:var(--hazel)}
+.backlink{font-size:13px;font-weight:500;text-decoration:none;display:inline-block;margin-bottom:14px}
+.lede{max-width:680px;color:#555b56}
+.updated{font-family:var(--mono);font-size:12px;color:#7d827c;margin-top:10px}
+.criteria{background:var(--card);border:1px solid var(--hazel);border-radius:14px;padding:16px 20px;max-width:1080px;margin:0 auto 8px;font-size:13px}
+.criteria-wrap{padding:0 24px;max-width:1128px;margin:0 auto}
+.criteria h2{font-size:14px;font-weight:700;margin-bottom:6px}
+.criteria ol{padding-left:22px;margin:4px 0}
+.criteria p.motto{margin-top:8px;color:#555b56;font-weight:500}
+main{max-width:1080px;margin:0 auto;padding:16px 24px 96px}
+.toolbar{position:sticky;top:0;background:rgba(246,247,244,.95);backdrop-filter:blur(6px);z-index:50;padding:12px 0;border-bottom:1px solid var(--hazel)}
+.searchrow{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+#q{flex:1;min-width:220px;font-family:var(--sans);font-size:15px;padding:10px 14px;border:1px solid var(--hazel);border-radius:10px;background:var(--card);color:var(--charcoal)}
+.count{font-family:var(--mono);font-size:13px;color:var(--sage-deep);white-space:nowrap;font-weight:500}
+.idx{display:flex;gap:4px;flex-wrap:wrap;margin-top:10px;align-items:center}
+.idx-label{font-family:var(--mono);font-size:10px;letter-spacing:.14em;color:#8a8f89;text-transform:uppercase;width:64px;flex:none}
+.idx button{font-family:var(--sans);font-size:13px;padding:4px 10px;border:1px solid var(--hazel);border-radius:8px;background:var(--card);color:var(--charcoal);cursor:pointer}
+.idx button:hover{border-color:var(--sage-deep)}
+.idx button.on{background:var(--sage-deep);border-color:var(--sage-deep);color:#fff}
+.idx button:disabled{opacity:.35;cursor:default}
+.idx button:disabled:hover{border-color:var(--hazel)}
+.filters{display:flex;gap:16px;flex-wrap:wrap;margin-top:10px}
+.fgroup{display:flex;gap:4px;flex-wrap:wrap;align-items:center}
+.fgroup .idx-label{width:auto;margin-right:4px}
+.fgroup button{font-family:var(--sans);font-size:12px;padding:3px 9px;border:1px solid var(--hazel);border-radius:99px;background:var(--card);color:var(--charcoal);cursor:pointer}
+.fgroup button:hover{border-color:var(--sage-deep)}
+.fgroup button.on{background:var(--sage-deep);border-color:var(--sage-deep);color:#fff}
+#reset{font-family:var(--mono);font-size:12px;padding:4px 12px;border:1px solid var(--alert);border-radius:8px;background:transparent;color:var(--alert);cursor:pointer;margin-top:10px}
+#list{margin-top:20px;display:grid;gap:14px}
+.entry{background:var(--card);border:1px solid var(--hazel);border-radius:14px;overflow:hidden}
+.sev-band{height:6px;background:var(--hazel)}
+.sev-critical .sev-band{background:var(--alert)}
+.sev-high .sev-band{background:#D08050}
+.sev-medium .sev-band{background:var(--sage)}
+.sev-low .sev-band{background:var(--hazel)}
+.entry .inner{padding:14px 18px 16px}
+.entry .meta-top{display:flex;gap:8px;flex-wrap:wrap;align-items:center;font-family:var(--mono);font-size:11px;color:#7d827c}
+.entry .eid{color:var(--sage-deep);font-weight:500}
+.entry h3{font-size:16px;font-weight:700;margin:4px 0 2px}
+.entry .ten{font-family:var(--mono);font-size:11px;color:#8a8f89;margin-bottom:8px}
+.tag{display:inline-block;font-family:var(--mono);font-size:10px;padding:1px 8px;border-radius:99px;border:1px solid currentColor}
+.tag.sev-t-critical{color:var(--alert);font-weight:700}
+.tag.sev-t-high{color:#B05E2E}
+.tag.sev-t-medium{color:var(--sage-deep)}
+.tag.sev-t-low{color:#7d827c}
+.tag.cat{color:#4a5f8a}
+.tag.fx{color:#6a6f6a}
+.vstate{font-family:var(--mono);font-size:9px;padding:1px 6px;border-radius:4px}
+.vstate.v{background:#E4EFE6;color:var(--sage-deep)}
+.vstate.u{background:#F4E6DE;color:var(--alert)}
+.entry dl{font-size:13px;display:grid;grid-template-columns:auto 1fr;gap:4px 12px;margin-top:6px}
+.entry dt{font-weight:700;color:#555b56;white-space:nowrap}
+.entry dd ol{padding-left:20px}
+.entry dd ol li{margin-bottom:2px}
+.entry .foot{margin-top:10px;font-family:var(--mono);font-size:11px;color:#8a8f89;display:flex;gap:14px;flex-wrap:wrap}
+.entry .foot a{word-break:break-all}
+.empty{padding:40px 0;text-align:center;color:#8a8f89;font-size:14px}
+footer{max-width:1080px;margin:0 auto;padding:32px 24px;font-size:11px;color:#8a8f89;border-top:1px solid var(--hazel)}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="eyebrow">Pixel Defect Dictionary</div>
+  <h1>不具合辞書 <span class="thin">/ 不具合 × 対処法</span></h1>
+  <p class="lede">Pixel a シリーズ + Fold 系の既知不具合と対処法を、腐らない構造（データと表示の分離）で蓄積する辞書。整備手帳の不具合項目を初期データとして収録。</p>
+  <p class="updated">data: ./data/entries.json / last verified: 2026-07-24</p>
+</header>
+
+<div class="criteria-wrap">
+<div class="criteria">
+  <h2>収録基準（3条件をすべて満たすもののみ収録）</h2>
+  <ol>
+    <li>独立した複数ソースで報告されている</li>
+    <li>再現時に実害がある</li>
+    <li>対処法または回避策が記述できる</li>
+  </ol>
+  <p class="motto">網羅は目的でない。基準を満たす項目が貯まる構造が目的。</p>
+</div>
+</div>
+
+<main>
+
+<div class="toolbar">
+  <div class="searchrow">
+    <input id="q" type="search" placeholder="全文検索（タイトル / 症状 / 対処法）" aria-label="全文検索">
+    <span class="count" id="count">– / – 件</span>
+  </div>
+  <div class="idx" id="kana-idx"><span class="idx-label">あいうえお</span></div>
+  <div class="idx" id="alpha-idx"><span class="idx-label">A – Z</span></div>
+  <div class="filters">
+    <div class="fgroup" id="f-category"><span class="idx-label">分類</span></div>
+    <div class="fgroup" id="f-severity"><span class="idx-label">重要度</span></div>
+    <div class="fgroup" id="f-fix"><span class="idx-label">修正状況</span></div>
+    <div class="fgroup" id="f-model"><span class="idx-label">機種</span></div>
+  </div>
+  <button id="reset" type="button">条件クリア</button>
+</div>
+
+<div id="list" aria-live="polite"></div>
+
+</main>
+
+<footer>
+  個人用リファレンス。出典は各項目の sources リンクを参照。verify_state = UNVERIFIED の項目は出典未照合であり再確認対象。データ追加は entries.json への追記のみで行い、本 HTML は変更しない。<br>
+  <a href="../">← Pixel 整備手帳へ戻る</a>
+</footer>
+
+<script>
+(function(){
+  'use strict';
+
+  var CATEGORIES = ["電源・起動","画面・タッチ","通信","バッテリー・充電・発熱","音・通話","カメラ","生体認証","アプリ挙動","OS更新起因","物理・破損"];
+  var SEVERITIES = ["critical","high","medium","low"];
+  var FIXES = ["patched","open","wontfix","spec"];
+  var KANA_ROWS = [
+    ["あ","あいうえお"],["か","かきくけこ"],["さ","さしすせそ"],["た","たちつてと"],["な","なにぬねの"],
+    ["は","はひふへほ"],["ま","まみむめも"],["や","やゆよ"],["ら","らりるれろ"],["わ","わをん"]
+  ];
+  var MODEL_LABELS = {"4a":"4a","4a5g":"4a (5G)","5a":"5a","6a":"6a","7a":"7a","8a":"8a","9a":"9a","10a":"10a","fold":"Fold","9profold":"9 Pro Fold","10profold":"10 Pro Fold"};
+  var MODEL_ORDER = ["4a","4a5g","5a","6a","7a","8a","9a","10a","fold","9profold","10profold"];
+  var SEV_LABEL = {critical:"critical（データ喪失・文鎮）",high:"high（主要機能停止）",medium:"medium（機能低下）",low:"low（軽微）"};
+
+  // 濁音・半濁音 → 清音、小書き → 並字の正規化（頭文字判定用）
+  var SEION = {
+    "が":"か","ぎ":"き","ぐ":"く","げ":"け","ご":"こ",
+    "ざ":"さ","じ":"し","ず":"す","ぜ":"せ","ぞ":"そ",
+    "だ":"た","ぢ":"ち","づ":"つ","で":"て","ど":"と",
+    "ば":"は","び":"ひ","ぶ":"ふ","べ":"へ","ぼ":"ほ",
+    "ぱ":"は","ぴ":"ひ","ぷ":"ふ","ぺ":"へ","ぽ":"ほ",
+    "ゔ":"う","ぁ":"あ","ぃ":"い","ぅ":"う","ぇ":"え","ぉ":"お",
+    "ゃ":"や","ゅ":"ゆ","ょ":"よ","っ":"つ","ゎ":"わ"
+  };
+  function kanaRow(yomi){
+    if(!yomi) return null;
+    var c = yomi.charAt(0);
+    c = SEION[c] || c;
+    for(var i=0;i<KANA_ROWS.length;i++){
+      if(KANA_ROWS[i][1].indexOf(c) !== -1) return KANA_ROWS[i][0];
+    }
+    return null;
+  }
+  function alphaKey(en){
+    if(!en) return null;
+    var c = en.charAt(0).toUpperCase();
+    return (c >= "A" && c <= "Z") ? c : null;
+  }
+
+  var entries = [];
+  var state = { q:"", kana:null, alpha:null, category:[], severity:[], fix:[], model:[] };
+
+  function esc(s){
+    return String(s).replace(/[&<>"']/g, function(m){
+      return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m];
+    });
+  }
+
+  function matches(e){
+    if(state.kana && kanaRow(e.yomi) !== state.kana) return false;
+    if(state.alpha && alphaKey(e.title_en) !== state.alpha) return false;
+    if(state.category.length && state.category.indexOf(e.category) === -1) return false;
+    if(state.severity.length && state.severity.indexOf(e.severity) === -1) return false;
+    if(state.fix.length && state.fix.indexOf(e.fix_status) === -1) return false;
+    if(state.model.length){
+      var hit = e.affected_models.some(function(m){ return state.model.indexOf(m) !== -1; });
+      if(!hit) return false;
+    }
+    if(state.q){
+      var hay = (e.title_ja + " " + e.title_en + " " + e.symptom + " " + e.workaround.join(" ")).toLowerCase();
+      var terms = state.q.toLowerCase().split(/\s+/).filter(Boolean);
+      for(var i=0;i<terms.length;i++){
+        if(hay.indexOf(terms[i]) === -1) return false;
+      }
+    }
+    return true;
+  }
+
+  function card(e){
+    var models = e.affected_models.map(function(m){ return MODEL_LABELS[m] || m; }).join(" / ");
+    var os = e.affected_os.length ? "Android " + e.affected_os.join(", ") : "OS非依存";
+    var steps = e.workaround.map(function(w){ return "<li>" + esc(w) + "</li>"; }).join("");
+    var srcs = e.sources.length
+      ? e.sources.map(function(s){ return '<a href="' + esc(s.url) + '" target="_blank" rel="noopener">' + esc(s.url.replace(/^https?:\/\//,"").split("/")[0]) + "</a>"; }).join(" ")
+      : "出典なし";
+    var vs = e.verify_state === "VERIFIED" ? '<span class="vstate v">VERIFIED</span>' : '<span class="vstate u">UNVERIFIED</span>';
+    return '<article class="entry sev-' + esc(e.severity) + '">'
+      + '<div class="sev-band"></div><div class="inner">'
+      + '<div class="meta-top"><span class="eid">' + esc(e.id) + "</span>"
+      + '<span class="tag sev-t-' + esc(e.severity) + '">' + esc(e.severity) + "</span>"
+      + '<span class="tag cat">' + esc(e.category) + "</span>"
+      + '<span class="tag fx">' + esc(e.fix_status) + "</span>" + vs + "</div>"
+      + "<h3>" + esc(e.title_ja) + "</h3>"
+      + '<div class="ten">' + esc(e.title_en) + "</div>"
+      + "<dl>"
+      + "<dt>対象</dt><dd>" + esc(models) + " ／ " + esc(os) + "</dd>"
+      + "<dt>症状</dt><dd>" + esc(e.symptom) + "</dd>"
+      + "<dt>原因</dt><dd>" + esc(e.cause) + "</dd>"
+      + "<dt>対処</dt><dd><ol>" + steps + "</ol></dd>"
+      + "</dl>"
+      + '<div class="foot"><span>sources: ' + srcs + "</span><span>last_checked: " + esc(e.last_checked) + "</span></div>"
+      + "</div></article>";
+  }
+
+  function render(){
+    var hit = entries.filter(matches);
+    document.getElementById("count").textContent = hit.length + " / " + entries.length + " 件";
+    var list = document.getElementById("list");
+    list.innerHTML = hit.length
+      ? hit.map(card).join("")
+      : '<div class="empty">条件に一致する項目がありません。</div>';
+  }
+
+  function makeButtons(containerId, values, labels, stateKey, single, availableSet){
+    var box = document.getElementById(containerId);
+    values.forEach(function(v){
+      var b = document.createElement("button");
+      b.type = "button";
+      b.textContent = labels ? (labels[v] || v) : v;
+      if(availableSet && !availableSet[v]) b.disabled = true;
+      b.addEventListener("click", function(){
+        if(single){
+          state[stateKey] = (state[stateKey] === v) ? null : v;
+          if(stateKey === "kana" && state.kana) state.alpha = null;
+          if(stateKey === "alpha" && state.alpha) state.kana = null;
+        }else{
+          var idx = state[stateKey].indexOf(v);
+          if(idx === -1) state[stateKey].push(v); else state[stateKey].splice(idx,1);
+        }
+        syncButtons();
+        render();
+      });
+      b.dataset.value = v;
+      box.appendChild(b);
+    });
+  }
+
+  function syncButtons(){
+    [["kana-idx","kana",true],["alpha-idx","alpha",true],
+     ["f-category","category",false],["f-severity","severity",false],
+     ["f-fix","fix",false],["f-model","model",false]].forEach(function(cfg){
+      var box = document.getElementById(cfg[0]);
+      Array.prototype.forEach.call(box.querySelectorAll("button"), function(b){
+        var v = b.dataset.value;
+        var on = cfg[2] ? state[cfg[1]] === v : state[cfg[1]].indexOf(v) !== -1;
+        b.classList.toggle("on", on);
+      });
+    });
+  }
+
+  function init(data){
+    entries = data;
+    var kanaAvail = {}, alphaAvail = {};
+    entries.forEach(function(e){
+      var k = kanaRow(e.yomi); if(k) kanaAvail[k] = true;
+      var a = alphaKey(e.title_en); if(a) alphaAvail[a] = true;
+    });
+    var alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+    makeButtons("kana-idx", KANA_ROWS.map(function(r){ return r[0]; }), null, "kana", true, kanaAvail);
+    makeButtons("alpha-idx", alphabet, null, "alpha", true, alphaAvail);
+    makeButtons("f-category", CATEGORIES, null, "category", false, null);
+    makeButtons("f-severity", SEVERITIES, SEV_LABEL, "severity", false, null);
+    makeButtons("f-fix", FIXES, null, "fix", false, null);
+    makeButtons("f-model", MODEL_ORDER, MODEL_LABELS, "model", false, null);
+
+    document.getElementById("q").addEventListener("input", function(ev){
+      state.q = ev.target.value.trim();
+      render();
+    });
+    document.getElementById("reset").addEventListener("click", function(){
+      state = { q:"", kana:null, alpha:null, category:[], severity:[], fix:[], model:[] };
+      document.getElementById("q").value = "";
+      syncButtons();
+      render();
+    });
+    render();
+  }
+
+  fetch("./data/entries.json")
+    .then(function(r){
+      if(!r.ok) throw new Error("HTTP " + r.status);
+      return r.json();
+    })
+    .then(init)
+    .catch(function(err){
+      document.getElementById("list").innerHTML =
+        '<div class="empty">entries.json の読み込みに失敗しました（' + esc(err.message) + '）。</div>';
+    });
+})();
+</script>
+
+</body>
+</html>
