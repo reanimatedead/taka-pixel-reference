@@ -38,3 +38,22 @@
 - **MANUAL_CHECK: 0件**（403 なし）。
 - `https://fonts.googleapis.com`（素のホスト）は GET でも 404 だが、これは preconnect 用ホストヒントであり実リソースではないため機能上 OK と判定。原文（付録A）の一字一句保持ルールにより HTML は改変しない。
 - `support.google.com` 系 13件は HEAD で 404 に見えるが GET+UA では全て 200。ページ内リンクとしては全て有効。
+
+## UPDATE-001: Fold系セクション（#fold）の新規URL死活確認 — 2026-07-24
+
+`#fold` セクション本体（付録B HTML）には `<a href>` リンクは **0件**（表と details のみ、外部リンクなし）。よって死活確認対象は Agent 2 が `data/sources.md` に追記した新規出典URLとした。方式: `GET -L` + ブラウザUA（前回の HEAD 偽陰性教訓を適用）。
+
+| 判定 | HTTP(GET+UA) | URL | 備考 |
+| --- | --- | --- | --- |
+| OK | 200 | https://www.tomsguide.com/news/google-pixel-fold-display-breaks-already-and-this-could-be-the-cause | 初代Fold内側画面破損 主ソース |
+| OK | 200 | https://www.androidpolice.com/google-pixel-fold-common-problems-and-how-to-solve-them/ | 保護層/既知問題 主ソース |
+| MANUAL_CHECK | 403 | https://www.phonearena.com/news/screen-issue-affects-new-pixel-fold_id148509 | サーバ側ボット保護による偽陰性。裏取り用の副ソースで、内容はWeb検索で確認済み。主ソース(200)が別途あるため影響なし |
+| OK | 200 | https://en.wikipedia.org/wiki/Pixel_10_Pro_Fold | IP68/ヒンジ |
+| OK | 200 | https://android.gadgethacks.com/news/pixel-10-pro-fold-gets-7-years-of-updates-through-2032/ | 保証7年/ヒンジ |
+| OK | 200 | https://k-tai.watch.impress.co.jp/docs/news/1519260.html | 初代Fold日本発売日/価格 |
+| OK | 200 | https://blog.google/intl/ja-jp/products/devices-services/2023_07_pixelfoldlaunch/ | Google公式 発売 |
+| OK | 200 | https://ascii.jp/elem/000/004/136/4136589/ | 価格¥253,000 裏取り |
+| OK | 200 | https://support.google.com/pixelphone/answer/4457705 | 保証期限 一次ソース |
+| OK | 200 | https://www.androidauthority.com/google-pixel-software-update-policy-3482984/ | 保証年数 裏取り |
+
+- **BROKEN: 0件**。**MANUAL_CHECK: 1件**（phonearena 403＝ボット保護の偽陰性、主ソース健在のため実害なし）。
