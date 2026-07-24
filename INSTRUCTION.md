@@ -1,0 +1,544 @@
+# taka-pixel-reference — 全部入り完結型指示書（ゼロから公開直前まで）
+
+作成日: 2026-07-24
+実行マシン: M1 Max MacBook Pro
+前提: **空のディレクトリから開始。人間による事前ファイル配置は不要。** この指示書1つで index.html 生成 → 検証 → Cloudflare Workers 構成 → QA → 報告まで完結する。
+リポジトリ名: taka-pixel-reference / Cloudflareプロジェクト名: taka-pixel-reference
+
+---
+
+## 絶対ルール（全エージェント共通）
+
+1. 各エージェントは作業開始前・終了後に `git status` を実行し記録する
+2. コミットは小さく安全に。メッセージは英語で内容が特定できる形
+3. `.env` および認証情報ファイルには一切触れない
+4. **`git push` と `wrangler deploy` は絶対に実行しない。REPORT.md 作成後に停止し人間の指示を待つ**
+5. 本指示書に埋め込まれたHTMLソースは**一字一句そのまま**書き出す。要約・省略・独自改変禁止
+6. 検証できない項目は削除せず `UNVERIFIED` マークのまま残す。偽の検証成功を報告しない
+7. 全成果物はリポジトリ内に置く（チャット削除後も自走可能にする）
+
+---
+
+## Agent 1: scaffold-builder（初期構築）
+
+1. カレントディレクトリが空であることを確認（空でなければ内容を報告して停止）
+2. `git init` 実行
+3. 以下の構成を作成する:
+   ```
+   .
+   ├── public/
+   │   └── index.html      ← 本指示書「付録A」のHTMLを一字一句そのまま書き出す
+   ├── INSTRUCTION.md      ← 本指示書自体のコピー（自走継続性のため）
+   └── .gitignore
+   ```
+4. `.gitignore` の内容:
+   ```
+   node_modules/
+   .wrangler/
+   .dev.vars
+   .env
+   .DS_Store
+   ```
+5. `git status` → `git add .` → コミット: `Initial scaffold: reference page and instruction`
+6. `git status` 実行・記録
+
+## Agent 2: research-verifier（データ検証）
+
+1. `git status` 実行・記録
+2. `public/index.html` 内の `#os-bugs` セクションで `UNVERIFIED` マークが付いた項目をWeb検索で検証する。出典URLが確認できたら該当マークを `VERIFIED` に書き換え、`data/sources.md` に「項目 / URL / 確認日」を記録
+3. 検証の結果、事実と異なる記述を発見した場合のみ本文を修正し、修正内容を `data/corrections.md` に記録
+4. `#links` セクションの全URLはこの段階では触らない（Agent 4が機械検証する）
+5. コミット: `Verify OS bug matrix entries and add sources`
+6. `git status` 実行・記録
+
+## Agent 3: infra-builder（Cloudflare Workers 構成）
+
+1. `git status` 実行・記録
+2. `wrangler.jsonc` をリポジトリ直下に作成:
+   ```jsonc
+   {
+     "name": "taka-pixel-reference",
+     "compatibility_date": "2026-07-01",
+     "assets": {
+       "directory": "./public"
+     }
+   }
+   ```
+   静的アセットのみの構成とし `main` は書かない
+3. `README.md` を作成: 目的 / ローカル確認 `npx wrangler dev` / デプロイ `npx wrangler deploy`（人間のみ実行）/ 月例更新運用（パッチ配信後に #os-bugs を確認・追記し last verified を更新）を記載
+4. コミット: `Add Cloudflare Workers static assets config`
+5. `git status` 実行・記録
+
+## Agent 4: qa-verifier(機械検証)
+
+1. `git status` 実行・記録
+2. HTML構文チェック: `npx html-validate public/index.html`（未導入なら `npm i -D html-validate`。生成された package.json / package-lock.json はコミット対象）。エラーは修正してよいが修正内容を記録
+3. リンク死活: index.html 内の全 `https://` URLを抽出し `curl -s -o /dev/null -w "%{http_code}" -I <URL>` で確認。200/301/302 = OK、403 = `MANUAL_CHECK`、404/000 = `BROKEN`。結果を `data/linkcheck.md` に記録。BROKEN は正しいURLを調査して修正
+4. ローカル起動: `npx wrangler dev` をバックグラウンド起動 → `curl -s localhost:8787 | head -5` で index.html が返ることを確認 → プロセス終了。結果を `data/qa-report.md` に記録
+5. コミット: `Add QA verification results`
+6. `git status` 実行・記録
+
+## Agent 5: git-reporter（統括・停止）
+
+1. `git status` と `git log --oneline` を記録
+2. 未コミット差分があれば内容確認のうえ正当ならコミット、不明なら報告のみ
+3. `REPORT.md` を作成:
+   - 完了項目 / UNVERIFIED 残存一覧 / BROKEN・MANUAL_CHECK リンク一覧
+   - 人間が実行する残りコマンド（順番どおり明記）:
+     ```bash
+     gh repo create reanimatedead/taka-pixel-reference --private --source=. --push
+     # ↑ gh未使用なら: GitHubでリポジトリ作成後
+     #   git remote add origin git@github.com:reanimatedead/taka-pixel-reference.git
+     #   git push -u origin main          ← 人間ゲート1
+     npx wrangler login                    # 初回のみ（ブラウザ認証）
+     npx wrangler deploy                   # ← 人間ゲート2
+     ```
+   - 公開URL想定: `https://taka-pixel-reference.<account>.workers.dev`
+4. コミット: `Add final report`
+5. **ここで完全に停止。push / deploy は実行しない**
+
+## 完了条件
+
+- [ ] `git log` に5エージェント全員のコミットが存在
+- [ ] `public/index.html` が付録Aと同一内容で存在し、`#os-bugs` が Android 11〜17 を含む
+- [ ] `wrangler dev` のローカル応答が qa-report.md に記録済み
+- [ ] REPORT.md に人間ゲート2つが明記
+- [ ] `.env` 系への接触ゼロ
+
+---
+---
+
+# 付録A: public/index.html（一字一句そのまま書き出すこと）
+
+```html
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pixel a-series 個人リファレンス | 4a → 10a</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --porcelain:#F6F7F4;
+  --charcoal:#2B2F2C;
+  --sage:#9DB8A2;
+  --sage-deep:#4F7059;
+  --hazel:#B7BCB4;
+  --alert:#C2542E;
+  --card:#FFFFFF;
+  --mono:'IBM Plex Mono',monospace;
+  --sans:'Zen Kaku Gothic New','Hiragino Kaku Gothic ProN',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{font-family:var(--sans);background:var(--porcelain);color:var(--charcoal);line-height:1.7;font-size:15px}
+a{color:var(--sage-deep)}
+a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var(--sage-deep);outline-offset:2px}
+header{padding:56px 24px 28px;max-width:1080px;margin:0 auto}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.18em;color:var(--sage-deep);text-transform:uppercase}
+h1{font-size:clamp(28px,5vw,44px);font-weight:700;letter-spacing:-.01em;margin:6px 0 10px}
+h1 .thin{font-weight:400;color:var(--hazel)}
+.lede{max-width:640px;color:#555b56}
+.updated{font-family:var(--mono);font-size:12px;color:#7d827c;margin-top:10px}
+nav{position:sticky;top:0;background:rgba(246,247,244,.92);backdrop-filter:blur(6px);border-bottom:1px solid var(--hazel);z-index:50}
+nav ul{display:flex;gap:4px;list-style:none;max-width:1080px;margin:0 auto;padding:0 16px;overflow-x:auto}
+nav a{display:block;padding:12px 14px;text-decoration:none;color:var(--charcoal);font-size:13px;font-weight:500;white-space:nowrap;border-bottom:3px solid transparent}
+nav a:hover{border-bottom-color:var(--sage)}
+main{max-width:1080px;margin:0 auto;padding:0 24px 96px}
+section{margin-top:64px}
+h2{font-size:22px;font-weight:700;display:flex;align-items:center;gap:10px;margin-bottom:6px}
+h2::before{content:"";width:14px;height:14px;border-radius:50%;background:var(--sage);flex:none}
+.sec-note{font-size:13px;color:#6a6f6a;margin-bottom:20px}
+.table-wrap{overflow-x:auto;border:1px solid var(--hazel);border-radius:14px;background:var(--card)}
+table{border-collapse:collapse;width:100%;min-width:980px;font-size:13px}
+th,td{padding:10px 12px;text-align:left;border-bottom:1px solid #E7E9E4;vertical-align:top}
+thead th{background:#EFF2EC;font-weight:700;position:sticky;top:0}
+tbody th{font-weight:500;color:#555b56;white-space:nowrap;background:#FBFCFA}
+td.hero{font-weight:700}
+.owned{background:#F0F6F0}
+.badge{display:inline-block;font-family:var(--mono);font-size:10px;padding:1px 7px;border-radius:99px;border:1px solid currentColor;margin-left:6px;vertical-align:middle}
+.badge.eol{color:var(--alert)}
+.badge.ok{color:var(--sage-deep)}
+.badge.own{color:#4a5f8a;border-color:#4a5f8a}
+.timeline{background:var(--card);border:1px solid var(--hazel);border-radius:14px;padding:24px 20px;position:relative}
+.tl-row{display:grid;grid-template-columns:110px 1fr;align-items:center;gap:12px;margin-bottom:12px}
+.tl-name{font-size:13px;font-weight:700;text-align:right}
+.tl-name small{display:block;font-family:var(--mono);font-size:10px;font-weight:400;color:#8a8f89}
+.tl-track{position:relative;height:22px;background:#F0F1EE;border-radius:6px}
+.tl-bar{position:absolute;top:0;height:100%;border-radius:6px;background:linear-gradient(90deg,var(--sage),var(--sage-deep));min-width:6px}
+.tl-bar.eol{background:repeating-linear-gradient(45deg,#DDD3CC,#DDD3CC 6px,#CFC4BC 6px,#CFC4BC 12px)}
+.tl-bar span{position:absolute;right:6px;top:50%;transform:translateY(-50%);font-family:var(--mono);font-size:10px;color:#fff;white-space:nowrap}
+.tl-bar.eol span{color:#84766c}
+.tl-axis{display:grid;grid-template-columns:110px 1fr;gap:12px;margin-top:6px}
+.tl-axis .ticks{display:flex;justify-content:space-between;font-family:var(--mono);font-size:10px;color:#8a8f89}
+.today-line{position:absolute;top:16px;bottom:34px;width:2px;background:var(--alert)}
+.today-label{position:absolute;top:-2px;transform:translateX(-50%);font-family:var(--mono);font-size:10px;color:var(--alert);font-weight:500}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px}
+.card{background:var(--card);border:1px solid var(--hazel);border-radius:14px;padding:16px 18px;text-decoration:none;color:inherit;display:block;transition:border-color .15s,transform .15s}
+.card:hover{border-color:var(--sage-deep);transform:translateY(-2px)}
+.card h3{font-size:14px;font-weight:700;margin-bottom:4px}
+.card p{font-size:12px;color:#6a6f6a}
+.card .url{font-family:var(--mono);font-size:10px;color:var(--sage-deep);word-break:break-all;display:block;margin-top:8px}
+.group-label{font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:#8a8f89;margin:22px 0 10px;text-transform:uppercase}
+.group-label:first-of-type{margin-top:0}
+.feature{background:var(--card);border:1px solid var(--hazel);border-radius:14px;padding:18px 20px;margin-bottom:14px}
+.feature h3{font-size:15px;font-weight:700;margin-bottom:6px}
+.feature .req{font-family:var(--mono);font-size:11px;color:var(--sage-deep);margin-bottom:8px}
+.feature ol{padding-left:20px;font-size:13px}
+.feature ol li{margin-bottom:4px}
+.feature .caveat{font-size:12px;color:var(--alert);margin-top:8px}
+details{background:var(--card);border:1px solid var(--hazel);border-radius:14px;margin-bottom:10px;overflow:hidden}
+summary{padding:14px 18px;cursor:pointer;font-weight:700;font-size:14px;list-style:none;display:flex;justify-content:space-between;align-items:center}
+summary::after{content:"+";font-family:var(--mono);color:var(--sage-deep);font-size:18px}
+details[open] summary::after{content:"−"}
+details .body{padding:0 18px 16px;font-size:13px;border-top:1px solid #EDEFE9}
+details .body p{margin:10px 0}
+details .body ul,details .body ol{padding-left:20px;margin:8px 0}
+details .body li{margin-bottom:4px}
+kbd{font-family:var(--mono);font-size:11px;background:#EFF2EC;border:1px solid var(--hazel);border-radius:5px;padding:1px 6px}
+.ts-tag{display:inline-block;font-family:var(--mono);font-size:10px;color:#fff;background:var(--sage-deep);border-radius:99px;padding:1px 8px;margin-right:8px}
+.ts-tag.warn{background:var(--alert)}
+.vstate{font-family:var(--mono);font-size:9px;padding:1px 6px;border-radius:4px;vertical-align:middle;margin-left:6px}
+.vstate.v{background:#E4EFE6;color:var(--sage-deep)}
+.vstate.u{background:#F4E6DE;color:var(--alert)}
+.alert-band{background:#FBEEE8;border:1px solid var(--alert);color:#8a3c20;border-radius:10px;padding:10px 14px;font-size:12px;margin:10px 0;font-weight:500}
+footer{max-width:1080px;margin:0 auto;padding:32px 24px;font-size:11px;color:#8a8f89;border-top:1px solid var(--hazel)}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="eyebrow">Personal Reference — Pixel a-series</div>
+  <h1>Pixel 4a → 10a <span class="thin">/ 個人運用ノート</span></h1>
+  <p class="lede">歴代 a シリーズ全 8 機種のスペック・サポート期限・公式ヘルプ・電話/Gmail 機能・OS別不具合・トラブルシューティングを 1 ページに集約。判断基準は「今日、その端末を安全に使えるか」。</p>
+  <p class="updated">last verified: 2026-07-24 / 出典: Google 公式ヘルプ + Google ストア + 国内報道</p>
+</header>
+
+<nav aria-label="ページ内リンク">
+  <ul>
+    <li><a href="#specs">スペック比較</a></li>
+    <li><a href="#support">サポート期限</a></li>
+    <li><a href="#links">公式ヘルプ</a></li>
+    <li><a href="#features">電話 / Gmail 機能</a></li>
+    <li><a href="#os-bugs">OS別不具合</a></li>
+    <li><a href="#ts">トラブルシューティング</a></li>
+  </ul>
+</nav>
+
+<main>
+
+<section id="specs">
+  <h2>スペック比較（4a → 10a）</h2>
+  <p class="sec-note">横スクロール可。<span class="badge own">MY DEVICE</span> = 所有端末（4a）。<span class="badge eol">EOL</span> = アップデート提供終了。</p>
+  <div class="table-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th>項目</th>
+        <th class="owned">Pixel 4a <span class="badge own">MY DEVICE</span></th>
+        <th>4a (5G)</th>
+        <th>5a (5G)</th>
+        <th>6a</th>
+        <th>7a</th>
+        <th>8a</th>
+        <th>9a</th>
+        <th>10a</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><th>発売（日本）</th><td class="owned">2020/8</td><td>2020/10</td><td>2021/8</td><td>2022/7</td><td>2023/5</td><td>2024/5</td><td>2025/4</td><td>2026/4/14</td></tr>
+      <tr><th>SoC</th><td class="owned">Snapdragon 730G</td><td>Snapdragon 765G</td><td>Snapdragon 765G</td><td>Tensor G1</td><td>Tensor G2</td><td>Tensor G3</td><td>Tensor G4</td><td>Tensor G4</td></tr>
+      <tr><th>RAM / ROM</th><td class="owned">6GB / 128GB</td><td>6GB / 128GB</td><td>6GB / 128GB</td><td>6GB / 128GB</td><td>8GB / 128GB</td><td>8GB / 128–256GB</td><td>8GB / 128–256GB</td><td>8GB / 128–256GB</td></tr>
+      <tr><th>画面</th><td class="owned">5.81" OLED 60Hz</td><td>6.2" OLED 60Hz</td><td>6.34" OLED 60Hz</td><td>6.1" OLED 60Hz</td><td>6.1" OLED 90Hz</td><td>6.1" OLED 120Hz</td><td>6.3" OLED 120Hz</td><td>6.3" OLED 120Hz</td></tr>
+      <tr><th>バッテリー</th><td class="owned">3,140mAh</td><td>3,885mAh</td><td>4,680mAh</td><td>4,410mAh</td><td>4,385mAh<br>無線充電◯</td><td>4,492mAh<br>無線充電◯</td><td>5,100mAh<br>無線充電◯</td><td>約5,100mAh級<br>30時間+・急速充電</td></tr>
+      <tr><th>メインカメラ</th><td class="owned">12.2MP 単眼</td><td>12.2MP+超広角</td><td>12.2MP+超広角</td><td>12.2MP+超広角</td><td>64MP+超広角</td><td>64MP+超広角</td><td>48MP+超広角</td><td>48MP+超広角<br>背面フラット化</td></tr>
+      <tr><th>防水防塵</th><td class="owned">なし</td><td>なし</td><td>IP67</td><td>IP67</td><td>IP67</td><td>IP67</td><td>IP68</td><td>IP68</td></tr>
+      <tr><th>生体認証</th><td class="owned">背面指紋</td><td>背面指紋</td><td>背面指紋</td><td>画面内指紋</td><td>画面内指紋+顔</td><td>画面内指紋+顔</td><td>画面内指紋+顔</td><td>画面内指紋+顔</td></tr>
+      <tr><th>5G</th><td class="owned">非対応</td><td>対応</td><td>対応</td><td>対応</td><td>対応</td><td>対応</td><td>対応</td><td>対応</td></tr>
+      <tr><th>発売時価格</th><td class="owned">¥42,900</td><td>¥60,500</td><td>¥51,700</td><td>¥53,900</td><td>¥62,700</td><td>¥72,600</td><td>¥79,900</td><td>¥79,900 (128GB)<br>¥94,900 (256GB)</td></tr>
+      <tr><th>最終OS</th><td class="owned">Android 13</td><td>Android 13</td><td>Android 14</td><td>Android 17 系継続中</td><td>Android 17 系継続中</td><td>Android 17 系継続中</td><td>Android 17 系継続中</td><td>Android 17 系継続中</td></tr>
+      <tr><th>アップデート保証</th><td class="owned hero">終了 <span class="badge eol">EOL</span></td><td>終了 <span class="badge eol">EOL</span></td><td>終了 <span class="badge eol">EOL</span></td><td class="hero">2027/7 まで <span class="badge ok">残り約1年</span></td><td class="hero">2028/5 まで <span class="badge ok">OK</span></td><td class="hero">2031/5 まで <span class="badge ok">7年保証</span></td><td class="hero">2032/4 まで <span class="badge ok">7年保証</span></td><td class="hero">2033/4 まで <span class="badge ok">7年保証</span></td></tr>
+    </tbody>
+  </table>
+  </div>
+</section>
+
+<section id="support">
+  <h2>サポート期限タイムライン</h2>
+  <p class="sec-note">縦の赤線 = 今日（2026年7月）。赤線より左で終わっているバーの端末は、セキュリティ更新が来ない＝メイン機・銀行/決済用途は不可。保証区分は 3 つ：<strong>5a以前 = 終了済み / 6a・7a = 5年 / 8a以降 = 7年</strong>。</p>
+  <div class="timeline">
+    <div class="today-line" style="left:calc(122px + (100% - 142px) * 0.4643)"></div>
+    <div class="today-label" style="left:calc(122px + (100% - 142px) * 0.4643)">TODAY</div>
+    <div class="tl-row"><div class="tl-name">4a<small>2020/8–2023/8</small></div><div class="tl-track"><div class="tl-bar eol" style="left:4.17%;width:17.86%"><span>EOL</span></div></div></div>
+    <div class="tl-row"><div class="tl-name">4a (5G)<small>2020/10–2023/11</small></div><div class="tl-track"><div class="tl-bar eol" style="left:5.36%;width:18.45%"><span>EOL</span></div></div></div>
+    <div class="tl-row"><div class="tl-name">5a (5G)<small>2021/8–2024/8</small></div><div class="tl-track"><div class="tl-bar eol" style="left:11.31%;width:17.86%"><span>EOL</span></div></div></div>
+    <div class="tl-row"><div class="tl-name">6a<small>2022/7–2027/7</small></div><div class="tl-track"><div class="tl-bar" style="left:17.86%;width:29.76%"><span>2027/7</span></div></div></div>
+    <div class="tl-row"><div class="tl-name">7a<small>2023/5–2028/5</small></div><div class="tl-track"><div class="tl-bar" style="left:23.81%;width:29.76%"><span>2028/5</span></div></div></div>
+    <div class="tl-row"><div class="tl-name">8a<small>2024/5–2031/5</small></div><div class="tl-track"><div class="tl-bar" style="left:29.76%;width:41.67%"><span>2031/5</span></div></div></div>
+    <div class="tl-row"><div class="tl-name">9a<small>2025/4–2032/4</small></div><div class="tl-track"><div class="tl-bar" style="left:36.31%;width:41.67%"><span>2032/4</span></div></div></div>
+    <div class="tl-row"><div class="tl-name">10a<small>2026/4–2033/4</small></div><div class="tl-track"><div class="tl-bar" style="left:42.26%;width:41.67%"><span>2033/4</span></div></div></div>
+    <div class="tl-axis"><div></div><div class="ticks"><span>2020</span><span>2022</span><span>2024</span><span>2026</span><span>2028</span><span>2030</span><span>2032</span><span>2034</span></div></div>
+  </div>
+</section>
+
+<section id="links">
+  <h2>公式ヘルプ・リンク集</h2>
+  <p class="sec-note">ブックマーク代わり。全て Google 公式（support.google.com 系）のみ。</p>
+  <div class="group-label">Pixel 本体</div>
+  <div class="cards">
+    <a class="card" href="https://support.google.com/pixelphone" target="_blank" rel="noopener"><h3>Pixel ヘルプ トップ</h3><p>本体・設定・修理の全ヘルプ入口</p><span class="url">support.google.com/pixelphone</span></a>
+    <a class="card" href="https://support.google.com/pixelphone/answer/4457705" target="_blank" rel="noopener"><h3>アップデート提供期限（公式表）</h3><p>機種別のOS/セキュリティ更新の保証期限一覧。EOL判定の一次ソース</p><span class="url">…/answer/4457705</span></a>
+    <a class="card" href="https://support.google.com/pixelphone/answer/7158570" target="_blank" rel="noopener"><h3>システムアップデートの確認方法</h3><p>手動更新の手順・再起動が必要なケース</p><span class="url">…/answer/7158570</span></a>
+    <a class="card" href="https://developers.google.com/android/images" target="_blank" rel="noopener"><h3>Factory Images（開発者向け）</h3><p>文鎮化からの復旧・初期化用の公式イメージ配布</p><span class="url">developers.google.com/android/images</span></a>
+    <a class="card" href="https://store.google.com/jp/product/pixel_10a_specs?hl=ja" target="_blank" rel="noopener"><h3>Pixel 10a 公式スペック</h3><p>Google ストアの技術仕様ページ（最新機の一次ソース）</p><span class="url">store.google.com/jp/product/pixel_10a_specs</span></a>
+    <a class="card" href="https://support.google.com/pixelphone/answer/7173456" target="_blank" rel="noopener"><h3>修理・保証</h3><p>正規修理の申込み・保証確認</p><span class="url">…/answer/7173456</span></a>
+  </div>
+  <div class="group-label">Gmail</div>
+  <div class="cards">
+    <a class="card" href="https://support.google.com/mail" target="_blank" rel="noopener"><h3>Gmail ヘルプ トップ</h3><p>送受信・ラベル・フィルタ・容量の全ヘルプ</p><span class="url">support.google.com/mail</span></a>
+    <a class="card" href="https://support.google.com/mail/answer/6579" target="_blank" rel="noopener"><h3>フィルタの作成</h3><p>自動振り分け・自動アーカイブ・自動ラベル（求人メール仕分けに使用）</p><span class="url">…/answer/6579</span></a>
+    <a class="card" href="https://support.google.com/mail/answer/7126229" target="_blank" rel="noopener"><h3>IMAP/SMTP 設定</h3><p>外部アプリ・自動化スクリプトからの接続設定値</p><span class="url">…/answer/7126229</span></a>
+    <a class="card" href="https://support.google.com/accounts/answer/185833" target="_blank" rel="noopener"><h3>アプリパスワード</h3><p>2段階認証環境でスクリプトからGmailに接続する時に必要</p><span class="url">accounts/answer/185833</span></a>
+  </div>
+  <div class="group-label">電話・アシスタント・AI</div>
+  <div class="cards">
+    <a class="card" href="https://support.google.com/phoneapp" target="_blank" rel="noopener"><h3>電話アプリ ヘルプ</h3><p>Google純正「電話」アプリ全般</p><span class="url">support.google.com/phoneapp</span></a>
+    <a class="card" href="https://support.google.com/phoneapp/answer/9118387" target="_blank" rel="noopener"><h3>通話スクリーニング</h3><p>AIが代わりに電話に出て相手と用件を確認する機能の設定</p><span class="url">…/answer/9118387</span></a>
+    <a class="card" href="https://support.google.com/assistant" target="_blank" rel="noopener"><h3>Google アシスタント ヘルプ</h3><p>音声操作・ルーティン設定</p><span class="url">support.google.com/assistant</span></a>
+    <a class="card" href="https://support.google.com/gemini" target="_blank" rel="noopener"><h3>Gemini ヘルプ</h3><p>Pixel 8a以降の標準AIアシスタント。アシスタントからの切替も</p><span class="url">support.google.com/gemini</span></a>
+    <a class="card" href="https://support.google.com/messages" target="_blank" rel="noopener"><h3>メッセージ ヘルプ</h3><p>RCS・迷惑SMS対策</p><span class="url">support.google.com/messages</span></a>
+  </div>
+</section>
+
+<section id="features">
+  <h2>電話 / Gmail 主要機能の対応状況と設定</h2>
+  <p class="sec-note">「どの世代から使えるか」を明記。4a では使えない機能が判断材料になる。</p>
+  <div class="feature">
+    <h3>通話スクリーニング（日本語対応版）</h3>
+    <div class="req">対応: Pixel 7 世代以降で段階提供 → 8a / 9a / 10a は標準搭載。4a〜6a は日本語自動応答は不可</div>
+    <ol>
+      <li>電話アプリ → 右上メニュー → <kbd>設定</kbd></li>
+      <li><kbd>通話スクリーニング</kbd> を選択</li>
+      <li>「不明な番号からの着信」で自動スクリーニングの強度を選ぶ</li>
+      <li>着信時は画面の「スクリーニング」ボタンで手動起動も可</li>
+    </ol>
+    <p class="caveat">注意: 営業電話・詐欺電話フィルタとして実用的なのは 8a 以降。EOL 端末での着信対応は迷惑電話フィルタアプリ側に依存することになりリスクが残る。</p>
+  </div>
+  <div class="feature">
+    <h3>レコーダー文字起こし（日本語）</h3>
+    <div class="req">対応: Tensor 搭載機（6a 以降）。4a / 4a 5G / 5a は英語のみ・精度低</div>
+    <ol>
+      <li>レコーダーアプリで録音開始 → 自動で文字起こしタブに反映</li>
+      <li>録音一覧 → 共有 → テキストとしてエクスポート（Obsidian転記に使用可）</li>
+    </ol>
+  </div>
+  <div class="feature">
+    <h3>Gmail: 自動仕分け（フィルタ + ラベル）</h3>
+    <div class="req">対応: 全機種（サーバー側機能のため端末世代に依存しない）</div>
+    <ol>
+      <li>Gmail（Web推奨）→ 検索バー右の <kbd>検索オプション</kbd></li>
+      <li>From / 件名 / キーワードで条件を指定 → <kbd>フィルタを作成</kbd></li>
+      <li>「ラベルを付ける」「受信トレイをスキップ」を選択</li>
+      <li>求人・API通知・請求など、送信元ドメイン単位で分ける</li>
+    </ol>
+  </div>
+  <div class="feature">
+    <h3>Gemini / アシスタント切替</h3>
+    <div class="req">対応: Gemini標準は 8a 以降。6a / 7a はアプリ導入で切替可。4a 系は従来アシスタントのみ</div>
+    <ol>
+      <li>Gemini アプリ → プロフィール → <kbd>設定</kbd></li>
+      <li><kbd>Google のデジタル アシスタント</kbd> → Gemini / アシスタント を選択</li>
+    </ol>
+  </div>
+</section>
+
+<section id="os-bugs">
+  <h2>OS別不具合マトリクス（Android 11 → 17）</h2>
+  <p class="sec-note">網羅は不可能な前提で、各OSの「定番症状 → 対策」のみ掲載。<span class="vstate v">VERIFIED</span> = 出典確認済み / <span class="vstate u">UNVERIFIED</span> = 要再確認。月例パッチ配信後にこのセクションを確認・追記する。last verified: 2026-07-24</p>
+
+  <details open>
+    <summary><span><span class="ts-tag warn">A17</span>Android 17（2026/6/16〜）— 対象: 6a / 7a / 8a / 9a / 10a 全機種</span></summary>
+    <div class="body">
+      <div class="alert-band">配信直後から深刻報告が多発した版。6a〜10a は月例修正パッチ（2026年7月以降）の適用状況を確認してから更新する。更新前フルバックアップ必須。</div>
+      <ul>
+        <li><strong>タッチ操作異常</strong> <span class="vstate v">VERIFIED</span> — スワイプ方向の逆転・タップ無反応・入力の過剰認識/欠落がシステム全体で突発。対策: ①アクセシビリティのトリプルタップ(拡大操作)をOFF ②Pixel Launcher のキャッシュ削除（設定→アプリ→Pixel Launcher→ストレージとキャッシュ）③改善なければ修正パッチ待ち。<em>画面故障と誤認して修理に出さない</em></li>
+        <li><strong>通信不能（5G→LTE落ち・モバイル接続不可・eSIM消滅）</strong> <span class="vstate v">VERIFIED</span> — 6a / 8a を含む広範な機種で報告。対策: 機内モードON/OFF → SIM再挿入 → ネットワーク設定リセット。eSIM消滅時は端末側で復旧不可のケースがありキャリア窓口で再発行</li>
+        <li><strong>Wi-Fi接続時のみ一部アプリが通信不可</strong> <span class="vstate v">VERIFIED</span> — 仕事用プロファイル利用環境で発生するバグとGoogleが公式に認め修正を明言。暫定対策: ①スーパーバッテリーセーバーを一度ON→OFF ②対象アプリのキャッシュ削除+無効化→再有効化 ③仕事用プロファイルの一時無効化</li>
+        <li><strong>再起動ループ・文鎮化</strong> <span class="vstate v">VERIFIED</span> — 初期化・本体交換に至る報告あり。対策: 更新前フルバックアップ。発生時はリカバリーモード → Factory Image sideload → 復旧不可なら交換申請</li>
+        <li><strong>アプリ起動遅延</strong> <span class="vstate u">UNVERIFIED</span> — 更新後数日は再インデックス期間として様子見。継続時は再起動を数回</li>
+      </ul>
+    </div>
+  </details>
+
+  <details>
+    <summary><span><span class="ts-tag">A16</span>Android 16（2025/6〜）— 対象: 6a〜10a</span></summary>
+    <div class="body">
+      <ul>
+        <li><strong>Wi-Fi突発切断・「接続済みだが通信不可」</strong> <span class="vstate v">VERIFIED</span> — 対策: ネットワーク設定リセット → Wi-Fi自動切替OFF → プライベートDNS OFF → ルーター再起動の順で切り分け</li>
+        <li><strong>バッテリー異常消費（6a世代で顕著報告）</strong> <span class="vstate v">VERIFIED</span> — 対策: バッテリー使用状況で異常アプリ特定・ライブ壁紙/常時表示を一時OFF・学習が落ち着くまで数日待つ</li>
+        <li><strong>通知が届かない</strong> <span class="vstate v">VERIFIED</span> — 更新時に「バッテリーの最適化」が自動で「制限あり」に変更される事例。設定→アプリ→対象アプリ→バッテリー→「制限なし」へ戻す</li>
+        <li><strong>戻る操作無反応・画面ホワイトアウト</strong> <span class="vstate v">VERIFIED</span> — 対策: 保護フィルム感度確認 → ジェスチャー設定再確認 → 月例パッチ適用</li>
+        <li><strong>位置情報の一時的ズレ（省電力切替直後）</strong> <span class="vstate u">UNVERIFIED</span> — 対策: 高精度モード固定 or 切替直後の測位を待つ</li>
+      </ul>
+      <p>教訓: Pixelは配信最速な分、初期バグを踏みやすい。<strong>メイン機は初回メジャー更新を2〜4週間遅らせるのが実用解。</strong></p>
+    </div>
+  </details>
+
+  <details>
+    <summary><span><span class="ts-tag">A15</span>Android 15（2024）— 対象: 6a〜9a</span></summary>
+    <div class="body">
+      <ul>
+        <li><strong>プライベートスペース有効化後のアプリ検索不整合</strong> <span class="vstate u">UNVERIFIED</span> — 対策: プライベートスペースの再ロック・再起動</li>
+        <li><strong>更新直後のアプリフリーズ・再起動ループ報告</strong> <span class="vstate u">UNVERIFIED</span> — 対策: セーフモードで切り分け → 問題アプリの更新待ち</li>
+        <li><strong>自動明るさの挙動変化</strong> <span class="vstate u">UNVERIFIED</span> — 対策: 明るさの学習リセット</li>
+      </ul>
+    </div>
+  </details>
+
+  <details>
+    <summary><span><span class="ts-tag">A14</span>Android 14（2023）— 対象: 5a最終 / 6a / 7a / 8a</span></summary>
+    <div class="body">
+      <ul>
+        <li><strong>複数ユーザー設定時のストレージアクセス不能・データロック（重大）</strong> <span class="vstate u">UNVERIFIED</span> — 当時の修正パッチ適用済みか確認。未更新の中古端末は購入前に要確認</li>
+        <li><strong>戻るジェスチャーの予測アニメーション不安定</strong> <span class="vstate u">UNVERIFIED</span> — 対策: 開発者オプションで予測型「戻る」をOFF</li>
+        <li>5a はこのバージョンでアップデート終了（2024年8月）</li>
+      </ul>
+    </div>
+  </details>
+
+  <details>
+    <summary><span><span class="ts-tag">A13</span>Android 13（2022）— 対象: 4a最終 / 5a / 6a</span></summary>
+    <div class="body">
+      <ul>
+        <li><strong>通知権限が既定OFFでアプリ通知が来ない</strong> <span class="vstate u">UNVERIFIED</span> — アプリ初回起動時に通知許可を明示的にON（仕様変更）</li>
+        <li><strong>一部機種でワイヤレス充電の断続</strong> <span class="vstate u">UNVERIFIED</span> — ケースを外す・純正充電器で検証</li>
+        <li>4a はこのバージョンでアップデート終了（2023年）</li>
+      </ul>
+    </div>
+  </details>
+
+  <details>
+    <summary><span><span class="ts-tag">A12</span>Android 12（2021）— 対象: 4a〜5a 世代</span></summary>
+    <div class="body">
+      <ul>
+        <li><strong>Material You 刷新直後のバッテリードレイン</strong> <span class="vstate u">UNVERIFIED</span> — 更新後48〜72時間は学習期間として様子見 → 改善なければアプリ側更新確認</li>
+        <li><strong>ウィジェット表示崩れ</strong> <span class="vstate u">UNVERIFIED</span> — Pixel Launcher のキャッシュ削除</li>
+        <li><strong>指紋センサー反応低下（12L含む）</strong> <span class="vstate u">UNVERIFIED</span> — 指紋再登録</li>
+      </ul>
+    </div>
+  </details>
+
+  <details>
+    <summary><span><span class="ts-tag">A11</span>Android 11（2020）— 対象: 4a / 4a 5G 初期</span></summary>
+    <div class="body">
+      <ul>
+        <li><strong>特定壁紙設定でのブートループ（クラッシュ画像問題）</strong> <span class="vstate u">UNVERIFIED</span> — セーフモードで起動し壁紙を変更</li>
+        <li><strong>通話録音の制限開始</strong> <span class="vstate u">UNVERIFIED</span> — 仕様（回避不可）</li>
+      </ul>
+    </div>
+  </details>
+</section>
+
+<section id="ts">
+  <h2>トラブルシューティング（TS）</h2>
+  <p class="sec-note">上から順に「全機種共通 → 世代固有の既知問題」。所有中の 4a の項目は必読。OSバージョン起因の症状は上の「OS別不具合マトリクス」を先に確認。</p>
+
+  <details open>
+    <summary><span><span class="ts-tag">共通</span>基本 TS フロー（全機種）</span></summary>
+    <div class="body">
+      <ol>
+        <li><strong>強制再起動:</strong> 電源ボタン <kbd>30秒長押し</kbd>（画面フリーズ時もこれで再起動）</li>
+        <li><strong>セーフモード:</strong> 電源メニューの「電源を切る」を長押し → セーフモード。サードパーティアプリ起因かの切り分け</li>
+        <li><strong>アプリ単位:</strong> 設定 → アプリ → 対象アプリ → <kbd>ストレージ</kbd> → キャッシュ削除 → 改善なければデータ削除</li>
+        <li><strong>ネットワーク:</strong> 設定 → システム → リセット → <kbd>Wi-Fi/モバイル/Bluetoothをリセット</kbd></li>
+        <li><strong>OSアップデート確認:</strong> 設定 → システム → ソフトウェアアップデート</li>
+        <li><strong>最終手段:</strong> バックアップ → 初期化。復旧不能ならリカバリーモード（電源OFF → <kbd>電源+音量下</kbd> 長押し）から Factory Image を sideload</li>
+      </ol>
+    </div>
+  </details>
+
+  <details open>
+    <summary><span><span class="ts-tag warn">4a</span>Pixel 4a（所有機）— EOL + バッテリー制限問題</span></summary>
+    <div class="body">
+      <p><strong>状態: 2023年に全アップデート終了。</strong>さらに2025年1月の最終「バッテリー性能アップデート」で、一部個体はバッテリー容量・充電速度が意図的に制限された（発火リスク対策）。対象個体はGoogleが交換/返金プログラムを提供していた。</p>
+      <ul>
+        <li><strong>電池の減りが急に悪化した場合:</strong> 故障ではなく上記アップデートの仕様の可能性が高い。設定 → バッテリー → 使用状況で確認</li>
+        <li><strong>セキュリティ:</strong> 更新が来ないため、銀行・決済・仕事用アカウントのログインは非推奨。検証用・音楽プレーヤー・室内サブ機に限定</li>
+        <li><strong>膨張チェック:</strong> 背面パネルの浮き・画面の押し上げが出たら即使用中止（リチウム電池の膨張兆候）</li>
+        <li><strong>延命するなら:</strong> 非公式ROM含め、安全に延命する公式手段は実質ない</li>
+      </ul>
+    </div>
+  </details>
+
+  <details>
+    <summary><span><span class="ts-tag warn">4a5G/5a</span>4a (5G)・5a (5G) — EOL 共通</span></summary>
+    <div class="body">
+      <ul>
+        <li>両機とも Snapdragon 765G。動作自体はまだ実用域だがセキュリティ更新なし → 4a と同じ「サブ機限定」判断</li>
+        <li>5a は電源ボタン陥没・膨張報告が比較的多い世代。中古購入は非推奨</li>
+      </ul>
+    </div>
+  </details>
+
+  <details>
+    <summary><span><span class="ts-tag">6a</span>Pixel 6a — 指紋認証・発熱・モデム</span></summary>
+    <div class="body">
+      <ul>
+        <li><strong>画面内指紋の精度が低い:</strong> 同じ指を角度を変えて2回登録すると改善。保護フィルムは指紋対応品のみ</li>
+        <li><strong>発熱・電池持ち:</strong> Tensor G1 世代共通。優先ネットワークを4Gにすると改善する場合あり</li>
+        <li><strong>通信が不安定:</strong> G1世代のモデム個体差。機内モードON/OFF → SIM再挿入 → ネットワークリセットの順で切り分け</li>
+        <li><strong>期限:</strong> 2027年7月でアップデート終了。残り約1年、買い替え計画を先に立てる</li>
+      </ul>
+    </div>
+  </details>
+
+  <details>
+    <summary><span><span class="ts-tag">7a</span>Pixel 7a — 発熱・ワイヤレス充電</span></summary>
+    <div class="body">
+      <ul>
+        <li><strong>充電中の発熱:</strong> ケース装着のままワイヤレス充電すると温度制御で充電が止まることがある。有線を基本に</li>
+        <li><strong>画面のちらつき報告:</strong> 明るさ自動調整OFF + 更新適用で改善例多数</li>
+        <li><strong>期限:</strong> 2028年5月まで。中古で買うならこの世代が実用下限</li>
+      </ul>
+    </div>
+  </details>
+
+  <details>
+    <summary><span><span class="ts-tag">8a〜10a</span>Pixel 8a / 9a / 10a — 現役世代</span></summary>
+    <div class="body">
+      <ul>
+        <li><strong>共通:</strong> 7年保証世代。問題発生時はまず月例アップデート適用 → 共通TSフロー → OS別マトリクス確認</li>
+        <li><strong>8a:</strong> 画面の緑かぶり報告はアップデートでほぼ解消済み。設定 → ディスプレイ → 画面の色味で微調整可</li>
+        <li><strong>9a:</strong> 一部ロットでバッテリー関連の出荷前対策があった世代。購入時はGoogleストアのサポート告知を確認</li>
+        <li><strong>10a:</strong> Tensor G4継続のマイナー更新世代。背面フラット化で卓上安定。GPU性能はG5より高い逆転現象があり、ゲーム用途では10無印より有利な場面もある</li>
+        <li><strong>リカバリー:</strong> この世代は「修復モード」(Repair Mode) 搭載。修理に出す前に 設定 → システム → 修復モード でデータを隠せる</li>
+      </ul>
+    </div>
+  </details>
+
+  <details>
+    <summary><span><span class="ts-tag">判断表</span>用途別・使ってよい世代の早見</span></summary>
+    <div class="body">
+      <ul>
+        <li><strong>銀行・決済・仕事アカウント:</strong> 6a以降のみ（＝更新が生きている端末のみ）。ただし6aは2027/7まで</li>
+        <li><strong>検証・開発サブ機:</strong> 4a〜5aでも可（ネットワークは検証用に分離）</li>
+        <li><strong>今買うならコスパ順:</strong> ① 型落ち9a（10a発売で値下がり中）② 10a ③ 中古7a（2028/5まで）</li>
+        <li><strong>買ってはいけない:</strong> 5a以前の中古全部（EOL）、6aの新規購入（残り1年）</li>
+        <li><strong>今買った端末は即Android 17:</strong> 購入直後に2026年7月以降の修正パッチが適用済みか必ず確認（上のA17ブロック参照）</li>
+      </ul>
+    </div>
+  </details>
+</section>
+
+</main>
+
+<footer>
+  主な出典: Google Pixel ヘルプ「ソフトウェア アップデートが提供されるタイミング」(support.google.com/pixelphone/answer/4457705) / Google ストア Pixel 10a 技術仕様 / Android 17 配信・不具合は2026年6〜7月の国内報道複数。価格は発売時のGoogleストア税込価格。個人用リファレンス。
+</footer>
+
+</body>
+</html>
+```
