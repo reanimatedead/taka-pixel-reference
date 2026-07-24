@@ -129,3 +129,31 @@ Agent 3 (qa-verifier) による Pages 移行後の機械検証。配信ディレ
 ### 総括（整合確認）
 - 本文整合性: OK（blob 完全一致・リネームのみ）。
 - 構成: OK（配信阻害ファイルなし・`.gitignore` 現状維持）。
+
+---
+
+# UPDATE-003 QA（専門TS追加）— 2026-07-24 / Agent 4
+
+対象: `docs/index.html`（#ts-pro セクション追加 + タイトル「Pixel 整備手帳」化）。
+
+## 機械検証結果
+
+| チェック | コマンド | 期待 | 結果 |
+| --- | --- | --- | --- |
+| HTML構文 | `npx html-validate docs/index.html` | エラー0 | **PASS**（exit 0・出力なし） |
+| セクションID | `grep -c 'id="ts-pro"'` | 1 | **PASS**（=1） |
+| タイトル改称 | `grep -c '整備手帳'` | >=2 | **PASS**（=2: `<title>` と h1 thin） |
+| nav↔section | href#と`<section id>`の照合 | 8=8 全一致 | **PASS**（specs/support/fold/links/features/os-bugs/ts/ts-pro） |
+| 新規リンク死活 | curl GET+UA | 全200 | **PASS**（images / ota とも 200） |
+
+## 内容確認
+
+- 付録CのHTMLは一字一句そのまま挿入（`diff` で expected と完全一致確認済み）。
+- `#ts-pro` に Lv0 / Lv1 / Lv2 / Lv3 / コードネーム表（details 5個）が存在。
+- `#ts` sec-note 末尾に専門TSへの誘導文を追記済み。
+
+## 未検証事項（設計どおり残置）
+
+- コードネーム表の全エントリ・Play Integrity 記述は `UNVERIFIED`（一次ソースの動的テーブルが取得系で非取得のため。詳細は `data/sources.md`）。QA としては「UNVERIFIED が意図的に残っていること」を確認 = 正常。
+
+総合判定: **PASS**（構文0エラー・必須grep全一致・死リンク0）。

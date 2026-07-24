@@ -57,3 +57,16 @@
 | OK | 200 | https://www.androidauthority.com/google-pixel-software-update-policy-3482984/ | 保証年数 裏取り |
 
 - **BROKEN: 0件**。**MANUAL_CHECK: 1件**（phonearena 403＝ボット保護の偽陰性、主ソース健在のため実害なし）。
+
+---
+
+## UPDATE-003 追加リンク死活（#ts-pro）— 2026-07-24 / Agent 4
+
+方式: `curl -sSL` + ブラウザUA（Chrome/126 Mac）+ リダイレクト追従、`--max-time 25`。
+
+| HTTP | URL | 備考 |
+| --- | --- | --- |
+| 200 | https://developers.google.com/android/images | Factory Images（コードネーム表・復旧イメージ配布元）。既存 #links にも掲載。 |
+| 200 | https://developers.google.com/android/ota | Full OTA Images（sideload 用）。#ts-pro で新規追加。 |
+
+新規URL 2件すべて 200 OK。死リンクなし。
