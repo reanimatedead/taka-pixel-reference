@@ -109,3 +109,23 @@ Agent 3 (qa-verifier) による Pages 移行後の機械検証。配信ディレ
 - `.nojekyll`: OK（存在）。
 - 旧パス参照: 現行運用文書（README.md）には残置なし。歴史的文書2件の参照は意図的に保持。
 - `.env` 系ファイルへの接触: なし。
+
+---
+
+## UPDATE-002: 整合確認（Agent 4: consistency-checker）— 2026-07-24
+
+### 1. 本文無変更（リネームのみ）の確認
+- `docs/index.html`（HEAD）の blob hash = `4b1bc2b`。
+- `public/index.html`（HEAD~3 = UPDATE-001 適用後）の blob hash = `4b1bc2b`。
+- **完全一致**。`git diff HEAD~3 HEAD` は `similarity index 100% / rename from public/index.html / rename to docs/index.html` を報告。本文の変更はゼロで、リネームのみであることを確認。
+
+### 2. .gitignore
+- `.wrangler/`（2行目）を含む。将来 Cloudflare を再利用する可能性を排除しないため、**削除しない**（残置しても配信に害はない）。
+
+### 3. リポジトリ直下の配信阻害ファイル
+- 直下一覧を確認。配信は GitHub Pages の `main /docs` から行われ、`docs/` 配下のみが公開対象。直下の `*.md` / `node_modules/` / `.wrangler/` 等は公開範囲外で配信を妨げない。
+- `docs/` 内は `index.html` と `.nojekyll` のみで、余分な干渉ファイルなし。
+
+### 総括（整合確認）
+- 本文整合性: OK（blob 完全一致・リネームのみ）。
+- 構成: OK（配信阻害ファイルなし・`.gitignore` 現状維持）。
