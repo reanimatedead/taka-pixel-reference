@@ -6,8 +6,16 @@
     "yomi": "たっちそうさいじょう",
     "category": "画面・タッチ",
     "severity": "high",
-    "affected_models": ["6a", "7a", "8a", "9a", "10a"],
-    "affected_os": ["17"],
+    "affected_models": [
+      "6a",
+      "7a",
+      "8a",
+      "9a",
+      "10a"
+    ],
+    "affected_os": [
+      "17"
+    ],
     "symptom": "上下スワイプの方向逆転、タップ無反応、入力の過剰認識/欠落がシステム全体で突発する。",
     "cause": "Android 17 初期版のシステム側バグ。画面ハードの故障ではない。",
     "workaround": [
@@ -18,8 +26,25 @@
     "fix_status": "open",
     "first_seen": "2026-06",
     "last_checked": "2026-07-24",
-    "verify_state": "UNVERIFIED",
-    "sources": []
+    "verify_state": "VERIFIED",
+    "sources": [
+      {
+        "url": "https://9to5google.com/2026/06/22/android-17-causes-google-pixel-scrolling-bug/",
+        "date": "2026-07-24"
+      },
+      {
+        "url": "https://9to5google.com/2026/06/23/another-touchscreen-bug-appears-in-android-17-on-pixel/",
+        "date": "2026-07-24"
+      },
+      {
+        "url": "https://www.androidcentral.com/apps-software/android-os/android-17-is-off-to-a-rough-start-with-new-pixel-touchscreen-complaints",
+        "date": "2026-07-24"
+      }
+    ],
+    "mechanism": {
+      "text": "根本原因は非公開。Google認知あり（Pixel Community公式が対処を提示）。framework/HAL層が疑われるが未特定。",
+      "confidence": "unknown"
+    }
   },
   {
     "id": "PXD-0002",
@@ -28,8 +53,16 @@
     "yomi": "つうしんふのう",
     "category": "通信",
     "severity": "high",
-    "affected_models": ["6a", "7a", "8a", "9a", "10a"],
-    "affected_os": ["17"],
+    "affected_models": [
+      "6a",
+      "7a",
+      "8a",
+      "9a",
+      "10a"
+    ],
+    "affected_os": [
+      "17"
+    ],
     "symptom": "5GからLTEへの落ち込み、モバイル接続不可、eSIM消滅。6a / 8a を含む広範な機種で報告。",
     "cause": "Android 17 初期版のシステム側不具合。",
     "workaround": [
@@ -41,8 +74,26 @@
     "fix_status": "open",
     "first_seen": "2026-06",
     "last_checked": "2026-07-24",
-    "verify_state": "UNVERIFIED",
-    "sources": []
+    "verify_state": "VERIFIED",
+    "sources": [
+      {
+        "url": "https://www.androidauthority.com/android-17-knocks-off-5g-3679536/",
+        "date": "2026-07-24"
+      },
+      {
+        "url": "https://www.androidcentral.com/apps-software/android-os/android-17-woes-continue-with-pixel-users-losing-5g-connectivity",
+        "date": "2026-07-24"
+      },
+      {
+        "url": "https://www.phonearena.com/news/after-installing-android-17-some-pixels-lose-5g_id181265",
+        "date": "2026-07-24"
+      }
+    ],
+    "layer": "modem_fw",
+    "mechanism": {
+      "text": "無線プロファイルの破損（\"scrambled cellular radio profiles\"）によるものと Android Authority が推定。eUICC/無線プロファイル層の問題。",
+      "confidence": "inferred"
+    }
   },
   {
     "id": "PXD-0003",
@@ -51,8 +102,16 @@
     "yomi": "わいふぁいせつぞくじのみいちぶあぷりがつうしんふか",
     "category": "通信",
     "severity": "medium",
-    "affected_models": ["6a", "7a", "8a", "9a", "10a"],
-    "affected_os": ["17"],
+    "affected_models": [
+      "6a",
+      "7a",
+      "8a",
+      "9a",
+      "10a"
+    ],
+    "affected_os": [
+      "17"
+    ],
     "symptom": "Wi-Fi接続時のみ一部アプリが通信できない。仕事用プロファイル利用環境で発生。",
     "cause": "仕事用プロファイル利用環境で発生するバグと Google が公式に認め修正を明言。",
     "workaround": [
@@ -63,8 +122,26 @@
     "fix_status": "open",
     "first_seen": "2026-06",
     "last_checked": "2026-07-24",
-    "verify_state": "UNVERIFIED",
-    "sources": []
+    "verify_state": "VERIFIED",
+    "sources": [
+      {
+        "url": "https://cybernews.com/tech/android-17-bug-google-pixel/",
+        "date": "2026-07-24"
+      },
+      {
+        "url": "https://www.phonearena.com/news/android-17-delivers-odd-pixel-wi-fi-bug_id181232",
+        "date": "2026-07-24"
+      },
+      {
+        "url": "https://www.androidpolice.com/android-17-wi-fi-issues/",
+        "date": "2026-07-24"
+      }
+    ],
+    "layer": "framework",
+    "mechanism": {
+      "text": "Work Profile と Android 17 の連携不良。Google が公式に表明: \"We are aware of this bug affecting Work Profile users, and a fix will be rolled out in a software update soon\"。IPv6有効化で解決した例があり、IPv6単独が原因ではない。",
+      "confidence": "confirmed"
+    }
   },
   {
     "id": "PXD-0004",
@@ -73,8 +150,16 @@
     "yomi": "さいきどうるぷぶんちんか",
     "category": "電源・起動",
     "severity": "critical",
-    "affected_models": ["6a", "7a", "8a", "9a", "10a"],
-    "affected_os": ["17"],
+    "affected_models": [
+      "6a",
+      "7a",
+      "8a",
+      "9a",
+      "10a"
+    ],
+    "affected_os": [
+      "17"
+    ],
     "symptom": "更新後に再起動ループ・文鎮化。初期化・本体交換に至る報告あり。",
     "cause": "Android 17 初期版のシステム側不具合。",
     "workaround": [
@@ -95,8 +180,16 @@
     "yomi": "あぷりきどうちえん",
     "category": "OS更新起因",
     "severity": "low",
-    "affected_models": ["6a", "7a", "8a", "9a", "10a"],
-    "affected_os": ["17"],
+    "affected_models": [
+      "6a",
+      "7a",
+      "8a",
+      "9a",
+      "10a"
+    ],
+    "affected_os": [
+      "17"
+    ],
     "symptom": "Android 17 更新後にアプリの起動が遅くなる。",
     "cause": "更新後数日の再インデックス期間による可能性（Android 17 固有の一次ソース未確認）。",
     "workaround": [
@@ -116,8 +209,16 @@
     "yomi": "わいふぁいとっぱつせつだん",
     "category": "通信",
     "severity": "medium",
-    "affected_models": ["6a", "7a", "8a", "9a", "10a"],
-    "affected_os": ["16"],
+    "affected_models": [
+      "6a",
+      "7a",
+      "8a",
+      "9a",
+      "10a"
+    ],
+    "affected_os": [
+      "16"
+    ],
     "symptom": "Wi-Fi が突発的に切断される。「接続済みだが通信不可」状態になる。",
     "cause": "Android 16 のシステム側不具合。",
     "workaround": [
@@ -129,8 +230,13 @@
     "fix_status": "open",
     "first_seen": "2025-06",
     "last_checked": "2026-07-24",
-    "verify_state": "UNVERIFIED",
-    "sources": []
+    "verify_state": "VERIFIED",
+    "sources": [
+      {
+        "url": "https://www.phonearena.com/news/android-16-qpr3-beta-2-is-here-to-solve-your-pixel-charging-problems-and-more_id177342",
+        "date": "2026-07-24"
+      }
+    ]
   },
   {
     "id": "PXD-0007",
@@ -139,8 +245,16 @@
     "yomi": "ばってりいじょうしょうひ",
     "category": "バッテリー・充電・発熱",
     "severity": "medium",
-    "affected_models": ["6a", "7a", "8a", "9a", "10a"],
-    "affected_os": ["16"],
+    "affected_models": [
+      "6a",
+      "7a",
+      "8a",
+      "9a",
+      "10a"
+    ],
+    "affected_os": [
+      "16"
+    ],
     "symptom": "Android 16 更新後のバッテリー異常消費。6a 世代で顕著な報告。",
     "cause": "Android 16 更新起因。更新直後は学習期間の影響も含む。",
     "workaround": [
@@ -151,8 +265,26 @@
     "fix_status": "open",
     "first_seen": "2025-06",
     "last_checked": "2026-07-24",
-    "verify_state": "UNVERIFIED",
-    "sources": []
+    "verify_state": "VERIFIED",
+    "sources": [
+      {
+        "url": "https://www.androidpolice.com/pixel-tensor-driver-update-deep-dive/",
+        "date": "2026-07-24"
+      },
+      {
+        "url": "https://discuss.grapheneos.org/d/29280-pixel-6-exynos-5123-modem-causing-problems-since-update",
+        "date": "2026-07-24"
+      },
+      {
+        "url": "https://xdaforums.com/t/tensor-running-too-hot-fix-overheating-improve-battery-life-on-stock-android-no-custom-rom-no-custom-kernel-pixel-phones.4785321/",
+        "date": "2026-07-24"
+      }
+    ],
+    "layer": "modem_fw",
+    "mechanism": {
+      "text": "Exynos 5123 モデムの「Mobile network standby」ドレイン（コミュニティ解析による推定）。Tensor サーマルエンジンの高頻度ポーリングも寄与。",
+      "confidence": "inferred"
+    }
   },
   {
     "id": "PXD-0008",
@@ -161,8 +293,16 @@
     "yomi": "つうちがとどかない",
     "category": "アプリ挙動",
     "severity": "medium",
-    "affected_models": ["6a", "7a", "8a", "9a", "10a"],
-    "affected_os": ["16"],
+    "affected_models": [
+      "6a",
+      "7a",
+      "8a",
+      "9a",
+      "10a"
+    ],
+    "affected_os": [
+      "16"
+    ],
     "symptom": "アプリの通知が届かなくなる。",
     "cause": "更新時に「バッテリーの最適化」が自動で「制限あり」に変更される事例。",
     "workaround": [
@@ -171,8 +311,18 @@
     "fix_status": "open",
     "first_seen": "2025-06",
     "last_checked": "2026-07-24",
-    "verify_state": "UNVERIFIED",
-    "sources": []
+    "verify_state": "VERIFIED",
+    "sources": [
+      {
+        "url": "https://support.google.com/pixelphone/thread/362205439/battery-optimisation-options-missing-in-android-16",
+        "date": "2026-07-24"
+      }
+    ],
+    "layer": "framework",
+    "mechanism": {
+      "text": "OS更新時に「バッテリーの最適化」が自動で「制限あり」に変更され通知が抑制される。仕様と副作用の境界とされる（推定）。",
+      "confidence": "inferred"
+    }
   },
   {
     "id": "PXD-0009",
@@ -181,8 +331,16 @@
     "yomi": "もどるそうさむはんのうがめんほわいとあうと",
     "category": "画面・タッチ",
     "severity": "medium",
-    "affected_models": ["6a", "7a", "8a", "9a", "10a"],
-    "affected_os": ["16"],
+    "affected_models": [
+      "6a",
+      "7a",
+      "8a",
+      "9a",
+      "10a"
+    ],
+    "affected_os": [
+      "16"
+    ],
     "symptom": "戻る操作が無反応になる。画面がホワイトアウトする。",
     "cause": "Android 16 のシステム側不具合。",
     "workaround": [
@@ -193,8 +351,17 @@
     "fix_status": "open",
     "first_seen": "2025-06",
     "last_checked": "2026-07-24",
-    "verify_state": "UNVERIFIED",
-    "sources": []
+    "verify_state": "VERIFIED",
+    "sources": [
+      {
+        "url": "https://android.gadgethacks.com/news/android-16-qpr3-beta-2-fixes-battery-drain-on-pixel/",
+        "date": "2026-07-24"
+      }
+    ],
+    "mechanism": {
+      "text": "機序非公開・層未特定。QPR3 Beta 2 で UI レンダリング修正の対象。",
+      "confidence": "unknown"
+    }
   },
   {
     "id": "PXD-0010",
@@ -203,8 +370,16 @@
     "yomi": "いちじょうほうのいちじてきずれ",
     "category": "通信",
     "severity": "low",
-    "affected_models": ["6a", "7a", "8a", "9a", "10a"],
-    "affected_os": ["16"],
+    "affected_models": [
+      "6a",
+      "7a",
+      "8a",
+      "9a",
+      "10a"
+    ],
+    "affected_os": [
+      "16"
+    ],
     "symptom": "省電力切替直後に位置情報が一時的にズレる。",
     "cause": "未特定（Android 16 固有の一次ソース未確認）。",
     "workaround": [
@@ -224,8 +399,15 @@
     "yomi": "ぷらいべとすぺすゆうこうかごのあぷりけんさくふせいごう",
     "category": "アプリ挙動",
     "severity": "low",
-    "affected_models": ["6a", "7a", "8a", "9a"],
-    "affected_os": ["15"],
+    "affected_models": [
+      "6a",
+      "7a",
+      "8a",
+      "9a"
+    ],
+    "affected_os": [
+      "15"
+    ],
     "symptom": "プライベートスペース有効化後、プライベートスペース内のアプリが検索で見えてしまう不整合。",
     "cause": "Android 15 のプライベートスペース実装の不具合。beta 2.1 で修正。",
     "workaround": [
@@ -237,7 +419,10 @@
     "last_checked": "2026-07-24",
     "verify_state": "VERIFIED",
     "sources": [
-      {"url": "https://www.tomsguide.com/phones/android-phones/private-space-on-android-15-has-an-annoying-glitch-but-android-15-beta-21-can-fix-it", "date": "2026-07-24"}
+      {
+        "url": "https://www.tomsguide.com/phones/android-phones/private-space-on-android-15-has-an-annoying-glitch-but-android-15-beta-21-can-fix-it",
+        "date": "2026-07-24"
+      }
     ]
   },
   {
@@ -247,8 +432,15 @@
     "yomi": "こうしんちょくごのあぷりふりずさいきどうるぷ",
     "category": "OS更新起因",
     "severity": "critical",
-    "affected_models": ["6a", "7a", "8a", "9a"],
-    "affected_os": ["15"],
+    "affected_models": [
+      "6a",
+      "7a",
+      "8a",
+      "9a"
+    ],
+    "affected_os": [
+      "15"
+    ],
     "symptom": "更新直後のアプリフリーズ・再起動ループ報告。Issue Tracker に多数の報告。",
     "cause": "更新起因。Google が認め復旧ツールを提供。",
     "workaround": [
@@ -260,7 +452,10 @@
     "last_checked": "2026-07-24",
     "verify_state": "VERIFIED",
     "sources": [
-      {"url": "https://9to5google.com/2026/06/11/google-pixel-updates-left-phones-useless-bootlooping-for-some-a-fix-is-now-in-sight/", "date": "2026-07-24"}
+      {
+        "url": "https://9to5google.com/2026/06/11/google-pixel-updates-left-phones-useless-bootlooping-for-some-a-fix-is-now-in-sight/",
+        "date": "2026-07-24"
+      }
     ]
   },
   {
@@ -270,8 +465,15 @@
     "yomi": "じどうあかるさのきょどうへんか",
     "category": "画面・タッチ",
     "severity": "low",
-    "affected_models": ["6a", "7a", "8a", "9a"],
-    "affected_os": ["15"],
+    "affected_models": [
+      "6a",
+      "7a",
+      "8a",
+      "9a"
+    ],
+    "affected_os": [
+      "15"
+    ],
     "symptom": "Android 15 更新後に自動明るさの挙動が変化する。",
     "cause": "未特定（Android 15 固有の変化として認知された一次ソース未確認）。",
     "workaround": [
@@ -290,8 +492,15 @@
     "yomi": "ふくすうゆうざせっていじのすとれじあくせすふのう",
     "category": "OS更新起因",
     "severity": "critical",
-    "affected_models": ["5a", "6a", "7a", "8a"],
-    "affected_os": ["14"],
+    "affected_models": [
+      "5a",
+      "6a",
+      "7a",
+      "8a"
+    ],
+    "affected_os": [
+      "14"
+    ],
     "symptom": "複数ユーザープロファイル設定端末でストレージアクセス不能・データロック。ブートループ・データ喪失に至る事例。",
     "cause": "Android 14 のストレージ処理の重大バグ。Google が認め修復ツールを提供。",
     "workaround": [
@@ -303,8 +512,24 @@
     "last_checked": "2026-07-24",
     "verify_state": "VERIFIED",
     "sources": [
-      {"url": "https://9to5google.com/2023/10/17/android-14-pixel-6-storage-problems/", "date": "2026-07-24"}
-    ]
+      {
+        "url": "https://9to5google.com/2023/10/17/android-14-pixel-6-storage-problems/",
+        "date": "2026-07-24"
+      },
+      {
+        "url": "https://borncity.com/win/2023/10/28/android-14-bug-locks-out-users-with-multiple-profiles-threat-of-data-loss/",
+        "date": "2026-07-24"
+      },
+      {
+        "url": "https://www.phonearena.com/news/android-14-storage-bug-fix-now-available-as-a-separate-tool-for-pixel-devices-stuck-in-reboot-loop_id152580",
+        "date": "2026-07-24"
+      }
+    ],
+    "layer": "kernel",
+    "mechanism": {
+      "text": "/data/media/0 が \"Structure needs cleaning\" となるファイルシステム/FUSE層の破損。Issue Tracker 305766503（P2→P0格上げ）、Google声明 2023-10-28。2023-11のパッチとスタンドアロン修復ツールで対処（2024-01に再発報告あり）。",
+      "confidence": "confirmed"
+    }
   },
   {
     "id": "PXD-0015",
@@ -313,8 +538,15 @@
     "yomi": "もどるじぇすちゃのよそくあにめしょんふあんてい",
     "category": "アプリ挙動",
     "severity": "low",
-    "affected_models": ["5a", "6a", "7a", "8a"],
-    "affected_os": ["14"],
+    "affected_models": [
+      "5a",
+      "6a",
+      "7a",
+      "8a"
+    ],
+    "affected_os": [
+      "14"
+    ],
     "symptom": "戻るジェスチャーの予測アニメーションが不安定。戻るをキャンセルするアプリで不安定化・クラッシュ。",
     "cause": "Android 14 の予測型戻るアニメーションがジェスチャー確定前に開始するため。",
     "workaround": [
@@ -325,7 +557,10 @@
     "last_checked": "2026-07-24",
     "verify_state": "VERIFIED",
     "sources": [
-      {"url": "https://docs.flutter.dev/release/breaking-changes/android-predictive-back", "date": "2026-07-24"}
+      {
+        "url": "https://docs.flutter.dev/release/breaking-changes/android-predictive-back",
+        "date": "2026-07-24"
+      }
     ]
   },
   {
@@ -335,8 +570,14 @@
     "yomi": "つうちけんげんがきていおふであぷりつうちがこない",
     "category": "アプリ挙動",
     "severity": "medium",
-    "affected_models": ["4a", "5a", "6a"],
-    "affected_os": ["13"],
+    "affected_models": [
+      "4a",
+      "5a",
+      "6a"
+    ],
+    "affected_os": [
+      "13"
+    ],
     "symptom": "新規インストールアプリの通知が来ない。",
     "cause": "Android 13 (API 33) で POST_NOTIFICATIONS ランタイム権限が導入され、新規アプリは通知権限が既定OFFになる仕様変更。",
     "workaround": [
@@ -347,7 +588,10 @@
     "last_checked": "2026-07-24",
     "verify_state": "VERIFIED",
     "sources": [
-      {"url": "https://developer.android.com/develop/ui/compose/notifications/notification-permission", "date": "2026-07-24"}
+      {
+        "url": "https://developer.android.com/develop/ui/compose/notifications/notification-permission",
+        "date": "2026-07-24"
+      }
     ]
   },
   {
@@ -357,8 +601,14 @@
     "yomi": "いちぶきしゅでわいやれすじゅうでんのだんぞく",
     "category": "バッテリー・充電・発熱",
     "severity": "medium",
-    "affected_models": ["4a", "5a", "6a"],
-    "affected_os": ["13"],
+    "affected_models": [
+      "4a",
+      "5a",
+      "6a"
+    ],
+    "affected_os": [
+      "13"
+    ],
     "symptom": "Android 13 更新後に一部 Pixel でワイヤレス充電が断続する（Not charging 表示）。",
     "cause": "Android 13 更新起因。後にパッチ提供。",
     "workaround": [
@@ -370,8 +620,24 @@
     "last_checked": "2026-07-24",
     "verify_state": "VERIFIED",
     "sources": [
-      {"url": "https://www.androidauthority.com/wireless-charging-android-13-3198736/", "date": "2026-07-24"}
-    ]
+      {
+        "url": "https://www.androidauthority.com/wireless-charging-android-13-3198736/",
+        "date": "2026-07-24"
+      },
+      {
+        "url": "https://9to5google.com/2022/08/19/pixel-wireless-charging-android-13/",
+        "date": "2026-07-24"
+      },
+      {
+        "url": "https://www.androidpolice.com/android-13-wireless-charging-bug/",
+        "date": "2026-07-24"
+      }
+    ],
+    "layer": "framework",
+    "mechanism": {
+      "text": "ソフトウェアの充電制御起因と推定（Issue Tracker 242836221）。",
+      "confidence": "inferred"
+    }
   },
   {
     "id": "PXD-0018",
@@ -380,8 +646,14 @@
     "yomi": "まてりあるゆうさっしんちょくごのばってりどれいん",
     "category": "バッテリー・充電・発熱",
     "severity": "medium",
-    "affected_models": ["4a", "4a5g", "5a"],
-    "affected_os": ["12"],
+    "affected_models": [
+      "4a",
+      "4a5g",
+      "5a"
+    ],
+    "affected_os": [
+      "12"
+    ],
     "symptom": "Android 12（Material You 版）更新直後のバッテリードレイン。複数 Pixel で報告。",
     "cause": "Android 12 更新起因。",
     "workaround": [
@@ -393,7 +665,10 @@
     "last_checked": "2026-07-24",
     "verify_state": "VERIFIED",
     "sources": [
-      {"url": "https://www.tomsguide.com/news/android-12-is-draining-some-google-pixel-batteries-what-you-need-to-know", "date": "2026-07-24"}
+      {
+        "url": "https://www.tomsguide.com/news/android-12-is-draining-some-google-pixel-batteries-what-you-need-to-know",
+        "date": "2026-07-24"
+      }
     ]
   },
   {
@@ -403,8 +678,14 @@
     "yomi": "うぃじぇっとひょうじくずれ",
     "category": "アプリ挙動",
     "severity": "low",
-    "affected_models": ["4a", "4a5g", "5a"],
-    "affected_os": ["12"],
+    "affected_models": [
+      "4a",
+      "4a5g",
+      "5a"
+    ],
+    "affected_os": [
+      "12"
+    ],
     "symptom": "ウィジェットのプレビュー崩れ・非表示・角丸クロップ等の表示崩れ。",
     "cause": "Android 12 の Material You 刷新起因。アップデートで修正。",
     "workaround": [
@@ -415,7 +696,10 @@
     "last_checked": "2026-07-24",
     "verify_state": "VERIFIED",
     "sources": [
-      {"url": "https://www.androidpolice.com/android-12-fixes-material-you-glitches-when-previewing-widgets/", "date": "2026-07-24"}
+      {
+        "url": "https://www.androidpolice.com/android-12-fixes-material-you-glitches-when-previewing-widgets/",
+        "date": "2026-07-24"
+      }
     ]
   },
   {
@@ -425,8 +709,14 @@
     "yomi": "しもんせんさはんのうていか",
     "category": "生体認証",
     "severity": "medium",
-    "affected_models": ["4a", "4a5g", "5a"],
-    "affected_os": ["12"],
+    "affected_models": [
+      "4a",
+      "4a5g",
+      "5a"
+    ],
+    "affected_os": [
+      "12"
+    ],
     "symptom": "Android 12（12L含む）で指紋センサーの反応低下。",
     "cause": "Android 12 更新起因。画面内指紋の低速・不安定を Google が公式に認めた（出典は Pixel 6 の事例）。",
     "workaround": [
@@ -437,7 +727,10 @@
     "last_checked": "2026-07-24",
     "verify_state": "VERIFIED",
     "sources": [
-      {"url": "https://www.androidpolice.com/google-details-why-pixel-6-fingerprint-sensor-is-slow-but-were-not-satisfied-with-the-explanation/", "date": "2026-07-24"}
+      {
+        "url": "https://www.androidpolice.com/google-details-why-pixel-6-fingerprint-sensor-is-slow-but-were-not-satisfied-with-the-explanation/",
+        "date": "2026-07-24"
+      }
     ]
   },
   {
@@ -447,8 +740,13 @@
     "yomi": "とくていかべがみせっていでのぶとるぷ",
     "category": "電源・起動",
     "severity": "high",
-    "affected_models": ["4a", "4a5g"],
-    "affected_os": ["11"],
+    "affected_models": [
+      "4a",
+      "4a5g"
+    ],
+    "affected_os": [
+      "11"
+    ],
     "symptom": "特定の画像を壁紙に設定するとクラッシュ・ブートループが発生する。",
     "cause": "非sRGB壁紙画像が ImageProcessorHelper の色空間輝度オーバーフローを誘発。Android 11 は自動色空間変換で回避。",
     "workaround": [
@@ -459,8 +757,24 @@
     "last_checked": "2026-07-24",
     "verify_state": "VERIFIED",
     "sources": [
-      {"url": "https://www.androidauthority.com/android-wallpaper-crash-1124577/", "date": "2026-07-24"}
-    ]
+      {
+        "url": "https://www.androidauthority.com/android-wallpaper-crash-1124577/",
+        "date": "2026-07-24"
+      },
+      {
+        "url": "https://www.xda-developers.com/wallpaper-triggers-rare-bug-causing-android-devices-bootloop/",
+        "date": "2026-07-24"
+      },
+      {
+        "url": "https://medium.com/@srivastavahardik/diving-into-androids-wallpaper-crash-bug-7bda055b9641",
+        "date": "2026-07-24"
+      }
+    ],
+    "layer": "framework",
+    "mechanism": {
+      "text": "ImageProcessHelper が RGB 合計値を配列 index に使用しており、丸めで 256 に到達すると ArrayIndexOutOfBoundsException: length=256; index=256 が発生し SystemUI がクラッシュ連鎖する。開発者 Davide Bianco が AOSP に修正を提出。Android 11 以降は sRGB 強制変換で影響なし（Android 10 以前の事象）。",
+      "confidence": "confirmed"
+    }
   },
   {
     "id": "PXD-0022",
@@ -469,8 +783,13 @@
     "yomi": "つうわろくおんのせいげんかいし",
     "category": "音・通話",
     "severity": "low",
-    "affected_models": ["4a", "4a5g"],
-    "affected_os": ["11"],
+    "affected_models": [
+      "4a",
+      "4a5g"
+    ],
+    "affected_os": [
+      "11"
+    ],
     "symptom": "サードパーティアプリによる通話録音ができない。",
     "cause": "アクセシビリティAPI経由の通話録音を Google が制限。仕様であり回避不可。",
     "workaround": [
@@ -481,7 +800,10 @@
     "last_checked": "2026-07-24",
     "verify_state": "VERIFIED",
     "sources": [
-      {"url": "https://www.androidpolice.com/google-ends-call-recording-apps-accessibility-services/", "date": "2026-07-24"}
+      {
+        "url": "https://www.androidpolice.com/google-ends-call-recording-apps-accessibility-services/",
+        "date": "2026-07-24"
+      }
     ]
   },
   {
@@ -491,8 +813,12 @@
     "yomi": "ばってりようりょうじゅうでんそくどのいとてきせいげん",
     "category": "バッテリー・充電・発熱",
     "severity": "medium",
-    "affected_models": ["4a"],
-    "affected_os": ["13"],
+    "affected_models": [
+      "4a"
+    ],
+    "affected_os": [
+      "13"
+    ],
     "symptom": "電池の減りが急に悪化する。故障ではなく最終アップデートの仕様の可能性が高い。",
     "cause": "2025年1月の最終「バッテリー性能アップデート」で、一部個体はバッテリー容量・充電速度が意図的に制限された（発火リスク対策）。対象個体は Google が交換/返金プログラムを提供していた。",
     "workaround": [
@@ -503,8 +829,30 @@
     "fix_status": "spec",
     "first_seen": "2025-01",
     "last_checked": "2026-07-24",
-    "verify_state": "UNVERIFIED",
-    "sources": []
+    "verify_state": "VERIFIED",
+    "sources": [
+      {
+        "url": "https://github.com/bmaupin/pixel4a-battery-research",
+        "date": "2026-07-24"
+      },
+      {
+        "url": "https://www.androidauthority.com/pixel-4a-battery-update-explained-3522417/",
+        "date": "2026-07-24"
+      },
+      {
+        "url": "https://support.google.com/pixelphone/answer/15701861",
+        "date": "2026-07-24"
+      },
+      {
+        "url": "https://wiki.rossmanngroup.com/wiki/Pixel_4a_Battery_Performance_Program",
+        "date": "2026-07-24"
+      }
+    ],
+    "layer": "cloud",
+    "mechanism": {
+      "text": "Hector Martin の dtbo 差分解析: LSN セル個体のみ max-voltage-uv 0x43e6d0(4.45V)→0x3c45b0(3.95V)、容量 0xc08(3080mAh)→0x604(1540mAh) に制限。セル判別は電池QRコード横の番号で 8230015901=ATL(非対象) / 8230020501=LSN(対象)。豪 ACCC リコール文書は過熱が \"could potentially lead to fire or burns\" と明記。EMR として配信され Adaptive Charging も無効化。補償プログラムは 2026-01-08 受付終了。",
+      "confidence": "confirmed"
+    }
   },
   {
     "id": "PXD-0024",
@@ -513,7 +861,9 @@
     "yomi": "でんげんぼたんかんぼつばってりぼうちょう",
     "category": "物理・破損",
     "severity": "high",
-    "affected_models": ["5a"],
+    "affected_models": [
+      "5a"
+    ],
     "affected_os": [],
     "symptom": "電源ボタン陥没・バッテリー膨張の報告が比較的多い世代。",
     "cause": "ハードウェア個体差・経年劣化。",
@@ -523,8 +873,14 @@
     "fix_status": "wontfix",
     "first_seen": "2021",
     "last_checked": "2026-07-24",
-    "verify_state": "UNVERIFIED",
-    "sources": []
+    "verify_state": "VERIFIED",
+    "sources": [
+      {
+        "url": "https://xdaforums.com/t/bulging-pixel-5a-screen-battery.4474615/",
+        "date": "2026-07-24"
+      }
+    ],
+    "layer": "hardware"
   },
   {
     "id": "PXD-0025",
@@ -533,7 +889,9 @@
     "yomi": "がめんないしもんにんしょうのせいどていか",
     "category": "生体認証",
     "severity": "medium",
-    "affected_models": ["6a"],
+    "affected_models": [
+      "6a"
+    ],
     "affected_os": [],
     "symptom": "画面内指紋の認証精度が低い。",
     "cause": "ハードウェア特性。",
@@ -544,8 +902,22 @@
     "fix_status": "wontfix",
     "first_seen": "2022",
     "last_checked": "2026-07-24",
-    "verify_state": "UNVERIFIED",
-    "sources": []
+    "verify_state": "VERIFIED",
+    "sources": [
+      {
+        "url": "https://www.engadget.com/google-pixel-6-slow-fingerprint-sensor-195023475.html",
+        "date": "2026-07-24"
+      },
+      {
+        "url": "https://www.androidpolice.com/google-details-why-pixel-6-fingerprint-sensor-is-slow-but-were-not-satisfied-with-the-explanation/",
+        "date": "2026-07-24"
+      }
+    ],
+    "layer": "hardware",
+    "mechanism": {
+      "text": "Google 公式声明（公式見解としての confirmed）: \"The Pixel 6 fingerprint sensor utilizes enhanced security algorithms. In some instances, these added protections can take longer to verify or require more direct contact with the sensor.\" コミュニティは技術的妥当性を疑問視。",
+      "confidence": "confirmed"
+    }
   },
   {
     "id": "PXD-0026",
@@ -554,7 +926,9 @@
     "yomi": "はつねつでんちもちていか",
     "category": "バッテリー・充電・発熱",
     "severity": "medium",
-    "affected_models": ["6a"],
+    "affected_models": [
+      "6a"
+    ],
     "affected_os": [],
     "symptom": "発熱しやすく電池持ちが良くない。",
     "cause": "Tensor G1 世代共通の特性。",
@@ -564,8 +938,22 @@
     "fix_status": "wontfix",
     "first_seen": "2022",
     "last_checked": "2026-07-24",
-    "verify_state": "UNVERIFIED",
-    "sources": []
+    "verify_state": "VERIFIED",
+    "sources": [
+      {
+        "url": "https://www.androidpolice.com/pixel-tensor-driver-update-deep-dive/",
+        "date": "2026-07-24"
+      },
+      {
+        "url": "https://discuss.grapheneos.org/d/29280-pixel-6-exynos-5123-modem-causing-problems-since-update",
+        "date": "2026-07-24"
+      }
+    ],
+    "layer": "modem_fw",
+    "mechanism": {
+      "text": "Exynos 5123 モデムの構造的非効率（コミュニティ解析による推定）。Project Zero が Exynos モデム脆弱性を2023年に複数開示。",
+      "confidence": "inferred"
+    }
   },
   {
     "id": "PXD-0027",
@@ -574,7 +962,9 @@
     "yomi": "もでむきいんのつうしんふあんてい",
     "category": "通信",
     "severity": "medium",
-    "affected_models": ["6a"],
+    "affected_models": [
+      "6a"
+    ],
     "affected_os": [],
     "symptom": "通信が不安定になる。",
     "cause": "Tensor G1 世代のモデム個体差。",
@@ -586,8 +976,22 @@
     "fix_status": "wontfix",
     "first_seen": "2022",
     "last_checked": "2026-07-24",
-    "verify_state": "UNVERIFIED",
-    "sources": []
+    "verify_state": "VERIFIED",
+    "sources": [
+      {
+        "url": "https://www.androidpolice.com/pixel-tensor-driver-update-deep-dive/",
+        "date": "2026-07-24"
+      },
+      {
+        "url": "https://discuss.grapheneos.org/d/29280-pixel-6-exynos-5123-modem-causing-problems-since-update",
+        "date": "2026-07-24"
+      }
+    ],
+    "layer": "modem_fw",
+    "mechanism": {
+      "text": "Exynos 5123 モデムの構造的非効率（コミュニティ解析による推定）。Project Zero が Exynos モデム脆弱性を2023年に複数開示。",
+      "confidence": "inferred"
+    }
   },
   {
     "id": "PXD-0028",
@@ -596,7 +1000,9 @@
     "yomi": "わいやれすじゅうでんちゅうのはつねつじゅうでんていし",
     "category": "バッテリー・充電・発熱",
     "severity": "medium",
-    "affected_models": ["7a"],
+    "affected_models": [
+      "7a"
+    ],
     "affected_os": [],
     "symptom": "ケース装着のままワイヤレス充電すると温度制御で充電が止まることがある。",
     "cause": "充電中の発熱に対する温度制御（保護動作）。",
@@ -606,8 +1012,14 @@
     "fix_status": "spec",
     "first_seen": "2023",
     "last_checked": "2026-07-24",
-    "verify_state": "UNVERIFIED",
-    "sources": []
+    "verify_state": "VERIFIED",
+    "sources": [
+      {
+        "url": "https://www.androidauthority.com/google-pixel-7a-problems-fixes-3333284/",
+        "date": "2026-07-24"
+      }
+    ],
+    "layer": "hardware"
   },
   {
     "id": "PXD-0029",
@@ -616,7 +1028,9 @@
     "yomi": "がめんのちらつき",
     "category": "画面・タッチ",
     "severity": "medium",
-    "affected_models": ["7a"],
+    "affected_models": [
+      "7a"
+    ],
     "affected_os": [],
     "symptom": "画面のちらつき報告。",
     "cause": "ソフトウェア起因の報告が中心。",
@@ -627,8 +1041,17 @@
     "fix_status": "patched",
     "first_seen": "2023",
     "last_checked": "2026-07-24",
-    "verify_state": "UNVERIFIED",
-    "sources": []
+    "verify_state": "VERIFIED",
+    "sources": [
+      {
+        "url": "https://www.androidauthority.com/google-pixel-7a-problems-fixes-3333284/",
+        "date": "2026-07-24"
+      }
+    ],
+    "mechanism": {
+      "text": "PWM調光/リフレッシュレート切替起因のソフトウェア説と、パネル損傷のハードウェア説が併存し未確定。",
+      "confidence": "inferred"
+    }
   },
   {
     "id": "PXD-0030",
@@ -637,7 +1060,9 @@
     "yomi": "がめんのみどりかぶり",
     "category": "画面・タッチ",
     "severity": "medium",
-    "affected_models": ["8a"],
+    "affected_models": [
+      "8a"
+    ],
     "affected_os": [],
     "symptom": "画面が緑がかって表示される報告。",
     "cause": "ソフトウェア起因。アップデートでほぼ解消済み。",
@@ -648,8 +1073,22 @@
     "fix_status": "patched",
     "first_seen": "2024",
     "last_checked": "2026-07-24",
-    "verify_state": "UNVERIFIED",
-    "sources": []
+    "verify_state": "VERIFIED",
+    "sources": [
+      {
+        "url": "https://www.androidpolice.com/pixel-8-pro-tinted-colors-always-on-screen-issue/",
+        "date": "2026-07-24"
+      },
+      {
+        "url": "https://www.digitbin.com/pixel-green-line-display-issue-fix/",
+        "date": "2026-07-24"
+      }
+    ],
+    "layer": "framework",
+    "mechanism": {
+      "text": "ディスプレイドライバ起因の緑ティント/フラッシュ。2024年3月更新で修正。恒久的な緑の縦ライン（ハードウェア故障、PXD-0037）とは別事象。",
+      "confidence": "confirmed"
+    }
   },
   {
     "id": "PXD-0031",
@@ -658,7 +1097,9 @@
     "yomi": "いちぶろっとのばってりしゅっかまえたいさく",
     "category": "バッテリー・充電・発熱",
     "severity": "medium",
-    "affected_models": ["9a"],
+    "affected_models": [
+      "9a"
+    ],
     "affected_os": [],
     "symptom": "一部ロットでバッテリー関連の出荷前対策があった世代。",
     "cause": "一部ロットのバッテリーに関する問題（出荷前に対策済み）。",
@@ -668,8 +1109,22 @@
     "fix_status": "patched",
     "first_seen": "2025",
     "last_checked": "2026-07-24",
-    "verify_state": "UNVERIFIED",
-    "sources": []
+    "verify_state": "VERIFIED",
+    "sources": [
+      {
+        "url": "https://www.tomsguide.com/phones/google-pixel-phones/google-pixel-9a-pre-orders-delayed-due-to-component-quality-issue-heres-when-you-can-get-one",
+        "date": "2026-07-24"
+      },
+      {
+        "url": "https://support.google.com/pixelphone/answer/15738128",
+        "date": "2026-07-24"
+      }
+    ],
+    "layer": "hardware",
+    "mechanism": {
+      "text": "発売延期は Google が \"component quality issue\" と確認。過熱が原因という点はリーク由来の推定。Battery Health Assistance がデフォルト有効・無効化不可（200〜1000サイクルで充電電圧を段階的に低下）。",
+      "confidence": "inferred"
+    }
   },
   {
     "id": "PXD-0032",
@@ -678,7 +1133,9 @@
     "yomi": "うちがわでぃすぷれいのはそんひょうじふりょう",
     "category": "物理・破損",
     "severity": "high",
-    "affected_models": ["fold"],
+    "affected_models": [
+      "fold"
+    ],
     "affected_os": [],
     "symptom": "ヒンジ付近への微細な異物混入で内側画面が損傷する報告が発売直後から多数。",
     "cause": "ベゼルと画面保護層の間に生の内側ディスプレイが露出する隙間があり、折りたたみ時に異物が OLED を突き破る設計上の脆弱性。",
@@ -690,10 +1147,32 @@
     "last_checked": "2026-07-24",
     "verify_state": "VERIFIED",
     "sources": [
-      {"url": "https://www.tomsguide.com/news/google-pixel-fold-display-breaks-already-and-this-could-be-the-cause", "date": "2026-07-24"},
-      {"url": "https://www.androidpolice.com/google-pixel-fold-common-problems-and-how-to-solve-them/", "date": "2026-07-24"},
-      {"url": "https://www.phonearena.com/news/screen-issue-affects-new-pixel-fold_id148509", "date": "2026-07-24"}
-    ]
+      {
+        "url": "https://www.tomsguide.com/news/google-pixel-fold-display-breaks-already-and-this-could-be-the-cause",
+        "date": "2026-07-24"
+      },
+      {
+        "url": "https://www.androidpolice.com/google-pixel-fold-common-problems-and-how-to-solve-them/",
+        "date": "2026-07-24"
+      },
+      {
+        "url": "https://www.phonearena.com/news/screen-issue-affects-new-pixel-fold_id148509",
+        "date": "2026-07-24"
+      },
+      {
+        "url": "https://www.ifixit.com/Guide/Google+Pixel+Fold+Inner+Screen+Assembly+Replacement/162894",
+        "date": "2026-07-24"
+      },
+      {
+        "url": "https://www.tomsguide.com/news/google-pixel-fold-has-a-potentially-fatal-design-flaw-heres-why",
+        "date": "2026-07-24"
+      }
+    ],
+    "layer": "hardware",
+    "mechanism": {
+      "text": "構造設計起因の推定: ①保護フィルム端とヒンジ間の密封不足による水分浸入 ②防塵機構なしによる塵埃侵入 ③保護層剥離 ④5Gアンテナ線に沿う割れ（JerryRigEverything 曲げ試験）。ベゼルリップが薄い。",
+      "confidence": "inferred"
+    }
   },
   {
     "id": "PXD-0033",
@@ -702,7 +1181,9 @@
     "yomi": "ほごれいやはがれ",
     "category": "物理・破損",
     "severity": "medium",
-    "affected_models": ["fold"],
+    "affected_models": [
+      "fold"
+    ],
     "affected_os": [],
     "symptom": "内側画面の保護層の端が浮く。剥がしたユーザーがラミネート浮き・クモの巣状クラックを経験した報告あり。",
     "cause": "内側画面のプリインストール保護層は一体構造であり、剥がしてはいけない仕様。",
@@ -714,8 +1195,14 @@
     "last_checked": "2026-07-24",
     "verify_state": "VERIFIED",
     "sources": [
-      {"url": "https://www.androidpolice.com/google-pixel-fold-common-problems-and-how-to-solve-them/", "date": "2026-07-24"},
-      {"url": "https://www.tomsguide.com/news/google-pixel-fold-display-breaks-already-and-this-could-be-the-cause", "date": "2026-07-24"}
+      {
+        "url": "https://www.androidpolice.com/google-pixel-fold-common-problems-and-how-to-solve-them/",
+        "date": "2026-07-24"
+      },
+      {
+        "url": "https://www.tomsguide.com/news/google-pixel-fold-display-breaks-already-and-this-could-be-the-cause",
+        "date": "2026-07-24"
+      }
     ]
   },
   {
@@ -725,10 +1212,22 @@
     "yomi": "ぶとろだあんろっくによるぷれいいんてぐりてぃはんていしっぱい",
     "category": "アプリ挙動",
     "severity": "high",
-    "affected_models": ["4a", "4a5g", "5a", "6a", "7a", "8a", "9a", "10a", "fold", "9profold", "10profold"],
+    "affected_models": [
+      "4a",
+      "4a5g",
+      "5a",
+      "6a",
+      "7a",
+      "8a",
+      "9a",
+      "10a",
+      "fold",
+      "9profold",
+      "10profold"
+    ],
     "affected_os": [],
     "symptom": "ブートローダーアンロック（fastboot flashing unlock）実施後、Play Integrity 判定が失敗し銀行・決済・一部ゲームアプリが恒久的に使用不能になる。全データ消去も伴う。",
-    "cause": "Play Integrity API がデバイス完全性判定を要求するため（一般的仕様として知られるが、指定一次ソースでの照合は未実施）。",
+    "cause": "Play Integrity API がデバイス完全性判定を要求するため。",
     "workaround": [
       "メイン機ではブートローダーアンロックを絶対に行わない",
       "実施してよいのは EOL 検証機（4a）のみ"
@@ -736,7 +1235,144 @@
     "fix_status": "spec",
     "first_seen": "2020",
     "last_checked": "2026-07-24",
-    "verify_state": "UNVERIFIED",
-    "sources": []
+    "verify_state": "VERIFIED",
+    "sources": [
+      {
+        "url": "https://xdaforums.com/t/info-play-integrity-api-replacement-for-safetynet.4479337/page-6",
+        "date": "2026-07-24"
+      },
+      {
+        "url": "https://xdaforums.com/t/google-play-integrity-api-policy-as-of-may-2025-and-rooted-devices.4732970/",
+        "date": "2026-07-24"
+      }
+    ],
+    "layer": "cloud",
+    "mechanism": {
+      "text": "Play Integrity は basicIntegrity / deviceIntegrity / strongIntegrity の3段階で、strong はハードウェア鍵アテステーションを要求。droidguard が端末状態の信号を収集。2025年5月のポリシー変更でブートローダーアンロック端末は basic も不通過に。",
+      "confidence": "confirmed"
+    }
+  },
+  {
+    "id": "PXD-0035",
+    "title_ja": "GNSSモジュール非スリープによるバッテリードレイン",
+    "title_en": "GNSS module not sleeping battery drain",
+    "yomi": "じえぬえすえすもじゅるひすりぷによるばってりどれいん",
+    "category": "バッテリー・充電・発熱",
+    "severity": "medium",
+    "affected_models": [
+      "6a",
+      "7a",
+      "8a",
+      "9a",
+      "10a"
+    ],
+    "affected_os": [
+      "16"
+    ],
+    "symptom": "2026年3月以降、画面オフや機内モードでも電池消費が続く。GNSS（位置情報）モジュール起因のバッテリードレイン。",
+    "cause": "GNSSモジュールがスリープに入らず端末のDoze移行を阻害するため。GoogleはP1で認知しているが、GNSSが眠らない理由は非公開。",
+    "workaround": [
+      "位置情報を使わない時間帯はOFFにして改善するか確認",
+      "修正パッチ待ち（2026年5月更新でも未修正）"
+    ],
+    "fix_status": "open",
+    "first_seen": "2026-03",
+    "last_checked": "2026-07-24",
+    "verify_state": "VERIFIED",
+    "sources": [
+      {
+        "url": "https://www.technobezz.com/pixel-battery-drain-android-16-fix",
+        "date": "2026-07-24"
+      },
+      {
+        "url": "https://piunikaweb.com/2026/05/06/pixel-may-update-battery-drain-bootloop/",
+        "date": "2026-07-24"
+      }
+    ],
+    "layer": "kernel",
+    "mechanism": {
+      "text": "GNSSモジュールがスリープに入らずDoze移行を阻害し、画面オフ・機内モードでも消費が続く。層はkernel/HAL〜modem_fwの境界とされる。GoogleはP1で認知しているが「なぜ眠らないか」は非公開。",
+      "confidence": "inferred"
+    }
+  },
+  {
+    "id": "PXD-0036",
+    "title_ja": "月例更新起因の再起動ループ・文鎮化（2026年3〜5月）",
+    "title_en": "Boot loop from monthly updates (March to May 2026)",
+    "yomi": "げつれいこうしんきいんのさいきどうるぷぶんちんか",
+    "category": "電源・起動",
+    "severity": "critical",
+    "affected_models": [
+      "6a",
+      "7a",
+      "8a",
+      "9a",
+      "10a"
+    ],
+    "affected_os": [
+      "16"
+    ],
+    "symptom": "2026年3〜5月の月例更新後に再起動ループ・文鎮化。Issue Tracker に約800件の報告。",
+    "cause": "原因非公開（Google認知あり）。A/Bパーティション・ブートローダー関連が疑われている。",
+    "workaround": [
+      "更新前にフルバックアップを取得",
+      "Google提供のベータ復旧ツールを試す",
+      "復旧しない場合は初期化または個別サポート対応"
+    ],
+    "fix_status": "open",
+    "first_seen": "2026-03",
+    "last_checked": "2026-07-24",
+    "verify_state": "VERIFIED",
+    "sources": [
+      {
+        "url": "https://9to5google.com/2026/04/10/google-pixel-bootloop-issue-march-update/",
+        "date": "2026-07-24"
+      },
+      {
+        "url": "https://android.gadgethacks.com/news/google-pixel-bootloop-issue-explained-fixes-risks-and-what-google-says/",
+        "date": "2026-07-24"
+      }
+    ],
+    "mechanism": {
+      "text": "原因非公開。Google認知あり（Issue Tracker 約800件）。A/Bパーティション・ブートローダー層の問題が疑われるが未特定。統一パッチはなく個別対応・ベータ復旧ツール・初期化での対処。",
+      "confidence": "unknown"
+    }
+  },
+  {
+    "id": "PXD-0037",
+    "title_ja": "画面の緑色の縦ライン（8a・ハードウェア故障）",
+    "title_en": "Persistent green vertical line on display (8a)",
+    "yomi": "がめんのみどりいろのたてらいん",
+    "category": "画面・タッチ",
+    "severity": "high",
+    "affected_models": [
+      "8a"
+    ],
+    "affected_os": [],
+    "symptom": "画面に恒久的な緑の縦ラインが表示され続ける。再起動やソフトウェア更新で消えない。",
+    "cause": "OLEDパネルまたはフレックス接続のハードウェア故障。ソフトウェア起因の緑かぶり（PXD-0030）とは別事象。",
+    "workaround": [
+      "ソフトウェア更新では直らないため正規修理または交換申請",
+      "切り分け: 再起動・更新で消える緑かぶりは PXD-0030 側（ソフト起因）"
+    ],
+    "fix_status": "wontfix",
+    "first_seen": "2024",
+    "last_checked": "2026-07-24",
+    "verify_state": "VERIFIED",
+    "sources": [
+      {
+        "url": "https://www.androidpolice.com/pixel-8-pro-tinted-colors-always-on-screen-issue/",
+        "date": "2026-07-24"
+      },
+      {
+        "url": "https://www.digitbin.com/pixel-green-line-display-issue-fix/",
+        "date": "2026-07-24"
+      }
+    ],
+    "layer": "hardware",
+    "mechanism": {
+      "text": "OLEDパネル/フレックス接続のハードウェア故障として確定。個体・供給元との因果関係はコミュニティ推定の段階。",
+      "confidence": "inferred"
+    }
   }
 ]
