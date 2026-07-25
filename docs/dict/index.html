@@ -83,6 +83,28 @@ main{max-width:1080px;margin:0 auto;padding:16px 24px 96px}
 .entry .foot a{word-break:break-all}
 .empty{padding:40px 0;text-align:center;color:#8a8f89;font-size:14px}
 footer{max-width:1080px;margin:0 auto;padding:32px 24px;font-size:11px;color:#8a8f89;border-top:1px solid var(--hazel)}
+.arch{background:var(--card);border:1px solid var(--hazel);border-radius:14px;padding:16px 20px;max-width:1080px;margin:8px auto 0;font-size:13px}
+.arch h2{font-size:14px;font-weight:700;margin-bottom:8px}
+.arch .fig{overflow-x:auto}
+.arch .fig svg{max-width:100%}
+.layer-legend{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+.tag.layer{font-weight:500}
+.layer-app{color:#4a5f8a}
+.layer-framework{color:#4F7059}
+.layer-hal{color:#8a6d3b}
+.layer-kernel{color:#7d4a8a}
+.layer-modem_fw{color:#2e7d8a}
+.layer-hardware{color:#B05E2E}
+.layer-cloud{color:#5b5f96}
+.mech-badge{font-family:var(--mono);font-size:9px;padding:1px 6px;border-radius:4px;margin-right:6px;white-space:nowrap}
+.mech-badge.c{background:#E4EFE6;color:var(--sage-deep)}
+.mech-badge.k{background:#ECECEA;color:#555b56}
+.diagram-box{margin-top:10px;border:1px dashed var(--hazel);border-radius:10px;padding:8px 12px}
+.diagram-box summary{cursor:pointer;font-family:var(--mono);font-size:12px;color:var(--sage-deep)}
+.diagram-box .fig{overflow-x:auto;padding-top:8px}
+.diagram-box .fig svg{max-width:100%}
+.no-mermaid .diagram-box{display:none}
+.no-mermaid .arch .fig{display:none}
 </style>
 </head>
 <body>
@@ -105,6 +127,11 @@ footer{max-width:1080px;margin:0 auto;padding:32px 24px;font-size:11px;color:#8a
   </ol>
   <p class="motto">網羅は目的でない。基準を満たす項目が貯まる構造が目的。</p>
 </div>
+<div class="arch">
+  <h2>共通構造図（Androidスタックのどの層で不具合が起きるか）</h2>
+  <div class="fig" id="arch-fig"></div>
+  <div class="layer-legend" id="layer-legend"></div>
+</div>
 </div>
 
 <main>
@@ -120,6 +147,7 @@ footer{max-width:1080px;margin:0 auto;padding:32px 24px;font-size:11px;color:#8a
     <div class="fgroup" id="f-category"><span class="idx-label">分類</span></div>
     <div class="fgroup" id="f-severity"><span class="idx-label">重要度</span></div>
     <div class="fgroup" id="f-fix"><span class="idx-label">修正状況</span></div>
+    <div class="fgroup" id="f-layer"><span class="idx-label">発生層</span></div>
     <div class="fgroup" id="f-model"><span class="idx-label">機種</span></div>
   </div>
   <button id="reset" type="button">条件クリア</button>
@@ -134,6 +162,7 @@ footer{max-width:1080px;margin:0 auto;padding:32px 24px;font-size:11px;color:#8a
   <a href="../">← Pixel 整備手帳へ戻る</a>
 </footer>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.9.1/mermaid.min.js" integrity="sha512-6a80OTZVmEJhqYJUmYd5z8yHUCDlYnj6q9XwB/gKOEyNQV/Q8u+XeSG59a2ZKFEHGTYzgfOQKYEBtrZV7vBr+Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
 (function(){
   'use strict';
@@ -148,6 +177,53 @@ footer{max-width:1080px;margin:0 auto;padding:32px 24px;font-size:11px;color:#8a
   var MODEL_LABELS = {"4a":"4a","4a5g":"4a (5G)","5a":"5a","6a":"6a","7a":"7a","8a":"8a","9a":"9a","10a":"10a","fold":"Fold","9profold":"9 Pro Fold","10profold":"10 Pro Fold"};
   var MODEL_ORDER = ["4a","4a5g","5a","6a","7a","8a","9a","10a","fold","9profold","10profold"];
   var SEV_LABEL = {critical:"critical（データ喪失・文鎮）",high:"high（主要機能停止）",medium:"medium（機能低下）",low:"low（軽微）"};
+  var LAYERS = ["app","framework","hal","kernel","modem_fw","hardware","cloud"];
+  var LAYER_LEGEND = {
+    app:"アプリ層", framework:"Android フレームワーク", hal:"HAL / ドライバ",
+    kernel:"カーネル", modem_fw:"モデムFW", hardware:"ハードウェア", cloud:"クラウド / Google サーバ"
+  };
+  // 共通構造図（UPDATE-005R 付録D・一字一句そのまま）
+  var ARCH_SRC = [
+    "flowchart TD",
+    "  CL[クラウド / Google サーバ<br>例: 遠隔設定・Play Integrity 判定]",
+    "  APP[アプリ層<br>例: 通知が来ない・アプリ落ち]",
+    "  FW[Android フレームワーク<br>例: 権限・プロファイル分離・UI]",
+    "  HAL[HAL / ドライバ<br>例: 指紋・カメラ・タッチ入力]",
+    "  KRN[カーネル<br>例: ストレージ・電源管理]",
+    "  MDM[モデムFW<br>例: 5G維持・eSIM]",
+    "  HW[ハードウェア<br>例: バッテリー膨張・ヒンジ]",
+    "  CL -.-> APP",
+    "  APP --> FW",
+    "  FW --> HAL",
+    "  HAL --> KRN",
+    "  KRN --> MDM",
+    "  KRN --> HW"
+  ].join("\n");
+
+  // Mermaid は CDN 読込。失敗時は図解を非表示にし本文表示は維持する（フォールバック必須）
+  var MERMAID_OK = (typeof window.mermaid !== "undefined");
+  var diagramSeq = 0;
+  if(MERMAID_OK){
+    try{
+      window.mermaid.initialize({startOnLoad:false, theme:"neutral", securityLevel:"strict", suppressErrorRendering:true});
+    }catch(e){ MERMAID_OK = false; }
+  }
+  if(!MERMAID_OK){
+    document.documentElement.className += " no-mermaid";
+  }
+  function renderDiagram(fig, code){
+    if(!MERMAID_OK || !fig) return;
+    var hide = function(){
+      var d = fig.closest ? fig.closest("details") : null;
+      (d || fig).style.display = "none";
+    };
+    diagramSeq++;
+    try{
+      window.mermaid.render("mmd-" + diagramSeq, code).then(function(r){
+        fig.innerHTML = r.svg;
+      }).catch(hide);
+    }catch(err){ hide(); }
+  }
 
   // 濁音・半濁音 → 清音、小書き → 並字の正規化（頭文字判定用）
   var SEION = {
@@ -175,7 +251,8 @@ footer{max-width:1080px;margin:0 auto;padding:32px 24px;font-size:11px;color:#8a
   }
 
   var entries = [];
-  var state = { q:"", kana:null, alpha:null, category:[], severity:[], fix:[], model:[] };
+  var byId = {};
+  var state = { q:"", kana:null, alpha:null, category:[], severity:[], fix:[], layer:[], model:[] };
 
   function esc(s){
     return String(s).replace(/[&<>"']/g, function(m){
@@ -189,6 +266,7 @@ footer{max-width:1080px;margin:0 auto;padding:32px 24px;font-size:11px;color:#8a
     if(state.category.length && state.category.indexOf(e.category) === -1) return false;
     if(state.severity.length && state.severity.indexOf(e.severity) === -1) return false;
     if(state.fix.length && state.fix.indexOf(e.fix_status) === -1) return false;
+    if(state.layer.length && state.layer.indexOf(e.layer || "") === -1) return false;
     if(state.model.length){
       var hit = e.affected_models.some(function(m){ return state.model.indexOf(m) !== -1; });
       if(!hit) return false;
@@ -211,20 +289,38 @@ footer{max-width:1080px;margin:0 auto;padding:32px 24px;font-size:11px;color:#8a
       ? e.sources.map(function(s){ return '<a href="' + esc(s.url) + '" target="_blank" rel="noopener">' + esc(s.url.replace(/^https?:\/\//,"").split("/")[0]) + "</a>"; }).join(" ")
       : "出典なし";
     var vs = e.verify_state === "VERIFIED" ? '<span class="vstate v">VERIFIED</span>' : '<span class="vstate u">UNVERIFIED</span>';
+    var layerTag = e.layer ? '<span class="tag layer layer-' + esc(e.layer) + '">' + esc(e.layer) + "</span>" : "";
+    var mechRow = "";
+    if(e.mechanism && e.mechanism.text){
+      var m = e.mechanism, mh;
+      if(m.confidence === "confirmed"){
+        mh = '<span class="mech-badge c">機序確認済み</span>' + esc(m.text);
+      }else if(m.confidence === "inferred"){
+        mh = "推定: " + esc(m.text);
+      }else{
+        mh = '<span class="mech-badge k">機序未解明（Google認知あり）</span>' + esc(m.text);
+      }
+      mechRow = "<dt>機序</dt><dd>" + mh + "</dd>";
+    }
+    var diaBox = (e.diagram && e.mechanism)
+      ? '<details class="diagram-box" data-eid="' + esc(e.id) + '"><summary>図解を開く</summary><div class="fig"></div></details>'
+      : "";
     return '<article class="entry sev-' + esc(e.severity) + '">'
       + '<div class="sev-band"></div><div class="inner">'
       + '<div class="meta-top"><span class="eid">' + esc(e.id) + "</span>"
       + '<span class="tag sev-t-' + esc(e.severity) + '">' + esc(e.severity) + "</span>"
       + '<span class="tag cat">' + esc(e.category) + "</span>"
-      + '<span class="tag fx">' + esc(e.fix_status) + "</span>" + vs + "</div>"
+      + '<span class="tag fx">' + esc(e.fix_status) + "</span>" + layerTag + vs + "</div>"
       + "<h3>" + esc(e.title_ja) + "</h3>"
       + '<div class="ten">' + esc(e.title_en) + "</div>"
       + "<dl>"
       + "<dt>対象</dt><dd>" + esc(models) + " ／ " + esc(os) + "</dd>"
       + "<dt>症状</dt><dd>" + esc(e.symptom) + "</dd>"
       + "<dt>原因</dt><dd>" + esc(e.cause) + "</dd>"
+      + mechRow
       + "<dt>対処</dt><dd><ol>" + steps + "</ol></dd>"
       + "</dl>"
+      + diaBox
       + '<div class="foot"><span>sources: ' + srcs + "</span><span>last_checked: " + esc(e.last_checked) + "</span></div>"
       + "</div></article>";
   }
@@ -265,7 +361,7 @@ footer{max-width:1080px;margin:0 auto;padding:32px 24px;font-size:11px;color:#8a
   function syncButtons(){
     [["kana-idx","kana",true],["alpha-idx","alpha",true],
      ["f-category","category",false],["f-severity","severity",false],
-     ["f-fix","fix",false],["f-model","model",false]].forEach(function(cfg){
+     ["f-fix","fix",false],["f-layer","layer",false],["f-model","model",false]].forEach(function(cfg){
       var box = document.getElementById(cfg[0]);
       Array.prototype.forEach.call(box.querySelectorAll("button"), function(b){
         var v = b.dataset.value;
@@ -279,6 +375,7 @@ footer{max-width:1080px;margin:0 auto;padding:32px 24px;font-size:11px;color:#8a
     entries = data;
     var kanaAvail = {}, alphaAvail = {};
     entries.forEach(function(e){
+      byId[e.id] = e;
       var k = kanaRow(e.yomi); if(k) kanaAvail[k] = true;
       var a = alphaKey(e.title_en); if(a) alphaAvail[a] = true;
     });
@@ -288,14 +385,38 @@ footer{max-width:1080px;margin:0 auto;padding:32px 24px;font-size:11px;color:#8a
     makeButtons("f-category", CATEGORIES, null, "category", false, null);
     makeButtons("f-severity", SEVERITIES, SEV_LABEL, "severity", false, null);
     makeButtons("f-fix", FIXES, null, "fix", false, null);
+    makeButtons("f-layer", LAYERS, null, "layer", false, null);
     makeButtons("f-model", MODEL_ORDER, MODEL_LABELS, "model", false, null);
+
+    // 発生層の凡例（7値色分け）
+    var legend = document.getElementById("layer-legend");
+    LAYERS.forEach(function(l){
+      var s = document.createElement("span");
+      s.className = "tag layer layer-" + l;
+      s.textContent = l + " = " + LAYER_LEGEND[l];
+      legend.appendChild(s);
+    });
+
+    // 辞書冒頭の共通構造図（付録D）を描画
+    renderDiagram(document.getElementById("arch-fig"), ARCH_SRC);
+
+    // 項目図解はトグルを開いた時点で初回のみ描画（toggle はバブルしないため capture）
+    document.addEventListener("toggle", function(ev){
+      var d = ev.target;
+      if(!d || !d.classList || !d.classList.contains("diagram-box") || !d.open) return;
+      var fig = d.querySelector(".fig");
+      if(!fig || fig.getAttribute("data-done")) return;
+      fig.setAttribute("data-done", "1");
+      var e = byId[d.getAttribute("data-eid")];
+      if(e && e.diagram) renderDiagram(fig, e.diagram);
+    }, true);
 
     document.getElementById("q").addEventListener("input", function(ev){
       state.q = ev.target.value.trim();
       render();
     });
     document.getElementById("reset").addEventListener("click", function(){
-      state = { q:"", kana:null, alpha:null, category:[], severity:[], fix:[], model:[] };
+      state = { q:"", kana:null, alpha:null, category:[], severity:[], fix:[], layer:[], model:[] };
       document.getElementById("q").value = "";
       syncButtons();
       render();

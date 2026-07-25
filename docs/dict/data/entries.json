@@ -141,7 +141,8 @@
     "mechanism": {
       "text": "Work Profile と Android 17 の連携不良。Google が公式に表明: \"We are aware of this bug affecting Work Profile users, and a fix will be rolled out in a software update soon\"。IPv6有効化で解決した例があり、IPv6単独が原因ではない。",
       "confidence": "confirmed"
-    }
+    },
+    "diagram": "flowchart TD\n  A[\"Android 17 更新\"] --> B[\"Work Profile とのネットワーク連携不良\"]\n  B --> C[\"Wi-Fi接続時のみ仕事用プロファイル内アプリが通信不可\"]\n  C --> D[\"IPv6 有効化で解決する環境あり＝単独原因ではない\"]\n  B --> E[\"Google が修正表明（時期未定）\"]"
   },
   {
     "id": "PXD-0004",
@@ -529,7 +530,8 @@
     "mechanism": {
       "text": "/data/media/0 が \"Structure needs cleaning\" となるファイルシステム/FUSE層の破損。Issue Tracker 305766503（P2→P0格上げ）、Google声明 2023-10-28。2023-11のパッチとスタンドアロン修復ツールで対処（2024-01に再発報告あり）。",
       "confidence": "confirmed"
-    }
+    },
+    "diagram": "flowchart TD\n  A[\"Android 14 更新 + 複数ユーザープロファイル\"] --> B[\"/data/media/0 の管理構造が破損\"]\n  B --> C[\"Structure needs cleaning エラー\"]\n  C --> D[\"ストレージアクセス不能・データロック\"]\n  D --> E[\"ブートループ・データ喪失の事例\"]\n  E --> F[\"2023-11 パッチ + 修復ツールで対処\"]"
   },
   {
     "id": "PXD-0015",
@@ -774,7 +776,8 @@
     "mechanism": {
       "text": "ImageProcessHelper が RGB 合計値を配列 index に使用しており、丸めで 256 に到達すると ArrayIndexOutOfBoundsException: length=256; index=256 が発生し SystemUI がクラッシュ連鎖する。開発者 Davide Bianco が AOSP に修正を提出。Android 11 以降は sRGB 強制変換で影響なし（Android 10 以前の事象）。",
       "confidence": "confirmed"
-    }
+    },
+    "diagram": "flowchart TD\n  A[\"非sRGB壁紙画像を設定\"] --> B[\"ImageProcessHelper が色ヒストグラムを計算\"]\n  B --> C[\"RGB合計値を配列indexに使用\"]\n  C --> D[\"丸めで index=256 に到達（length=256）\"]\n  D --> E[\"ArrayIndexOutOfBoundsException 発生\"]\n  E --> F[\"SystemUI クラッシュ連鎖\"]\n  F --> G[\"再起動後も再発＝ブートループ\"]"
   },
   {
     "id": "PXD-0022",
@@ -852,7 +855,8 @@
     "mechanism": {
       "text": "Hector Martin の dtbo 差分解析: LSN セル個体のみ max-voltage-uv 0x43e6d0(4.45V)→0x3c45b0(3.95V)、容量 0xc08(3080mAh)→0x604(1540mAh) に制限。セル判別は電池QRコード横の番号で 8230015901=ATL(非対象) / 8230020501=LSN(対象)。豪 ACCC リコール文書は過熱が \"could potentially lead to fire or burns\" と明記。EMR として配信され Adaptive Charging も無効化。補償プログラムは 2026-01-08 受付終了。",
       "confidence": "confirmed"
-    }
+    },
+    "diagram": "flowchart TD\n  A[\"クラウド側でバッテリーセル種別を判定\"] --> B[\"LSNセル個体のみ EMR 配信\"]\n  B --> C[\"dtbo 書き換え: max-voltage-uv 4.45V→3.95V\"]\n  C --> D[\"実効容量 3080mAh→1540mAh\"]\n  B --> E[\"Adaptive Charging 無効化\"]\n  D --> F[\"電池持ちの急激な悪化として体感\"]"
   },
   {
     "id": "PXD-0024",
@@ -1250,7 +1254,8 @@
     "mechanism": {
       "text": "Play Integrity は basicIntegrity / deviceIntegrity / strongIntegrity の3段階で、strong はハードウェア鍵アテステーションを要求。droidguard が端末状態の信号を収集。2025年5月のポリシー変更でブートローダーアンロック端末は basic も不通過に。",
       "confidence": "confirmed"
-    }
+    },
+    "diagram": "flowchart TD\n  A[\"ブートローダーアンロック\"] --> B[\"ハードウェア鍵アテステーション失敗\"]\n  B --> C[\"strongIntegrity 不通過\"]\n  A --> D[\"droidguard が端末状態の信号を収集\"]\n  D --> E[\"2025-05 ポリシー変更後は basicIntegrity も不通過\"]\n  C --> F[\"銀行・決済・一部ゲームアプリが利用不能\"]\n  E --> F"
   },
   {
     "id": "PXD-0035",
