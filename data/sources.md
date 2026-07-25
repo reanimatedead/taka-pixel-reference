@@ -115,3 +115,22 @@ JavaScript で動的挿入される構造。今回利用した取得系（HTML�
 
 - 本文修正なし（誤りを一次ソース上で確認できていないため、修正の根拠がない = `data/corrections.md` への記録事項なし）。
 - 10a / 10 Pro Fold を含む全コードネームは UNVERIFIED のまま。完了条件「10a コードネームが VERIFIED 化 or 理由付き UNVERIFIED」→ **理由付き UNVERIFIED で確定**。
+
+---
+
+# UPDATE-005R Agent 2 (codename-fixer) 追記 — 2026-07-25
+
+コードネーム表（`docs/index.html` #ts-pro）を付録E（`data/research-2026-07.md`）の確定情報で更新した。
+
+## 確定内容
+
+| 機種 | コードネーム | 状態 | 出典 |
+| --- | --- | --- | --- |
+| Pixel 10a | **stallion**（STA5） | **VERIFIED** | https://9to5google.com/2026/03/05/pixel-10a-factory-images/ （9to5Google・Factory Image公開記事） |
+| 4a=sunfish / 4a(5G)=bramble / 5a=barbet / 6a=bluejay / 7a=lynx / 8a=akita / 9a=tegu / Fold=felix / 9 Pro Fold=comet | 既存9件 | **VERIFIED** | https://www.androidpolice.com/google-pixel-codename-list/ + https://wiki.lineageos.org/devices/ + https://source.android.com/docs/setup/build/building-pixel-kernels |
+| Pixel 10 Pro Fold | rango（リーク段階・公式Factory Image未掲載） | **UNVERIFIED 維持** | https://www.xda-developers.com/google-pixel-10-leaks-codenames/ |
+
+## 注記
+
+- 既存9件の VERIFIED は Google 公式一次ソース単独ではなく、Android Police 一覧・LineageOS wiki・AOSP build docs の**community 照合**（3ソース一致）による。
+- 10 Pro Fold = rango はリーク段階のため表に名称は記載しつつ UNVERIFIED を維持した。
