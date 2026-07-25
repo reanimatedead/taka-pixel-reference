@@ -191,3 +191,38 @@ Agent 3 (qa-verifier) による Pages 移行後の機械検証。配信ディレ
 - ローカル配信で /dict/data/entries.json が HTTP 経由で 34 件返ることを確認。
 
 総合判定: **PASS**（スキーマ違反0・構文エラー0・件数一致）。
+
+---
+
+# QA報告 — UPDATE-005R（Agent 4: qa-verifier）2026-07-25
+
+## 1. JSON / スキーマ制約（python3 によるプログラム検証）
+
+- `python3 -m json.tool docs/dict/data/entries.json` — **PASS**（構文正常）
+- layer 7値以内（app/framework/hal/kernel/modem_fw/hardware/cloud）— **PASS**（付与19件、値外なし）
+- mechanism.confidence 3値以内（confirmed/inferred/unknown）— **PASS**（21件 = confirmed 7 / inferred 11 / unknown 3）
+- diagram ⊆ mechanism 保有項目 — **PASS**（図解5件すべて mechanism 保有: PXD-0003/0014/0021/0023/0034）
+- ID 一意・連番 — **PASS**（PXD-0001〜0037、欠番・重複なし）
+- 新規追加 ≤ 8件 — **PASS**（3件: PXD-0035/0036/0037）
+- 図解 ≤ 10件 — **PASS**(5件)
+
+## 2. Mermaid 構文検証
+
+- 手段: Node.js v25 + jsdom 環境で `mermaid@10.9.1`（表示側 CDN と同一バージョン）の `mermaid.parse()` を実行
+  （mermaid-cli は Chromium 依存が重いため parse API を採用。検証スクリプト: mermaid-parse-check.mjs）
+- 対象: 共通構造図（付録D・HTML内 ARCH_SRC から抽出）+ 項目図解5件 = 計6件
+- 結果: **全件 PASS**
+
+## 3. HTML 検証
+
+- `npx html-validate docs/dict/index.html docs/index.html` — **エラー0**（exit 0）
+
+## 4. 配信テスト
+
+- `python3 -m http.server 8000 --directory docs` → `curl -s localhost:8000/dict/ | grep -c 'mermaid'` = **7**（>=1 で PASS）
+- `entries.json` HTTP 200
+
+## 5. 表示仕様の確認（コード上）
+
+- Mermaid CDN 読込失敗時: `no-mermaid` クラスで図解のみ非表示・本文表示は維持（フォールバック実装あり、SRI付き）
+- confidence 3値の表示分岐: confirmed=「機序確認済み」バッジ / inferred=「推定:」前置 / unknown=「機序未解明（Google認知あり）」— card() 内で分岐実装を確認
