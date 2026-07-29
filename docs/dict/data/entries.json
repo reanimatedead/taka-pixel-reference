@@ -44,7 +44,15 @@
     "mechanism": {
       "text": "根本原因は非公開。Google認知あり（Pixel Community公式が対処を提示）。framework/HAL層が疑われるが未特定。",
       "confidence": "unknown"
-    }
+    },
+    "build_link": {
+      "first_seen": {
+        "build_id": "CP2A.260605.012",
+        "confidence": "inferred"
+      },
+      "still_open_as_of": "CP2A.260705.006"
+    },
+    "evidence_level": "MULTI_SOURCE"
   },
   {
     "id": "PXD-0002",
@@ -93,7 +101,15 @@
     "mechanism": {
       "text": "無線プロファイルの破損（\"scrambled cellular radio profiles\"）によるものと Android Authority が推定。eUICC/無線プロファイル層の問題。",
       "confidence": "inferred"
-    }
+    },
+    "build_link": {
+      "first_seen": {
+        "build_id": "CP2A.260605.012",
+        "confidence": "inferred"
+      },
+      "still_open_as_of": "CP2A.260705.006"
+    },
+    "evidence_level": "MULTI_SOURCE"
   },
   {
     "id": "PXD-0003",
@@ -142,7 +158,15 @@
       "text": "Work Profile と Android 17 の連携不良。Google が公式に表明: \"We are aware of this bug affecting Work Profile users, and a fix will be rolled out in a software update soon\"。IPv6有効化で解決した例があり、IPv6単独が原因ではない。",
       "confidence": "confirmed"
     },
-    "diagram": "flowchart TD\n  A[\"Android 17 更新\"] --> B[\"Work Profile とのネットワーク連携不良\"]\n  B --> C[\"Wi-Fi接続時のみ仕事用プロファイル内アプリが通信不可\"]\n  C --> D[\"IPv6 有効化で解決する環境あり＝単独原因ではない\"]\n  B --> E[\"Google が修正表明（時期未定）\"]"
+    "diagram": "flowchart TD\n  A[\"Android 17 更新\"] --> B[\"Work Profile とのネットワーク連携不良\"]\n  B --> C[\"Wi-Fi接続時のみ仕事用プロファイル内アプリが通信不可\"]\n  C --> D[\"IPv6 有効化で解決する環境あり＝単独原因ではない\"]\n  B --> E[\"Google が修正表明（時期未定）\"]",
+    "build_link": {
+      "first_seen": {
+        "build_id": "CP2A.260605.012",
+        "confidence": "inferred"
+      },
+      "still_open_as_of": "CP2A.260705.006"
+    },
+    "evidence_level": "MULTI_SOURCE"
   },
   {
     "id": "PXD-0004",
@@ -172,7 +196,18 @@
     "first_seen": "2026-06",
     "last_checked": "2026-07-24",
     "verify_state": "UNVERIFIED",
-    "sources": []
+    "sources": [],
+    "build_link": {
+      "first_seen": {
+        "build_id": "CP2A.260605.012",
+        "confidence": "inferred"
+      },
+      "fixed_in": {
+        "build_id": "CP2A.260705.006",
+        "confidence": "official"
+      }
+    },
+    "evidence_level": "REPORTED_ONLY"
   },
   {
     "id": "PXD-0005",
@@ -201,7 +236,14 @@
     "first_seen": "2026-06",
     "last_checked": "2026-07-24",
     "verify_state": "UNVERIFIED",
-    "sources": []
+    "sources": [],
+    "build_link": {
+      "first_seen": {
+        "build_id": "CP2A.260605.012",
+        "confidence": "estimated"
+      }
+    },
+    "evidence_level": "REPORTED_ONLY"
   },
   {
     "id": "PXD-0006",
@@ -237,7 +279,14 @@
         "url": "https://www.phonearena.com/news/android-16-qpr3-beta-2-is-here-to-solve-your-pixel-charging-problems-and-more_id177342",
         "date": "2026-07-24"
       }
-    ]
+    ],
+    "build_link": {
+      "first_seen": {
+        "build_id": "BP2A.250605.031.A2",
+        "confidence": "inferred"
+      }
+    },
+    "evidence_level": "REPORTED_ONLY"
   },
   {
     "id": "PXD-0007",
@@ -285,7 +334,14 @@
     "mechanism": {
       "text": "Exynos 5123 モデムの「Mobile network standby」ドレイン（コミュニティ解析による推定）。Tensor サーマルエンジンの高頻度ポーリングも寄与。",
       "confidence": "inferred"
-    }
+    },
+    "build_link": {
+      "first_seen": {
+        "build_id": "BP2A.250605.031.A2",
+        "confidence": "inferred"
+      }
+    },
+    "evidence_level": "MULTI_SOURCE"
   },
   {
     "id": "PXD-0008",
@@ -323,7 +379,14 @@
     "mechanism": {
       "text": "OS更新時に「バッテリーの最適化」が自動で「制限あり」に変更され通知が抑制される。仕様と副作用の境界とされる（推定）。",
       "confidence": "inferred"
-    }
+    },
+    "build_link": {
+      "first_seen": {
+        "build_id": "BP2A.250605.031.A2",
+        "confidence": "inferred"
+      }
+    },
+    "evidence_level": "OFFICIAL"
   },
   {
     "id": "PXD-0009",
@@ -362,7 +425,14 @@
     "mechanism": {
       "text": "機序非公開・層未特定。QPR3 Beta 2 で UI レンダリング修正の対象。",
       "confidence": "unknown"
-    }
+    },
+    "build_link": {
+      "first_seen": {
+        "build_id": "BP2A.250605.031.A2",
+        "confidence": "inferred"
+      }
+    },
+    "evidence_level": "REPORTED_ONLY"
   },
   {
     "id": "PXD-0010",
@@ -391,7 +461,14 @@
     "first_seen": "2025-06",
     "last_checked": "2026-07-24",
     "verify_state": "UNVERIFIED",
-    "sources": []
+    "sources": [],
+    "build_link": {
+      "first_seen": {
+        "build_id": "BP2A.250605.031.A2",
+        "confidence": "estimated"
+      }
+    },
+    "evidence_level": "REPORTED_ONLY"
   },
   {
     "id": "PXD-0011",
@@ -424,7 +501,8 @@
         "url": "https://www.tomsguide.com/phones/android-phones/private-space-on-android-15-has-an-annoying-glitch-but-android-15-beta-21-can-fix-it",
         "date": "2026-07-24"
       }
-    ]
+    ],
+    "evidence_level": "REPORTED_ONLY"
   },
   {
     "id": "PXD-0012",
@@ -457,7 +535,8 @@
         "url": "https://9to5google.com/2026/06/11/google-pixel-updates-left-phones-useless-bootlooping-for-some-a-fix-is-now-in-sight/",
         "date": "2026-07-24"
       }
-    ]
+    ],
+    "evidence_level": "REPORTED_ONLY"
   },
   {
     "id": "PXD-0013",
@@ -484,7 +563,8 @@
     "first_seen": "2024",
     "last_checked": "2026-07-24",
     "verify_state": "UNVERIFIED",
-    "sources": []
+    "sources": [],
+    "evidence_level": "REPORTED_ONLY"
   },
   {
     "id": "PXD-0014",
@@ -531,7 +611,8 @@
       "text": "/data/media/0 が \"Structure needs cleaning\" となるファイルシステム/FUSE層の破損。Issue Tracker 305766503（P2→P0格上げ）、Google声明 2023-10-28。2023-11のパッチとスタンドアロン修復ツールで対処（2024-01に再発報告あり）。",
       "confidence": "confirmed"
     },
-    "diagram": "flowchart TD\n  A[\"Android 14 更新 + 複数ユーザープロファイル\"] --> B[\"/data/media/0 の管理構造が破損\"]\n  B --> C[\"Structure needs cleaning エラー\"]\n  C --> D[\"ストレージアクセス不能・データロック\"]\n  D --> E[\"ブートループ・データ喪失の事例\"]\n  E --> F[\"2023-11 パッチ + 修復ツールで対処\"]"
+    "diagram": "flowchart TD\n  A[\"Android 14 更新 + 複数ユーザープロファイル\"] --> B[\"/data/media/0 の管理構造が破損\"]\n  B --> C[\"Structure needs cleaning エラー\"]\n  C --> D[\"ストレージアクセス不能・データロック\"]\n  D --> E[\"ブートループ・データ喪失の事例\"]\n  E --> F[\"2023-11 パッチ + 修復ツールで対処\"]",
+    "evidence_level": "MULTI_SOURCE"
   },
   {
     "id": "PXD-0015",
@@ -563,7 +644,8 @@
         "url": "https://docs.flutter.dev/release/breaking-changes/android-predictive-back",
         "date": "2026-07-24"
       }
-    ]
+    ],
+    "evidence_level": "OFFICIAL"
   },
   {
     "id": "PXD-0016",
@@ -594,7 +676,8 @@
         "url": "https://developer.android.com/develop/ui/compose/notifications/notification-permission",
         "date": "2026-07-24"
       }
-    ]
+    ],
+    "evidence_level": "OFFICIAL"
   },
   {
     "id": "PXD-0017",
@@ -639,7 +722,8 @@
     "mechanism": {
       "text": "ソフトウェアの充電制御起因と推定（Issue Tracker 242836221）。",
       "confidence": "inferred"
-    }
+    },
+    "evidence_level": "MULTI_SOURCE"
   },
   {
     "id": "PXD-0018",
@@ -671,7 +755,8 @@
         "url": "https://www.tomsguide.com/news/android-12-is-draining-some-google-pixel-batteries-what-you-need-to-know",
         "date": "2026-07-24"
       }
-    ]
+    ],
+    "evidence_level": "REPORTED_ONLY"
   },
   {
     "id": "PXD-0019",
@@ -702,7 +787,8 @@
         "url": "https://www.androidpolice.com/android-12-fixes-material-you-glitches-when-previewing-widgets/",
         "date": "2026-07-24"
       }
-    ]
+    ],
+    "evidence_level": "REPORTED_ONLY"
   },
   {
     "id": "PXD-0020",
@@ -733,7 +819,8 @@
         "url": "https://www.androidpolice.com/google-details-why-pixel-6-fingerprint-sensor-is-slow-but-were-not-satisfied-with-the-explanation/",
         "date": "2026-07-24"
       }
-    ]
+    ],
+    "evidence_level": "REPORTED_ONLY"
   },
   {
     "id": "PXD-0021",
@@ -777,7 +864,8 @@
       "text": "ImageProcessHelper が RGB 合計値を配列 index に使用しており、丸めで 256 に到達すると ArrayIndexOutOfBoundsException: length=256; index=256 が発生し SystemUI がクラッシュ連鎖する。開発者 Davide Bianco が AOSP に修正を提出。Android 11 以降は sRGB 強制変換で影響なし（Android 10 以前の事象）。",
       "confidence": "confirmed"
     },
-    "diagram": "flowchart TD\n  A[\"非sRGB壁紙画像を設定\"] --> B[\"ImageProcessHelper が色ヒストグラムを計算\"]\n  B --> C[\"RGB合計値を配列indexに使用\"]\n  C --> D[\"丸めで index=256 に到達（length=256）\"]\n  D --> E[\"ArrayIndexOutOfBoundsException 発生\"]\n  E --> F[\"SystemUI クラッシュ連鎖\"]\n  F --> G[\"再起動後も再発＝ブートループ\"]"
+    "diagram": "flowchart TD\n  A[\"非sRGB壁紙画像を設定\"] --> B[\"ImageProcessHelper が色ヒストグラムを計算\"]\n  B --> C[\"RGB合計値を配列indexに使用\"]\n  C --> D[\"丸めで index=256 に到達（length=256）\"]\n  D --> E[\"ArrayIndexOutOfBoundsException 発生\"]\n  E --> F[\"SystemUI クラッシュ連鎖\"]\n  F --> G[\"再起動後も再発＝ブートループ\"]",
+    "evidence_level": "MULTI_SOURCE"
   },
   {
     "id": "PXD-0022",
@@ -807,7 +895,8 @@
         "url": "https://www.androidpolice.com/google-ends-call-recording-apps-accessibility-services/",
         "date": "2026-07-24"
       }
-    ]
+    ],
+    "evidence_level": "REPORTED_ONLY"
   },
   {
     "id": "PXD-0023",
@@ -856,7 +945,8 @@
       "text": "Hector Martin の dtbo 差分解析: LSN セル個体のみ max-voltage-uv 0x43e6d0(4.45V)→0x3c45b0(3.95V)、容量 0xc08(3080mAh)→0x604(1540mAh) に制限。セル判別は電池QRコード横の番号で 8230015901=ATL(非対象) / 8230020501=LSN(対象)。豪 ACCC リコール文書は過熱が \"could potentially lead to fire or burns\" と明記。EMR として配信され Adaptive Charging も無効化。補償プログラムは 2026-01-08 受付終了。",
       "confidence": "confirmed"
     },
-    "diagram": "flowchart TD\n  A[\"クラウド側でバッテリーセル種別を判定\"] --> B[\"LSNセル個体のみ EMR 配信\"]\n  B --> C[\"dtbo 書き換え: max-voltage-uv 4.45V→3.95V\"]\n  C --> D[\"実効容量 3080mAh→1540mAh\"]\n  B --> E[\"Adaptive Charging 無効化\"]\n  D --> F[\"電池持ちの急激な悪化として体感\"]"
+    "diagram": "flowchart TD\n  A[\"クラウド側でバッテリーセル種別を判定\"] --> B[\"LSNセル個体のみ EMR 配信\"]\n  B --> C[\"dtbo 書き換え: max-voltage-uv 4.45V→3.95V\"]\n  C --> D[\"実効容量 3080mAh→1540mAh\"]\n  B --> E[\"Adaptive Charging 無効化\"]\n  D --> F[\"電池持ちの急激な悪化として体感\"]",
+    "evidence_level": "OFFICIAL"
   },
   {
     "id": "PXD-0024",
@@ -884,7 +974,8 @@
         "date": "2026-07-24"
       }
     ],
-    "layer": "hardware"
+    "layer": "hardware",
+    "evidence_level": "REPORTED_ONLY"
   },
   {
     "id": "PXD-0025",
@@ -921,7 +1012,8 @@
     "mechanism": {
       "text": "Google 公式声明（公式見解としての confirmed）: \"The Pixel 6 fingerprint sensor utilizes enhanced security algorithms. In some instances, these added protections can take longer to verify or require more direct contact with the sensor.\" コミュニティは技術的妥当性を疑問視。",
       "confidence": "confirmed"
-    }
+    },
+    "evidence_level": "MULTI_SOURCE"
   },
   {
     "id": "PXD-0026",
@@ -957,7 +1049,8 @@
     "mechanism": {
       "text": "Exynos 5123 モデムの構造的非効率（コミュニティ解析による推定）。Project Zero が Exynos モデム脆弱性を2023年に複数開示。",
       "confidence": "inferred"
-    }
+    },
+    "evidence_level": "MULTI_SOURCE"
   },
   {
     "id": "PXD-0027",
@@ -995,7 +1088,8 @@
     "mechanism": {
       "text": "Exynos 5123 モデムの構造的非効率（コミュニティ解析による推定）。Project Zero が Exynos モデム脆弱性を2023年に複数開示。",
       "confidence": "inferred"
-    }
+    },
+    "evidence_level": "MULTI_SOURCE"
   },
   {
     "id": "PXD-0028",
@@ -1023,7 +1117,8 @@
         "date": "2026-07-24"
       }
     ],
-    "layer": "hardware"
+    "layer": "hardware",
+    "evidence_level": "REPORTED_ONLY"
   },
   {
     "id": "PXD-0029",
@@ -1055,7 +1150,8 @@
     "mechanism": {
       "text": "PWM調光/リフレッシュレート切替起因のソフトウェア説と、パネル損傷のハードウェア説が併存し未確定。",
       "confidence": "inferred"
-    }
+    },
+    "evidence_level": "REPORTED_ONLY"
   },
   {
     "id": "PXD-0030",
@@ -1092,7 +1188,8 @@
     "mechanism": {
       "text": "ディスプレイドライバ起因の緑ティント/フラッシュ。2024年3月更新で修正。恒久的な緑の縦ライン（ハードウェア故障、PXD-0037）とは別事象。",
       "confidence": "confirmed"
-    }
+    },
+    "evidence_level": "MULTI_SOURCE"
   },
   {
     "id": "PXD-0031",
@@ -1128,7 +1225,8 @@
     "mechanism": {
       "text": "発売延期は Google が \"component quality issue\" と確認。過熱が原因という点はリーク由来の推定。Battery Health Assistance がデフォルト有効・無効化不可（200〜1000サイクルで充電電圧を段階的に低下）。",
       "confidence": "inferred"
-    }
+    },
+    "evidence_level": "OFFICIAL"
   },
   {
     "id": "PXD-0032",
@@ -1176,7 +1274,8 @@
     "mechanism": {
       "text": "構造設計起因の推定: ①保護フィルム端とヒンジ間の密封不足による水分浸入 ②防塵機構なしによる塵埃侵入 ③保護層剥離 ④5Gアンテナ線に沿う割れ（JerryRigEverything 曲げ試験）。ベゼルリップが薄い。",
       "confidence": "inferred"
-    }
+    },
+    "evidence_level": "MULTI_SOURCE"
   },
   {
     "id": "PXD-0033",
@@ -1207,7 +1306,8 @@
         "url": "https://www.tomsguide.com/news/google-pixel-fold-display-breaks-already-and-this-could-be-the-cause",
         "date": "2026-07-24"
       }
-    ]
+    ],
+    "evidence_level": "MULTI_SOURCE"
   },
   {
     "id": "PXD-0034",
@@ -1255,7 +1355,8 @@
       "text": "Play Integrity は basicIntegrity / deviceIntegrity / strongIntegrity の3段階で、strong はハードウェア鍵アテステーションを要求。droidguard が端末状態の信号を収集。2025年5月のポリシー変更でブートローダーアンロック端末は basic も不通過に。",
       "confidence": "confirmed"
     },
-    "diagram": "flowchart TD\n  A[\"ブートローダーアンロック\"] --> B[\"ハードウェア鍵アテステーション失敗\"]\n  B --> C[\"strongIntegrity 不通過\"]\n  A --> D[\"droidguard が端末状態の信号を収集\"]\n  D --> E[\"2025-05 ポリシー変更後は basicIntegrity も不通過\"]\n  C --> F[\"銀行・決済・一部ゲームアプリが利用不能\"]\n  E --> F"
+    "diagram": "flowchart TD\n  A[\"ブートローダーアンロック\"] --> B[\"ハードウェア鍵アテステーション失敗\"]\n  B --> C[\"strongIntegrity 不通過\"]\n  A --> D[\"droidguard が端末状態の信号を収集\"]\n  D --> E[\"2025-05 ポリシー変更後は basicIntegrity も不通過\"]\n  C --> F[\"銀行・決済・一部ゲームアプリが利用不能\"]\n  E --> F",
+    "evidence_level": "REPORTED_ONLY"
   },
   {
     "id": "PXD-0035",
@@ -1298,7 +1399,15 @@
     "mechanism": {
       "text": "GNSSモジュールがスリープに入らずDoze移行を阻害し、画面オフ・機内モードでも消費が続く。層はkernel/HAL〜modem_fwの境界とされる。GoogleはP1で認知しているが「なぜ眠らないか」は非公開。",
       "confidence": "inferred"
-    }
+    },
+    "build_link": {
+      "first_seen": {
+        "build_id": "CP1A.260305.018",
+        "confidence": "inferred"
+      },
+      "still_open_as_of": "CP1A.260505.005"
+    },
+    "evidence_level": "MULTI_SOURCE"
   },
   {
     "id": "PXD-0036",
@@ -1341,7 +1450,15 @@
     "mechanism": {
       "text": "原因非公開。Google認知あり（Issue Tracker 約800件）。A/Bパーティション・ブートローダー層の問題が疑われるが未特定。統一パッチはなく個別対応・ベータ復旧ツール・初期化での対処。",
       "confidence": "unknown"
-    }
+    },
+    "build_link": {
+      "first_seen": {
+        "build_id": "CP1A.260305.018",
+        "confidence": "inferred"
+      },
+      "still_open_as_of": "CP1A.260505.005"
+    },
+    "evidence_level": "MULTI_SOURCE"
   },
   {
     "id": "PXD-0037",
@@ -1378,6 +1495,270 @@
     "mechanism": {
       "text": "OLEDパネル/フレックス接続のハードウェア故障として確定。個体・供給元との因果関係はコミュニティ推定の段階。",
       "confidence": "inferred"
-    }
+    },
+    "evidence_level": "MULTI_SOURCE"
+  },
+  {
+    "id": "PXD-0038",
+    "title_ja": "アプリ起動失敗・強制終了（Android 17）",
+    "title_en": "App launch failure and force close (Android 17)",
+    "yomi": "あぷりきどうしっぱいきょうせいしゅうりょう",
+    "category": "アプリ挙動",
+    "severity": "high",
+    "affected_models": [
+      "6a",
+      "7a",
+      "8a",
+      "9a",
+      "10a"
+    ],
+    "affected_os": [
+      "17"
+    ],
+    "symptom": "Android 17 初期版でアプリが起動に失敗する・強制終了する。起動遅延（PXD-0005）とは別の事象。",
+    "cause": "Android 17 初期版のシステム側不具合。2026年7月更新（CP2A.260705.006）で公式修正。",
+    "workaround": [
+      "2026年7月更新（CP2A.260705.006）以降へ更新",
+      "更新できない場合は対象アプリのキャッシュ削除・端末再起動を試す（暫定対処・自己責任）"
+    ],
+    "fix_status": "patched",
+    "first_seen": "2026-06",
+    "last_checked": "2026-07-30",
+    "verify_state": "UNVERIFIED",
+    "sources": [],
+    "build_link": {
+      "first_seen": {
+        "build_id": "CP2A.260605.012",
+        "confidence": "estimated"
+      },
+      "fixed_in": {
+        "build_id": "CP2A.260705.006",
+        "confidence": "official"
+      }
+    },
+    "evidence_level": "REPORTED_ONLY"
+  },
+  {
+    "id": "PXD-0039",
+    "title_ja": "システムウィジェットの色・コントラスト異常（Android 17）",
+    "title_en": "System widget color and contrast anomaly (Android 17)",
+    "yomi": "しすてむうぃじぇっとのいろこんとらすといじょう",
+    "category": "アプリ挙動",
+    "severity": "low",
+    "affected_models": [
+      "6a",
+      "7a",
+      "8a",
+      "9a",
+      "10a"
+    ],
+    "affected_os": [
+      "17"
+    ],
+    "symptom": "システムウィジェットの色・コントラストが異常表示になる。Android 12 期のウィジェット表示崩れ（PXD-0019）とは別の事象。",
+    "cause": "Android 17 初期版の描画系不具合。2026年7月更新（CP2A.260705.006）で公式修正。",
+    "workaround": [
+      "2026年7月更新（CP2A.260705.006）以降へ更新"
+    ],
+    "fix_status": "patched",
+    "first_seen": "2026-06",
+    "last_checked": "2026-07-30",
+    "verify_state": "UNVERIFIED",
+    "sources": [],
+    "build_link": {
+      "first_seen": {
+        "build_id": "CP2A.260605.012",
+        "confidence": "estimated"
+      },
+      "fixed_in": {
+        "build_id": "CP2A.260705.006",
+        "confidence": "official"
+      }
+    },
+    "evidence_level": "REPORTED_ONLY"
+  },
+  {
+    "id": "PXD-0040",
+    "title_ja": "ナビゲーションボタン位置ずれ（Pixel 10 Pro Fold）",
+    "title_en": "Navigation button misalignment (Pixel 10 Pro Fold)",
+    "yomi": "なびげしょんぼたんいちずれ",
+    "category": "画面・タッチ",
+    "severity": "low",
+    "affected_models": [
+      "10profold"
+    ],
+    "affected_os": [
+      "17"
+    ],
+    "symptom": "Pixel 10 Pro Fold でナビゲーションボタンの表示位置がずれる。",
+    "cause": "Android 17 の表示レイアウト不具合。2026年7月更新（CP2A.260705.006）で公式修正。",
+    "workaround": [
+      "2026年7月更新（CP2A.260705.006）以降へ更新"
+    ],
+    "fix_status": "patched",
+    "first_seen": "2026-06",
+    "last_checked": "2026-07-30",
+    "verify_state": "UNVERIFIED",
+    "sources": [],
+    "build_link": {
+      "first_seen": {
+        "build_id": "CP2A.260605.012",
+        "confidence": "estimated"
+      },
+      "fixed_in": {
+        "build_id": "CP2A.260705.006",
+        "confidence": "official"
+      }
+    },
+    "evidence_level": "REPORTED_ONLY"
+  },
+  {
+    "id": "PXD-0041",
+    "title_ja": "Wi-Fi切断ループ（20〜30秒周期・Android 17）",
+    "title_en": "Periodic Wi-Fi disconnect loop every 20-30 seconds (Android 17)",
+    "yomi": "わいふぁいせつだんるぷ",
+    "category": "通信",
+    "severity": "medium",
+    "affected_models": [
+      "6a",
+      "7a",
+      "8a",
+      "9a",
+      "10a"
+    ],
+    "affected_os": [
+      "17"
+    ],
+    "symptom": "Wi-Fi が20〜30秒周期で切断と再接続を繰り返す。2026年7月更新（CP2A.260705.006）適用後も未修正の報告。仕事用プロファイル限定の通信不可（PXD-0003）や Android 16 の突発切断（PXD-0006）とは別の事象。",
+    "cause": "原因未確定。Android 17 更新後に報告。",
+    "workaround": [
+      "ルーター側で IPv6 を有効化すると改善したとの報告あり（原因未確定のため暫定対処・自己責任）",
+      "改善しない場合は修正パッチ待ち"
+    ],
+    "fix_status": "open",
+    "first_seen": "2026-07",
+    "last_checked": "2026-07-30",
+    "verify_state": "UNVERIFIED",
+    "sources": [],
+    "build_link": {
+      "first_seen": {
+        "build_id": "CP2A.260605.012",
+        "confidence": "estimated"
+      },
+      "still_open_as_of": "CP2A.260705.006"
+    },
+    "evidence_level": "REPORTED_ONLY"
+  },
+  {
+    "id": "PXD-0042",
+    "title_ja": "着信不可・着信画面が表示されない（Android 17）",
+    "title_en": "Incoming calls not received or call screen not shown (Android 17)",
+    "yomi": "ちゃくしんふかちゃくしんがめんがひょうじされない",
+    "category": "音・通話",
+    "severity": "high",
+    "affected_models": [
+      "6a",
+      "7a",
+      "8a",
+      "9a",
+      "10a"
+    ],
+    "affected_os": [
+      "17"
+    ],
+    "symptom": "着信できない、または着信画面が表示されない。Google IssueTracker に報告あり。2026年7月更新（CP2A.260705.006）適用後も未修正の報告。",
+    "cause": "原因未確定。詐欺検知・通話スクリーニング機能との干渉が疑われている（推定段階）。",
+    "workaround": [
+      "詐欺検知（Scam Detection）設定の見直し（暫定対処・自己責任）",
+      "通話スクリーニング設定の見直し（暫定対処・自己責任）",
+      "改善しない場合は修正パッチ待ち"
+    ],
+    "fix_status": "open",
+    "first_seen": "2026-07",
+    "last_checked": "2026-07-30",
+    "verify_state": "UNVERIFIED",
+    "sources": [],
+    "build_link": {
+      "first_seen": {
+        "build_id": "CP2A.260605.012",
+        "confidence": "estimated"
+      },
+      "still_open_as_of": "CP2A.260705.006"
+    },
+    "evidence_level": "REPORTED_ONLY"
+  },
+  {
+    "id": "PXD-0043",
+    "title_ja": "ウィジェット消失・再配置不可（Android 17）",
+    "title_en": "Widgets disappearing and cannot be re-added (Android 17)",
+    "yomi": "うぃじぇっとしょうしつさいはいちふか",
+    "category": "アプリ挙動",
+    "severity": "medium",
+    "affected_models": [
+      "6a",
+      "7a",
+      "8a",
+      "9a",
+      "10a"
+    ],
+    "affected_os": [
+      "17"
+    ],
+    "symptom": "ホーム画面のウィジェットが消失し、再配置もできない。2026年7月更新（CP2A.260705.006）適用後も未修正の報告。7月更新で修正された色・コントラスト異常（PXD-0039）とは別の事象。",
+    "cause": "原因未確定。Android 17 更新後に報告。",
+    "workaround": [
+      "確実な回避策は未確認。端末再起動・Pixel Launcher のキャッシュ削除を試す（暫定対処・自己責任）",
+      "改善しない場合は修正パッチ待ち"
+    ],
+    "fix_status": "open",
+    "first_seen": "2026-07",
+    "last_checked": "2026-07-30",
+    "verify_state": "UNVERIFIED",
+    "sources": [],
+    "build_link": {
+      "first_seen": {
+        "build_id": "CP2A.260605.012",
+        "confidence": "estimated"
+      },
+      "still_open_as_of": "CP2A.260705.006"
+    },
+    "evidence_level": "REPORTED_ONLY"
+  },
+  {
+    "id": "PXD-0044",
+    "title_ja": "ゲーム動作不安定（Android 17）",
+    "title_en": "Game instability (Android 17)",
+    "yomi": "げむどうさふあんてい",
+    "category": "アプリ挙動",
+    "severity": "low",
+    "affected_models": [
+      "6a",
+      "7a",
+      "8a",
+      "9a",
+      "10a"
+    ],
+    "affected_os": [
+      "17"
+    ],
+    "symptom": "Android 17 更新後にゲームアプリの動作が不安定になる（カクつき・フレーム低下・強制終了の報告）。2026年7月更新（CP2A.260705.006）適用後も未修正の報告。",
+    "cause": "原因未確定。Android 17 更新後に報告。",
+    "workaround": [
+      "確実な回避策は未確認。ゲームアプリの更新・端末再起動を試す（暫定対処・自己責任）",
+      "改善しない場合は修正パッチ待ち"
+    ],
+    "fix_status": "open",
+    "first_seen": "2026-07",
+    "last_checked": "2026-07-30",
+    "verify_state": "UNVERIFIED",
+    "sources": [],
+    "build_link": {
+      "first_seen": {
+        "build_id": "CP2A.260605.012",
+        "confidence": "estimated"
+      },
+      "still_open_as_of": "CP2A.260705.006"
+    },
+    "evidence_level": "REPORTED_ONLY"
   }
 ]

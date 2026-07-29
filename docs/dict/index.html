@@ -106,6 +106,42 @@ footer{max-width:1080px;margin:0 auto;padding:32px 24px;font-size:11px;color:#8a
 .no-mermaid .diagram-box{display:none}
 .no-mermaid .arch .fig{display:none}
 </style>
+<style>
+/* bx: 「ビルド番号で引く」追加UI 専用スタイル（既存ルールには一切手を入れない・bx- 接頭辞のみ） */
+.bx-wrap{max-width:1128px;margin:0 auto;padding:0 24px 48px}
+.bx-box{background:var(--card);border:1px solid var(--hazel);border-radius:14px;padding:20px;max-width:1080px;margin:0 auto}
+.bx-box h2{font-size:16px;font-weight:700;margin-bottom:4px}
+.bx-lede{font-size:13px;color:#555b56;margin-bottom:10px}
+#bx-input{width:100%;font-family:var(--mono);font-size:15px;padding:10px 14px;border:1px solid var(--hazel);border-radius:10px;background:var(--porcelain);color:var(--charcoal)}
+.bx-build{margin-top:14px;font-size:13px}
+.bx-build dl{display:grid;grid-template-columns:auto 1fr;gap:4px 12px}
+.bx-build dt{font-weight:700;color:#555b56;white-space:nowrap}
+.bx-arb-warn{margin-top:10px;padding:10px 14px;border:2px solid var(--alert);border-radius:10px;color:var(--alert);font-weight:700}
+.bx-arb-note{font-weight:400;font-size:12px;margin-top:4px}
+.bx-unlisted{margin-top:14px;padding:8px 14px;border:1px dashed var(--hazel);border-radius:10px;font-size:13px;color:#8a6d3b}
+.bx-cand{margin-top:10px;font-size:13px}
+.bx-cand button{font-family:var(--mono);font-size:12px;padding:3px 9px;margin:2px 2px 0 0;border:1px solid var(--hazel);border-radius:8px;background:var(--card);color:var(--sage-deep);cursor:pointer}
+.bx-cand button:hover{border-color:var(--sage-deep)}
+.bx-summary{font-family:var(--mono);font-size:13px;margin-top:16px;font-weight:500;color:var(--sage-deep)}
+.bx-group{margin-top:14px}
+.bx-group h3{font-size:14px;font-weight:700;margin-bottom:6px}
+.bx-item{border:1px solid var(--hazel);border-radius:10px;padding:8px 12px;margin-bottom:6px;font-size:13px;background:var(--porcelain)}
+.bx-item .bx-meta{font-family:var(--mono);font-size:11px;color:#7d827c;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.bx-badge{display:inline-block;font-family:var(--mono);font-size:10px;padding:1px 8px;border-radius:99px;border:1px solid currentColor}
+.bx-cf-official{color:var(--sage-deep)}
+.bx-cf-inferred{color:#8a6d3b}
+.bx-cf-estimated{color:#B05E2E}
+.bx-cf-unknown{color:#7d827c}
+.bx-ev{color:#4a5f8a}
+.bx-reason{color:#555b56;margin-top:2px}
+.bx-note{color:#8a6d3b;margin-top:2px}
+.bx-empty{margin-top:6px;font-size:13px;color:#8a8f89}
+.bx-howto{margin-top:16px;font-size:13px;border-top:1px dashed var(--hazel);padding-top:12px}
+.bx-howto h3{font-size:13px;font-weight:700;margin-bottom:4px}
+.bx-howto ol{padding-left:22px}
+.bx-howto code{font-family:var(--mono);background:var(--porcelain);padding:1px 6px;border-radius:4px}
+.bx-stale{margin:0 0 12px;padding:10px 14px;border:2px solid var(--alert);border-radius:10px;color:var(--alert);font-weight:700;font-size:13px}
+</style>
 </head>
 <body>
 
@@ -156,6 +192,25 @@ footer{max-width:1080px;margin:0 auto;padding:32px 24px;font-size:11px;color:#8a
 <div id="list" aria-live="polite"></div>
 
 </main>
+
+<!-- bx: 「ビルド番号で引く」追加セクション。既存の検索/索引/一覧とは独立（別 IIFE・別 fetch・bx- 接頭辞のみ） -->
+<section class="bx-wrap" id="bx-section" aria-label="ビルド番号で引く">
+<div class="bx-box">
+  <h2>ビルド番号で引く</h2>
+  <p class="bx-lede">手元のビルドID（例: CP2A.260705.006）を入力すると、そのビルドの素性（機種 / 地域 / OS・track / リリース日 / セキュリティパッチ / ARBフラグ）と、全不具合エントリの修正状況を3分類で表示します。前方一致の候補も出しますが、完全一致を優先します。</p>
+  <div id="bx-stale" class="bx-stale" hidden></div>
+  <input id="bx-input" type="search" placeholder="ビルドID（例: CP2A.260705.006）" aria-label="ビルドIDで引く" autocomplete="off" spellcheck="false">
+  <div id="bx-build" class="bx-build"></div>
+  <div id="bx-result"></div>
+  <div class="bx-howto">
+    <h3>自分の端末のビルド番号の調べ方</h3>
+    <ol>
+      <li>設定 → デバイス情報 → ビルド番号</li>
+      <li><code>adb shell getprop ro.build.id</code>（要 開発者向けオプション + USBデバッグ有効化。adb 導入済みのPCから実行）</li>
+    </ol>
+  </div>
+</div>
+</section>
 
 <footer>
   個人用リファレンス。出典は各項目の sources リンクを参照。verify_state = UNVERIFIED の項目は出典未照合であり再確認対象。データ追加は JSON データへの追記のみで行い、本 HTML は変更しない。<br>
@@ -434,6 +489,261 @@ footer{max-width:1080px;margin:0 auto;padding:32px 24px;font-size:11px;color:#8a
       document.getElementById("list").innerHTML =
         '<div class="empty">データの読み込みに失敗しました（' + esc(err.message) + '）。</div>';
     });
+})();
+</script>
+
+<script>
+/* bx: 「ビルド番号で引く」追加ロジック。既存 IIFE とは完全に独立（既存関数・既存 ID・既存イベントに一切触れない）。 */
+(function(){
+  'use strict';
+
+  var bxEntries = [];
+  var bxBuilds = [];
+  var bxBuildById = {};
+  var bxTotal = 0;
+
+  function bxEsc(s){
+    return String(s).replace(/[&<>"']/g, function(m){
+      return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m];
+    });
+  }
+
+  // release_date は "YYYY-MM" と "YYYY-MM-DD" が混在。月が異なれば月で比較し、
+  // 同月で両方に日があれば日で比較。同月で日が欠ける場合は null（比較不能）を返し、
+  // 呼び出し側は安全側（①に入れない = 未修正扱い）に倒す。
+  function bxCmpDate(a, b){
+    if(!a || !b) return null;
+    var as = String(a), bs = String(b);
+    var am = as.slice(0, 7), bm = bs.slice(0, 7);
+    if(am < bm) return -1;
+    if(am > bm) return 1;
+    if(as.length >= 10 && bs.length >= 10){
+      if(as < bs) return -1;
+      if(as > bs) return 1;
+      return 0;
+    }
+    return null;
+  }
+
+  var bxCfLabel = {
+    official: "official（公式確定）",
+    inferred: "inferred（推定・出典に示唆あり）",
+    estimated: "estimated（推定・時期からの見積り）",
+    unknown: "unknown（根拠不明）"
+  };
+
+  function bxBadges(link, ev){
+    var h = "";
+    if(link && link.confidence){
+      h += '<span class="bx-badge bx-cf-' + bxEsc(link.confidence) + '">' + bxEsc(bxCfLabel[link.confidence] || link.confidence) + "</span>";
+    }
+    if(ev){
+      h += '<span class="bx-badge bx-ev">' + bxEsc(ev) + "</span>";
+    }
+    return h;
+  }
+
+  // 3分類。normId = 大文字正規化済みの入力ID、inBuild = builds.json で完全一致したビルド（未収載なら null）。
+  // ① fixed_in が入力ビルドと一致、または release_date 比較で fixed_in ≤ 入力（厳密に前の場合のみ）。
+  // ② still_open_as_of が入力ビルド以降 / fixed_in が入力より新しい / 比較根拠なし（安全側）。
+  // ③ build_link 省略（紐付け情報なし）。①+②+③ = 全件。
+  function bxClassify(normId, inBuild){
+    var fixed = [], open = [], unknown = [];
+    bxEntries.forEach(function(e){
+      var bl = e.build_link;
+      if(!bl){
+        unknown.push({ e: e, link: null, reason: "build_link なし（ビルド紐付け情報が未整備）", notes: [] });
+        return;
+      }
+      var fs = bl.first_seen || null;
+      var fx = bl.fixed_in || null;
+      var so = bl.still_open_as_of || null;
+      var r = { e: e, link: null, reason: "", notes: [] };
+      if(fx){
+        r.link = fx;
+        if(String(fx.build_id).toUpperCase() === normId){
+          r.reason = "fixed_in がこのビルド（" + fx.build_id + "）";
+          fixed.push(r);
+          return;
+        }
+        var fb = bxBuildById[String(fx.build_id).toUpperCase()];
+        var c = (inBuild && fb) ? bxCmpDate(fb.release_date, inBuild.release_date) : null;
+        if(c !== null && c < 0){
+          r.reason = "修正ビルド " + fx.build_id + "（" + fb.release_date + "）がこのビルド（" + inBuild.release_date + "）より前 → 修正込み";
+          fixed.push(r);
+          return;
+        }
+        if(c !== null && c > 0){
+          r.reason = "修正ビルド " + fx.build_id + "（" + fb.release_date + "）がこのビルドより新しい → このビルドでは未修正";
+        }else if(c === 0){
+          r.reason = "修正ビルド " + fx.build_id + " と同日リリースで順序を確定できない → 安全側で未修正扱い";
+        }else{
+          r.reason = "修正ビルド " + fx.build_id + " との時系列比較の根拠がない → 安全側で未修正扱い";
+        }
+        open.push(r);
+        return;
+      }
+      if(so){
+        r.link = { build_id: so, confidence: null };
+        var sb = bxBuildById[String(so).toUpperCase()];
+        if(String(so).toUpperCase() === normId){
+          r.reason = "still_open_as_of がこのビルド（" + so + "）→ このビルド時点で未修正を確認";
+        }else{
+          var c2 = (inBuild && sb) ? bxCmpDate(sb.release_date, inBuild.release_date) : null;
+          if(c2 !== null && c2 >= 0){
+            r.reason = "still_open_as_of " + so + "（" + sb.release_date + "）がこのビルド以降 → このビルドでは未修正";
+          }else if(c2 !== null){
+            r.reason = "still_open_as_of " + so + " 以降の状況は未確認 → 安全側で未修正扱い";
+          }else{
+            r.reason = "still_open_as_of " + so + " との時系列比較の根拠がない → 安全側で未修正扱い";
+          }
+        }
+        if(fs) r.notes.push("初出: " + fs.build_id + "（" + (bxCfLabel[fs.confidence] || fs.confidence || "unknown") + "）");
+        open.push(r);
+        return;
+      }
+      // first_seen のみ（修正ビルドの記録なし）
+      r.link = fs;
+      r.reason = "修正ビルドの記録なし → 安全側で未修正扱い";
+      if(fs){
+        var fsb = bxBuildById[String(fs.build_id).toUpperCase()];
+        var c3 = (inBuild && fsb) ? bxCmpDate(fsb.release_date, inBuild.release_date) : null;
+        if(c3 !== null && c3 > 0){
+          r.notes.push("初出ビルド " + fs.build_id + "（" + fsb.release_date + "）より前のビルドのため、このビルドでは未発生の可能性あり");
+        }
+      }
+      open.push(r);
+    });
+    return { fixed: fixed, open: open, unknown: unknown };
+  }
+
+  function bxBuildInfo(b){
+    var arb = b.anti_rollback || null;
+    var h = "<dl>";
+    h += "<dt>ビルドID</dt><dd>" + bxEsc(b.build_id) + "</dd>";
+    h += "<dt>OS / track</dt><dd>" + bxEsc(b.os || "不明") + " / " + bxEsc(b.track || "不明") + "</dd>";
+    h += "<dt>リリース日</dt><dd>" + bxEsc(b.release_date || "不明") + "</dd>";
+    h += "<dt>セキュリティパッチ</dt><dd>" + bxEsc(b.security_patch || "不明") + "</dd>";
+    h += "<dt>機種</dt><dd>" + bxEsc((b.devices && b.devices.length) ? b.devices.join(", ") : "不明") + "</dd>";
+    h += "<dt>地域</dt><dd>" + bxEsc(b.region_scope || "不明") + "</dd>";
+    h += "<dt>ARBフラグ</dt><dd>" + (arb ? (arb.incremented ? "増加あり（incremented: true）" : "増加なし（incremented: false）") : "記載なし") + "</dd>";
+    if(b.parent_build_id){ h += "<dt>親ビルド</dt><dd>" + bxEsc(b.parent_build_id) + "</dd>"; }
+    if(b.verify_state){ h += "<dt>verify_state</dt><dd>" + bxEsc(b.verify_state) + "</dd>"; }
+    h += "</dl>";
+    if(arb && arb.incremented){
+      h += '<div class="bx-arb-warn">⚠ これ以前のAndroid 16へ戻せません'
+        + (arb.note ? '<div class="bx-arb-note">' + bxEsc(arb.note) + "</div>" : "")
+        + "</div>";
+    }
+    return h;
+  }
+
+  function bxRow(r){
+    var e = r.e;
+    var h = '<div class="bx-item">'
+      + '<div class="bx-meta"><span class="eid">' + bxEsc(e.id) + "</span>"
+      + '<span class="tag sev-t-' + bxEsc(e.severity) + '">' + bxEsc(e.severity) + "</span>"
+      + bxBadges(r.link, e.evidence_level)
+      + "</div>"
+      + "<div>" + bxEsc(e.title_ja) + "</div>";
+    if(r.reason) h += '<div class="bx-reason">' + bxEsc(r.reason) + "</div>";
+    (r.notes || []).forEach(function(n){ h += '<div class="bx-note">' + bxEsc(n) + "</div>"; });
+    return h + "</div>";
+  }
+
+  function bxGroup(title, arr){
+    return '<div class="bx-group"><h3>' + bxEsc(title) + "（" + arr.length + "件）</h3>"
+      + (arr.length ? arr.map(bxRow).join("") : '<div class="bx-empty">該当なし</div>')
+      + "</div>";
+  }
+
+  function bxRenderResult(cls){
+    var h = '<div class="bx-summary">① 修正済み ' + cls.fixed.length + "件 / ② 未修正 " + cls.open.length
+      + "件 / ③ 不明 " + cls.unknown.length + "件（" + bxTotal + "件中）</div>";
+    h += bxGroup("① このビルドで修正済み", cls.fixed);
+    h += bxGroup("② このビルドではまだ未修正", cls.open);
+    h += bxGroup("③ 不明（紐付け情報なし）", cls.unknown);
+    return h;
+  }
+
+  function bxLookup(){
+    var box = document.getElementById("bx-build");
+    var res = document.getElementById("bx-result");
+    var raw = document.getElementById("bx-input").value.trim();
+    if(!raw){
+      box.innerHTML = "";
+      res.innerHTML = "";
+      return;
+    }
+    var norm = raw.toUpperCase();
+    var b = bxBuildById[norm] || null;
+    var h = "";
+    if(b){
+      h += bxBuildInfo(b);
+    }else{
+      h += '<div class="bx-unlisted">「' + bxEsc(raw) + "」は辞書未収載のビルドです（builds.json " + bxBuilds.length
+        + "件に完全一致なし）。以下の3分類は entries.json の紐付け情報との文字列一致で可能な範囲のみ判定しています（時系列比較は不能・安全側で未修正扱い）。</div>";
+      var cands = bxBuilds.filter(function(x){ return String(x.build_id).toUpperCase().indexOf(norm) === 0; });
+      if(cands.length){
+        h += '<div class="bx-cand">前方一致の候補（クリックで選択）: ' + cands.map(function(x){
+          return '<button type="button" data-bxid="' + bxEsc(x.build_id) + '">' + bxEsc(x.build_id) + "</button>";
+        }).join(" ") + "</div>";
+      }
+    }
+    box.innerHTML = h;
+    res.innerHTML = bxRenderResult(bxClassify(norm, b));
+  }
+
+  function bxInit(){
+    bxTotal = bxEntries.length;
+    bxBuilds.forEach(function(b){ bxBuildById[String(b.build_id).toUpperCase()] = b; });
+    document.getElementById("bx-input").addEventListener("input", bxLookup);
+    document.getElementById("bx-build").addEventListener("click", function(ev){
+      var t = ev.target;
+      if(t && t.getAttribute && t.getAttribute("data-bxid")){
+        document.getElementById("bx-input").value = t.getAttribute("data-bxid");
+        bxLookup();
+      }
+    });
+  }
+
+  function bxChk(r){
+    if(!r.ok) throw new Error("HTTP " + r.status);
+    return r.json();
+  }
+
+  /* bx-stale: 収集停止（30日超）の警告バナー。status.json（サーバ側判定）と
+     builds.json の generated_at（クライアント側判定）の二重化。どちらも失敗しても既存機能に影響しない。 */
+  var BX_STALE_DAYS = 30;
+  function bxStaleShow(lastDate){
+    var el = document.getElementById("bx-stale");
+    if(!el || !el.hidden) return;
+    el.textContent = "⚠ ビルド収集が" + BX_STALE_DAYS + "日以上停止しています（最終収集: " + (lastDate || "不明") + "）";
+    el.hidden = false;
+  }
+  function bxDaysSince(s){
+    var m = String(s || "").match(/^(\d{4})-(\d{2})(?:-(\d{2}))?/);
+    if(!m) return null;
+    var d = Date.UTC(+m[1], +m[2] - 1, +(m[3] || 1));
+    return Math.floor((Date.now() - d) / 86400000);
+  }
+  fetch("./data/status.json").then(bxChk).then(function(st){
+    if(st && st.stale === true) bxStaleShow(st.last_collected);
+  }).catch(function(){ /* status.json が404/不正でも何もしない（既存機能非干渉） */ });
+
+  Promise.all([
+    fetch("./data/entries.json").then(bxChk),
+    fetch("./data/builds.json").then(bxChk)
+  ]).then(function(rs){
+    bxEntries = rs[0] || [];
+    bxBuilds = (rs[1] && rs[1].builds) || [];
+    var bxGenDays = bxDaysSince(rs[1] && rs[1].generated_at);
+    if(bxGenDays !== null && bxGenDays >= BX_STALE_DAYS) bxStaleShow(rs[1].generated_at);
+    bxInit();
+  }).catch(function(err){
+    document.getElementById("bx-build").innerHTML =
+      '<div class="bx-empty">ビルドデータの読み込みに失敗しました（' + bxEsc(err.message) + '）。</div>';
+  });
 })();
 </script>
 

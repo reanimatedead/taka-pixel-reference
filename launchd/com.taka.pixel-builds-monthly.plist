@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <!-- Pixel ビルド辞書 月次収集（毎月10日 03:00, M1 mini）。
+       収集のみで git 操作なし。詳細ログは data/logs/ に残る。
+       パスは $HOME 経由（bash が展開）。launchd は StandardOutPath 等で
+       環境変数を展開しないため、そこは /tmp 固定とし個人パスを埋め込まない。 -->
+  <key>Label</key>
+  <string>com.taka.pixel-builds-monthly</string>
+  <key>ProgramArguments</key>
+  <array>
+    <string>/bin/bash</string>
+    <string>-c</string>
+    <string>exec "$HOME/taka-pixel-reference/scripts/monthly_collect.sh"</string>
+  </array>
+  <key>StartCalendarInterval</key>
+  <dict>
+    <key>Day</key>
+    <integer>10</integer>
+    <key>Hour</key>
+    <integer>3</integer>
+    <key>Minute</key>
+    <integer>0</integer>
+  </dict>
+  <key>StandardOutPath</key>
+  <string>/tmp/com.taka.pixel-builds-monthly.out.log</string>
+  <key>StandardErrorPath</key>
+  <string>/tmp/com.taka.pixel-builds-monthly.err.log</string>
+</dict>
+</plist>

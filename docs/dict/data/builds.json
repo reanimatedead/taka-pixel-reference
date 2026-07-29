@@ -1,0 +1,1860 @@
+{
+  "generated_at": "2026-07-30",
+  "builds": [
+    {
+      "build_id": "BD1A.250702.001",
+      "os": "Android 16",
+      "track": "stable",
+      "release_date": "2025-08",
+      "security_patch": "2025-08-05",
+      "devices": [
+        "blazer",
+        "frankel",
+        "mustang"
+      ],
+      "region_scope": "global",
+      "anti_rollback": {
+        "incremented": false,
+        "note": ""
+      },
+      "official_fixes": [],
+      "sources": [
+        "https://developers.google.com/android/images",
+        "https://developers.google.com/android/ota",
+        "https://source.android.com/docs/security/bulletin/pixel"
+      ],
+      "verify_state": "UNVERIFIED"
+    },
+    {
+      "build_id": "BD1A.250702.001.A3",
+      "os": "Android 16",
+      "track": "stable",
+      "release_date": "2025-08",
+      "security_patch": "2025-08-05",
+      "devices": [
+        "blazer",
+        "frankel",
+        "mustang"
+      ],
+      "region_scope": "Verizon",
+      "parent_build_id": "BD1A.250702.001",
+      "anti_rollback": {
+        "incremented": false,
+        "note": ""
+      },
+      "official_fixes": [],
+      "sources": [
+        "https://developers.google.com/android/images",
+        "https://developers.google.com/android/ota",
+        "https://source.android.com/docs/security/bulletin/pixel"
+      ],
+      "verify_state": "UNVERIFIED"
+    },
+    {
+      "build_id": "BD3A.250721.001",
+      "os": "Android 16",
+      "track": "stable",
+      "release_date": "2025-08",
+      "security_patch": "2025-08-05",
+      "devices": [
+        "blazer",
+        "frankel",
+        "mustang"
+      ],
+      "region_scope": "global",
+      "anti_rollback": {
+        "incremented": false,
+        "note": ""
+      },
+      "official_fixes": [],
+      "sources": [
+        "https://developers.google.com/android/images",
+        "https://developers.google.com/android/ota",
+        "https://source.android.com/docs/security/bulletin/pixel"
+      ],
+      "verify_state": "UNVERIFIED"
+    },
+    {
+      "build_id": "BD3A.250721.001.A1",
+      "os": "Android 16",
+      "track": "stable",
+      "release_date": "2025-08",
+      "security_patch": "2025-08-05",
+      "devices": [
+        "blazer",
+        "frankel",
+        "mustang"
+      ],
+      "region_scope": "NA GStore",
+      "parent_build_id": "BD3A.250721.001",
+      "anti_rollback": {
+        "incremented": false,
+        "note": ""
+      },
+      "official_fixes": [],
+      "sources": [
+        "https://developers.google.com/android/images",
+        "https://developers.google.com/android/ota",
+        "https://source.android.com/docs/security/bulletin/pixel"
+      ],
+      "verify_state": "UNVERIFIED"
+    },
+    {
+      "build_id": "BD3A.250721.001.B7",
+      "os": "Android 16",
+      "track": "monthly",
+      "release_date": "2025-09",
+      "security_patch": "2025-09-05",
+      "devices": [
+        "blazer",
+        "frankel",
+        "mustang"
+      ],
+      "region_scope": "global",
+      "parent_build_id": "BD3A.250721.001",
+      "anti_rollback": {
+        "incremented": false,
+        "note": ""
+      },
+      "official_fixes": [],
+      "sources": [
+        "https://developers.google.com/android/images",
+        "https://developers.google.com/android/ota",
+        "https://source.android.com/docs/security/bulletin/pixel"
+      ],
+      "verify_state": "UNVERIFIED"
+    },
+    {
+      "build_id": "BD3A.250721.001.E1",
+      "os": "Android 16",
+      "track": "monthly",
+      "release_date": "2025-09",
+      "security_patch": "2025-09-05",
+      "devices": [
+        "blazer",
+        "frankel",
+        "mustang"
+      ],
+      "region_scope": "global",
+      "parent_build_id": "BD3A.250721.001",
+      "anti_rollback": {
+        "incremented": false,
+        "note": ""
+      },
+      "official_fixes": [],
+      "sources": [
+        "https://developers.google.com/android/images",
+        "https://developers.google.com/android/ota",
+        "https://source.android.com/docs/security/bulletin/pixel"
+      ],
+      "verify_state": "UNVERIFIED"
+    },
+    {
+      "build_id": "BD3A.250808.001",
+      "os": "Android 16",
+      "track": "monthly",
+      "release_date": "2025-10",
+      "security_patch": "2025-10-05",
+      "devices": [
+        "rango"
+      ],
+      "region_scope": "global",
+      "anti_rollback": {
+        "incremented": false,
+        "note": ""
+      },
+      "official_fixes": [],
+      "sources": [
+        "https://developers.google.com/android/images",
+        "https://developers.google.com/android/ota",
+        "https://source.android.com/docs/security/bulletin/pixel"
+      ],
+      "verify_state": "UNVERIFIED"
+    },
+    {
+      "build_id": "BD3A.251005.003",
+      "os": "Android 16",
+      "track": "monthly",
+      "release_date": "2025-10",
+      "security_patch": "2025-10-05",
+      "devices": [
+        "rango"
+      ],
+      "region_scope": "global",
+      "anti_rollback": {
+        "incremented": false,
+        "note": ""
+      },
+      "official_fixes": [],
+      "sources": [
+        "https://developers.google.com/android/images",
+        "https://developers.google.com/android/ota",
+        "https://source.android.com/docs/security/bulletin/pixel"
+      ],
+      "verify_state": "UNVERIFIED"
+    },
+    {
+      "build_id": "BD3A.251005.003.E1",
+      "os": "Android 16",
+      "track": "monthly",
+      "release_date": "2025-10",
+      "security_patch": "2025-10-05",
+      "devices": [
+        "rango"
+      ],
+      "region_scope": "global",
+      "parent_build_id": "BD3A.251005.003",
+      "anti_rollback": {
+        "incremented": false,
+        "note": ""
+      },
+      "official_fixes": [],
+      "sources": [
+        "https://developers.google.com/android/images",
+        "https://developers.google.com/android/ota",
+        "https://source.android.com/docs/security/bulletin/pixel"
+      ],
+      "verify_state": "UNVERIFIED"
+    },
+    {
+      "build_id": "BD3A.251005.003.F1",
+      "os": "Android 16",
+      "track": "monthly",
+      "release_date": "2025-10",
+      "security_patch": "2025-10-05",
+      "devices": [
+        "rango"
+      ],
+      "region_scope": "Japan",
+      "parent_build_id": "BD3A.251005.003",
+      "anti_rollback": {
+        "incremented": false,
+        "note": ""
+      },
+      "official_fixes": [],
+      "sources": [
+        "https://developers.google.com/android/images",
+        "https://developers.google.com/android/ota",
+        "https://source.android.com/docs/security/bulletin/pixel"
+      ],
+      "verify_state": "UNVERIFIED"
+    },
+    {
+      "build_id": "BD3A.251005.003.J2",
+      "os": "Android 16",
+      "track": "monthly",
+      "release_date": "2025-10",
+      "security_patch": "2025-10-05",
+      "devices": [
+        "rango"
+      ],
+      "region_scope": "Japan",
+      "parent_build_id": "BD3A.251005.003",
+      "anti_rollback": {
+        "incremented": false,
+        "note": ""
+      },
+      "official_fixes": [],
+      "sources": [
+        "https://developers.google.com/android/images",
+        "https://developers.google.com/android/ota",
+        "https://source.android.com/docs/security/bulletin/pixel"
+      ],
+      "verify_state": "UNVERIFIED"
+    },
+    {
+      "build_id": "BD3A.251005.003.J5",
+      "os": "Android 16",
+      "track": "monthly",
+      "release_date": "2025-10",
+      "security_patch": "2025-10-05",
+      "devices": [
+        "blazer",
+        "frankel",
+        "mustang"
+      ],
+      "region_scope": "Japan",
+      "parent_build_id": "BD3A.251005.003",
+      "anti_rollback": {
+        "incremented": false,
+        "note": ""
+      },
+      "official_fixes": [],
+      "sources": [
+        "https://developers.google.com/android/images",
+        "https://developers.google.com/android/ota",
+        "https://source.android.com/docs/security/bulletin/pixel"
+      ],
+      "verify_state": "UNVERIFIED"
+    },
+    {
+      "build_id": "BD3A.251005.003.J6",
+      "os": "Android 16",
+      "track": "monthly",
+      "release_date": "2025-10",
+      "security_patch": "2025-10-05",
+      "devices": [
+        "blazer",
+        "frankel",
+        "mustang"
+      ],
+      "region_scope": "Japan",
+      "parent_build_id": "BD3A.251005.003",
+      "anti_rollback": {
+        "incremented": false,
+        "note": ""
+      },
+      "official_fixes": [],
+      "sources": [
+        "https://developers.google.com/android/images",
+        "https://developers.google.com/android/ota",
+        "https://source.android.com/docs/security/bulletin/pixel"
+      ],
+      "verify_state": "UNVERIFIED"
+    },
+    {
+      "build_id": "BD3A.251005.003.W3",
+      "os": "Android 16",
+      "track": "monthly",
+      "release_date": "2025-10",
+      "security_patch": "2025-10-05",
+      "devices": [
+        "blazer",
+        "frankel",
+        "mustang"
+      ],
+      "region_scope": "global",
+      "parent_build_id": "BD3A.251005.003",
+      "anti_rollback": {
+        "incremented": false,
+        "note": ""
+      },
+      "official_fixes": [],
+      "sources": [
+        "https://developers.google.com/android/images",
+        "https://developers.google.com/android/ota",
+        "https://source.android.com/docs/security/bulletin/pixel"
+      ],
+      "verify_state": "UNVERIFIED"
+    },
+    {
+      "build_id": "BD3A.251005.003.W4",
+      "os": "Android 16",
+      "track": "monthly",
+      "release_date": "2025-10",
+      "security_patch": "2025-10-05",
+      "devices": [
+        "blazer",
+        "frankel",
+        "mustang"
+      ],
+      "region_scope": "global",
+      "parent_build_id": "BD3A.251005.003",
+      "anti_rollback": {
+        "incremented": false,
+        "note": ""
+      },
+      "official_fixes": [],
+      "sources": [
+        "https://developers.google.com/android/images",
+        "https://developers.google.com/android/ota",
+        "https://source.android.com/docs/security/bulletin/pixel"
+      ],
+      "verify_state": "UNVERIFIED"
+    },
+    {
+      "build_id": "BD3A.251105.010.E1",
+      "os": "Android 16",
+      "track": "monthly",
+      "release_date": "2025-11",
+      "security_patch": "2025-11-05",
+      "devices": [
+        "blazer",
+        "frankel",
+        "mustang",
+        "rango"
+      ],
+      "region_scope": "global",
+      "parent_build_id": "BD3A.251105.010",
+      "anti_rollback": {
+        "incremented": false,
+        "note": ""
+      },
+      "official_fixes": [],
+      "sources": [
+        "https://developers.google.com/android/images",
+        "https://developers.google.com/android/ota",
+        "https://source.android.com/docs/security/bulletin/pixel"
+      ],
+      "verify_state": "UNVERIFIED"
+    },
+    {
+      "build_id": "BD3A.251105.010.F1",
+      "os": "Android 16",
+      "track": "monthly",
+      "release_date": "2025-11",
+      "security_patch": "2025-11-05",
+      "devices": [
+        "blazer",
+        "frankel",
+        "mustang",
+        "rango"
+      ],
+      "region_scope": "Japan carriers except Softbank",
+      "parent_build_id": "BD3A.251105.010",
+      "anti_rollback": {
+        "incremented": false,
+        "note": ""
+      },
+      "official_fixes": [],
+      "sources": [
+        "https://developers.google.com/android/images",
+        "https://developers.google.com/android/ota",
+        "https://source.android.com/docs/security/bulletin/pixel"
+      ],
+      "verify_state": "UNVERIFIED"
+    },
+    {
+      "build_id": "BD3A.251105.010.J3",
+      "os": "Android 16",
+      "track": "monthly",
+      "release_date": "2025-11",
+      "security_patch": "2025-11-05",
+      "devices": [
+        "blazer",
+        "frankel",
+        "mustang",
+        "rango"
+      ],
+      "region_scope": "Softbank",
+      "parent_build_id": "BD3A.251105.010",
+      "anti_rollback": {
+        "incremented": false,
+        "note": ""
+      },
+      "official_fixes": [],
+      "sources": [
+        "https://developers.google.com/android/images",
+        "https://developers.google.com/android/ota",
+        "https://source.android.com/docs/security/bulletin/pixel"
+      ],
+      "verify_state": "UNVERIFIED"
+    },
+    {
+      "build_id": "BD6A.251031.001.A4",
+      "os": "Android 16",
+      "track": "stable",
+      "release_date": "2026-03",
+      "security_patch": "2026-03-05",
+      "devices": [
+        "stallion"
+      ],
+      "region_scope": "global",
+      "parent_build_id": "BD6A.251031.001",
+      "anti_rollback": {
+        "incremented": false,
+        "note": ""
+      },
+      "official_fixes": [],
+      "sources": [
+        "https://developers.google.com/android/images",
+        "https://developers.google.com/android/ota",
+        "https://source.android.com/docs/security/bulletin/pixel"
+      ],
+      "verify_state": "UNVERIFIED"
+    },
+    {
+      "build_id": "BP2A.250605.031.A2",
+      "os": "Android 16",
+      "track": "stable",
+      "release_date": "2025-06-10",
+      "security_patch": "2025-06-05",
+      "devices": [
+        "akita",
+        "caiman",
+        "cheetah",
+        "felix",
+        "husky",
+        "komodo",
+        "lynx",
+        "oriole",
+        "panther",
+        "raven",
+        "shiba",
+        "tangorpro",
+        "tegu",
+        "tokay"
+      ],
+      "region_scope": "global",
+      "parent_build_id": "BP2A.250605.031",
+      "anti_rollback": {
+        "incremented": false,
+        "note": ""
+      },
+      "official_fixes": [],
+      "sources": [
+        "https://developers.google.com/android/images",
+        "https://developers.google.com/android/ota",
+        "https://source.android.com/docs/security/bulletin/pixel"
+      ],
+      "verify_state": "VERIFIED"
+    },
+    {
+      "build_id": "BP2A.250605.031.A3",
+      "os": "Android 16",
+      "track": "stable",
+      "release_date": "2025-06",
+      "security_patch": "2025-06-05",
+      "devices": [
+        "comet"
+      ],
+      "region_scope": "global",
+      "parent_build_id": "BP2A.250605.031",
+      "anti_rollback": {
+        "incremented": false,
+        "note": ""
+      },
+      "official_fixes": [],
+      "sources": [
+        "https://developers.google.com/android/images",
+        "https://developers.google.com/android/ota",
+        "https://source.android.com/docs/security/bulletin/pixel"
+      ],
+      "verify_state": "UNVERIFIED"
+    },
+    {
+      "build_id": "BP2A.250605.031.A5",
+      "os": "Android 16",
+      "track": "monthly",
+      "release_date": "2025-08",
+      "security_patch": "2025-08-05",
+      "devices": [
+        "oriole",
+        "raven"
+      ],
+      "region_scope": "global",
+      "parent_build_id": "BP2A.250605.031",
+      "anti_rollback": {
+        "incremented": false,
+        "note": ""
+      },
+      "official_fixes": [],
+      "sources": [
+        "https://developers.google.com/android/images",
+        "https://developers.google.com/android/ota",
+        "https://source.android.com/docs/security/bulletin/pixel"
+      ],
+      "verify_state": "UNVERIFIED"
+    },
+    {
+      "build_id": "BP2A.250705.008",
+      "os": "Android 16",
+      "track": "monthly",
+      "release_date": "2025-07-08",
+      "security_patch": "2025-07-05",
+      "devices": [
+        "akita",
+        "bluejay",
+        "caiman",
+        "cheetah",
+        "comet",
+        "felix",
+        "husky",
+        "komodo",
+        "lynx",
+        "panther",
+        "shiba",
+        "tangorpro",
+        "tegu",
+        "tokay"
+      ],
+      "region_scope": "global",
+      "anti_rollback": {
+        "incremented": false,
+        "note": ""
+      },
+      "official_fixes": [],
+      "sources": [
+        "https://developers.google.com/android/images",
+        "https://developers.google.com/android/ota",
+        "https://source.android.com/docs/security/bulletin/pixel"
+      ],
+      "verify_state": "VERIFIED"
+    },
+    {
+      "build_id": "BP2A.250705.008.A1",
+      "os": "Android 16",
+      "track": "monthly",
+      "release_date": "2025-07-08",
+      "security_patch": "2025-08-05",
+      "devices": [
+        "bluejay"
+      ],
+      "region_scope": "global",
+      "parent_build_id": "BP2A.250705.008",
+      "anti_rollback": {
+        "incremented": false,
+        "note": ""
+      },
+      "official_fixes": [],
+      "sources": [
+        "https://developers.google.com/android/images",
+        "https://developers.google.com/android/ota",
+        "https://source.android.com/docs/security/bulletin/pixel"
+      ],
+      "verify_state": "VERIFIED",
+      "release_date_source_month": "2025-08",
+      "human_review": true,
+      "conflict_note": "release_date: anchor=2025-07-08 / source_month=2025-08"
+    },
+    {
+      "build_id": "BP2A.250805.005",
+      "os": "Android 16",
+      "track": "monthly",
+      "release_date": "2025-08",
+      "security_patch": "2025-08-05",
+      "devices": [
+        "akita",
+        "caiman",
+        "cheetah",
+        "comet",
+        "felix",
+        "husky",
+        "komodo",
+        "lynx",
+        "panther",
+        "shiba",
+        "tangorpro",
+        "tegu",
+        "tokay"
+      ],
+      "region_scope": "global",
+      "anti_rollback": {
+        "incremented": false,
+        "note": ""
+      },
+      "official_fixes": [],
+      "sources": [
+        "https://developers.google.com/android/images",
+        "https://developers.google.com/android/ota",
+        "https://source.android.com/docs/security/bulletin/pixel"
+      ],
+      "verify_state": "UNVERIFIED"
+    },
+    {
+      "build_id": "BP3A.250905.014",
+      "os": "Android 16 QPR1",
+      "track": "qpr",
+      "release_date": "2025-09-03",
+      "security_patch": "2025-09-05",
+      "devices": [
+        "akita",
+        "bluejay",
+        "caiman",
+        "cheetah",
+        "comet",
+        "felix",
+        "husky",
+        "komodo",
+        "lynx",
+        "oriole",
+        "panther",
+        "raven",
+        "shiba",
+        "tegu",
+        "tokay"
+      ],
+      "region_scope": "global",
+      "anti_rollback": {
+        "incremented": false,
+        "note": ""
+      },
+      "official_fixes": [],
+      "sources": [
+        "https://developers.google.com/android/images",
+        "https://developers.google.com/android/ota",
+        "https://source.android.com/docs/security/bulletin/pixel"
+      ],
+      "verify_state": "VERIFIED"
+    },
+    {
+      "build_id": "BP3A.250905.014.A1",
+      "os": "Android 16",
+      "track": "qpr",
+      "release_date": "2025-09",
+      "security_patch": "2025-09-05",
+      "devices": [
+        "tangorpro"
+      ],
+      "region_scope": "global",
+      "parent_build_id": "BP3A.250905.014",
+      "anti_rollback": {
+        "incremented": false,
+        "note": ""
+      },
+      "official_fixes": [],
+      "sources": [
+        "https://developers.google.com/android/images",
+        "https://developers.google.com/android/ota",
+        "https://source.android.com/docs/security/bulletin/pixel"
+      ],
+      "verify_state": "UNVERIFIED"
+    },
+    {
+      "build_id": "BP3A.251005.004.A2",
+      "os": "Android 16",
+      "track": "monthly",
+      "release_date": "2025-10",
+      "security_patch": "2025-10-05",
+      "devices": [
+        "tangorpro",
+        "tegu"
+      ],
+      "region_scope": "Japan",
+      "parent_build_id": "BP3A.251005.004",
+      "anti_rollback": {
+        "incremented": false,
+        "note": ""
+      },
+      "official_fixes": [],
+      "sources": [
+        "https://developers.google.com/android/images",
+        "https://developers.google.com/android/ota",
+        "https://source.android.com/docs/security/bulletin/pixel"
+      ],
+      "verify_state": "UNVERIFIED"
+    },
+    {
+      "build_id": "BP3A.251005.004.A3",
+      "os": "Android 16",
+      "track": "monthly",
+      "release_date": "2025-10",
+      "security_patch": "2025-10-05",
+      "devices": [
+        "tegu"
+      ],
+      "region_scope": "Japan",
+      "parent_build_id": "BP3A.251005.004",
+      "anti_rollback": {
+        "incremented": false,
+        "note": ""
+      },
+      "official_fixes": [],
+      "sources": [
+        "https://developers.google.com/android/images",
+        "https://developers.google.com/android/ota",
+        "https://source.android.com/docs/security/bulletin/pixel"
+      ],
+      "verify_state": "UNVERIFIED"
+    },
+    {
+      "build_id": "BP3A.251005.004.B1",
+      "os": "Android 16",
+      "track": "monthly",
+      "release_date": "2025-10",
+      "security_patch": "2025-10-05",
+      "devices": [
+        "akita",
+        "caiman",
+        "cheetah",
+        "comet",
+        "felix",
+        "husky",
+        "komodo",
+        "lynx",
+        "panther",
+        "shiba",
+        "tegu",
+        "tokay"
+      ],
+      "region_scope": "global",
+      "parent_build_id": "BP3A.251005.004",
+      "anti_rollback": {
+        "incremented": false,
+        "note": ""
+      },
+      "official_fixes": [],
+      "sources": [
+        "https://developers.google.com/android/images",
+        "https://developers.google.com/android/ota",
+        "https://source.android.com/docs/security/bulletin/pixel"
+      ],
+      "verify_state": "UNVERIFIED"
+    },
+    {
+      "build_id": "BP3A.251005.004.B2",
+      "os": "Android 16",
+      "track": "monthly",
+      "release_date": "2025-10",
+      "security_patch": "2025-10-05",
+      "devices": [
+        "akita",
+        "cheetah",
+        "felix",
+        "husky",
+        "lynx",
+        "panther",
+        "shiba",
+        "tegu"
+      ],
+      "region_scope": "global",
+      "parent_build_id": "BP3A.251005.004",
+      "anti_rollback": {
+        "incremented": false,
+        "note": ""
+      },
+      "official_fixes": [],
+      "sources": [
+        "https://developers.google.com/android/images",
+        "https://developers.google.com/android/ota",
+        "https://source.android.com/docs/security/bulletin/pixel"
+      ],
+      "verify_state": "UNVERIFIED"
+    },
+    {
+      "build_id": "BP3A.251005.004.B3",
+      "os": "Android 16",
+      "track": "monthly",
+      "release_date": "2025-10",
+      "security_patch": "2025-10-05",
+      "devices": [
+        "caiman",
+        "comet",
+        "komodo",
+        "tokay"
+      ],
+      "region_scope": "global",
+      "parent_build_id": "BP3A.251005.004",
+      "anti_rollback": {
+        "incremented": false,
+        "note": ""
+      },
+      "official_fixes": [],
+      "sources": [
+        "https://developers.google.com/android/images",
+        "https://developers.google.com/android/ota",
+        "https://source.android.com/docs/security/bulletin/pixel"
+      ],
+      "verify_state": "UNVERIFIED"
+    },
+    {
+      "build_id": "BP3A.251105.013.A1",
+      "os": "Android 16",
+      "track": "monthly",
+      "release_date": "2025-11",
+      "security_patch": "2025-11-05",
+      "devices": [
+        "tangorpro"
+      ],
+      "region_scope": "global",
+      "parent_build_id": "BP3A.251105.013",
+      "anti_rollback": {
+        "incremented": false,
+        "note": ""
+      },
+      "official_fixes": [],
+      "sources": [
+        "https://developers.google.com/android/images",
+        "https://developers.google.com/android/ota",
+        "https://source.android.com/docs/security/bulletin/pixel"
+      ],
+      "verify_state": "UNVERIFIED"
+    },
+    {
+      "build_id": "BP3A.251105.015",
+      "os": "Android 16",
+      "track": "monthly",
+      "release_date": "2025-11",
+      "security_patch": "2025-11-05",
+      "devices": [
+        "akita",
+        "caiman",
+        "comet",
+        "felix",
+        "husky",
+        "komodo",
+        "lynx",
+        "shiba",
+        "tegu",
+        "tokay"
+      ],
+      "region_scope": "global",
+      "anti_rollback": {
+        "incremented": false,
+        "note": ""
+      },
+      "official_fixes": [],
+      "sources": [
+        "https://developers.google.com/android/images",
+        "https://developers.google.com/android/ota",
+        "https://source.android.com/docs/security/bulletin/pixel"
+      ],
+      "verify_state": "UNVERIFIED"
+    },
+    {
+      "build_id": "BP3A.251105.015.J1",
+      "os": "Android 16",
+      "track": "monthly",
+      "release_date": "2025-11",
+      "security_patch": "2025-11-05",
+      "devices": [
+        "tegu"
+      ],
+      "region_scope": "Japan",
+      "parent_build_id": "BP3A.251105.015",
+      "anti_rollback": {
+        "incremented": false,
+        "note": ""
+      },
+      "official_fixes": [],
+      "sources": [
+        "https://developers.google.com/android/images",
+        "https://developers.google.com/android/ota",
+        "https://source.android.com/docs/security/bulletin/pixel"
+      ],
+      "verify_state": "UNVERIFIED"
+    },
+    {
+      "build_id": "BP4A.251205.006",
+      "os": "Android 16 QPR2",
+      "track": "qpr",
+      "release_date": "2025-12-02",
+      "security_patch": "2025-12-05",
+      "devices": [
+        "akita",
+        "blazer",
+        "bluejay",
+        "caiman",
+        "cheetah",
+        "comet",
+        "felix",
+        "frankel",
+        "husky",
+        "komodo",
+        "mustang",
+        "oriole",
+        "panther",
+        "rango",
+        "raven",
+        "shiba",
+        "tangorpro",
+        "tegu",
+        "tokay"
+      ],
+      "region_scope": "global",
+      "anti_rollback": {
+        "incremented": false,
+        "note": ""
+      },
+      "official_fixes": [],
+      "sources": [
+        "https://developers.google.com/android/images",
+        "https://developers.google.com/android/ota",
+        "https://source.android.com/docs/security/bulletin/pixel"
+      ],
+      "verify_state": "VERIFIED"
+    },
+    {
+      "build_id": "BP4A.251205.006.A1",
+      "os": "Android 16 QPR2",
+      "track": "qpr",
+      "release_date": "2025-12-02",
+      "security_patch": "2025-12-05",
+      "devices": [
+        "blazer",
+        "caiman",
+        "comet",
+        "frankel",
+        "komodo",
+        "mustang",
+        "rango",
+        "tokay"
+      ],
+      "region_scope": "EMEA",
+      "parent_build_id": "BP4A.251205.006",
+      "anti_rollback": {
+        "incremented": false,
+        "note": ""
+      },
+      "official_fixes": [],
+      "sources": [
+        "https://developers.google.com/android/images",
+        "https://developers.google.com/android/ota",
+        "https://source.android.com/docs/security/bulletin/pixel"
+      ],
+      "verify_state": "VERIFIED"
+    },
+    {
+      "build_id": "BP4A.251205.006.A4",
+      "os": "Android 16",
+      "track": "qpr",
+      "release_date": "2025-12",
+      "security_patch": "2025-12-05",
+      "devices": [
+        "blazer",
+        "caiman",
+        "comet",
+        "frankel",
+        "komodo",
+        "mustang",
+        "rango",
+        "tokay"
+      ],
+      "region_scope": "EMEA",
+      "parent_build_id": "BP4A.251205.006",
+      "anti_rollback": {
+        "incremented": false,
+        "note": ""
+      },
+      "official_fixes": [],
+      "sources": [
+        "https://developers.google.com/android/images",
+        "https://developers.google.com/android/ota",
+        "https://source.android.com/docs/security/bulletin/pixel"
+      ],
+      "verify_state": "UNVERIFIED"
+    },
+    {
+      "build_id": "BP4A.251205.006.B1",
+      "os": "Android 16 QPR2",
+      "track": "qpr",
+      "release_date": "2025-12-02",
+      "security_patch": "2025-12-05",
+      "devices": [
+        "tegu"
+      ],
+      "region_scope": "VZW",
+      "parent_build_id": "BP4A.251205.006",
+      "anti_rollback": {
+        "incremented": false,
+        "note": ""
+      },
+      "official_fixes": [],
+      "sources": [
+        "https://developers.google.com/android/images",
+        "https://developers.google.com/android/ota",
+        "https://source.android.com/docs/security/bulletin/pixel"
+      ],
+      "verify_state": "VERIFIED"
+    },
+    {
+      "build_id": "BP4A.251205.006.B3",
+      "os": "Android 16",
+      "track": "qpr",
+      "release_date": "2025-12",
+      "security_patch": "2025-12-05",
+      "devices": [
+        "tegu"
+      ],
+      "region_scope": "Verizon",
+      "parent_build_id": "BP4A.251205.006",
+      "anti_rollback": {
+        "incremented": false,
+        "note": ""
+      },
+      "official_fixes": [],
+      "sources": [
+        "https://developers.google.com/android/images",
+        "https://developers.google.com/android/ota",
+        "https://source.android.com/docs/security/bulletin/pixel"
+      ],
+      "verify_state": "UNVERIFIED"
+    },
+    {
+      "build_id": "BP4A.251205.006.C1",
+      "os": "Android 16 QPR2",
+      "track": "qpr",
+      "release_date": "2025-12-02",
+      "security_patch": "2025-12-05",
+      "devices": [
+        "blazer",
+        "frankel",
+        "mustang",
+        "rango",
+        "tegu"
+      ],
+      "region_scope": "Japan; Japan, Japan",
+      "parent_build_id": "BP4A.251205.006",
+      "anti_rollback": {
+        "incremented": false,
+        "note": ""
+      },
+      "official_fixes": [],
+      "sources": [
+        "https://developers.google.com/android/images",
+        "https://developers.google.com/android/ota",
+        "https://source.android.com/docs/security/bulletin/pixel"
+      ],
+      "verify_state": "VERIFIED"
+    },
+    {
+      "build_id": "BP4A.251205.006.C2",
+      "os": "Android 16",
+      "track": "qpr",
+      "release_date": "2025-12",
+      "security_patch": "2025-12-05",
+      "devices": [
+        "blazer",
+        "frankel",
+        "mustang",
+        "rango",
+        "tegu"
+      ],
+      "region_scope": "Japan",
+      "parent_build_id": "BP4A.251205.006",
+      "anti_rollback": {
+        "incremented": false,
+        "note": ""
+      },
+      "official_fixes": [],
+      "sources": [
+        "https://developers.google.com/android/images",
+        "https://developers.google.com/android/ota",
+        "https://source.android.com/docs/security/bulletin/pixel"
+      ],
+      "verify_state": "UNVERIFIED"
+    },
+    {
+      "build_id": "BP4A.251205.006.E1",
+      "os": "Android 16",
+      "track": "qpr",
+      "release_date": "2025-12",
+      "security_patch": "2025-12-05",
+      "devices": [
+        "akita",
+        "blazer",
+        "caiman",
+        "comet",
+        "frankel",
+        "husky",
+        "komodo",
+        "mustang",
+        "rango",
+        "shiba",
+        "tegu",
+        "tokay"
+      ],
+      "region_scope": "global",
+      "parent_build_id": "BP4A.251205.006",
+      "anti_rollback": {
+        "incremented": false,
+        "note": ""
+      },
+      "official_fixes": [],
+      "sources": [
+        "https://developers.google.com/android/images",
+        "https://developers.google.com/android/ota",
+        "https://source.android.com/docs/security/bulletin/pixel"
+      ],
+      "verify_state": "UNVERIFIED"
+    },
+    {
+      "build_id": "BP4A.260105.004.A2",
+      "os": "Android 16",
+      "track": "monthly",
+      "release_date": "2026-01",
+      "security_patch": "2026-01-05",
+      "devices": [
+        "blazer",
+        "caiman",
+        "comet",
+        "frankel",
+        "komodo",
+        "mustang",
+        "rango",
+        "tokay"
+      ],
+      "region_scope": "EMEA",
+      "parent_build_id": "BP4A.260105.004",
+      "anti_rollback": {
+        "incremented": false,
+        "note": ""
+      },
+      "official_fixes": [],
+      "sources": [
+        "https://developers.google.com/android/images",
+        "https://developers.google.com/android/ota",
+        "https://source.android.com/docs/security/bulletin/pixel"
+      ],
+      "verify_state": "UNVERIFIED"
+    },
+    {
+      "build_id": "BP4A.260105.004.B2",
+      "os": "Android 16",
+      "track": "monthly",
+      "release_date": "2026-01",
+      "security_patch": "2026-01-05",
+      "devices": [
+        "tegu"
+      ],
+      "region_scope": "Verizon",
+      "parent_build_id": "BP4A.260105.004",
+      "anti_rollback": {
+        "incremented": false,
+        "note": ""
+      },
+      "official_fixes": [],
+      "sources": [
+        "https://developers.google.com/android/images",
+        "https://developers.google.com/android/ota",
+        "https://source.android.com/docs/security/bulletin/pixel"
+      ],
+      "verify_state": "UNVERIFIED"
+    },
+    {
+      "build_id": "BP4A.260105.004.C2",
+      "os": "Android 16",
+      "track": "monthly",
+      "release_date": "2026-01",
+      "security_patch": "2026-01-05",
+      "devices": [
+        "blazer",
+        "frankel",
+        "mustang",
+        "rango",
+        "tegu"
+      ],
+      "region_scope": "Japan",
+      "parent_build_id": "BP4A.260105.004",
+      "anti_rollback": {
+        "incremented": false,
+        "note": ""
+      },
+      "official_fixes": [],
+      "sources": [
+        "https://developers.google.com/android/images",
+        "https://developers.google.com/android/ota",
+        "https://source.android.com/docs/security/bulletin/pixel"
+      ],
+      "verify_state": "UNVERIFIED"
+    },
+    {
+      "build_id": "BP4A.260105.004.E1",
+      "os": "Android 16",
+      "track": "monthly",
+      "release_date": "2026-01",
+      "security_patch": "2026-01-05",
+      "devices": [
+        "akita",
+        "blazer",
+        "caiman",
+        "comet",
+        "felix",
+        "frankel",
+        "husky",
+        "komodo",
+        "lynx",
+        "mustang",
+        "rango",
+        "shiba",
+        "tangorpro",
+        "tegu",
+        "tokay"
+      ],
+      "region_scope": "global",
+      "parent_build_id": "BP4A.260105.004",
+      "anti_rollback": {
+        "incremented": false,
+        "note": ""
+      },
+      "official_fixes": [],
+      "sources": [
+        "https://developers.google.com/android/images",
+        "https://developers.google.com/android/ota",
+        "https://source.android.com/docs/security/bulletin/pixel"
+      ],
+      "verify_state": "UNVERIFIED"
+    },
+    {
+      "build_id": "BP4A.260205.001",
+      "os": "Android 16",
+      "track": "monthly",
+      "release_date": "2026-02",
+      "security_patch": "2026-02-05",
+      "devices": [
+        "akita",
+        "blazer",
+        "felix",
+        "frankel",
+        "husky",
+        "lynx",
+        "mustang",
+        "rango",
+        "shiba",
+        "tangorpro",
+        "tegu"
+      ],
+      "region_scope": "global",
+      "anti_rollback": {
+        "incremented": false,
+        "note": ""
+      },
+      "official_fixes": [],
+      "sources": [
+        "https://developers.google.com/android/images",
+        "https://developers.google.com/android/ota",
+        "https://source.android.com/docs/security/bulletin/pixel"
+      ],
+      "verify_state": "UNVERIFIED"
+    },
+    {
+      "build_id": "BP4A.260205.001.A1",
+      "os": "Android 16",
+      "track": "monthly",
+      "release_date": "2026-02",
+      "security_patch": "2026-02-05",
+      "devices": [
+        "blazer",
+        "frankel",
+        "mustang",
+        "rango"
+      ],
+      "region_scope": "EMEA",
+      "parent_build_id": "BP4A.260205.001",
+      "anti_rollback": {
+        "incremented": false,
+        "note": ""
+      },
+      "official_fixes": [],
+      "sources": [
+        "https://developers.google.com/android/images",
+        "https://developers.google.com/android/ota",
+        "https://source.android.com/docs/security/bulletin/pixel"
+      ],
+      "verify_state": "UNVERIFIED"
+    },
+    {
+      "build_id": "BP4A.260205.001.B1",
+      "os": "Android 16",
+      "track": "monthly",
+      "release_date": "2026-02",
+      "security_patch": "2026-02-05",
+      "devices": [
+        "tegu"
+      ],
+      "region_scope": "VZW",
+      "parent_build_id": "BP4A.260205.001",
+      "anti_rollback": {
+        "incremented": false,
+        "note": ""
+      },
+      "official_fixes": [],
+      "sources": [
+        "https://developers.google.com/android/images",
+        "https://developers.google.com/android/ota",
+        "https://source.android.com/docs/security/bulletin/pixel"
+      ],
+      "verify_state": "UNVERIFIED"
+    },
+    {
+      "build_id": "BP4A.260205.001.C1",
+      "os": "Android 16",
+      "track": "monthly",
+      "release_date": "2026-02",
+      "security_patch": "2026-02-05",
+      "devices": [
+        "blazer",
+        "frankel",
+        "mustang",
+        "rango",
+        "tegu"
+      ],
+      "region_scope": "JP",
+      "parent_build_id": "BP4A.260205.001",
+      "anti_rollback": {
+        "incremented": false,
+        "note": ""
+      },
+      "official_fixes": [],
+      "sources": [
+        "https://developers.google.com/android/images",
+        "https://developers.google.com/android/ota",
+        "https://source.android.com/docs/security/bulletin/pixel"
+      ],
+      "verify_state": "UNVERIFIED"
+    },
+    {
+      "build_id": "BP4A.260205.002",
+      "os": "Android 16",
+      "track": "monthly",
+      "release_date": "2026-02",
+      "security_patch": "2026-02-05",
+      "devices": [
+        "caiman",
+        "comet",
+        "komodo",
+        "tokay"
+      ],
+      "region_scope": "global",
+      "anti_rollback": {
+        "incremented": false,
+        "note": ""
+      },
+      "official_fixes": [],
+      "sources": [
+        "https://developers.google.com/android/images",
+        "https://developers.google.com/android/ota",
+        "https://source.android.com/docs/security/bulletin/pixel"
+      ],
+      "verify_state": "UNVERIFIED"
+    },
+    {
+      "build_id": "BP4A.260205.002.A1",
+      "os": "Android 16",
+      "track": "monthly",
+      "release_date": "2026-02",
+      "security_patch": "2026-02-05",
+      "devices": [
+        "caiman",
+        "comet",
+        "komodo",
+        "tokay"
+      ],
+      "region_scope": "EMEA",
+      "parent_build_id": "BP4A.260205.002",
+      "anti_rollback": {
+        "incremented": false,
+        "note": ""
+      },
+      "official_fixes": [],
+      "sources": [
+        "https://developers.google.com/android/images",
+        "https://developers.google.com/android/ota",
+        "https://source.android.com/docs/security/bulletin/pixel"
+      ],
+      "verify_state": "UNVERIFIED"
+    },
+    {
+      "build_id": "CP1A.260305.018",
+      "os": "Android 16",
+      "track": "qpr",
+      "release_date": "2026-03",
+      "security_patch": "2026-03-05",
+      "devices": [
+        "akita",
+        "blazer",
+        "bluejay",
+        "caiman",
+        "cheetah",
+        "comet",
+        "felix",
+        "frankel",
+        "husky",
+        "komodo",
+        "lynx",
+        "mustang",
+        "oriole",
+        "panther",
+        "rango",
+        "raven",
+        "shiba",
+        "stallion",
+        "tangorpro",
+        "tegu",
+        "tokay"
+      ],
+      "region_scope": "global",
+      "anti_rollback": {
+        "incremented": false,
+        "note": ""
+      },
+      "official_fixes": [],
+      "sources": [
+        "https://developers.google.com/android/images",
+        "https://developers.google.com/android/ota",
+        "https://source.android.com/docs/security/bulletin/pixel"
+      ],
+      "verify_state": "UNVERIFIED"
+    },
+    {
+      "build_id": "CP1A.260305.018.A1",
+      "os": "Android 16",
+      "track": "qpr",
+      "release_date": "2026-03",
+      "security_patch": "2026-03-05",
+      "devices": [
+        "bluejay",
+        "oriole",
+        "raven"
+      ],
+      "region_scope": "Australia",
+      "parent_build_id": "CP1A.260305.018",
+      "anti_rollback": {
+        "incremented": false,
+        "note": ""
+      },
+      "official_fixes": [],
+      "sources": [
+        "https://developers.google.com/android/images",
+        "https://developers.google.com/android/ota",
+        "https://source.android.com/docs/security/bulletin/pixel"
+      ],
+      "verify_state": "UNVERIFIED"
+    },
+    {
+      "build_id": "CP1A.260405.003.A1",
+      "os": "Android 16",
+      "track": "monthly",
+      "release_date": "2026-04",
+      "security_patch": "2026-04-05",
+      "devices": [
+        "bluejay",
+        "oriole",
+        "raven"
+      ],
+      "region_scope": "Australia",
+      "parent_build_id": "CP1A.260405.003",
+      "anti_rollback": {
+        "incremented": false,
+        "note": ""
+      },
+      "official_fixes": [],
+      "sources": [
+        "https://developers.google.com/android/images",
+        "https://developers.google.com/android/ota",
+        "https://source.android.com/docs/security/bulletin/pixel"
+      ],
+      "verify_state": "UNVERIFIED"
+    },
+    {
+      "build_id": "CP1A.260405.005",
+      "os": "Android 16",
+      "track": "monthly",
+      "release_date": "2026-04",
+      "security_patch": "2026-04-05",
+      "devices": [
+        "akita",
+        "blazer",
+        "bluejay",
+        "caiman",
+        "cheetah",
+        "comet",
+        "felix",
+        "frankel",
+        "husky",
+        "komodo",
+        "lynx",
+        "mustang",
+        "oriole",
+        "panther",
+        "rango",
+        "raven",
+        "shiba",
+        "stallion",
+        "tangorpro",
+        "tegu",
+        "tokay"
+      ],
+      "region_scope": "global",
+      "anti_rollback": {
+        "incremented": false,
+        "note": ""
+      },
+      "official_fixes": [],
+      "sources": [
+        "https://developers.google.com/android/images",
+        "https://developers.google.com/android/ota",
+        "https://source.android.com/docs/security/bulletin/pixel"
+      ],
+      "verify_state": "UNVERIFIED"
+    },
+    {
+      "build_id": "CP1A.260405.005.B1",
+      "os": "Android 16",
+      "track": "monthly",
+      "release_date": "2026-04",
+      "security_patch": "2026-04-05",
+      "devices": [
+        "bluejay",
+        "cheetah",
+        "panther"
+      ],
+      "region_scope": "Telia",
+      "parent_build_id": "CP1A.260405.005",
+      "anti_rollback": {
+        "incremented": false,
+        "note": ""
+      },
+      "official_fixes": [],
+      "sources": [
+        "https://developers.google.com/android/images",
+        "https://developers.google.com/android/ota",
+        "https://source.android.com/docs/security/bulletin/pixel"
+      ],
+      "verify_state": "UNVERIFIED"
+    },
+    {
+      "build_id": "CP1A.260505.005",
+      "os": "Android 16",
+      "track": "monthly",
+      "release_date": "2026-05",
+      "security_patch": "2026-05-05",
+      "devices": [
+        "akita",
+        "blazer",
+        "caiman",
+        "comet",
+        "felix",
+        "frankel",
+        "husky",
+        "komodo",
+        "lynx",
+        "mustang",
+        "rango",
+        "shiba",
+        "stallion",
+        "tangorpro",
+        "tegu",
+        "tokay"
+      ],
+      "region_scope": "global",
+      "anti_rollback": {
+        "incremented": true,
+        "note": "Android 16ビルドへの巻き戻し不可。ブートローダーのanti-rollbackカウンタ増加のため、これ以前のファクトリーイメージ書き込みは文鎮化リスク（対象: Pixel 10系 frankel/mustang/blazer/rango/stallion。ソース上は2026年5月の全デバイス共通ビルドとして掲載）"
+      },
+      "official_fixes": [],
+      "sources": [
+        "https://developers.google.com/android/images",
+        "https://developers.google.com/android/ota",
+        "https://source.android.com/docs/security/bulletin/pixel"
+      ],
+      "verify_state": "VERIFIED"
+    },
+    {
+      "build_id": "CP1A.260505.005.A1",
+      "os": "Android 16",
+      "track": "monthly",
+      "release_date": "2026-05",
+      "security_patch": "2026-05-05",
+      "devices": [
+        "akita",
+        "blazer",
+        "caiman",
+        "comet",
+        "felix",
+        "frankel",
+        "husky",
+        "komodo",
+        "lynx",
+        "mustang",
+        "rango",
+        "shiba",
+        "stallion",
+        "tegu",
+        "tokay"
+      ],
+      "region_scope": "Telia",
+      "parent_build_id": "CP1A.260505.005",
+      "anti_rollback": {
+        "incremented": true,
+        "note": "Android 16ビルドへの巻き戻し不可。ブートローダーのanti-rollbackカウンタ増加のため、これ以前のファクトリーイメージ書き込みは文鎮化リスク（対象: Pixel 10系 frankel/mustang/blazer/rango/stallion。ソース上は2026年5月の全デバイス共通ビルドとして掲載）"
+      },
+      "official_fixes": [],
+      "sources": [
+        "https://developers.google.com/android/images",
+        "https://developers.google.com/android/ota",
+        "https://source.android.com/docs/security/bulletin/pixel"
+      ],
+      "verify_state": "VERIFIED"
+    },
+    {
+      "build_id": "CP2A.260605.012",
+      "os": "Android 17",
+      "track": "stable",
+      "release_date": "2026-06-16",
+      "security_patch": "2026-06-05",
+      "devices": [
+        "akita",
+        "blazer",
+        "bluejay",
+        "caiman",
+        "cheetah",
+        "comet",
+        "felix",
+        "frankel",
+        "husky",
+        "komodo",
+        "lynx",
+        "mustang",
+        "oriole",
+        "panther",
+        "rango",
+        "raven",
+        "shiba",
+        "stallion",
+        "tangorpro",
+        "tegu",
+        "tokay"
+      ],
+      "region_scope": "global",
+      "anti_rollback": {
+        "incremented": false,
+        "note": ""
+      },
+      "official_fixes": [],
+      "sources": [
+        "https://developers.google.com/android/images",
+        "https://developers.google.com/android/ota",
+        "https://source.android.com/docs/security/bulletin/pixel"
+      ],
+      "verify_state": "VERIFIED"
+    },
+    {
+      "build_id": "CP2A.260605.012.A1",
+      "os": "Android 17",
+      "track": "stable",
+      "release_date": "2026-06-16",
+      "security_patch": "2026-06-05",
+      "devices": [
+        "bluejay",
+        "oriole",
+        "raven"
+      ],
+      "region_scope": "AT&T",
+      "parent_build_id": "CP2A.260605.012",
+      "anti_rollback": {
+        "incremented": false,
+        "note": ""
+      },
+      "official_fixes": [],
+      "sources": [
+        "https://developers.google.com/android/images",
+        "https://developers.google.com/android/ota",
+        "https://source.android.com/docs/security/bulletin/pixel"
+      ],
+      "verify_state": "VERIFIED"
+    },
+    {
+      "build_id": "CP2A.260605.012.B1",
+      "os": "Android 17",
+      "track": "stable",
+      "release_date": "2026-06-16",
+      "security_patch": "2026-06-05",
+      "devices": [
+        "bluejay",
+        "oriole",
+        "raven"
+      ],
+      "region_scope": "Australia",
+      "parent_build_id": "CP2A.260605.012",
+      "anti_rollback": {
+        "incremented": false,
+        "note": ""
+      },
+      "official_fixes": [],
+      "sources": [
+        "https://developers.google.com/android/images",
+        "https://developers.google.com/android/ota",
+        "https://source.android.com/docs/security/bulletin/pixel"
+      ],
+      "verify_state": "VERIFIED"
+    },
+    {
+      "build_id": "CP2A.260605.012.C1",
+      "os": "Android 17",
+      "track": "stable",
+      "release_date": "2026-06-16",
+      "security_patch": "2026-06-05",
+      "devices": [
+        "blazer",
+        "caiman",
+        "comet",
+        "frankel",
+        "komodo",
+        "mustang",
+        "rango",
+        "stallion",
+        "tokay"
+      ],
+      "region_scope": "Rogers",
+      "parent_build_id": "CP2A.260605.012",
+      "anti_rollback": {
+        "incremented": false,
+        "note": ""
+      },
+      "official_fixes": [],
+      "sources": [
+        "https://developers.google.com/android/images",
+        "https://developers.google.com/android/ota",
+        "https://source.android.com/docs/security/bulletin/pixel"
+      ],
+      "verify_state": "VERIFIED"
+    },
+    {
+      "build_id": "CP2A.260705.006",
+      "os": "Android 17",
+      "track": "monthly",
+      "release_date": "2026-07-07",
+      "security_patch": "2026-07-05",
+      "devices": [
+        "akita",
+        "blazer",
+        "bluejay",
+        "caiman",
+        "cheetah",
+        "comet",
+        "felix",
+        "frankel",
+        "husky",
+        "komodo",
+        "lynx",
+        "mustang",
+        "oriole",
+        "panther",
+        "rango",
+        "raven",
+        "shiba",
+        "stallion",
+        "tangorpro",
+        "tegu",
+        "tokay"
+      ],
+      "region_scope": "global",
+      "anti_rollback": {
+        "incremented": false,
+        "note": ""
+      },
+      "official_fixes": [],
+      "sources": [
+        "https://developers.google.com/android/images",
+        "https://developers.google.com/android/ota",
+        "https://source.android.com/docs/security/bulletin/pixel"
+      ],
+      "verify_state": "VERIFIED"
+    },
+    {
+      "build_id": "CP2A.260705.006.A1",
+      "os": "Android 17",
+      "track": "monthly",
+      "release_date": "2026-07-07",
+      "security_patch": "2026-07-05",
+      "devices": [
+        "blazer",
+        "bluejay",
+        "caiman",
+        "comet",
+        "frankel",
+        "komodo",
+        "mustang",
+        "oriole",
+        "rango",
+        "raven",
+        "stallion",
+        "tokay"
+      ],
+      "region_scope": "Australia; Rogers",
+      "parent_build_id": "CP2A.260705.006",
+      "anti_rollback": {
+        "incremented": false,
+        "note": ""
+      },
+      "official_fixes": [],
+      "sources": [
+        "https://developers.google.com/android/images",
+        "https://developers.google.com/android/ota",
+        "https://source.android.com/docs/security/bulletin/pixel"
+      ],
+      "verify_state": "VERIFIED"
+    }
+  ]
+}
