@@ -631,7 +631,13 @@ footer{max-width:1080px;margin:0 auto;padding:32px 24px;font-size:11px;color:#8a
     if(b.verify_state){ h += "<dt>verify_state</dt><dd>" + bxEsc(b.verify_state) + "</dd>"; }
     h += "</dl>";
     if(arb && arb.incremented){
-      h += '<div class="bx-arb-warn">⚠ これ以前のAndroid 16へ戻せません'
+      // bx: ARB表示強化（Agent 1 2nd iteration: ARB Historian）。
+      // anti_rollback.effect があれば OS 世代に即した見出し（BP1A=Android 15 対応）、
+      // 無ければ従来の固定見出しにフォールバック。既存の note 表示は従来どおり維持。
+      h += '<div class="bx-arb-warn">⚠ ' + (arb.effect ? bxEsc(arb.effect) : "これ以前のAndroid 16へ戻せません")
+        + (arb.scope ? '<div class="bx-arb-note">対象機種: ' + bxEsc(arb.scope) + "</div>" : "")
+        + '<div class="bx-arb-note">対象機種でこのビルド以降を適用済みの場合、これより前へのダウングレード不可</div>'
+        + '<div class="bx-arb-note">OTA は片スロットしか更新しないため、両スロット（A/B）を新ブートローダーへ揃えないとフォールバック時にハードブリックする。安定版起動後に対応する Full OTA を sideload して両スロットを揃えること</div>'
         + (arb.note ? '<div class="bx-arb-note">' + bxEsc(arb.note) + "</div>" : "")
         + "</div>";
     }

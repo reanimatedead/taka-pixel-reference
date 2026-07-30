@@ -164,3 +164,223 @@
 ### 出荷判断
 - data/raw/2026-07-30/ は合計 4.5MB（<10MB）のため **gzip 圧縮せず素の .html のまま commit**（一次資産・再現性最優先。10MB 超過時に圧縮検討のルールは維持）。
 - forbidden terms スキャン: 新規・変更ファイル全て + data/raw/ 生HTML（自分の個人情報のみ）に対し実名/メール/ホーム絶対パス/APIキーpatternの検索でヒット0件を確認してから push。
+
+## Agent 2 (2nd iteration: Suffix Auditor)
+
+（2026-07-30。scripts/parse_builds.py のサフィックス→地域/キャリア導出の監査・是正）
+
+### 固定辞書だったか: NO
+- 旧実装に「suffix→region のグローバル1次元固定辞書」は**存在しなかった**。region_scope はソースHTML（data/raw/2026-07-30/{ota,images}.html）の変異版キャリア注記 `<td>VERSION (BUILD_ID, Mon YYYY, REGION)</td>` を parse_device_tables が直接パースして導出していた（廃止対象なし）。
+- ただし旧実装には2つの欠陥があった:
+  1. **注記のトークン未分割**: 注記全体を1文字列として集合に入れていたため、images.html の tegu 行にあるソース側重複 `(BP4A.251205.006.C1, Dec 2025, Japan, Japan)` が `"Japan; Japan, Japan"` として出力されていた。
+  2. **表記ゆれの未正規化**: VZW/Verizon、JP/Japan、Softbank/SoftBank が混在。
+
+### 注記直接パースは可能か: YES（これを正とした）
+- スコープ内66件のうち変異版の地域/キャリアは全て生HTML注記に存在（ota.html と images.html の両方に同一注記があることを32パターン全てで grep 確認）。
+- 新実装: 注記直接パースが引き続き正。注記を "," でトークン分割→ REGION_NORMALIZE で正規化→集合で重複排除。
+- 補完用に **SUFFIX_MONTH_MAP（base month × suffix の二次元テーブル、32エントリ）** を追加。key=(build_id 埋め込み日付由来の "YYYY-MM", suffix)、value={region, source}。source には生HTMLスナップショット内の該当注記原文と公式URLを記録。**注記が無い変異版のみ**のフォールバックで、現データでは1件も発動しない（発動時は region_scope_source フィールドに根拠を記録する設計）。
+- 固定辞書が誤りである根拠（同一サフィックスの意味が月で変わる実例、全て生HTML注記由来）: .C1: 2025-12=Japan / 2026-02=Japan / 2026-06=Rogers。.A1: 2025-12=EMEA / 2026-05=Telia / 2026-06=AT&T / 2026-07=Rogers（2026-07はデバイスにより Australia 併記）。
+
+### region_scope 正規化ルール
+1. キャリア名は正式表記: VZW→Verizon、Softbank→SoftBank
+2. 国は英語国名（ISO2レター略記禁止）: JP→Japan、AU→Australia
+3. 略記の展開: NA GStore→North America (Google Store)
+4. 複数対象は正規化トークンをソートし "; " 区切り
+5. ソース側の同一トークン重複（"Japan, Japan"）は集合化で排除
+
+### 訂正一覧（7件、全66件を生HTML注記と突き合わせ済み）
+| build_id | before | after |
+|---|---|---|
+| BD3A.250721.001.A1 | NA GStore | North America (Google Store) |
+| BD3A.251105.010.F1 | Japan carriers except Softbank | Japan carriers except SoftBank |
+| BD3A.251105.010.J3 | Softbank | SoftBank |
+| BP4A.251205.006.B1 | VZW | Verizon |
+| BP4A.251205.006.C1 | Japan; Japan, Japan | Japan |
+| BP4A.260205.001.B1 | VZW | Verizon |
+| BP4A.260205.001.C1 | JP | Japan |
+
+### 検証
+- 再生成前後の機械 diff: **region_scope 以外の差分ゼロ**（66件・全フィールド比較をスクリプトで確認）。件数66維持・valid JSON。
+- 冪等性: parse_builds.py を2回再実行し SHA-256 同一（byte-diff ゼロ）。
+- tests/test_suffix_map.py 新規作成（23項目 PASS）: 二次元テーブルの既知確定値7組、「固定辞書なら FAIL する」月間不等式アサート（map側+データ側）、全エントリの出典存在、builds.json 実データ照合、正規化残渣ゼロ。
+- tests/test_contract.py: 14/14 PASS 維持。
+- 非改変の確認: entries.json / index.html は未変更（git status で機械確認）。
+
+## Agent 1 (2nd iteration: ARB Historian)
+
+日付: 2026-07-30。目的: anti-rollback（ARB）関連の欠落修正。既存値の改変なし（追記・新規フィールド・新規レコードのみ）。
+
+### 1. Android 15 世代 ARB 例外レコード追加（BP1A.250505.005）
+- builds.json への直接手書きは再生成で消えるため、scripts/parse_builds.py に **KNOWN_EXTRA_BUILDS**（スコープ外例外収載の注入機構）を新設し、main() 末尾（ソート前）で注入。既存の ANCHORS / ANTI_ROLLBACK_BUILDS 機構は不変。
+- ソース根拠（両方確認済み → verify_state=VERIFIED）:
+  - data/raw/2026-07-30/images.html 内に警告文が実在（offset 48280 付近）:
+    "Special instructions for updating Pixel devices to the May 2025 monthly release / Warning: The May 2025 update for Pixel 6 (6, 6 Pro, 6a) and Pixel 8 (8, 8 Pro, 8a) devices contains a bootloader update that increments the anti-roll back version for the bootloader. ... you won't be able to flash and boot older Android 15 builds."
+    → sources に https://developers.google.com/android/images を記録。
+  - Android Police 記事の実URLを WebSearch/WebFetch で特定・実在確認:
+    https://www.androidpolice.com/may-2025-google-pixel-security-update-anti-rollback-bootloader/
+    （公開 2025-05-06 14:27 EDT、build_id BP1A.250505.005 と対象 Pixel 6系/6a/8系/8a を明記）
+- security_patch "2025-05-05" は pixel-bulletin.html スナップショットの May 2025 行から parse_bulletin() の結果で再解決（_bulletin_month ヒントキー方式。スナップショットに行が無い場合のみレコード内フォールバック値を使用）。
+- os は既存表記に合わせ "Android 15"（タスク指示の "15" は既存表記優先の指示に従い変換）。track=stable はタスク確定値のまま採用。
+- devices は sorted 順（akita, bluejay, husky, oriole, raven, shiba）で既存レコードの整列規則に一致させた。
+
+### 2. 既存 ARB 2件（CP1A.260505.005 / .A1）への scope / effect「追記」
+- **ARB_EXTRA_FIELDS** を新設し、anti_rollback を {incremented, scope, effect, note} の順で再構成。incremented / note の値は byte 同一（機械照合済み）。
+- scope の文言判断: タスク指示は「Pixel 10系機種」だが、images.html の May 2026 警告文は "Pixel 10, 10 Pro, 10 Pro XL and 10 Pro Fold" の4機種のみを列挙し **stallion (10a) を含まない**。既存 note は stallion を含むが note は不変で残し、scope はソース警告文の列挙に従い "Pixel 10, 10 Pro, 10 Pro XL, 10 Pro Fold（frankel/mustang/blazer/rango。ソース警告文の列挙。Pixel 9系以前は非対象）" とした。note との差異は本節を正とする（note は Agent 2 由来の既存値のため改変禁止）。
+
+### 3. 旧世代 ARB 告知の全文検索（タスク2）
+- data/raw/2026-07-30/{images,ota}.html を anti-rollback / anti rollback / antirollback / rollback / roll back / downgrad / revert / flash back / older build / previous version で全文検索。
+- 結果: **ARB 告知は images.html 内の May 2025（Pixel 6/8系）と May 2026（Pixel 10系）の2件のみ**。ota.html には ARB 告知なし。Android 13 世代等さらに古い ARB 告知は該当なし → 追加レコードなし。
+  （"flash back" の1件は "flash back to public" という Flash Tool の一般説明で ARB 無関係）
+
+### 4. UI 強化（docs/dict/index.html、bx- 名前空間のみ）
+- bxBuildInfo() の ARB 警告ブロックに追記: scope 表示（「対象機種: …」）+ 固定2文（ダウングレード不可 / A/B 両スロット sideload 注意）。既存の note 表示・bx-arb-warn / bx-arb-note クラスは維持（新規CSSなし）。
+- 見出しの判断: 従来の固定文「⚠ これ以前のAndroid 16へ戻せません」は Android 15 世代の BP1A に対して事実誤りになるため、anti_rollback.effect が存在する場合は「⚠ 」+ effect を見出しとし、effect が無いレコードでは従来の固定文にフォールバック。現在 ARB 3件は全て effect を持つため正しい世代が表示される（赤字警告ブロック自体・note 表示は存置）。
+- 変更行数: 5行 → 11行（+6行、置換1ブロックのみ）。node --check で inline script 2本とも構文 OK。
+
+### 5. 整備手帳側リンク（docs/index.html — 今回のみ明示許可された追記）
+- 追記位置: Lv3「復旧（リカバリー / sideload / Factory Image）」details 内、既存の最終 caveat（ブートローダーアンロック警告、旧 L545）の直後・`</div></details>` の直前に `<p class="caveat">` 1ブロックのみ追加（+1行）。既存内容は無変更。
+- 内容: ARB 該当ビルドの1行要約（BP1A.250505.005=Pixel 6/8系・Android 15 / CP1A.260505.005=Pixel 10系・Android 16）+ dict/#bx-section へのリンク（アンカー id="bx-section" の実在を確認済み）。
+
+### 6. テスト基準値の更新
+- tests/test_suffix_map.py の「builds.json has 66 records」を **67** に更新（66→67 は BP1A 追加による増加。件数非減少の思想は維持）。tests/test_contract.py は builds 件数固定を持たないため変更不要（行数下限 1860 は 1894 で PASS）。
+
+### 7. 検証結果
+- 冪等性: parse_builds.py 2026-07-30 を2回実行し MD5 同一（c9ed3ba6f84f2cbfd1f4eb4c8437f5f4、byte-diff ゼロ）。
+- 非破壊の機械照合: 再生成前後の全66件×全フィールド比較で、差分は CP1A.260505.005 / .A1 の anti_rollback への scope/effect 追加のみ（incremented/note は同値）。violations: NONE。
+- tests/test_contract.py 14/14 PASS / tests/test_suffix_map.py 23/23 PASS。
+- npx html-validate docs/dict/index.html docs/index.html → エラー 0（exit=0）。
+- entries.json は未変更。git commit / push は実施していない。
+
+## Agent 3 (2nd iteration: Schema Fixer)
+
+日付: 2026-07-30。スコープ: docs/dict/data/builds.json のスキーマ拡張（base_month / release_date 分離）と human_review 日付矛盾の解決。builds.json は直接手書きせず scripts/parse_builds.py の変更→再生成で実施（冪等性契約を維持）。
+
+### 1. base_month / release_date のスキーマ分離
+- 新フィールド `base_month`（"YYYY-MM"）を**全67件**に追加。build_id の日付部6桁（XXXX.YYMMDD.NNN）からの機械導出（`base_month_of()` 既存関数を再利用、`with_base_month()` で release_date の直前に挿入）。機械導出のため全件付与。
+- `release_date` の意味を「実際に配信された月（ソース掲載月ベース）」に確定。base_month との食い違いは矛盾ではなく「後月配信」として表現する。
+- 分離後の「後月配信」レコード（base_month ≠ release_date 月）は10件: BD1A.250702.001 / BD1A.250702.001.A3 / BD3A.250721.001 / BD3A.250721.001.A1 / BD3A.250721.001.B7 / BD3A.250721.001.E1 / BD3A.250808.001 / BD6A.251031.001.A4 / BP2A.250605.031.A5 / BP2A.250705.008.A1。BP2A.250705.008.A1 以外の9件は元々ソース掲載月がそのまま release_date に入っており値の変更なし（ota.html / images.html の月注記で確認: 例 "(BD6A.251031.001.A4, Mar 2026)", "(BP2A.250605.031.A5, Aug 2025)"）。
+
+### 2. BP2A.250705.008.A1 の human_review 解消
+- 旧状態: anchor release_date=2025-07-08 とソース掲載月 2025-08 の食い違いで human_review=true / conflict_note 付き。
+- 解決: パーサに `RESOLVED_CONFLICTS` 機構を新設。release_date 起因のアンカー矛盾のみ解決対象（os/track/region の矛盾は従来どおり human_review）。本件は release_date="2025-08"（ソース掲載月: ota/images 両方に "(BP2A.250705.008.A1, Aug 2025)" 注記あり）に確定し、human_review / conflict_note を除去、`resolution_note` に経緯を記録（「base_month/release_date 分離により矛盾でないと判明。…2026-07-30 解決」）。release_date_source_month=2025-08 は既存どおり残置。verify_state=VERIFIED（アンカー由来）は不変。security_patch=2025-08-05（ソース掲載月ベース）も不変。
+- アンカー値 2025-07-08 は ANCHORS に不変で残る（照合機構は生きており、将来スナップショットで掲載月が変われば再び矛盾検知される）。
+- これで builds.json の human_review は 1件→**0件**。
+
+### 3. BP2A.250605.031.A5（例示された同種案件）の確認
+- builds.json に**既存**（KNOWN_EXTRA_BUILDS 追加は不要）。ソース ota/images 両方に "(BP2A.250605.031.A5, Aug 2025)" 注記あり。
+- 検証結果: base_month=2025-06 / release_date=2025-08 / security_patch=2025-08-05 / devices=[oriole, raven]（Pixel 6 / 6 Pro）— 指示された期待値と完全一致。値の変更なし。
+
+### 4. タスク2: BD3A 系の収載確認
+- **.C1**: 生HTML全ファイル（ota/images/pixel-bulletin/pixel-update-help）を `BD3A\.[0-9]{6}\.[0-9]{3}\.C[0-9]+` で走査 → **出現ゼロ。ソースに存在せず**、追加しない。（.C1 自体は BP4A/CP2A 系にのみ存在: 2025-12/2026-01/2026-02=Japan, 2026-06=Rogers）
+- **BD3A.251105.010 親レコード**: `BD3A\.251105\.010[^.]` で走査 → 出現ゼロ。ソースには変異版 .E1/.F1/.J3 のみ掲載（親ビルドは未配信 = 変異版のみ配信）。親は追加しない。parent_build_id="BD3A.251105.010" は変異版の導出フィールドとして残る（実レコードの存在を意味しない）。
+- **全走査照合**: `BD3A\.[0-9]{6}\.[0-9]{3}(\.[A-Z][0-9]+)?` で生HTML全走査 → distinct 16件。builds.json の BD3A 16件と**1:1 完全一致**（欠落ゼロ・過剰ゼロ）。.J5/.J6/.F1 は BD3A.251005.003 系に既収載を確認。
+
+### 5. テスト更新（tests/test_contract.py）
+- base_month の3チェックを追加: (a) 全件存在 (b) 形式 ^[0-9]{4}-[0-9]{2}$ (c) build_id 日付部（YYMMDD→20YY-MM）との整合。14→**17チェック**。
+- **基準値更新**: MIN_LINES_BUILDS 1860→**1960**（base_month 全67件追加による増加 1894→1960行。human_review/conflict_note 2行減・resolution_note 1行増を含む。行数非減少の思想は維持し、新実測値まで引き上げ）。件数基準（suffix_map の 67件固定）は変更なし。
+
+### 6. 検証結果
+- 冪等性: parse_builds.py を2回実行し MD5 同一（d17931a2a95d956f26c2ec22bf5d333b、byte-diff ゼロ）。
+- 非破壊の機械照合: 再生成前後の全67件×全フィールド比較。差分は (a) base_month 全件追加 (b) BP2A.250705.008.A1 の release_date 2025-07-08→2025-08 / human_review・conflict_note 除去 / resolution_note 追加、のみ。それ以外の差分ゼロ（unexpected diffs: []）。件数 67→67（新規レコードなし）。
+- tests/test_contract.py 17/17 PASS / tests/test_suffix_map.py 23/23 PASS。valid JSON 確認済み。
+- entries.json / index.html は未変更。git commit / push は実施していない。
+
+## Agent 4 (2nd iteration: Cross-Validator)
+
+日付: 2026-07-30。スコープ: builds.json 全67件をスクレイピング元 (developers.google.com/{ota,images} + source.android.com bulletin) とは独立の外部情報と突き合わせ、`confidence` / `confidence_sources` を付与。builds.json は直接手書きせず scripts/parse_builds.py の `CROSS_VALIDATION` テーブル + `apply_cross_validation()` で再生成（冪等性契約を維持）。
+
+### 1. 判定規則（値域の解釈を明文化）
+- **OFFICIAL**: Google 公式の第二経路 = **Pixel Community 公式月次投稿**（support.google.com/pixelphone/thread/*、Community Manager 投稿の「Google Pixel Update - <Month>」）で build_id の一致を確認したもの。
+- **MULTI_SOURCE**: 公式第二経路では未確認だが、独立系ソース1つ以上で一致（スクレイピング元を1経路と数え、相互独立2経路以上で一致）。「独立2ソース」はこの相互独立経路数で解釈（devsite の ota/images 2ページは同一経路 = 1 と数える）。
+- **SINGLE_SOURCE**: 外部照合できず（スクレイピング元の1経路のみ。要再確認）。
+- デフォルトは SINGLE_SOURCE（テーブル未登録 = 未照合と同義）。既存 sources は不変、判定根拠 URL は新設 `confidence_sources` に記録。
+
+### 2. 採用した独立ソース
+1. **Pixel Community 公式月次投稿**（OFFICIAL の根拠）: 2025-06〜2026-07 の全14ヶ月分の公式投稿を発見・取得（WebFetch は JS レンダで不可 → curl 直接取得で本文の build 表を機械抽出）。スレッドID: 349745083 / 355981577 / 362911257 / 368006132 / 379076388 / 386109819 / 389367100 / 401468923 / 406938450 / 410784164 / 422905223 / 431077516 / 442096105 / 448470698。
+2. **BetaWiki**（betawiki.net）: ビルド単位ページ（BP2A.250605.031.A2/.A3、BD1A.250702.001、BD3A.250721.001.B7、BP3A.250905.014、BP4A.251205.006）+ Android_16 一覧ページ。直接 fetch は Cloudflare でブロック → 検索スニペット経由で確認。
+3. **XDA**（xdaforums.com）: 機種別 stable update スレッド（raven 4352027 / husky 4633839 / Pixel 10 系 4757843 / ARB 告知 4788187）。本文 fetch は 403 → スレッドタイトル（build_id・日付・地域を含む）と検索スニペットで確認。
+4. **報道系**（代替独立ソース）: droid-life（月次 build 表が最も網羅的。8月/10月×2波/11月/12月/1月/2月/4月/7月/Pixel 10 factory images 記事を fetch）、9to5Google（7月/8月/9月/10月/12月19日/3月/5月/6月/7月/10a factory images）、Android Police（2025-05 ARB / 2025-07）、Android Authority ほか。
+5. Verizon 公式サポートページ（Pixel 9a 更新履歴）も参照したが、掲載は基本ビルドのみで .B* 変異版の確認には使えず（キャリア公式であって Google 公式でないため OFFICIAL の根拠にもしない）。
+
+### 3. 月別照合結果（カバレッジ）
+| 月 | 公式投稿 | 独立系 | 判定 |
+|---|---|---|---|
+| 2025-05 (BP1A) | なし(スコープ外世代) | Android Police + XDA | MULTI 1 |
+| 2025-06 | ✓(.A2/.A3) | BetaWiki + droid-life | OFFICIAL 2 |
+| 2025-07 | ✓(.008) | 9to5G + droid-life + AP | OFFICIAL 1 |
+| 2025-08 | ✓(.A5/.008.A1/.005) | droid-life + 9to5G + AA | OFFICIAL 3 / Pixel10ローンチ4件は公式投稿非掲載→droid-life factory記事+BetaWiki+9to5GでMULTI 4 |
+| 2025-09 | ✓(.014/.014.A1/.B7) | BetaWiki + XDA + 9to5G | OFFICIAL 3 / .E1(9/16配信)は非掲載→XDA+9to5GでMULTI 1 |
+| 2025-10 | ✓(10/8第1波: .B1/.A2/.W3/.J5) | droid-life(10/8,10/30) + XDA + 9to5G | OFFICIAL 4 / 10/30第2波7件はMULTI / rango系ローンチ(BD3A.250808.001=BetaWiki一覧でMULTI、BD3A.251005.003・.J2=外部確認できずSINGLE) |
+| 2025-11 | ✓(全6件) | droid-life + XDA + AA | OFFICIAL 6 |
+| 2025-12 | ✓(12/2第1波: base/.A1/.B1/.C1) | BetaWiki + droid-life + XDA + 9to5G | OFFICIAL 4 / 12/17-19第2波 .E1/.A4/.C2=9to5G+XDAでMULTI 3、.B3=外部確認できずSINGLE |
+| 2026-01 | ✓(全4件) | droid-life + Forbes + AA | OFFICIAL 4 |
+| 2026-02 | ✓(全6件) | droid-life + 9to5G + XDA | OFFICIAL 6 |
+| 2026-03 | ✓(.018/.018.A1) | XDA + 9to5G + droid-life | OFFICIAL 2 / BD6A.251031.001.A4(10a出荷ビルド)=9to5G factory記事でMULTI 1 |
+| 2026-04 | ✓(.005/.003.A1) | droid-life + XDA + 9to5G | OFFICIAL 2 / .005.B1(Telia)=外部確認できずSINGLE |
+| 2026-05 | ✓(.005) | 9to5G + XDA + technobezz | OFFICIAL 1 / .A1(Telia)=XDAスレッドタイトルでMULTI 1 |
+| 2026-06 | ✓(全4件) | 9to5G + XDA + AA | OFFICIAL 4 |
+| 2026-07 | ✓(base/.A1) | droid-life + 9to5G + XDA | OFFICIAL 2 |
+
+集計: **OFFICIAL 44 / MULTI_SOURCE 19 / SINGLE_SOURCE 4**（計67）。
+SINGLE_SOURCE 4件 = BD3A.251005.003（rango 10/8波 global）/ BD3A.251005.003.J2（rango 10/8波 Japan）/ BP4A.251205.006.B3（Verizon 12月第2波）/ CP1A.260405.005.B1（Telia 4月）。いずれも exact-match 検索で外部出現なし（捏造せず SINGLE のまま。CROSS_VALIDATION に空エントリで「調査済み」を明示）。
+
+### 4. 食い違い検出（タスク2）
+- **記録した食い違い: 1件**。BP1A.250505.005 の release_date: builds.json=2025-05-05（パッチレベル由来のオーナー確定値）vs 独立2ソース（Android Police・XDA raven スレッド）=2025-05-06（ロールアウト開始日）。値は書き換えず conflict_note に外部値を追記（2025-05 は月内1件 ≤2 → human_review なし）。
+- **同一月3件以上の食い違い: なし** → human_review を立てた月はゼロ。機構は `apply_cross_validation()` にリリース月単位のカウントとして実装済み（将来の再照合で自動発動）。
+- **公式投稿で解消した外部同士の食い違い（レコードには記録せず）**:
+  1. CP2A.260605.012.C1 (Rogers): 9to5Google 記事は Pixel 9a を含む10機種と読めるが、公式6月投稿の Rogers 列挙は 9a なしの9機種で builds.json と完全一致 → 食い違いなし（報道側の丸め）。
+  2. CP2A.260705.006.A1 (AU+Rogers): droid-life は Rogers に 9a を含む13機種だが、公式7月投稿は AU 3機種 + Rogers 9機種（9a なし）= 12機種で builds.json と完全一致 → 食い違いなし。
+  3. 2026-03: 9to5Google 記事本文は CP1A.260305.016 と誤記（同記事のコメント欄・XDA・公式投稿はいずれも .018）→ builds.json (.018) 側が正。
+  4. BP2A.250705.008.A1 の release_date=2025-08（Agent 3 の解決）を droid-life/公式8月投稿が外部からも裏付け（Pixel 6a の8月配信ビルド）。
+
+### 5. 実装
+- `CROSS_VALIDATION`（build_id → confidence / confidence_sources / external_conflict）+ `COMMUNITY_POSTS`（公式投稿URL表）+ `apply_cross_validation()` を parse_builds.py に追加。KNOWN_EXTRA_BUILDS / ARB_EXTRA_FIELDS / RESOLVED_CONFLICTS と同型のテーブル駆動。適用は KNOWN_EXTRA 注入後・base_month 付与前（全67件に適用されるため）。
+- 追加フィールドは各レコード末尾（verify_state の後）に confidence → confidence_sources の順で付与。既存フィールドは一切不変。
+- tests/test_contract.py: confidence 3チェック追加（全件存在 / 3値域 / confidence_sources が https URL 配列）。17→**20チェック**。MIN_LINES_BUILDS 1960→**2286**（confidence_sources 全件追加による増加。行数非減少の思想は維持し新実測値へ引き上げ）。
+
+### 6. 検証結果
+- 冪等性: parse_builds.py 2026-07-30 を2回実行し MD5 同一（fa8229beee14b2527b8e1b469934398a、byte-diff ゼロ）。
+- 非破壊の機械照合: 再生成前後の全67件×全フィールド比較。差分は confidence / confidence_sources の全件追加 + BP1A.250505.005 の conflict_note 追記のみ。violations: NONE。件数 67→67。
+- tests/test_contract.py 20/20 PASS / tests/test_suffix_map.py 23/23 PASS。valid JSON 確認済み。
+- entries.json / index.html は未変更。git commit / push は実施していない。
+
+## Agent 5 (2nd iteration: Ops & Shipper)
+
+作業日: 2026-07-30。Agent 1〜4 の未コミット成果の上に運用系を仕上げ、検証ゲートを通して出荷。
+
+### 1. launchd plist の月2回化
+- `launchd/com.taka.pixel-builds-monthly.plist` の StartCalendarInterval を dict → array 化し、毎月10日 03:00 と 20日 03:00 の2本に変更。`plutil -lint` OK。
+- 理由: 月中リリースの取りこぼし防止。実績: A17正式版 6/16、Feature Drop 11/11、QPR2 2次更新 12/19 など、10日単発のスケジュールでは拾えない月中〜月末配信が繰り返し発生している。理由は plist 内 XML コメントと monthly_collect.sh 冒頭コメントの両方に記録。
+- 設置は未実行（launchctl 操作は人間ゲート運用。コマンドは最終報告に記載）。
+
+### 2. dead リンク4件の切り分け（真因判定）
+初回 linkcheck（1st iteration）で dead=4 だった URL を再調査。結論: **3件はスクレイパー側の偽陰性、1件のみ dead 確定**。
+- `support.google.com/pixelphone/answer/15701861` → **スクレイパー側**。HEAD が 404 を返すが GET では 200（HEAD 偽陰性）。旧実装は HEAD の 4xx を即 dead 判定していた。
+- `support.google.com/pixelphone/answer/15738128` → **スクレイパー側**。同上（HEAD 404 / GET 200）。
+- `support.google.com/pixelphone/thread/362205439/...` → **スクレイパー側**。同上（HEAD 404 / GET 200）。
+- `wiki.rossmanngroup.com/wiki/Pixel_4a_Battery_Performance_Program` → **dead 確定**。DNS 解決不能（NXDOMAIN）。ルートドメイン rossmanngroup.com は生存（200）しており、wiki サブドメイン自体が廃止されたと判断。sources の差し替えは今回スコープ外（次回データ更新時に代替ソースを検討。候補: 同内容を扱う bmaupin/pixel4a-battery-research 等は既に別ソースとして収載済み）。
+- 参考: `support.google.com/pixelphone/answer/4457705`（月次収集の取得元）も curl 直接確認で HEAD 404 / GET 200 の同パターン。**ページは有効**（リダイレクトなし・bot 検知なし。単に HEAD メソッドに 404 を返すサーバ仕様）。
+- `scripts/verify_sources_alive.py` を改修: HEAD 失敗時は理由によらず GET で再確認 / support.google.com 系は GET 失敗時に hl=ja 付与で再試行（既存クエリがあれば &hl=ja）/ それでも失敗なら 1 回リトライ。User-Agent は既存設定を維持。改修後の全件再実行で dead=1（rossmann のみ）・support 系 3件は 200。
+
+### 3. PXD-0004 の更新（人間承認済み）
+今回の指示で「既存値変更が許可されている唯一の箇所」として明示承認されたもの。変更前→後:
+- `fix_status`: "open" → **"patched"**（CP2A.260705.006 で修正済み。人間承認済み）
+- `evidence_level`: "REPORTED_ONLY" → **"OFFICIAL"**（fixed_in が公式 confidence="official" で確定しているため。前後値を本行に記録）
+- `recheck_at`: **"2026-08" を新規追加**（8月更新時に再発報告の有無を確認する運用マーカー）
+- `build_link.fixed_in` = {"build_id": "CP2A.260705.006", "confidence": "official"} は既存で確認済み（変更なし）
+- 機械照合: 変更前後の entries.json 全44件×全フィールドを比較し、差分が上記3点（PXD-0004 のみ）であることを assert で確認。他エントリ・他フィールドは不変。
+
+### 4. スクリプト由来コメント
+- `verify_sources_alive.py` / `decay_warning.py` の docstring に「Obsidian-Public-Vault 版とは別実装。将来共通化検討」を明記（従来の「他リポの同名スクリプト」という曖昧表現を具体化）。
+
+### 5. テスト増強
+- tests/test_contract.py 20→**23チェック**: (a) 既知 ARB 3件（BP1A.250505.005 / CP1A.260505.005 / CP1A.260505.005.A1）の anti_rollback.incremented=true、(b) incremented=true 全レコードの scope/effect 非空、(c) recheck_at 形式 ^[0-9]{4}-[0-9]{2}$（存在する場合のみ）。
+- monthly_collect.sh の検証段に tests/test_suffix_map.py を追加（従来は test_contract.py のみで、サフィックス回帰が月次収集で走らなかった）。月次収集で両テストが必ず走ることを保証。
+
+### 6. 検証ゲート結果（push 前）
+- test_contract.py 23/23 PASS / test_suffix_map.py 23/23 PASS
+- html-validate: docs/dict/index.html・docs/index.html とも PASS（エラー 0）
+- decay_warning.py: stale=false（last_collected=2026-07-30）
+- parse_builds.py 冪等性: 2026-07-30 で2回実行し MD5 同一（fa8229beee14b2527b8e1b469934398a）・作業ツリーの builds.json と byte 一致
+- 行数: builds.json 2286 / entries.json 1765 / docs/dict/index.html 757（いずれも基準以上）
+- forbidden terms スキャン・git status クリーンは commit 直前に実施（結果は最終報告）

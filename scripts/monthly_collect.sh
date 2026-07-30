@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
-# monthly_collect.sh — Pixel ビルド辞書の月次収集パイプライン（launchd から毎月10日 03:00 に起動）
+# monthly_collect.sh — Pixel ビルド辞書の月次収集パイプライン
+# （launchd から毎月10日 03:00 と 20日 03:00 の月2回起動。2026-07-30 に月1回→月2回へ変更:
+#   月中リリースの取りこぼし防止。実績: A17正式版 6/16、Feature Drop 11/11、QPR2 2次更新 12/19）
 #
 #   1. 4ソースを data/raw/$(date +%F)/ にスナップショット
 #   2. scripts/parse_builds.py で docs/dict/data/builds.json を再生成
@@ -62,7 +64,10 @@ fi
 python3 "$REPO/scripts/parse_builds.py" "$TODAY"
 
 # --- 3. 検証 -----------------------------------------------------------------
+# 契約テストとサフィックス回帰テストの両方を必ず実行する（片方だけの実行は
+# サフィックス辞書の回帰を素通しするため禁止。2026-07-30 Agent 5）。
 python3 "$REPO/tests/test_contract.py"
+python3 "$REPO/tests/test_suffix_map.py"
 python3 "$REPO/scripts/decay_warning.py"
 
 echo "=== monthly_collect done $(date '+%Y-%m-%d %H:%M:%S') ==="

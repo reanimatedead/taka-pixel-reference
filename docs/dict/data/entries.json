@@ -192,9 +192,10 @@
       "発生時はリカバリーモード → Factory Image sideload",
       "復旧不可なら交換申請"
     ],
-    "fix_status": "open",
+    "fix_status": "patched",
     "first_seen": "2026-06",
     "last_checked": "2026-07-24",
+    "recheck_at": "2026-08",
     "verify_state": "UNVERIFIED",
     "sources": [],
     "build_link": {
@@ -207,7 +208,7 @@
         "confidence": "official"
       }
     },
-    "evidence_level": "REPORTED_ONLY"
+    "evidence_level": "OFFICIAL"
   },
   {
     "id": "PXD-0005",

@@ -5,6 +5,7 @@
       "build_id": "BD1A.250702.001",
       "os": "Android 16",
       "track": "stable",
+      "base_month": "2025-07",
       "release_date": "2025-08",
       "security_patch": "2025-08-05",
       "devices": [
@@ -23,12 +24,18 @@
         "https://developers.google.com/android/ota",
         "https://source.android.com/docs/security/bulletin/pixel"
       ],
-      "verify_state": "UNVERIFIED"
+      "verify_state": "UNVERIFIED",
+      "confidence": "MULTI_SOURCE",
+      "confidence_sources": [
+        "https://betawiki.net/wiki/Android_16_build_BD1A.250702.001",
+        "https://www.droid-life.com/2025/08/28/google-posts-factory-image-files-for-pixel-10-series/"
+      ]
     },
     {
       "build_id": "BD1A.250702.001.A3",
       "os": "Android 16",
       "track": "stable",
+      "base_month": "2025-07",
       "release_date": "2025-08",
       "security_patch": "2025-08-05",
       "devices": [
@@ -48,12 +55,18 @@
         "https://developers.google.com/android/ota",
         "https://source.android.com/docs/security/bulletin/pixel"
       ],
-      "verify_state": "UNVERIFIED"
+      "verify_state": "UNVERIFIED",
+      "confidence": "MULTI_SOURCE",
+      "confidence_sources": [
+        "https://www.droid-life.com/2025/08/28/google-posts-factory-image-files-for-pixel-10-series/",
+        "https://betawiki.net/wiki/Android_16_build_BD1A.250702.001"
+      ]
     },
     {
       "build_id": "BD3A.250721.001",
       "os": "Android 16",
       "track": "stable",
+      "base_month": "2025-07",
       "release_date": "2025-08",
       "security_patch": "2025-08-05",
       "devices": [
@@ -72,12 +85,18 @@
         "https://developers.google.com/android/ota",
         "https://source.android.com/docs/security/bulletin/pixel"
       ],
-      "verify_state": "UNVERIFIED"
+      "verify_state": "UNVERIFIED",
+      "confidence": "MULTI_SOURCE",
+      "confidence_sources": [
+        "https://www.droid-life.com/2025/08/28/google-posts-factory-image-files-for-pixel-10-series/",
+        "https://9to5google.com/2025/09/02/pixel-10-september-ota-update/"
+      ]
     },
     {
       "build_id": "BD3A.250721.001.A1",
       "os": "Android 16",
       "track": "stable",
+      "base_month": "2025-07",
       "release_date": "2025-08",
       "security_patch": "2025-08-05",
       "devices": [
@@ -85,7 +104,7 @@
         "frankel",
         "mustang"
       ],
-      "region_scope": "NA GStore",
+      "region_scope": "North America (Google Store)",
       "parent_build_id": "BD3A.250721.001",
       "anti_rollback": {
         "incremented": false,
@@ -97,12 +116,18 @@
         "https://developers.google.com/android/ota",
         "https://source.android.com/docs/security/bulletin/pixel"
       ],
-      "verify_state": "UNVERIFIED"
+      "verify_state": "UNVERIFIED",
+      "confidence": "MULTI_SOURCE",
+      "confidence_sources": [
+        "https://www.droid-life.com/2025/08/28/google-posts-factory-image-files-for-pixel-10-series/",
+        "https://9to5google.com/2025/09/02/pixel-10-september-ota-update/"
+      ]
     },
     {
       "build_id": "BD3A.250721.001.B7",
       "os": "Android 16",
       "track": "monthly",
+      "base_month": "2025-07",
       "release_date": "2025-09",
       "security_patch": "2025-09-05",
       "devices": [
@@ -122,12 +147,18 @@
         "https://developers.google.com/android/ota",
         "https://source.android.com/docs/security/bulletin/pixel"
       ],
-      "verify_state": "UNVERIFIED"
+      "verify_state": "UNVERIFIED",
+      "confidence": "OFFICIAL",
+      "confidence_sources": [
+        "https://support.google.com/pixelphone/thread/368006132",
+        "https://betawiki.net/wiki/Android_16_build_BD3A.250721.001.B7"
+      ]
     },
     {
       "build_id": "BD3A.250721.001.E1",
       "os": "Android 16",
       "track": "monthly",
+      "base_month": "2025-07",
       "release_date": "2025-09",
       "security_patch": "2025-09-05",
       "devices": [
@@ -147,12 +178,18 @@
         "https://developers.google.com/android/ota",
         "https://source.android.com/docs/security/bulletin/pixel"
       ],
-      "verify_state": "UNVERIFIED"
+      "verify_state": "UNVERIFIED",
+      "confidence": "MULTI_SOURCE",
+      "confidence_sources": [
+        "https://xdaforums.com/t/16sep25-new-stable-update-critical-bug-fix-bd3a-250721-001-e1.4757843/",
+        "https://9to5google.com/2025/09/16/pixel-10-september-2025-ota-update/"
+      ]
     },
     {
       "build_id": "BD3A.250808.001",
       "os": "Android 16",
       "track": "monthly",
+      "base_month": "2025-08",
       "release_date": "2025-10",
       "security_patch": "2025-10-05",
       "devices": [
@@ -169,12 +206,17 @@
         "https://developers.google.com/android/ota",
         "https://source.android.com/docs/security/bulletin/pixel"
       ],
-      "verify_state": "UNVERIFIED"
+      "verify_state": "UNVERIFIED",
+      "confidence": "MULTI_SOURCE",
+      "confidence_sources": [
+        "https://betawiki.net/wiki/Android_16"
+      ]
     },
     {
       "build_id": "BD3A.251005.003",
       "os": "Android 16",
       "track": "monthly",
+      "base_month": "2025-10",
       "release_date": "2025-10",
       "security_patch": "2025-10-05",
       "devices": [
@@ -191,12 +233,15 @@
         "https://developers.google.com/android/ota",
         "https://source.android.com/docs/security/bulletin/pixel"
       ],
-      "verify_state": "UNVERIFIED"
+      "verify_state": "UNVERIFIED",
+      "confidence": "SINGLE_SOURCE",
+      "confidence_sources": []
     },
     {
       "build_id": "BD3A.251005.003.E1",
       "os": "Android 16",
       "track": "monthly",
+      "base_month": "2025-10",
       "release_date": "2025-10",
       "security_patch": "2025-10-05",
       "devices": [
@@ -214,12 +259,17 @@
         "https://developers.google.com/android/ota",
         "https://source.android.com/docs/security/bulletin/pixel"
       ],
-      "verify_state": "UNVERIFIED"
+      "verify_state": "UNVERIFIED",
+      "confidence": "MULTI_SOURCE",
+      "confidence_sources": [
+        "https://www.droid-life.com/2025/10/30/google-posts-surprise-october-pixel-update-builds-doesnt-say-what-for/"
+      ]
     },
     {
       "build_id": "BD3A.251005.003.F1",
       "os": "Android 16",
       "track": "monthly",
+      "base_month": "2025-10",
       "release_date": "2025-10",
       "security_patch": "2025-10-05",
       "devices": [
@@ -237,12 +287,17 @@
         "https://developers.google.com/android/ota",
         "https://source.android.com/docs/security/bulletin/pixel"
       ],
-      "verify_state": "UNVERIFIED"
+      "verify_state": "UNVERIFIED",
+      "confidence": "MULTI_SOURCE",
+      "confidence_sources": [
+        "https://www.droid-life.com/2025/10/30/google-posts-surprise-october-pixel-update-builds-doesnt-say-what-for/"
+      ]
     },
     {
       "build_id": "BD3A.251005.003.J2",
       "os": "Android 16",
       "track": "monthly",
+      "base_month": "2025-10",
       "release_date": "2025-10",
       "security_patch": "2025-10-05",
       "devices": [
@@ -260,12 +315,15 @@
         "https://developers.google.com/android/ota",
         "https://source.android.com/docs/security/bulletin/pixel"
       ],
-      "verify_state": "UNVERIFIED"
+      "verify_state": "UNVERIFIED",
+      "confidence": "SINGLE_SOURCE",
+      "confidence_sources": []
     },
     {
       "build_id": "BD3A.251005.003.J5",
       "os": "Android 16",
       "track": "monthly",
+      "base_month": "2025-10",
       "release_date": "2025-10",
       "security_patch": "2025-10-05",
       "devices": [
@@ -285,12 +343,18 @@
         "https://developers.google.com/android/ota",
         "https://source.android.com/docs/security/bulletin/pixel"
       ],
-      "verify_state": "UNVERIFIED"
+      "verify_state": "UNVERIFIED",
+      "confidence": "OFFICIAL",
+      "confidence_sources": [
+        "https://support.google.com/pixelphone/thread/379076388",
+        "https://www.droid-life.com/2025/10/08/october-2025-android-update-available-for-google-pixel-devices/"
+      ]
     },
     {
       "build_id": "BD3A.251005.003.J6",
       "os": "Android 16",
       "track": "monthly",
+      "base_month": "2025-10",
       "release_date": "2025-10",
       "security_patch": "2025-10-05",
       "devices": [
@@ -310,12 +374,18 @@
         "https://developers.google.com/android/ota",
         "https://source.android.com/docs/security/bulletin/pixel"
       ],
-      "verify_state": "UNVERIFIED"
+      "verify_state": "UNVERIFIED",
+      "confidence": "MULTI_SOURCE",
+      "confidence_sources": [
+        "https://www.droid-life.com/2025/10/30/google-posts-surprise-october-pixel-update-builds-doesnt-say-what-for/",
+        "https://xdaforums.com/t/30oct25-new-stable-update-bd3a-251005-003-w4-or-j6-for-japan-variant.4757843/"
+      ]
     },
     {
       "build_id": "BD3A.251005.003.W3",
       "os": "Android 16",
       "track": "monthly",
+      "base_month": "2025-10",
       "release_date": "2025-10",
       "security_patch": "2025-10-05",
       "devices": [
@@ -335,12 +405,18 @@
         "https://developers.google.com/android/ota",
         "https://source.android.com/docs/security/bulletin/pixel"
       ],
-      "verify_state": "UNVERIFIED"
+      "verify_state": "UNVERIFIED",
+      "confidence": "OFFICIAL",
+      "confidence_sources": [
+        "https://support.google.com/pixelphone/thread/379076388",
+        "https://www.droid-life.com/2025/10/08/october-2025-android-update-available-for-google-pixel-devices/"
+      ]
     },
     {
       "build_id": "BD3A.251005.003.W4",
       "os": "Android 16",
       "track": "monthly",
+      "base_month": "2025-10",
       "release_date": "2025-10",
       "security_patch": "2025-10-05",
       "devices": [
@@ -360,12 +436,19 @@
         "https://developers.google.com/android/ota",
         "https://source.android.com/docs/security/bulletin/pixel"
       ],
-      "verify_state": "UNVERIFIED"
+      "verify_state": "UNVERIFIED",
+      "confidence": "MULTI_SOURCE",
+      "confidence_sources": [
+        "https://www.droid-life.com/2025/10/30/google-posts-surprise-october-pixel-update-builds-doesnt-say-what-for/",
+        "https://xdaforums.com/t/30oct25-new-stable-update-bd3a-251005-003-w4-or-j6-for-japan-variant.4757843/",
+        "https://9to5google.com/2025/11/01/new-pixel-october-2025-update/"
+      ]
     },
     {
       "build_id": "BD3A.251105.010.E1",
       "os": "Android 16",
       "track": "monthly",
+      "base_month": "2025-11",
       "release_date": "2025-11",
       "security_patch": "2025-11-05",
       "devices": [
@@ -386,12 +469,18 @@
         "https://developers.google.com/android/ota",
         "https://source.android.com/docs/security/bulletin/pixel"
       ],
-      "verify_state": "UNVERIFIED"
+      "verify_state": "UNVERIFIED",
+      "confidence": "OFFICIAL",
+      "confidence_sources": [
+        "https://support.google.com/pixelphone/thread/386109819",
+        "https://www.droid-life.com/2025/11/11/november-2025-android-security-update-download-google-pixel/"
+      ]
     },
     {
       "build_id": "BD3A.251105.010.F1",
       "os": "Android 16",
       "track": "monthly",
+      "base_month": "2025-11",
       "release_date": "2025-11",
       "security_patch": "2025-11-05",
       "devices": [
@@ -400,7 +489,7 @@
         "mustang",
         "rango"
       ],
-      "region_scope": "Japan carriers except Softbank",
+      "region_scope": "Japan carriers except SoftBank",
       "parent_build_id": "BD3A.251105.010",
       "anti_rollback": {
         "incremented": false,
@@ -412,12 +501,18 @@
         "https://developers.google.com/android/ota",
         "https://source.android.com/docs/security/bulletin/pixel"
       ],
-      "verify_state": "UNVERIFIED"
+      "verify_state": "UNVERIFIED",
+      "confidence": "OFFICIAL",
+      "confidence_sources": [
+        "https://support.google.com/pixelphone/thread/386109819",
+        "https://www.droid-life.com/2025/11/11/november-2025-android-security-update-download-google-pixel/"
+      ]
     },
     {
       "build_id": "BD3A.251105.010.J3",
       "os": "Android 16",
       "track": "monthly",
+      "base_month": "2025-11",
       "release_date": "2025-11",
       "security_patch": "2025-11-05",
       "devices": [
@@ -426,7 +521,7 @@
         "mustang",
         "rango"
       ],
-      "region_scope": "Softbank",
+      "region_scope": "SoftBank",
       "parent_build_id": "BD3A.251105.010",
       "anti_rollback": {
         "incremented": false,
@@ -438,12 +533,18 @@
         "https://developers.google.com/android/ota",
         "https://source.android.com/docs/security/bulletin/pixel"
       ],
-      "verify_state": "UNVERIFIED"
+      "verify_state": "UNVERIFIED",
+      "confidence": "OFFICIAL",
+      "confidence_sources": [
+        "https://support.google.com/pixelphone/thread/386109819",
+        "https://www.droid-life.com/2025/11/11/november-2025-android-security-update-download-google-pixel/"
+      ]
     },
     {
       "build_id": "BD6A.251031.001.A4",
       "os": "Android 16",
       "track": "stable",
+      "base_month": "2025-10",
       "release_date": "2026-03",
       "security_patch": "2026-03-05",
       "devices": [
@@ -461,12 +562,54 @@
         "https://developers.google.com/android/ota",
         "https://source.android.com/docs/security/bulletin/pixel"
       ],
-      "verify_state": "UNVERIFIED"
+      "verify_state": "UNVERIFIED",
+      "confidence": "MULTI_SOURCE",
+      "confidence_sources": [
+        "https://9to5google.com/2026/03/05/pixel-10a-factory-images/"
+      ]
+    },
+    {
+      "build_id": "BP1A.250505.005",
+      "os": "Android 15",
+      "track": "stable",
+      "base_month": "2025-05",
+      "release_date": "2025-05-05",
+      "security_patch": "2025-05-05",
+      "devices": [
+        "akita",
+        "bluejay",
+        "husky",
+        "oriole",
+        "raven",
+        "shiba"
+      ],
+      "region_scope": "global",
+      "scope_note": "Android 16世代外だが、復旧手順の正しさに直結するため例外収載",
+      "anti_rollback": {
+        "incremented": true,
+        "scope": "Pixel 6, 6 Pro, 6a, 8, 8 Pro, 8a（Pixel 7系は非対象）",
+        "effect": "これ以前のAndroid 15ビルドへ戻して起動できない",
+        "note": "Android 15ビルドへの巻き戻し不可。ブートローダーのanti-rollbackカウンタ増加のため、これ以前のファクトリーイメージ書き込みは文鎮化リスク（対象: Pixel 6系 oriole/raven/bluejay・Pixel 8系 shiba/husky/akita。Pixel 7系は非対象）"
+      },
+      "official_fixes": [],
+      "sources": [
+        "https://developers.google.com/android/images",
+        "https://source.android.com/docs/security/bulletin/pixel",
+        "https://www.androidpolice.com/may-2025-google-pixel-security-update-anti-rollback-bootloader/"
+      ],
+      "verify_state": "VERIFIED",
+      "confidence": "MULTI_SOURCE",
+      "confidence_sources": [
+        "https://www.androidpolice.com/may-2025-google-pixel-security-update-anti-rollback-bootloader/",
+        "https://xdaforums.com/t/may-6-2025-anti-rollback-bootloader-flash-both-slots-bp1a-250505-005-global-root-pixel-6-pro-raven-stable-firmware.4352027/"
+      ],
+      "conflict_note": "release_date: builds.json=2025-05-05 / 外部(Android Police, XDA)=2025-05-06 (ロールアウト開始日)。値は書き換えず両方残す"
     },
     {
       "build_id": "BP2A.250605.031.A2",
       "os": "Android 16",
       "track": "stable",
+      "base_month": "2025-06",
       "release_date": "2025-06-10",
       "security_patch": "2025-06-05",
       "devices": [
@@ -497,12 +640,19 @@
         "https://developers.google.com/android/ota",
         "https://source.android.com/docs/security/bulletin/pixel"
       ],
-      "verify_state": "VERIFIED"
+      "verify_state": "VERIFIED",
+      "confidence": "OFFICIAL",
+      "confidence_sources": [
+        "https://support.google.com/pixelphone/thread/349745083",
+        "https://betawiki.net/wiki/Android_16_build_BP2A.250605.031.A2",
+        "https://www.droid-life.com/2025/06/10/android-16-download-new-features/"
+      ]
     },
     {
       "build_id": "BP2A.250605.031.A3",
       "os": "Android 16",
       "track": "stable",
+      "base_month": "2025-06",
       "release_date": "2025-06",
       "security_patch": "2025-06-05",
       "devices": [
@@ -520,12 +670,19 @@
         "https://developers.google.com/android/ota",
         "https://source.android.com/docs/security/bulletin/pixel"
       ],
-      "verify_state": "UNVERIFIED"
+      "verify_state": "UNVERIFIED",
+      "confidence": "OFFICIAL",
+      "confidence_sources": [
+        "https://support.google.com/pixelphone/thread/349745083",
+        "https://betawiki.net/wiki/Android_16_build_BP2A.250605.031.A3",
+        "https://www.droid-life.com/2025/06/10/android-16-download-new-features/"
+      ]
     },
     {
       "build_id": "BP2A.250605.031.A5",
       "os": "Android 16",
       "track": "monthly",
+      "base_month": "2025-06",
       "release_date": "2025-08",
       "security_patch": "2025-08-05",
       "devices": [
@@ -544,12 +701,18 @@
         "https://developers.google.com/android/ota",
         "https://source.android.com/docs/security/bulletin/pixel"
       ],
-      "verify_state": "UNVERIFIED"
+      "verify_state": "UNVERIFIED",
+      "confidence": "OFFICIAL",
+      "confidence_sources": [
+        "https://support.google.com/pixelphone/thread/362911257",
+        "https://www.droid-life.com/2025/08/05/august-2025-google-pixel-update-download/"
+      ]
     },
     {
       "build_id": "BP2A.250705.008",
       "os": "Android 16",
       "track": "monthly",
+      "base_month": "2025-07",
       "release_date": "2025-07-08",
       "security_patch": "2025-07-05",
       "devices": [
@@ -579,13 +742,19 @@
         "https://developers.google.com/android/ota",
         "https://source.android.com/docs/security/bulletin/pixel"
       ],
-      "verify_state": "VERIFIED"
+      "verify_state": "VERIFIED",
+      "confidence": "OFFICIAL",
+      "confidence_sources": [
+        "https://support.google.com/pixelphone/thread/355981577",
+        "https://9to5google.com/2025/07/08/android-16-july-update-pixel/"
+      ]
     },
     {
       "build_id": "BP2A.250705.008.A1",
       "os": "Android 16",
       "track": "monthly",
-      "release_date": "2025-07-08",
+      "base_month": "2025-07",
+      "release_date": "2025-08",
       "security_patch": "2025-08-05",
       "devices": [
         "bluejay"
@@ -604,13 +773,18 @@
       ],
       "verify_state": "VERIFIED",
       "release_date_source_month": "2025-08",
-      "human_review": true,
-      "conflict_note": "release_date: anchor=2025-07-08 / source_month=2025-08"
+      "resolution_note": "base_month/release_date 分離により矛盾でないと判明。base_month=2025-07 はビルドID埋め込み日付、実配信はソース掲載月 2025-08（アンカー値 2025-07-08 はビルドID日付由来でありソース掲載月と食い違っていた）。2026-07-30 解決",
+      "confidence": "OFFICIAL",
+      "confidence_sources": [
+        "https://support.google.com/pixelphone/thread/362911257",
+        "https://www.droid-life.com/2025/08/05/august-2025-google-pixel-update-download/"
+      ]
     },
     {
       "build_id": "BP2A.250805.005",
       "os": "Android 16",
       "track": "monthly",
+      "base_month": "2025-08",
       "release_date": "2025-08",
       "security_patch": "2025-08-05",
       "devices": [
@@ -639,12 +813,19 @@
         "https://developers.google.com/android/ota",
         "https://source.android.com/docs/security/bulletin/pixel"
       ],
-      "verify_state": "UNVERIFIED"
+      "verify_state": "UNVERIFIED",
+      "confidence": "OFFICIAL",
+      "confidence_sources": [
+        "https://support.google.com/pixelphone/thread/362911257",
+        "https://www.droid-life.com/2025/08/05/august-2025-google-pixel-update-download/",
+        "https://9to5google.com/2025/08/05/android-16-august-update-pixel/"
+      ]
     },
     {
       "build_id": "BP3A.250905.014",
       "os": "Android 16 QPR1",
       "track": "qpr",
+      "base_month": "2025-09",
       "release_date": "2025-09-03",
       "security_patch": "2025-09-05",
       "devices": [
@@ -675,12 +856,19 @@
         "https://developers.google.com/android/ota",
         "https://source.android.com/docs/security/bulletin/pixel"
       ],
-      "verify_state": "VERIFIED"
+      "verify_state": "VERIFIED",
+      "confidence": "OFFICIAL",
+      "confidence_sources": [
+        "https://support.google.com/pixelphone/thread/368006132",
+        "https://betawiki.net/wiki/Android_16_build_BP3A.250905.014",
+        "https://9to5google.com/2025/09/03/android-16-september-update-pixel/"
+      ]
     },
     {
       "build_id": "BP3A.250905.014.A1",
       "os": "Android 16",
       "track": "qpr",
+      "base_month": "2025-09",
       "release_date": "2025-09",
       "security_patch": "2025-09-05",
       "devices": [
@@ -698,12 +886,18 @@
         "https://developers.google.com/android/ota",
         "https://source.android.com/docs/security/bulletin/pixel"
       ],
-      "verify_state": "UNVERIFIED"
+      "verify_state": "UNVERIFIED",
+      "confidence": "OFFICIAL",
+      "confidence_sources": [
+        "https://support.google.com/pixelphone/thread/368006132",
+        "https://www.droid-life.com/2025/09/04/heres-everything-fixed-in-pixel-september-security-patch/"
+      ]
     },
     {
       "build_id": "BP3A.251005.004.A2",
       "os": "Android 16",
       "track": "monthly",
+      "base_month": "2025-10",
       "release_date": "2025-10",
       "security_patch": "2025-10-05",
       "devices": [
@@ -722,12 +916,18 @@
         "https://developers.google.com/android/ota",
         "https://source.android.com/docs/security/bulletin/pixel"
       ],
-      "verify_state": "UNVERIFIED"
+      "verify_state": "UNVERIFIED",
+      "confidence": "OFFICIAL",
+      "confidence_sources": [
+        "https://support.google.com/pixelphone/thread/379076388",
+        "https://www.droid-life.com/2025/10/08/october-2025-android-update-available-for-google-pixel-devices/"
+      ]
     },
     {
       "build_id": "BP3A.251005.004.A3",
       "os": "Android 16",
       "track": "monthly",
+      "base_month": "2025-10",
       "release_date": "2025-10",
       "security_patch": "2025-10-05",
       "devices": [
@@ -745,12 +945,17 @@
         "https://developers.google.com/android/ota",
         "https://source.android.com/docs/security/bulletin/pixel"
       ],
-      "verify_state": "UNVERIFIED"
+      "verify_state": "UNVERIFIED",
+      "confidence": "MULTI_SOURCE",
+      "confidence_sources": [
+        "https://www.droid-life.com/2025/10/30/google-posts-surprise-october-pixel-update-builds-doesnt-say-what-for/"
+      ]
     },
     {
       "build_id": "BP3A.251005.004.B1",
       "os": "Android 16",
       "track": "monthly",
+      "base_month": "2025-10",
       "release_date": "2025-10",
       "security_patch": "2025-10-05",
       "devices": [
@@ -779,12 +984,19 @@
         "https://developers.google.com/android/ota",
         "https://source.android.com/docs/security/bulletin/pixel"
       ],
-      "verify_state": "UNVERIFIED"
+      "verify_state": "UNVERIFIED",
+      "confidence": "OFFICIAL",
+      "confidence_sources": [
+        "https://support.google.com/pixelphone/thread/379076388",
+        "https://www.droid-life.com/2025/10/08/october-2025-android-update-available-for-google-pixel-devices/",
+        "https://9to5google.com/2025/10/08/android-16-october-update-pixel/"
+      ]
     },
     {
       "build_id": "BP3A.251005.004.B2",
       "os": "Android 16",
       "track": "monthly",
+      "base_month": "2025-10",
       "release_date": "2025-10",
       "security_patch": "2025-10-05",
       "devices": [
@@ -809,12 +1021,17 @@
         "https://developers.google.com/android/ota",
         "https://source.android.com/docs/security/bulletin/pixel"
       ],
-      "verify_state": "UNVERIFIED"
+      "verify_state": "UNVERIFIED",
+      "confidence": "MULTI_SOURCE",
+      "confidence_sources": [
+        "https://www.droid-life.com/2025/10/30/google-posts-surprise-october-pixel-update-builds-doesnt-say-what-for/"
+      ]
     },
     {
       "build_id": "BP3A.251005.004.B3",
       "os": "Android 16",
       "track": "monthly",
+      "base_month": "2025-10",
       "release_date": "2025-10",
       "security_patch": "2025-10-05",
       "devices": [
@@ -835,12 +1052,17 @@
         "https://developers.google.com/android/ota",
         "https://source.android.com/docs/security/bulletin/pixel"
       ],
-      "verify_state": "UNVERIFIED"
+      "verify_state": "UNVERIFIED",
+      "confidence": "MULTI_SOURCE",
+      "confidence_sources": [
+        "https://www.droid-life.com/2025/10/30/google-posts-surprise-october-pixel-update-builds-doesnt-say-what-for/"
+      ]
     },
     {
       "build_id": "BP3A.251105.013.A1",
       "os": "Android 16",
       "track": "monthly",
+      "base_month": "2025-11",
       "release_date": "2025-11",
       "security_patch": "2025-11-05",
       "devices": [
@@ -858,12 +1080,18 @@
         "https://developers.google.com/android/ota",
         "https://source.android.com/docs/security/bulletin/pixel"
       ],
-      "verify_state": "UNVERIFIED"
+      "verify_state": "UNVERIFIED",
+      "confidence": "OFFICIAL",
+      "confidence_sources": [
+        "https://support.google.com/pixelphone/thread/386109819",
+        "https://www.droid-life.com/2025/11/11/november-2025-android-security-update-download-google-pixel/"
+      ]
     },
     {
       "build_id": "BP3A.251105.015",
       "os": "Android 16",
       "track": "monthly",
+      "base_month": "2025-11",
       "release_date": "2025-11",
       "security_patch": "2025-11-05",
       "devices": [
@@ -889,12 +1117,18 @@
         "https://developers.google.com/android/ota",
         "https://source.android.com/docs/security/bulletin/pixel"
       ],
-      "verify_state": "UNVERIFIED"
+      "verify_state": "UNVERIFIED",
+      "confidence": "OFFICIAL",
+      "confidence_sources": [
+        "https://support.google.com/pixelphone/thread/386109819",
+        "https://www.droid-life.com/2025/11/11/november-2025-android-security-update-download-google-pixel/"
+      ]
     },
     {
       "build_id": "BP3A.251105.015.J1",
       "os": "Android 16",
       "track": "monthly",
+      "base_month": "2025-11",
       "release_date": "2025-11",
       "security_patch": "2025-11-05",
       "devices": [
@@ -912,12 +1146,18 @@
         "https://developers.google.com/android/ota",
         "https://source.android.com/docs/security/bulletin/pixel"
       ],
-      "verify_state": "UNVERIFIED"
+      "verify_state": "UNVERIFIED",
+      "confidence": "OFFICIAL",
+      "confidence_sources": [
+        "https://support.google.com/pixelphone/thread/386109819",
+        "https://www.droid-life.com/2025/11/11/november-2025-android-security-update-download-google-pixel/"
+      ]
     },
     {
       "build_id": "BP4A.251205.006",
       "os": "Android 16 QPR2",
       "track": "qpr",
+      "base_month": "2025-12",
       "release_date": "2025-12-02",
       "security_patch": "2025-12-05",
       "devices": [
@@ -952,12 +1192,19 @@
         "https://developers.google.com/android/ota",
         "https://source.android.com/docs/security/bulletin/pixel"
       ],
-      "verify_state": "VERIFIED"
+      "verify_state": "VERIFIED",
+      "confidence": "OFFICIAL",
+      "confidence_sources": [
+        "https://support.google.com/pixelphone/thread/389367100",
+        "https://betawiki.net/wiki/Android_16_build_BP4A.251205.006",
+        "https://www.droid-life.com/2025/12/02/download-pixel-december-update-features/"
+      ]
     },
     {
       "build_id": "BP4A.251205.006.A1",
       "os": "Android 16 QPR2",
       "track": "qpr",
+      "base_month": "2025-12",
       "release_date": "2025-12-02",
       "security_patch": "2025-12-05",
       "devices": [
@@ -982,12 +1229,18 @@
         "https://developers.google.com/android/ota",
         "https://source.android.com/docs/security/bulletin/pixel"
       ],
-      "verify_state": "VERIFIED"
+      "verify_state": "VERIFIED",
+      "confidence": "OFFICIAL",
+      "confidence_sources": [
+        "https://support.google.com/pixelphone/thread/389367100",
+        "https://www.droid-life.com/2025/12/02/download-pixel-december-update-features/"
+      ]
     },
     {
       "build_id": "BP4A.251205.006.A4",
       "os": "Android 16",
       "track": "qpr",
+      "base_month": "2025-12",
       "release_date": "2025-12",
       "security_patch": "2025-12-05",
       "devices": [
@@ -1012,18 +1265,23 @@
         "https://developers.google.com/android/ota",
         "https://source.android.com/docs/security/bulletin/pixel"
       ],
-      "verify_state": "UNVERIFIED"
+      "verify_state": "UNVERIFIED",
+      "confidence": "MULTI_SOURCE",
+      "confidence_sources": [
+        "https://9to5google.com/2025/12/19/pixel-december-2025-update-patch/"
+      ]
     },
     {
       "build_id": "BP4A.251205.006.B1",
       "os": "Android 16 QPR2",
       "track": "qpr",
+      "base_month": "2025-12",
       "release_date": "2025-12-02",
       "security_patch": "2025-12-05",
       "devices": [
         "tegu"
       ],
-      "region_scope": "VZW",
+      "region_scope": "Verizon",
       "parent_build_id": "BP4A.251205.006",
       "anti_rollback": {
         "incremented": false,
@@ -1035,12 +1293,18 @@
         "https://developers.google.com/android/ota",
         "https://source.android.com/docs/security/bulletin/pixel"
       ],
-      "verify_state": "VERIFIED"
+      "verify_state": "VERIFIED",
+      "confidence": "OFFICIAL",
+      "confidence_sources": [
+        "https://support.google.com/pixelphone/thread/389367100",
+        "https://www.droid-life.com/2025/12/02/download-pixel-december-update-features/"
+      ]
     },
     {
       "build_id": "BP4A.251205.006.B3",
       "os": "Android 16",
       "track": "qpr",
+      "base_month": "2025-12",
       "release_date": "2025-12",
       "security_patch": "2025-12-05",
       "devices": [
@@ -1058,12 +1322,15 @@
         "https://developers.google.com/android/ota",
         "https://source.android.com/docs/security/bulletin/pixel"
       ],
-      "verify_state": "UNVERIFIED"
+      "verify_state": "UNVERIFIED",
+      "confidence": "SINGLE_SOURCE",
+      "confidence_sources": []
     },
     {
       "build_id": "BP4A.251205.006.C1",
       "os": "Android 16 QPR2",
       "track": "qpr",
+      "base_month": "2025-12",
       "release_date": "2025-12-02",
       "security_patch": "2025-12-05",
       "devices": [
@@ -1073,7 +1340,7 @@
         "rango",
         "tegu"
       ],
-      "region_scope": "Japan; Japan, Japan",
+      "region_scope": "Japan",
       "parent_build_id": "BP4A.251205.006",
       "anti_rollback": {
         "incremented": false,
@@ -1085,12 +1352,18 @@
         "https://developers.google.com/android/ota",
         "https://source.android.com/docs/security/bulletin/pixel"
       ],
-      "verify_state": "VERIFIED"
+      "verify_state": "VERIFIED",
+      "confidence": "OFFICIAL",
+      "confidence_sources": [
+        "https://support.google.com/pixelphone/thread/389367100",
+        "https://www.droid-life.com/2025/12/02/download-pixel-december-update-features/"
+      ]
     },
     {
       "build_id": "BP4A.251205.006.C2",
       "os": "Android 16",
       "track": "qpr",
+      "base_month": "2025-12",
       "release_date": "2025-12",
       "security_patch": "2025-12-05",
       "devices": [
@@ -1112,12 +1385,17 @@
         "https://developers.google.com/android/ota",
         "https://source.android.com/docs/security/bulletin/pixel"
       ],
-      "verify_state": "UNVERIFIED"
+      "verify_state": "UNVERIFIED",
+      "confidence": "MULTI_SOURCE",
+      "confidence_sources": [
+        "https://9to5google.com/2025/12/19/pixel-december-2025-update-patch/"
+      ]
     },
     {
       "build_id": "BP4A.251205.006.E1",
       "os": "Android 16",
       "track": "qpr",
+      "base_month": "2025-12",
       "release_date": "2025-12",
       "security_patch": "2025-12-05",
       "devices": [
@@ -1146,12 +1424,18 @@
         "https://developers.google.com/android/ota",
         "https://source.android.com/docs/security/bulletin/pixel"
       ],
-      "verify_state": "UNVERIFIED"
+      "verify_state": "UNVERIFIED",
+      "confidence": "MULTI_SOURCE",
+      "confidence_sources": [
+        "https://9to5google.com/2025/12/19/pixel-december-2025-update-patch/",
+        "https://xdaforums.com/t/02dec25-new-stable-update-qpr2-bp4a-251205-006-also-a1-or-c1-e1-verizon-19dec25.4757843/"
+      ]
     },
     {
       "build_id": "BP4A.260105.004.A2",
       "os": "Android 16",
       "track": "monthly",
+      "base_month": "2026-01",
       "release_date": "2026-01",
       "security_patch": "2026-01-05",
       "devices": [
@@ -1176,12 +1460,18 @@
         "https://developers.google.com/android/ota",
         "https://source.android.com/docs/security/bulletin/pixel"
       ],
-      "verify_state": "UNVERIFIED"
+      "verify_state": "UNVERIFIED",
+      "confidence": "OFFICIAL",
+      "confidence_sources": [
+        "https://support.google.com/pixelphone/thread/401468923",
+        "https://www.droid-life.com/2026/01/12/january-2026-google-pixel-update-download/"
+      ]
     },
     {
       "build_id": "BP4A.260105.004.B2",
       "os": "Android 16",
       "track": "monthly",
+      "base_month": "2026-01",
       "release_date": "2026-01",
       "security_patch": "2026-01-05",
       "devices": [
@@ -1199,12 +1489,18 @@
         "https://developers.google.com/android/ota",
         "https://source.android.com/docs/security/bulletin/pixel"
       ],
-      "verify_state": "UNVERIFIED"
+      "verify_state": "UNVERIFIED",
+      "confidence": "OFFICIAL",
+      "confidence_sources": [
+        "https://support.google.com/pixelphone/thread/401468923",
+        "https://www.droid-life.com/2026/01/12/january-2026-google-pixel-update-download/"
+      ]
     },
     {
       "build_id": "BP4A.260105.004.C2",
       "os": "Android 16",
       "track": "monthly",
+      "base_month": "2026-01",
       "release_date": "2026-01",
       "security_patch": "2026-01-05",
       "devices": [
@@ -1226,12 +1522,18 @@
         "https://developers.google.com/android/ota",
         "https://source.android.com/docs/security/bulletin/pixel"
       ],
-      "verify_state": "UNVERIFIED"
+      "verify_state": "UNVERIFIED",
+      "confidence": "OFFICIAL",
+      "confidence_sources": [
+        "https://support.google.com/pixelphone/thread/401468923",
+        "https://www.droid-life.com/2026/01/12/january-2026-google-pixel-update-download/"
+      ]
     },
     {
       "build_id": "BP4A.260105.004.E1",
       "os": "Android 16",
       "track": "monthly",
+      "base_month": "2026-01",
       "release_date": "2026-01",
       "security_patch": "2026-01-05",
       "devices": [
@@ -1263,12 +1565,18 @@
         "https://developers.google.com/android/ota",
         "https://source.android.com/docs/security/bulletin/pixel"
       ],
-      "verify_state": "UNVERIFIED"
+      "verify_state": "UNVERIFIED",
+      "confidence": "OFFICIAL",
+      "confidence_sources": [
+        "https://support.google.com/pixelphone/thread/401468923",
+        "https://www.droid-life.com/2026/01/12/january-2026-google-pixel-update-download/"
+      ]
     },
     {
       "build_id": "BP4A.260205.001",
       "os": "Android 16",
       "track": "monthly",
+      "base_month": "2026-02",
       "release_date": "2026-02",
       "security_patch": "2026-02-05",
       "devices": [
@@ -1295,12 +1603,18 @@
         "https://developers.google.com/android/ota",
         "https://source.android.com/docs/security/bulletin/pixel"
       ],
-      "verify_state": "UNVERIFIED"
+      "verify_state": "UNVERIFIED",
+      "confidence": "OFFICIAL",
+      "confidence_sources": [
+        "https://support.google.com/pixelphone/thread/406938450",
+        "https://www.droid-life.com/2026/02/03/download-february-pixel-update-features/"
+      ]
     },
     {
       "build_id": "BP4A.260205.001.A1",
       "os": "Android 16",
       "track": "monthly",
+      "base_month": "2026-02",
       "release_date": "2026-02",
       "security_patch": "2026-02-05",
       "devices": [
@@ -1321,18 +1635,24 @@
         "https://developers.google.com/android/ota",
         "https://source.android.com/docs/security/bulletin/pixel"
       ],
-      "verify_state": "UNVERIFIED"
+      "verify_state": "UNVERIFIED",
+      "confidence": "OFFICIAL",
+      "confidence_sources": [
+        "https://support.google.com/pixelphone/thread/406938450",
+        "https://www.droid-life.com/2026/02/03/download-february-pixel-update-features/"
+      ]
     },
     {
       "build_id": "BP4A.260205.001.B1",
       "os": "Android 16",
       "track": "monthly",
+      "base_month": "2026-02",
       "release_date": "2026-02",
       "security_patch": "2026-02-05",
       "devices": [
         "tegu"
       ],
-      "region_scope": "VZW",
+      "region_scope": "Verizon",
       "parent_build_id": "BP4A.260205.001",
       "anti_rollback": {
         "incremented": false,
@@ -1344,12 +1664,18 @@
         "https://developers.google.com/android/ota",
         "https://source.android.com/docs/security/bulletin/pixel"
       ],
-      "verify_state": "UNVERIFIED"
+      "verify_state": "UNVERIFIED",
+      "confidence": "OFFICIAL",
+      "confidence_sources": [
+        "https://support.google.com/pixelphone/thread/406938450",
+        "https://www.droid-life.com/2026/02/03/download-february-pixel-update-features/"
+      ]
     },
     {
       "build_id": "BP4A.260205.001.C1",
       "os": "Android 16",
       "track": "monthly",
+      "base_month": "2026-02",
       "release_date": "2026-02",
       "security_patch": "2026-02-05",
       "devices": [
@@ -1359,7 +1685,7 @@
         "rango",
         "tegu"
       ],
-      "region_scope": "JP",
+      "region_scope": "Japan",
       "parent_build_id": "BP4A.260205.001",
       "anti_rollback": {
         "incremented": false,
@@ -1371,12 +1697,18 @@
         "https://developers.google.com/android/ota",
         "https://source.android.com/docs/security/bulletin/pixel"
       ],
-      "verify_state": "UNVERIFIED"
+      "verify_state": "UNVERIFIED",
+      "confidence": "OFFICIAL",
+      "confidence_sources": [
+        "https://support.google.com/pixelphone/thread/406938450",
+        "https://www.droid-life.com/2026/02/03/download-february-pixel-update-features/"
+      ]
     },
     {
       "build_id": "BP4A.260205.002",
       "os": "Android 16",
       "track": "monthly",
+      "base_month": "2026-02",
       "release_date": "2026-02",
       "security_patch": "2026-02-05",
       "devices": [
@@ -1396,12 +1728,18 @@
         "https://developers.google.com/android/ota",
         "https://source.android.com/docs/security/bulletin/pixel"
       ],
-      "verify_state": "UNVERIFIED"
+      "verify_state": "UNVERIFIED",
+      "confidence": "OFFICIAL",
+      "confidence_sources": [
+        "https://support.google.com/pixelphone/thread/406938450",
+        "https://www.droid-life.com/2026/02/03/download-february-pixel-update-features/"
+      ]
     },
     {
       "build_id": "BP4A.260205.002.A1",
       "os": "Android 16",
       "track": "monthly",
+      "base_month": "2026-02",
       "release_date": "2026-02",
       "security_patch": "2026-02-05",
       "devices": [
@@ -1422,12 +1760,18 @@
         "https://developers.google.com/android/ota",
         "https://source.android.com/docs/security/bulletin/pixel"
       ],
-      "verify_state": "UNVERIFIED"
+      "verify_state": "UNVERIFIED",
+      "confidence": "OFFICIAL",
+      "confidence_sources": [
+        "https://support.google.com/pixelphone/thread/406938450",
+        "https://www.droid-life.com/2026/02/03/download-february-pixel-update-features/"
+      ]
     },
     {
       "build_id": "CP1A.260305.018",
       "os": "Android 16",
       "track": "qpr",
+      "base_month": "2026-03",
       "release_date": "2026-03",
       "security_patch": "2026-03-05",
       "devices": [
@@ -1464,12 +1808,18 @@
         "https://developers.google.com/android/ota",
         "https://source.android.com/docs/security/bulletin/pixel"
       ],
-      "verify_state": "UNVERIFIED"
+      "verify_state": "UNVERIFIED",
+      "confidence": "OFFICIAL",
+      "confidence_sources": [
+        "https://support.google.com/pixelphone/thread/410784164",
+        "https://xdaforums.com/t/march-3-2026-cp1a-260305-018-global-18-a1-australia-root-pixel-6-pro-raven-stable-firmware.4352027/"
+      ]
     },
     {
       "build_id": "CP1A.260305.018.A1",
       "os": "Android 16",
       "track": "qpr",
+      "base_month": "2026-03",
       "release_date": "2026-03",
       "security_patch": "2026-03-05",
       "devices": [
@@ -1489,12 +1839,18 @@
         "https://developers.google.com/android/ota",
         "https://source.android.com/docs/security/bulletin/pixel"
       ],
-      "verify_state": "UNVERIFIED"
+      "verify_state": "UNVERIFIED",
+      "confidence": "OFFICIAL",
+      "confidence_sources": [
+        "https://support.google.com/pixelphone/thread/410784164",
+        "https://xdaforums.com/t/march-3-2026-cp1a-260305-018-global-18-a1-australia-root-pixel-6-pro-raven-stable-firmware.4352027/"
+      ]
     },
     {
       "build_id": "CP1A.260405.003.A1",
       "os": "Android 16",
       "track": "monthly",
+      "base_month": "2026-04",
       "release_date": "2026-04",
       "security_patch": "2026-04-05",
       "devices": [
@@ -1514,12 +1870,18 @@
         "https://developers.google.com/android/ota",
         "https://source.android.com/docs/security/bulletin/pixel"
       ],
-      "verify_state": "UNVERIFIED"
+      "verify_state": "UNVERIFIED",
+      "confidence": "OFFICIAL",
+      "confidence_sources": [
+        "https://support.google.com/pixelphone/thread/422905223",
+        "https://www.droid-life.com/2026/04/07/2026-april-pixel-update-download-phone/"
+      ]
     },
     {
       "build_id": "CP1A.260405.005",
       "os": "Android 16",
       "track": "monthly",
+      "base_month": "2026-04",
       "release_date": "2026-04",
       "security_patch": "2026-04-05",
       "devices": [
@@ -1556,12 +1918,18 @@
         "https://developers.google.com/android/ota",
         "https://source.android.com/docs/security/bulletin/pixel"
       ],
-      "verify_state": "UNVERIFIED"
+      "verify_state": "UNVERIFIED",
+      "confidence": "OFFICIAL",
+      "confidence_sources": [
+        "https://support.google.com/pixelphone/thread/422905223",
+        "https://www.droid-life.com/2026/04/07/2026-april-pixel-update-download-phone/"
+      ]
     },
     {
       "build_id": "CP1A.260405.005.B1",
       "os": "Android 16",
       "track": "monthly",
+      "base_month": "2026-04",
       "release_date": "2026-04",
       "security_patch": "2026-04-05",
       "devices": [
@@ -1581,12 +1949,15 @@
         "https://developers.google.com/android/ota",
         "https://source.android.com/docs/security/bulletin/pixel"
       ],
-      "verify_state": "UNVERIFIED"
+      "verify_state": "UNVERIFIED",
+      "confidence": "SINGLE_SOURCE",
+      "confidence_sources": []
     },
     {
       "build_id": "CP1A.260505.005",
       "os": "Android 16",
       "track": "monthly",
+      "base_month": "2026-05",
       "release_date": "2026-05",
       "security_patch": "2026-05-05",
       "devices": [
@@ -1610,6 +1981,8 @@
       "region_scope": "global",
       "anti_rollback": {
         "incremented": true,
+        "scope": "Pixel 10, 10 Pro, 10 Pro XL, 10 Pro Fold（frankel/mustang/blazer/rango。ソース警告文の列挙。Pixel 9系以前は非対象）",
+        "effect": "これ以前のAndroid 16ビルドへ戻して起動できない",
         "note": "Android 16ビルドへの巻き戻し不可。ブートローダーのanti-rollbackカウンタ増加のため、これ以前のファクトリーイメージ書き込みは文鎮化リスク（対象: Pixel 10系 frankel/mustang/blazer/rango/stallion。ソース上は2026年5月の全デバイス共通ビルドとして掲載）"
       },
       "official_fixes": [],
@@ -1618,12 +1991,19 @@
         "https://developers.google.com/android/ota",
         "https://source.android.com/docs/security/bulletin/pixel"
       ],
-      "verify_state": "VERIFIED"
+      "verify_state": "VERIFIED",
+      "confidence": "OFFICIAL",
+      "confidence_sources": [
+        "https://support.google.com/pixelphone/thread/431077516",
+        "https://9to5google.com/2026/05/05/android-16-may-update-pixel/",
+        "https://xdaforums.com/t/05-may-2026-new-stable-update-a16-qpr3-cp1a-260505-005-global-a1-telia-warning-anti-rollback-update-included-take-care-not-to-brick-your-phone.4757843/"
+      ]
     },
     {
       "build_id": "CP1A.260505.005.A1",
       "os": "Android 16",
       "track": "monthly",
+      "base_month": "2026-05",
       "release_date": "2026-05",
       "security_patch": "2026-05-05",
       "devices": [
@@ -1647,6 +2027,8 @@
       "parent_build_id": "CP1A.260505.005",
       "anti_rollback": {
         "incremented": true,
+        "scope": "Pixel 10, 10 Pro, 10 Pro XL, 10 Pro Fold（frankel/mustang/blazer/rango。ソース警告文の列挙。Pixel 9系以前は非対象）",
+        "effect": "これ以前のAndroid 16ビルドへ戻して起動できない",
         "note": "Android 16ビルドへの巻き戻し不可。ブートローダーのanti-rollbackカウンタ増加のため、これ以前のファクトリーイメージ書き込みは文鎮化リスク（対象: Pixel 10系 frankel/mustang/blazer/rango/stallion。ソース上は2026年5月の全デバイス共通ビルドとして掲載）"
       },
       "official_fixes": [],
@@ -1655,12 +2037,17 @@
         "https://developers.google.com/android/ota",
         "https://source.android.com/docs/security/bulletin/pixel"
       ],
-      "verify_state": "VERIFIED"
+      "verify_state": "VERIFIED",
+      "confidence": "MULTI_SOURCE",
+      "confidence_sources": [
+        "https://xdaforums.com/t/05-may-2026-new-stable-update-a16-qpr3-cp1a-260505-005-global-a1-telia-warning-anti-rollback-update-included-take-care-not-to-brick-your-phone.4757843/"
+      ]
     },
     {
       "build_id": "CP2A.260605.012",
       "os": "Android 17",
       "track": "stable",
+      "base_month": "2026-06",
       "release_date": "2026-06-16",
       "security_patch": "2026-06-05",
       "devices": [
@@ -1697,12 +2084,18 @@
         "https://developers.google.com/android/ota",
         "https://source.android.com/docs/security/bulletin/pixel"
       ],
-      "verify_state": "VERIFIED"
+      "verify_state": "VERIFIED",
+      "confidence": "OFFICIAL",
+      "confidence_sources": [
+        "https://support.google.com/pixelphone/thread/442096105",
+        "https://9to5google.com/2026/06/16/android-17-june-update-pixel/"
+      ]
     },
     {
       "build_id": "CP2A.260605.012.A1",
       "os": "Android 17",
       "track": "stable",
+      "base_month": "2026-06",
       "release_date": "2026-06-16",
       "security_patch": "2026-06-05",
       "devices": [
@@ -1722,12 +2115,19 @@
         "https://developers.google.com/android/ota",
         "https://source.android.com/docs/security/bulletin/pixel"
       ],
-      "verify_state": "VERIFIED"
+      "verify_state": "VERIFIED",
+      "confidence": "OFFICIAL",
+      "confidence_sources": [
+        "https://support.google.com/pixelphone/thread/442096105",
+        "https://9to5google.com/2026/06/16/android-17-june-update-pixel/",
+        "https://xdaforums.com/t/june-16-2026-android-17-stable-cp2a-260605-012-global-a1-at-t-b1-au-root-pixel-6-pro-raven-stable-firmware.4352027/"
+      ]
     },
     {
       "build_id": "CP2A.260605.012.B1",
       "os": "Android 17",
       "track": "stable",
+      "base_month": "2026-06",
       "release_date": "2026-06-16",
       "security_patch": "2026-06-05",
       "devices": [
@@ -1747,12 +2147,19 @@
         "https://developers.google.com/android/ota",
         "https://source.android.com/docs/security/bulletin/pixel"
       ],
-      "verify_state": "VERIFIED"
+      "verify_state": "VERIFIED",
+      "confidence": "OFFICIAL",
+      "confidence_sources": [
+        "https://support.google.com/pixelphone/thread/442096105",
+        "https://9to5google.com/2026/06/16/android-17-june-update-pixel/",
+        "https://xdaforums.com/t/june-16-2026-android-17-stable-cp2a-260605-012-global-a1-at-t-b1-au-root-pixel-6-pro-raven-stable-firmware.4352027/"
+      ]
     },
     {
       "build_id": "CP2A.260605.012.C1",
       "os": "Android 17",
       "track": "stable",
+      "base_month": "2026-06",
       "release_date": "2026-06-16",
       "security_patch": "2026-06-05",
       "devices": [
@@ -1778,12 +2185,19 @@
         "https://developers.google.com/android/ota",
         "https://source.android.com/docs/security/bulletin/pixel"
       ],
-      "verify_state": "VERIFIED"
+      "verify_state": "VERIFIED",
+      "confidence": "OFFICIAL",
+      "confidence_sources": [
+        "https://support.google.com/pixelphone/thread/442096105",
+        "https://9to5google.com/2026/06/16/android-17-june-update-pixel/",
+        "https://xdaforums.com/t/android-17-stable-cp2a-260605-012-012-c1-16-jun-2026.4757843/"
+      ]
     },
     {
       "build_id": "CP2A.260705.006",
       "os": "Android 17",
       "track": "monthly",
+      "base_month": "2026-07",
       "release_date": "2026-07-07",
       "security_patch": "2026-07-05",
       "devices": [
@@ -1820,12 +2234,19 @@
         "https://developers.google.com/android/ota",
         "https://source.android.com/docs/security/bulletin/pixel"
       ],
-      "verify_state": "VERIFIED"
+      "verify_state": "VERIFIED",
+      "confidence": "OFFICIAL",
+      "confidence_sources": [
+        "https://support.google.com/pixelphone/thread/448470698",
+        "https://9to5google.com/2026/07/07/android-17-july-pixel-update/",
+        "https://www.droid-life.com/2026/07/07/2026-july-pixel-update-available-for-your-pixel-phone/"
+      ]
     },
     {
       "build_id": "CP2A.260705.006.A1",
       "os": "Android 17",
       "track": "monthly",
+      "base_month": "2026-07",
       "release_date": "2026-07-07",
       "security_patch": "2026-07-05",
       "devices": [
@@ -1854,7 +2275,12 @@
         "https://developers.google.com/android/ota",
         "https://source.android.com/docs/security/bulletin/pixel"
       ],
-      "verify_state": "VERIFIED"
+      "verify_state": "VERIFIED",
+      "confidence": "OFFICIAL",
+      "confidence_sources": [
+        "https://support.google.com/pixelphone/thread/448470698",
+        "https://www.droid-life.com/2026/07/07/2026-july-pixel-update-available-for-your-pixel-phone/"
+      ]
     }
   ]
 }

@@ -10,8 +10,8 @@ builds.json の generated_at（無ければ data/raw/ の最新日付ディレ�
 実行: python3 scripts/decay_warning.py
 依存: python3 標準ライブラリのみ。ネットワークアクセスなし。
 
-他リポの同名スクリプトの思想（データ収集停止の腐敗検知）を踏襲した
-本リポジトリ向け新規実装。
+Obsidian-Public-Vault 版とは別実装。将来共通化検討。
+（思想＝データ収集停止の腐敗検知は同じだが、コードは本リポジトリ向け新規実装）
 """
 import json
 import re

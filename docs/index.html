@@ -543,6 +543,7 @@ adb reboot bootloader
 fastboot devices
 ./flash-all.sh     <span class="c"># 全データ消去して工場出荷状態に</span></pre>
       <p class="caveat">警告: ブートローダーアンロック（fastboot flashing unlock）は全データ消去に加え、Play Integrity 判定が失敗し銀行・決済・一部ゲームアプリが恒久的に使用不能になる <span class="vstate u">UNVERIFIED</span>。実施してよいのはEOL検証機（4a）のみ。メイン機では絶対に行わない。</p>
+      <p class="caveat"><strong>ARB（anti-rollback）該当機種の注意</strong> <span class="vstate v">VERIFIED</span>: ブートローダーの anti-rollback カウンタが増加したビルド以降を適用済みの機種では、それより前のビルドの sideload / Factory Image 書き込みで起動不能（両スロット不一致でハードブリック）に至る。該当ビルド — BP1A.250505.005（2025-05: Pixel 6/6 Pro/6a・8/8 Pro/8a、Android 15へ巻き戻し不可）/ CP1A.260505.005（2026-05: Pixel 10系、Android 16へ巻き戻し不可）。復旧作業前に <a href="dict/#bx-section">ビルド番号辞書（ビルド番号で引く）</a> で手元のビルドIDを検索し、ARB警告の有無を確認すること。</p>
     </div>
   </details>
 

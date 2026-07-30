@@ -16,8 +16,12 @@ ENTRIES_PATH = REPO / "docs" / "dict" / "data" / "entries.json"
 INDEX_PATH = REPO / "docs" / "dict" / "index.html"
 
 # ---- 基準値（2026-07-30 時点。行数非減少ゲート）----
+# MIN_LINES_BUILDS 1860→1960: Agent 3 (2nd iteration: Schema Fixer) が
+# base_month を全67件に追加 (2026-07-30)。行数非減少の思想は維持。
+# MIN_LINES_BUILDS 1960→2286: Agent 4 (2nd iteration: Cross-Validator) が
+# confidence / confidence_sources を全67件に追加 (2026-07-30)。
 MIN_LINES_ENTRIES = 1764
-MIN_LINES_BUILDS = 1860
+MIN_LINES_BUILDS = 2286
 MIN_LINES_INDEX = 727
 
 # ---- 値域 ----
@@ -27,6 +31,8 @@ BUILD_REQUIRED = [
 ]
 TRACKS = {"stable", "qpr", "monthly", "drop"}
 VERIFY_STATES = {"VERIFIED", "UNVERIFIED"}
+# Agent 4 (2nd iteration: Cross-Validator): 外部独立ソース照合の確度
+CONFIDENCE_LEVELS = {"OFFICIAL", "MULTI_SOURCE", "SINGLE_SOURCE"}
 
 ENTRY_REQUIRED = [
     "id", "title_ja", "title_en", "yomi", "category", "severity",
@@ -37,6 +43,7 @@ EVIDENCE_LEVELS = {"OFFICIAL", "MULTI_SOURCE", "REPORTED_ONLY"}
 LINK_CONFIDENCES = {"official", "inferred", "estimated", "unknown"}
 
 BUILD_ID_RE = re.compile(r"^[A-Z]{2}[0-9A-Z]{2}\.[0-9]{6}\.[0-9]{3}(\.[A-Z][0-9])?$")
+BASE_MONTH_RE = re.compile(r"^[0-9]{4}-[0-9]{2}$")
 
 results = []
 
@@ -137,6 +144,72 @@ def main():
           "first mismatch: %s" % next(
               (f"index {i}: {a} > {b_}" for i, (a, b_) in enumerate(zip(ids, ids[1:])) if a > b_),
               ""))
+
+    # ---- 7. base_month（Agent 3 2nd iteration: Schema Fixer）----
+    # base_month = build_id 埋め込み日付 (XXXX.YYMMDD.NNN) の月。release_date
+    # (実配信月・ソース掲載月ベース) との分離スキーマ。全件必須。
+    bm_missing = [b["build_id"] for b in builds if "base_month" not in b]
+    check("builds: base_month present (all records)", not bm_missing, str(bm_missing[:10]))
+
+    bad_bm = [(b["build_id"], b.get("base_month")) for b in builds
+              if not BASE_MONTH_RE.match(str(b.get("base_month", "")))]
+    check("builds: base_month matches ^[0-9]{4}-[0-9]{2}$", not bad_bm, str(bad_bm[:10]))
+
+    bm_mismatch = [
+        (b["build_id"], b.get("base_month"))
+        for b in builds
+        if b.get("base_month") != f"20{b['build_id'][5:7]}-{b['build_id'][7:9]}"
+    ]
+    check("builds: base_month == build_id date part (YYMMDD -> 20YY-MM)",
+          not bm_mismatch, str(bm_mismatch[:10]))
+
+    # ---- 8. confidence（Agent 4 2nd iteration: Cross-Validator）----
+    # 外部独立ソース照合の確度。全件必須・3値域・confidence_sources は URL 配列。
+    conf_missing = [b["build_id"] for b in builds if "confidence" not in b]
+    check("builds: confidence present (all records)", not conf_missing, str(conf_missing[:10]))
+
+    bad_conf_b = [(b["build_id"], b.get("confidence")) for b in builds
+                  if b.get("confidence") not in CONFIDENCE_LEVELS]
+    check("builds: confidence in OFFICIAL/MULTI_SOURCE/SINGLE_SOURCE",
+          not bad_conf_b, str(bad_conf_b[:10]))
+
+    bad_cs = [b["build_id"] for b in builds
+              if not isinstance(b.get("confidence_sources"), list)
+              or any(not (isinstance(u, str) and u.startswith("https://"))
+                     for u in b.get("confidence_sources", []))]
+    check("builds: confidence_sources is a list of https URLs (all records)",
+          not bad_cs, str(bad_cs[:10]))
+
+    # ---- 9. anti_rollback（Agent 5 2nd iteration: Ops & Shipper）----
+    # 既知の ARB 対象ビルド（Agent 1 が公式警告文から収載）に incremented=true が
+    # 立っていること。ARB 例外の取りこぼし回帰をここで固定する。
+    ARB_KNOWN = ["BP1A.250505.005", "CP1A.260505.005", "CP1A.260505.005.A1"]
+    by_id = {b["build_id"]: b for b in builds}
+    arb_missing = [
+        bid for bid in ARB_KNOWN
+        if not (by_id.get(bid, {}).get("anti_rollback") or {}).get("incremented")
+    ]
+    check("builds: known ARB builds have anti_rollback.incremented=true %s" % ARB_KNOWN,
+          not arb_missing, str(arb_missing))
+
+    # incremented=true の全レコードに scope / effect（Agent 1 追記フィールド）が
+    # 非空 string で存在すること。
+    arb_bad = [
+        b["build_id"] for b in builds
+        if (b.get("anti_rollback") or {}).get("incremented")
+        and not all(isinstance(b["anti_rollback"].get(k), str) and b["anti_rollback"][k]
+                    for k in ("scope", "effect"))
+    ]
+    check("builds: ARB records (incremented=true) have non-empty scope/effect",
+          not arb_bad, str(arb_bad))
+
+    # ---- 10. recheck_at（Agent 5 2nd iteration: Ops & Shipper）----
+    # 運用マーカー。存在する場合のみ ^[0-9]{4}-[0-9]{2}$（YYYY-MM）を要求。
+    bad_recheck = [(e["id"], e.get("recheck_at")) for e in entries
+                   if "recheck_at" in e
+                   and not BASE_MONTH_RE.match(str(e.get("recheck_at", "")))]
+    check("entries: recheck_at matches ^[0-9]{4}-[0-9]{2}$ (when present)",
+          not bad_recheck, str(bad_recheck[:10]))
 
     # ---- 出力 ----
     n_fail = 0

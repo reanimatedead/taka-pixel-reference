@@ -9,13 +9,20 @@ HEAD（失敗時 GET フォールバック）でアクセスし、死んでい�
 依存: python3 標準ライブラリのみ。ネットワークアクセスは軽く
 （ユニークURLのみ・順次・リクエスト間隔 0.5s）。
 
-他リポの同名スクリプトの思想（ソースURL失効の定期検出）を踏襲した
-本リポジトリ向け新規実装。
+Obsidian-Public-Vault 版とは別実装。将来共通化検討。
+（思想＝ソースURL失効の定期検出は同じだが、コードは本リポジトリ向け新規実装）
+
+判定ロジック（2026-07-30 Agent 5 改修）:
+- HEAD が 4xx でも GET で必ず再確認する。support.google.com は HEAD に
+  404 を返す（GET では 200）ことが実測で確認済みのため（HEAD 偽陰性）。
+- support.google.com 系で GET も失敗した場合は hl=ja を付与して再試行。
+- それでも失敗した場合は 1 回だけリトライ（一過性のネットワーク失敗対策）。
 """
 import json
 import sys
 import time
 import urllib.error
+import urllib.parse
 import urllib.request
 from pathlib import Path
 
@@ -56,20 +63,52 @@ def probe(url, method):
         return resp.status
 
 
+def get_once(url):
+    """GET 1回。(status, note) を返す。status=None は接続不能。"""
+    try:
+        return probe(url, "GET"), "GET"
+    except urllib.error.HTTPError as e:
+        return e.code, "GET"
+    except Exception as e:  # URLError / timeout / SSL etc.
+        return None, f"{type(e).__name__}: {e}"
+
+
+def is_alive(status):
+    return status is not None and (200 <= status < 400 or status in SOFT_ALIVE)
+
+
+def with_hl_ja(url):
+    return url + ("&hl=ja" if "?" in url else "?hl=ja")
+
+
 def check(url):
-    """(status, note) を返す。status=None は接続不能。"""
-    for method in ("HEAD", "GET"):
-        try:
-            return probe(url, method), method
-        except urllib.error.HTTPError as e:
-            if method == "HEAD" and e.code in (405, 501):
-                continue  # HEAD 非対応サーバは GET で再試行
-            return e.code, method
-        except Exception as e:  # URLError / timeout / SSL etc.
-            if method == "HEAD":
-                continue  # 接続レイヤの失敗も GET で一度だけ再試行
-            return None, f"{type(e).__name__}: {e}"
-    return None, "unreachable"
+    """(status, note) を返す。status=None は接続不能。
+
+    HEAD 成功(2xx/3xx)以外は必ず GET で再確認する。support.google.com は
+    HEAD に 404 を返すが GET では 200 の HEAD 偽陰性が実測されているため、
+    旧実装（HEAD の 4xx を即 dead 判定）は誤検出していた。
+    """
+    try:
+        status = probe(url, "HEAD")
+        if 200 <= status < 400:
+            return status, "HEAD"
+    except Exception:
+        pass  # HEAD の失敗理由によらず GET で確認する
+    status, note = get_once(url)
+    if is_alive(status):
+        return status, note
+    # support.google.com 系: hl 未指定が原因のことがあるため hl=ja を付与して再試行
+    host = urllib.parse.urlsplit(url).hostname or ""
+    if host == "support.google.com":
+        s2, n2 = get_once(with_hl_ja(url))
+        if is_alive(s2):
+            return s2, f"{n2} +hl=ja"
+    # 一過性のネットワーク失敗対策のリトライ（1回のみ）
+    time.sleep(1.0)
+    s3, n3 = get_once(url)
+    if is_alive(s3):
+        return s3, f"{n3} retry"
+    return status if status is not None else s3, note if status is not None else n3
 
 
 def main():
