@@ -141,6 +141,12 @@ footer{max-width:1080px;margin:0 auto;padding:32px 24px;font-size:11px;color:#8a
 .bx-howto ol{padding-left:22px}
 .bx-howto code{font-family:var(--mono);background:var(--porcelain);padding:1px 6px;border-radius:4px}
 .bx-stale{margin:0 0 12px;padding:10px 14px;border:2px solid var(--alert);border-radius:10px;color:var(--alert);font-weight:700;font-size:13px}
+/* bx-conf: ビルド照合確度 (builds.json の confidence)。entries 側 build_link.confidence (bx-cf-*) とは別系統 */
+.bx-conf-official{color:var(--sage-deep)}
+.bx-conf-multi{color:#4a5f8a}
+.bx-conf-single{color:var(--alert);font-weight:700;background:#F4E6DE}
+.bx-conf-none{color:#7d827c}
+.bx-conf-warn{display:block;color:var(--alert);font-size:12px;font-weight:700;margin-top:2px}
 </style>
 </head>
 <body>
@@ -617,6 +623,31 @@ footer{max-width:1080px;margin:0 auto;padding:32px 24px;font-size:11px;color:#8a
     return { fixed: fixed, open: open, unknown: unknown };
   }
 
+  /* bx-conf: ビルド照合確度 (builds.json の confidence) の表示。
+     OFFICIAL = 公式第二経路 (Pixel Community 公式月次投稿) で build_id 一致を確認
+     MULTI_SOURCE = 独立系ソース 1 つ以上で一致 (相互独立 2 経路以上)
+     SINGLE_SOURCE = 外部照合できず (スクレイピング元の 1 経路のみ) → 赤バッジ + 要再確認の明示 */
+  var bxConfMeta = {
+    OFFICIAL: { cls: "bx-conf-official", label: "OFFICIAL（公式第二経路で照合済み）" },
+    MULTI_SOURCE: { cls: "bx-conf-multi", label: "MULTI_SOURCE（独立ソースで照合済み）" },
+    SINGLE_SOURCE: { cls: "bx-conf-single", label: "SINGLE_SOURCE（外部出現ゼロ・要再確認）" }
+  };
+  function bxConfRow(b){
+    var meta = bxConfMeta[b.confidence];
+    var h = "<dt>照合確度</dt><dd>";
+    if(meta){
+      h += '<span class="bx-badge ' + meta.cls + '">' + bxEsc(meta.label) + "</span>";
+      var n = (b.confidence_sources && b.confidence_sources.length) || 0;
+      if(n){ h += ' <span class="bx-conf-none">照合ソース ' + n + "件</span>"; }
+      if(b.confidence === "SINGLE_SOURCE"){
+        h += '<span class="bx-conf-warn">⚠ このビルドIDは取得元以外の外部ソースに一度も出現していません（外部出現ゼロ・要再確認）</span>';
+      }
+    }else{
+      h += '<span class="bx-badge bx-conf-none">記載なし</span>';
+    }
+    return h + "</dd>";
+  }
+
   function bxBuildInfo(b){
     var arb = b.anti_rollback || null;
     var h = "<dl>";
@@ -629,6 +660,7 @@ footer{max-width:1080px;margin:0 auto;padding:32px 24px;font-size:11px;color:#8a
     h += "<dt>ARBフラグ</dt><dd>" + (arb ? (arb.incremented ? "増加あり（incremented: true）" : "増加なし（incremented: false）") : "記載なし") + "</dd>";
     if(b.parent_build_id){ h += "<dt>親ビルド</dt><dd>" + bxEsc(b.parent_build_id) + "</dd>"; }
     if(b.verify_state){ h += "<dt>verify_state</dt><dd>" + bxEsc(b.verify_state) + "</dd>"; }
+    h += bxConfRow(b);
     h += "</dl>";
     if(arb && arb.incremented){
       // bx: ARB表示強化（Agent 1 2nd iteration: ARB Historian）。

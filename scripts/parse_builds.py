@@ -664,15 +664,26 @@ def main():
         sec = bulletins.get(month, {}).get("patch_level") if month else None
 
         # region_scope: ソースHTMLの変異版注記の直接パースが正。
-        # 注記が無い変異版のみ SUFFIX_MONTH_MAP (base month × suffix) で補完。
+        # devsite の正常行は必ず "(BUILD_ID, Mon YYYY[, REGION])" の月注記を持ち、
+        # 「月注記あり・地域トークンなし」は地域限定なし (= global) を意味する
+        # (2026-07-30 スナップショット実測: 月注記なしのスコープ内行は 0 件。
+        #  外部照合済み global 変異版 18 件がこの表記。builds.json の confidence_sources 参照)。
+        # 注記そのものが欠落した縮退行 (月も取れない) のみ SUFFIX_MONTH_MAP
+        # (base month × suffix) でフォールバック補完する。
         # 固定辞書 (suffix→region のグローバル1次元マップ) は使用禁止。
+        # フォールバックも失敗した場合 (注記欠落かつマップ外の月×サフィックス) は
+        # "global" 等で推測して埋めず region_scope="unknown" + human_review を立てる
+        # (2026-07-31 凍結時に確定。tests/test_suffix_fallback.py で回帰固定)。
         regions = set(a["regions"])
         region_fallback_src = None
-        if not regions and VARIANT_SUFFIX_RE.search(bid):
+        region_unknown = False
+        if not regions and VARIANT_SUFFIX_RE.search(bid) and not a["months"]:
             fb = SUFFIX_MONTH_MAP.get((base_month_of(bid), bid.rsplit(".", 1)[1]))
             if fb:
                 regions = set(fb["region"].split("; "))
                 region_fallback_src = fb["source"]
+            else:
+                region_unknown = True
 
         rec = {
             "build_id": bid,
@@ -681,7 +692,8 @@ def main():
             "release_date": release_date,
             "security_patch": sec,
             "devices": sorted(a["devices"]),
-            "region_scope": "; ".join(sorted(regions)) if regions else "global",
+            "region_scope": ("unknown" if region_unknown
+                             else "; ".join(sorted(regions)) if regions else "global"),
         }
         if region_fallback_src:
             rec["region_scope_source"] = region_fallback_src
@@ -737,6 +749,14 @@ def main():
                 if a["regions"] and not (a["regions"] & syn):
                     conflicts.append(
                         f"region_scope: anchor={claim} / parsed={sorted(a['regions'])}")
+        # 変異版サフィックスの地域が注記 (欠落) からもフォールバックからも導出
+        # できない場合は推測せず人間確認に回す (region_scope="unknown" のまま残す)
+        if region_unknown:
+            rec["human_review"] = True
+            conflicts.append(
+                "region_scope: 変異版サフィックスの注記欠落 (月注記も取得できず)・"
+                f"SUFFIX_MONTH_MAP ({base_month_of(bid)}, {bid.rsplit('.', 1)[1]}) "
+                "未登録 -> unknown")
         if conflicts:
             resolution = RESOLVED_CONFLICTS.get(bid)
             if resolution and all(c.startswith("release_date:") for c in conflicts):

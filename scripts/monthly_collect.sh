@@ -66,8 +66,11 @@ python3 "$REPO/scripts/parse_builds.py" "$TODAY"
 # --- 3. 検証 -----------------------------------------------------------------
 # 契約テストとサフィックス回帰テストの両方を必ず実行する（片方だけの実行は
 # サフィックス辞書の回帰を素通しするため禁止。2026-07-30 Agent 5）。
+# 凍結時 (2026-07-31) に SUFFIX_MONTH_MAP フォールバック結合テストを追加
+# （注記欠落時の unknown+human_review 動作の回帰防止）。
 python3 "$REPO/tests/test_contract.py"
 python3 "$REPO/tests/test_suffix_map.py"
+python3 "$REPO/tests/test_suffix_fallback.py"
 python3 "$REPO/scripts/decay_warning.py"
 
 echo "=== monthly_collect done $(date '+%Y-%m-%d %H:%M:%S') ==="

@@ -20,9 +20,11 @@ INDEX_PATH = REPO / "docs" / "dict" / "index.html"
 # base_month を全67件に追加 (2026-07-30)。行数非減少の思想は維持。
 # MIN_LINES_BUILDS 1960→2286: Agent 4 (2nd iteration: Cross-Validator) が
 # confidence / confidence_sources を全67件に追加 (2026-07-30)。
+# MIN_LINES_INDEX 727→789: 2026-07-31 凍結時に confidence 表示 (bx-conf) を
+# index.html に追加。行数非減少の思想は維持し新実測値へ引き上げ。
 MIN_LINES_ENTRIES = 1764
 MIN_LINES_BUILDS = 2286
-MIN_LINES_INDEX = 727
+MIN_LINES_INDEX = 789
 
 # ---- 値域 ----
 BUILD_REQUIRED = [
@@ -179,6 +181,19 @@ def main():
                      for u in b.get("confidence_sources", []))]
     check("builds: confidence_sources is a list of https URLs (all records)",
           not bad_cs, str(bad_cs[:10]))
+
+    # ---- 8b. aosp_tag_build_id（2026-07-31 凍結時: AOSPタグ混入検査）----
+    # AOSPタグ側のビルドID (source.android.com/docs/setup/reference/build-numbers)
+    # が Pixel 実配信IDと異なる場合にのみ分離保持する任意フィールド。
+    # 存在する場合のみ形式 (build_id と同じ正規表現) と build_id との非同一を検査。
+    # 2026-07-31 の全67件突合では混入ゼロ (data/build-dict-decisions.md 参照)。
+    bad_aosp = [(b["build_id"], b.get("aosp_tag_build_id")) for b in builds
+                if "aosp_tag_build_id" in b
+                and (not isinstance(b["aosp_tag_build_id"], str)
+                     or not BUILD_ID_RE.match(b["aosp_tag_build_id"])
+                     or b["aosp_tag_build_id"] == b["build_id"])]
+    check("builds: aosp_tag_build_id matches build_id regex and differs from build_id (when present)",
+          not bad_aosp, str(bad_aosp[:10]))
 
     # ---- 9. anti_rollback（Agent 5 2nd iteration: Ops & Shipper）----
     # 既知の ARB 対象ビルド（Agent 1 が公式警告文から収載）に incremented=true が
