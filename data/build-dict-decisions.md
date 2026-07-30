@@ -384,3 +384,60 @@ SINGLE_SOURCE 4件 = BD3A.251005.003（rango 10/8波 global）/ BD3A.251005.003.
 - parse_builds.py 冪等性: 2026-07-30 で2回実行し MD5 同一（fa8229beee14b2527b8e1b469934398a）・作業ツリーの builds.json と byte 一致
 - 行数: builds.json 2286 / entries.json 1765 / docs/dict/index.html 757（いずれも基準以上）
 - forbidden terms スキャン・git status クリーンは commit 直前に実施（結果は最終報告）
+
+## Agent 2 (3rd iteration: Freeze Verifier, 2026-07-31)
+
+凍結 (docs/FROZEN.md) 前の最終検証。取得物は `data/raw/2026-07-31-freeze-verify/` に保存
+（`YYYY-MM-DD` 完全一致でないディレクトリ名にしたのは意図的: parse_builds.py の
+スナップショット自動解決は `^\d{4}-\d{2}-\d{2}$` のディレクトリを拾うため、
+ota/images/bulletin を含まない検証用取得物が誤って最新スナップショット扱いされるのを防ぐ）。
+
+### 1. 2026年3月ビルドの末尾番号確定 (.016 か .018 か)
+- **結論: CP1A.260305.018 で確定（builds.json は正しく、訂正不要）**。
+- 一次根拠: Google Pixel Community 公式月次投稿「Google Pixel Update - March 2026」
+  https://support.google.com/pixelphone/thread/410784164 を curl GET で取得
+  （`community-2026-03-thread-410784164.html`, 1,852,270 bytes, Community Manager 投稿）。
+  スレッド全文に CP1A.260305.018 が 24 回出現（.018 単体 22 + .018.A1 2）、**CP1A.260305.016 の出現は 0 回**。
+- .016 の出どころは 2 系統が確認済み: (a) 9to5Google 2026-03 記事本文の誤記（2nd iteration Agent 4 記録済み）、
+  (b) AOSP タグ側の別ビルド（下記 2. 参照。ただし build-numbers 表に CP1A.260305 系の掲載はなく、
+  少なくとも公式 Build IDs 表由来ではない）。
+
+### 2. AOSPタグ由来ビルド番号の混入検査（全67件）
+- source.android.com/docs/setup/reference/build-numbers（公式 Build IDs 表）を取得
+  （`aosp-build-numbers.html`, 341,016 bytes, 表 459 行）し、全67件の build_id と突合。
+- **結論: 混入ゼロ**。判定は 2 段:
+  1. builds.json の全67件が実配信スナップショット（data/raw/2026-07-30 の ota.html / images.html）に
+     出現することを機械照合 → **不出現 0 件**（= AOSPタグ表からしか取れない ID は 1 件もない）。
+  2. AOSPタグ表と builds.json で「同一 base（プレフィックス+日付）だがビルドIDが異なる」組を抽出 →
+     該当は CP2A.260605 のみ: AOSPタグ android-17.0.0_r1 = **CP2A.260605.016**、Pixel 実配信 = CP2A.260605.012（+ .A1/.B1/.C1）。
+     builds.json は実配信側 .012 を収載しており正しい（実証例そのもの。混入していない）。
+- 参考: builds.json とAOSPタグ表の両方に出現する ID は 5 件
+  （BP1A.250505.005=r32 / BP2A.250605.031.A2=16.0.0_r1 / .A3=r2 / BP3A.250905.014=r3 / BP4A.251205.006=r4）。
+  これらはタグ側ビルドIDと実配信IDが同一の正常ケースであり分離不要。
+- 訂正 0 件のため `aosp_tag_build_id` フィールドの実データ付与はなし。将来の混入訂正に備え、
+  tests/test_contract.py に形式チェックを追加（存在する場合のみ: build_id 正規表現一致 + build_id と非同一）。23→**24チェック**。
+
+### 3. SUFFIX_MONTH_MAP フォールバック経路の結合テスト（+実装修正）
+- 現データでフォールバック発動 0 件 = 本番未検証だったため、注記を欠落させた合成HTML
+  （`tests/fixtures/suffix_fallback/{ota,images,pixel-bulletin}.html`）を parse_builds.main() に
+  実際に通す結合テスト `tests/test_suffix_fallback.py`（**13チェック**）を追加。monthly_collect.sh の検証段にも追加。
+- **実装修正**: 旧実装は「注記欠落 + マップ外の月×サフィックス」を region_scope="global" で
+  黙って埋めていた（推測）。region_scope="unknown" + human_review=true + conflict_note に修正。
+- **重要な線引き**: devsite の正常行は必ず月注記 `(BUILD_ID, Mon YYYY[, REGION])` を持ち
+  （2026-07-30 スナップショット実測: 月注記なしのスコープ内行 0 件）、
+  「月注記あり・地域トークンなし」は devsite 自身の global 表記である（外部照合済み global 変異版 18 件が
+  この表記。例: BD3A.250721.001.B7 は公式9月投稿で global 確認済み）。よって unknown 化の対象は
+  「注記そのものが欠落し月も取れない縮退行」に限定した。ここを区別しないと外部照合済みの 18 件が
+  unknown+human_review に化ける（実際に初版実装で 18 件化けたため線引きを導入。builds.json は
+  修正後の再生成で凍結時 MD5 fa8229beee14b2527b8e1b469934398a と同一 = データ無変更を機械確認）。
+
+### 4. rossmann リンクの差し替え（Wayback）
+- 対象は entries.json PXD-0023 の 1 件のみ（builds.json に rossmann 参照なし）。
+- archive.org/wayback/available API は複数回 429（レート制限、90秒空けても継続）のため、
+  web.archive.org/web/2026/<URL> の直接プローブに切替 → 302 でスナップショット
+  **https://web.archive.org/web/20251122151930/https://wiki.rossmanngroup.com/wiki/Pixel_4a_Battery_Performance_Program**
+  を発見。実取得 128,387 bytes・「Pixel 4a」21 出現・「Battery Performance Program」本文確認
+  （`wayback-rossmann-pixel4a-20251122151930.html` に保存）。
+- PXD-0023 の sources を Wayback URL へ差し替え（date は再確認日 2026-07-31 に更新）。
+  ソースは削除ではなく差し替えのため evidence_level=OFFICIAL（support.google.com 公式含む4ソース）は不変。
+  builds.json の confidence への影響もなし。
