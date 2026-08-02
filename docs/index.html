@@ -97,6 +97,21 @@ pre{background:#2B2F2C;color:#E8EAE5;font-family:var(--mono);font-size:12px;bord
 pre .c{color:#8FA894}
 .lv{display:inline-block;font-family:var(--mono);font-size:10px;color:#fff;background:#4a5f8a;border-radius:99px;padding:1px 8px;margin-right:8px}
 .lv.danger{background:var(--alert)}
+.dev-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;margin:14px 0 18px}
+.dev-card{background:var(--card);border:1px solid var(--hazel);border-radius:14px;padding:14px 16px}
+.dev-card h3{font-size:14px;margin-bottom:5px}
+.dev-card p{font-size:12px;color:#6a6f6a}
+.dev-pill{display:inline-block;font-family:var(--mono);font-size:10px;border-radius:99px;border:1px solid currentColor;padding:1px 7px;margin-right:6px}
+.dev-pill.low{color:var(--sage-deep)}
+.dev-pill.mid{color:#9B6A24}
+.dev-pill.high{color:var(--alert)}
+.dev-list{padding-left:20px;font-size:13px}
+.dev-list li{margin-bottom:5px}
+.dev-table table{min-width:1180px}
+.dev-table td:nth-child(3),.dev-table td:nth-child(4){min-width:250px}
+.flow-mini{display:flex;gap:8px;align-items:stretch;overflow-x:auto;padding:2px 0 8px}
+.flow-mini span{flex:0 0 150px;border:1px solid var(--hazel);border-radius:10px;background:#FBFCFA;padding:8px 10px;font-size:12px;text-align:center}
+.flow-mini i{display:flex;align-items:center;color:var(--sage-deep);font-family:var(--mono);font-style:normal}
 </style>
 </head>
 <body>
@@ -111,6 +126,7 @@ pre .c{color:#8FA894}
 <nav aria-label="ページ内リンク">
   <ul>
     <li><a href="#specs">スペック比較</a></li>
+    <li><a href="#dev-options">開発者OP</a></li>
     <li><a href="#support">サポート期限</a></li>
     <li><a href="#fold">Fold系</a></li>
     <li><a href="#links">公式ヘルプ</a></li>
@@ -158,6 +174,104 @@ pre .c{color:#8FA894}
     </tbody>
   </table>
   </div>
+</section>
+
+<section id="dev-options">
+  <h2>開発者オプション詳細（分類・項目・用途）</h2>
+  <p class="sec-note">入口: <kbd>設定</kbd> → <kbd>デバイス情報</kbd> → <kbd>ビルド番号を7回タップ</kbd> → <kbd>設定</kbd> → <kbd>システム</kbd> → <kbd>開発者向けオプション</kbd>。Pixel/Android 17 を基準に、端末やOSで名称・表示有無が変わる項目は「表示される場合」として扱う。</p>
+
+  <div class="alert-band">原則: 不具合解析が終わったら <strong>USBデバッグ / ワイヤレスデバッグ / OEMロック解除 / GPU強制系 / アクティビティ破棄系</strong> は元に戻す。メイン機で「意味は不明だが速くなりそう」という理由で変更しない。</div>
+
+  <div class="dev-grid">
+    <div class="dev-card"><h3>診断・ログ</h3><p>バグレポート、メモリ、実行中サービス、logcat量を確認する。問い合わせや再現証拠の中心。</p></div>
+    <div class="dev-card"><h3>ADB・PC接続</h3><p>USB/Wi-Fi経由で端末を操作する。復旧・バックアップ・ログ採取に使うが、許可管理が重要。</p></div>
+    <div class="dev-card"><h3>入力・画面表示</h3><p>タップ、ポインタ、レイアウト境界、アニメーションを可視化し、操作異常やUI崩れを切り分ける。</p></div>
+    <div class="dev-card"><h3>GPU・描画</h3><p>GPU負荷、オーバードロー、HW overlay、色覚シミュレーションを確認する。ゲーム/動画/画面乱れ向け。</p></div>
+    <div class="dev-card"><h3>通信・Bluetooth</h3><p>Wi-Fi詳細ログ、モバイル維持、Bluetooth音声/ログを確認する。Android Autoやイヤホン不調向け。</p></div>
+    <div class="dev-card"><h3>アプリ負荷試験</h3><p>バックグラウンド制限、アクティビティ破棄、Shortcut制限を使い、アプリの弱点を意図的に出す。</p></div>
+  </div>
+
+  <details open>
+    <summary><span><span class="ts-tag">SAFE FLOW</span>使う前後の基本フロー</span></summary>
+    <div class="body">
+      <div class="flow-mini" role="img" aria-label="開発者オプション利用フロー">
+        <span>目的を決める</span><i>→</i><span>現在値をメモ/撮影</span><i>→</i><span>1項目だけ変更</span><i>→</i><span>再現確認</span><i>→</i><span>ログ保存</span><i>→</i><span>元に戻す</span>
+      </div>
+      <ul class="dev-list">
+        <li><strong>端末保護:</strong> ADB許可ダイアログは自分のPCだけ許可。共有PC・会社PC・不明なUSBハブでは許可しない。</li>
+        <li><strong>変更管理:</strong> 画面録画・スクショで変更前の値を残す。複数項目を同時に変えると原因が追えない。</li>
+        <li><strong>初期化前:</strong> バグレポート、スクリーン録画、発生時刻、Android build、アプリ版本を保存する。</li>
+      </ul>
+    </div>
+  </details>
+
+  <div class="table-wrap dev-table">
+  <table>
+    <thead>
+      <tr>
+        <th>分類</th>
+        <th>項目</th>
+        <th>機能・何ができるか</th>
+        <th>主な用途</th>
+        <th>危険度 / 戻し方</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><th>有効化</th><td>開発者向けオプション全体スイッチ</td><td>開発者向け設定の有効/無効を切り替える。OFFにすると多くの項目が無効化される。</td><td>普段はOFF、診断時だけONにする運用。</td><td><span class="dev-pill low">LOW</span>作業後OFF。ただし個別値が残る項目もあるため確認。</td></tr>
+      <tr><th>有効化</th><td>クイック設定開発者タイル</td><td>選んだ開発者項目を通知シェードのクイック設定に追加する。</td><td>画面録画中の「Show taps」切替、GPU/レイアウト確認の一時ON。</td><td><span class="dev-pill low">LOW</span>使わないタイルは削除。</td></tr>
+      <tr><th>診断・ログ</th><td>メモリ</td><td>平均メモリ使用量、空き容量、アプリ別メモリ消費を確認する。</td><td>LINE/ゲーム/ブラウザが重い、Android 17後に落ちる時の一次確認。</td><td><span class="dev-pill low">LOW</span>閲覧のみ。</td></tr>
+      <tr><th>診断・ログ</th><td>バグレポートを取得</td><td>端末ログ、システム状態、直近のエラー情報をまとめたzipを生成する。</td><td>Google/アプリ開発元/キャリアへ証拠付きで問い合わせる。</td><td><span class="dev-pill mid">MED</span>個人情報を含む。共有前に宛先を限定。</td></tr>
+      <tr><th>診断・ログ</th><td>バグレポートのショートカット</td><td>電源メニュー等からバグレポート取得に素早く入る。</td><td>再現タイミングが短い不具合の直後にログを取る。</td><td><span class="dev-pill low">LOW</span>不要ならOFF。</td></tr>
+      <tr><th>診断・ログ</th><td>実行中のサービス</td><td>現在動いているサービス、プロセス、メモリ使用を確認する。</td><td>通知遅延、常駐アプリ、VPN、LINE/Teams/ゲーム常駐の切り分け。</td><td><span class="dev-pill low">LOW</span>停止操作は慎重に。基本は閲覧。</td></tr>
+      <tr><th>診断・ログ</th><td>ロガーバッファサイズ</td><td>logcatに保持するログ量を増減する。</td><td>再現に時間がかかる不具合でログが流れないようにする。</td><td><span class="dev-pill mid">MED</span>大きすぎるとメモリ使用増。作業後は既定値へ。</td></tr>
+      <tr><th>ADB・PC接続</th><td>USBデバッグ</td><td>USB接続したPCからADBコマンド、ログ取得、ファイル退避、sideload準備を可能にする。</td><td>専門TS、bugreport、復旧、写真退避、アプリ調査。</td><td><span class="dev-pill high">HIGH</span>作業後OFF。許可PC以外では絶対に許可しない。</td></tr>
+      <tr><th>ADB・PC接続</th><td>ワイヤレスデバッグ</td><td>同一ネットワーク上のPCからADB接続する。</td><td>USB端子不調、ケーブルなしでのログ採取、Android 16+環境の開発。</td><td><span class="dev-pill high">HIGH</span>同一LAN上のリスクあり。作業後OFF、ペアリング削除。</td></tr>
+      <tr><th>ADB・PC接続</th><td>USBデバッグの許可を取り消す</td><td>過去に許可したPCのADB認証鍵を削除する。</td><td>中古端末、共有PC接続後、会社PC返却後の安全化。</td><td><span class="dev-pill low">LOW</span>定期的に実行してよい。次回接続時に再許可。</td></tr>
+      <tr><th>ADB・PC接続</th><td>デフォルトUSB設定</td><td>USB接続時の既定動作（ファイル転送、MIDI、充電のみ等）を選ぶ。</td><td>PCが端末を認識しない、Android Auto有線接続、写真退避の切り分け。</td><td><span class="dev-pill mid">MED</span>常時ファイル転送は避け、通常は充電のみへ戻す。</td></tr>
+      <tr><th>ADB・PC接続</th><td>デバッグアプリを選択 / デバッガを待機</td><td>指定アプリの起動時にデバッガ接続を待つ。</td><td>自作/検証アプリのクラッシュ調査。</td><td><span class="dev-pill mid">MED</span>対象アプリが起動待ちで止まる。作業後解除。</td></tr>
+      <tr><th>ADB・PC接続</th><td>USB経由のアプリを確認</td><td>ADB経由で入れるアプリを安全性チェックに通す。</td><td>野良APK検証時の最低限の保護。</td><td><span class="dev-pill low">LOW</span>基本ON推奨。</td></tr>
+      <tr><th>入力</th><td>タップを表示</td><td>画面タップ位置に丸い視覚効果を出す。</td><td>操作動画、タッチ無反応/過剰反応の証拠化、サポート説明。</td><td><span class="dev-pill low">LOW</span>録画後OFF。</td></tr>
+      <tr><th>入力</th><td>ポインタの位置</td><td>座標、移動軌跡、タッチ圧/座標情報を画面上部に表示する。</td><td>画面端のタッチ抜け、逆方向スワイプ、ゴーストタッチの診断。</td><td><span class="dev-pill low">LOW</span>常用には邪魔。診断後OFF。</td></tr>
+      <tr><th>描画・UI</th><td>レイアウト境界を表示</td><td>UI部品の境界、余白、クリップ領域を線で表示する。</td><td>アプリのボタンずれ、表示崩れ、画面サイズ/折りたたみ対応確認。</td><td><span class="dev-pill low">LOW</span>確認後OFF。</td></tr>
+      <tr><th>描画・UI</th><td>RTLレイアウト方向を強制</td><td>画面を右から左の言語レイアウトとして強制表示する。</td><td>多言語UI、戻るジェスチャー、レイアウト崩れの検証。</td><td><span class="dev-pill low">LOW</span>通常利用ではOFF。</td></tr>
+      <tr><th>描画・UI</th><td>Window / Transition / Animator animation scale</td><td>ウィンドウ、画面遷移、アニメーション速度を変更する。</td><td>体感速度改善、アニメーション起因のカクつき切り分け。</td><td><span class="dev-pill low">LOW</span>0.5x〜1x推奨。0xはアプリ挙動確認時だけ。</td></tr>
+      <tr><th>描画・UI</th><td>ディスプレイカットアウトをシミュレート</td><td>ノッチ/パンチホール等の表示領域を仮想的に再現する。</td><td>アプリの全画面表示、ステータスバー重なり確認。</td><td><span class="dev-pill low">LOW</span>検証後OFF。</td></tr>
+      <tr><th>描画・UI</th><td>最小幅（表示される場合）</td><td>dp単位の画面幅を変更し、UI密度を変える。</td><td>タブレット風表示、表示密度検証。</td><td><span class="dev-pill high">HIGH</span>値を誤ると操作困難。変更前の値を必ず記録。</td></tr>
+      <tr><th>GPU・描画</th><td>GPUレンダリングのプロファイル作成</td><td>フレーム描画時間を棒グラフで表示/記録する。</td><td>ゲーム/アプリのカクつき、FPS低下、UI jank確認。</td><td><span class="dev-pill low">LOW</span>確認後OFF。</td></tr>
+      <tr><th>GPU・描画</th><td>GPUビュー更新を表示</td><td>GPUで再描画された領域を視覚表示する。</td><td>無駄な再描画、スクロール時の重さを探す。</td><td><span class="dev-pill low">LOW</span>確認後OFF。</td></tr>
+      <tr><th>GPU・描画</th><td>GPUオーバードローをデバッグ</td><td>同一ピクセルが何回描画されているかを色分けする。</td><td>アプリが重い、画面描画が遅い時の開発者向け診断。</td><td><span class="dev-pill low">LOW</span>通常表示では使わない。</td></tr>
+      <tr><th>GPU・描画</th><td>4x MSAAを強制</td><td>OpenGL ES 2.0アプリでアンチエイリアスを強制する。</td><td>古いゲームの輪郭改善テスト。</td><td><span class="dev-pill mid">MED</span>電池消費/発熱増。ゲーム後OFF。</td></tr>
+      <tr><th>GPU・描画</th><td>HWオーバーレイを無効化</td><td>画面合成をハードウェアオーバーレイではなくGPU側へ寄せる。</td><td>画面ちらつき、黒画面、動画/ゲーム描画不具合の一時切り分け。</td><td><span class="dev-pill mid">MED</span>発熱/電池消費増。恒久対策にしない。</td></tr>
+      <tr><th>GPU・描画</th><td>色空間をシミュレート</td><td>色覚特性（Monochromacy / Deuteranomaly等）を端末全体で模擬する。</td><td>アクセシビリティ確認、色だけで状態を示していないか検査。</td><td><span class="dev-pill low">LOW</span>スクショには反映されない点に注意。確認後OFF。</td></tr>
+      <tr><th>通信</th><td>Wi-Fi詳細ログ</td><td>Wi-Fi接続状態やRSSI等の情報表示を増やす。</td><td>Wi-Fi切断、ローカルネットワーク、Android Auto無線接続の切り分け。</td><td><span class="dev-pill low">LOW</span>確認後OFFでも可。</td></tr>
+      <tr><th>通信</th><td>モバイルデータを常にON</td><td>Wi-Fi接続中もモバイル回線を維持する。</td><td>Wi-Fi↔モバイル切替遅延、着信/通知遅延の切り分け。</td><td><span class="dev-pill mid">MED</span>電池消費増。通常はOFF推奨。</td></tr>
+      <tr><th>通信</th><td>Bluetooth HCI snoop log</td><td>Bluetooth通信ログを取得できるようにする。</td><td>イヤホン音切れ、Android Auto、車載通話、ゲーム音声遅延の証拠化。</td><td><span class="dev-pill high">HIGH</span>接続情報を含む。取得後OFF、ログ共有は限定。</td></tr>
+      <tr><th>通信</th><td>絶対音量を無効化</td><td>端末音量とBluetooth機器音量の連動を切る。</td><td>イヤホン/車載で音量が極端、無音、音割れする時の切り分け。</td><td><span class="dev-pill mid">MED</span>改善しなければ戻す。機器ごとに差が出る。</td></tr>
+      <tr><th>通信</th><td>Bluetooth audio codec / sample rate / bits / LDAC</td><td>対応イヤホンの音声コーデックや品質を指定する。</td><td>LDAC不安定、ゲーム遅延、音飛び、通話品質の比較。</td><td><span class="dev-pill mid">MED</span>接続し直すと戻る場合あり。標準値を記録。</td></tr>
+      <tr><th>アプリ</th><td>アクティビティを保持しない</td><td>アプリ画面を離れた瞬間にActivityを破棄する。</td><td>アプリが状態保存できているかのストレステスト。</td><td><span class="dev-pill high">HIGH</span>LINE/ゲーム/決済の挙動が崩れる。通常は必ずOFF。</td></tr>
+      <tr><th>アプリ</th><td>バックグラウンドプロセスの上限</td><td>バックグラウンドで保持するプロセス数を制限する。</td><td>通知遅延、再起動、メモリ不足時の再現テスト。</td><td><span class="dev-pill high">HIGH</span>通常は標準制限。変更したまま使わない。</td></tr>
+      <tr><th>アプリ</th><td>スタンバイアプリ</td><td>アプリの待機バケット状態を確認/変更する。</td><td>通知が来ない、バックグラウンド同期しないアプリの確認。</td><td><span class="dev-pill mid">MED</span>設定を戻すか、通常使用で学習させる。</td></tr>
+      <tr><th>アプリ</th><td>ShortcutManager rate-limitingをリセット</td><td>ショートカットAPIのテスト制限をリセットする。</td><td>自作/検証アプリのショートカット反映テスト。</td><td><span class="dev-pill low">LOW</span>一般ユーザー用途は少ない。</td></tr>
+      <tr><th>アプリ</th><td>画面共有保護を無効化</td><td>機密画面の画面共有保護をテスト目的で外す。</td><td>デモ/検証でスクリーン共有に表示されない画面を確認。</td><td><span class="dev-pill high">HIGH</span>機密漏えいリスク。常用しない。</td></tr>
+      <tr><th>復旧・低層</th><td>OEMロック解除</td><td>ブートローダーをアンロック可能にする前提スイッチ。</td><td>Factory Image全書き込み、カスタムROM検証、EOL機の実験。</td><td><span class="dev-pill high">HIGH</span>メイン機ではOFF。アンロックは全データ消去/決済アプリ不可リスク。</td></tr>
+      <tr><th>復旧・低層</th><td>DSU Loader（表示される場合）</td><td>Dynamic System Updatesで一時的なシステムイメージを起動する。</td><td>開発者向け互換性検証。</td><td><span class="dev-pill high">HIGH</span>通常ユーザーは触らない。誤操作時は再起動/削除。</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <details>
+    <summary><span><span class="ts-tag">逆引き</span>症状別に見る項目</span></summary>
+    <div class="body">
+      <ul>
+        <li><strong>Android Auto / 車載Bluetooth:</strong> USBデバッグでbugreport、デフォルトUSB設定、Bluetooth HCI snoop log、絶対音量を無効化、Wi-Fi詳細ログ。</li>
+        <li><strong>LINE通知が来ない:</strong> 実行中のサービス、スタンバイアプリ、メモリ、バグレポート。バックグラウンドプロセス上限を変更している場合は標準へ戻す。</li>
+        <li><strong>ゲームが重い/落ちる:</strong> GPUレンダリングのプロファイル、GPUビュー更新、HWオーバーレイ無効化の一時切り分け、メモリ、バグレポート。</li>
+        <li><strong>タッチ異常:</strong> タップを表示、ポインタの位置。画面録画で「触っているのに反応しない/触っていないのに動く」を残す。</li>
+        <li><strong>アプリクラッシュ/ANR:</strong> バグレポート、ロガーバッファサイズ、デバッグアプリを選択。自分のアプリ以外では「アクティビティを保持しない」を常用しない。</li>
+        <li><strong>復旧/ADB:</strong> USBデバッグ、USBデバッグの許可を取り消す、デフォルトUSB設定。復旧操作は下の専門TSへ。</li>
+      </ul>
+    </div>
+  </details>
 </section>
 
 <section id="support">

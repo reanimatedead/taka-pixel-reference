@@ -1,5 +1,12 @@
 # OS別不具合マトリクス 出典記録（#os-bugs）
 
+## 2026-08-02 — 開発者オプション詳細（#dev-options）
+
+| 項目 | URL | 確認日 | メモ |
+| --- | --- | --- | --- |
+| Android Developers: Configure on-device developer options | https://developer.android.com/studio/debug/dev-options | 2026-08-02 | 開発者オプションの有効化、USB/Wi-Fi debugging、General/Input/Drawing/GPU/Apps 項目の一次ソース。 |
+| Android 17 CDD: Developer Options | https://source.android.com/docs/compatibility/17/android-17-cdd#6_2_developer_options | 2026-08-02 | Developer Options を標準UIとして提供し、既定で隠す要件の一次ソース。 |
+
 Agent 2 (research-verifier) による検証ログ。`public/index.html` の `#os-bugs` セクションで `UNVERIFIED` だった項目を Web 検索・実ページ取得で検証し、出典が確認できたものを `VERIFIED` に更新した。
 
 確認日は全て **2026-07-24**。
