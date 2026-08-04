@@ -1,5 +1,13 @@
 # OS別不具合マトリクス 出典記録（#os-bugs）
 
+## 2026-08-05 — Pixel標準 / Pro 諸元追加（#pixel-lineup / dict #model-specs）
+
+| 項目 | URL | 確認日 | メモ |
+| --- | --- | --- | --- |
+| Pixel phone hardware tech specs | https://support.google.com/pixelphone/answer/7158570 | 2026-08-05 | Pixel 6/6 Pro、7/7 Pro、8/8 Pro、9/9 Pro/9 Pro XL の公式ハードウェア諸元。 |
+| Pixel phone hardware tech specs（earlier models） | https://support.google.com/pixelphone/answer/16043605 | 2026-08-05 | Pixel 5 の公式ハードウェア諸元。 |
+| Learn when you'll get software updates on Google Pixel phones | https://support.google.com/pixelphone/answer/4457705 | 2026-08-05 | Pixel 5a以前はEOL、Pixel 6/7/Foldは5年、Pixel 8以降は7年の更新ポリシー。 |
+
 ## 2026-08-02 — 開発者オプション詳細（#dev-options）
 
 | 項目 | URL | 確認日 | メモ |

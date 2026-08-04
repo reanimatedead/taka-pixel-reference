@@ -1,6 +1,6 @@
 # taka-pixel-reference
 
-Pixel a シリーズ（4a → 10a）の個人用リファレンスページ「**Pixel 整備手帳**」。スペック比較・開発者オプション・サポート期限・公式ヘルプリンク・電話/Gmail 機能・OS別不具合マトリクス・トラブルシューティング・専門TS（ADB / fastboot / コードネーム / 復旧手順）を 1 枚の静的 HTML に集約したもの。
+Pixel の個人用リファレンスページ「**Pixelの諸元**」。a シリーズ、標準モデル、Pro / Pro XL、Fold 系のスペック比較・開発者オプション・サポート期限・公式ヘルプリンク・電話/Gmail 機能・OS別不具合マトリクス・トラブルシューティング・専門TS（ADB / fastboot / コードネーム / 復旧手順）を 1 枚の静的 HTML に集約したもの。
 
 判断基準は「今日、その端末を安全に使えるか」。EOL（アップデート提供終了）判定と、Android 各バージョンの定番不具合→対策を手元で即引けるようにするのが目的。
 
@@ -49,7 +49,7 @@ Android の月例セキュリティパッチ配信後に、以下を回す：
 
 ## 不具合辞書（dict/）
 
-整備手帳とは別ページの「不具合 × 対処法 辞書」。1000件を書くのではなく、1000件が貯まって腐らない構造（データ JSON と表示 HTML の分離）を先に作るという思想で運用する。
+Pixelの諸元とは別ページの「不具合 × 対処法 辞書」。1000件を書くのではなく、1000件が貯まって腐らない構造（データ JSON と表示 HTML の分離）を先に作るという思想で運用する。
 
 - **URL**: `https://reanimatedead.github.io/taka-pixel-reference/dict/`
 - **データ本体**: `docs/dict/data/entries.json`（スキーマ定義は `UPDATE-004.md` を参照。`id` は PXD-連番4桁で欠番・再利用禁止、`yomi` はあいうえお索引の生成キー、`category` は10分類のみ、`severity` = critical/high/medium/low、`fix_status` = patched/open/wontfix/spec、`verify_state` は新規 UNVERIFIED 開始が既定）
