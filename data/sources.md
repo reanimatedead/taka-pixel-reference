@@ -4,7 +4,7 @@
 
 | 項目 | URL | 確認日 | メモ |
 | --- | --- | --- | --- |
-| Pixel phone hardware tech specs | https://support.google.com/pixelphone/answer/7158570 | 2026-08-05 | Pixel 6/6 Pro、7/7 Pro、8/8 Pro、9/9 Pro/9 Pro XL の公式ハードウェア諸元。 |
+| Pixel phone hardware tech specs | https://support.google.com/pixelphone/answer/7158570 | 2026-08-05 | Pixel 6/6 Pro、7/7 Pro、8/8 Pro、9/9 Pro/9 Pro XL、10/10 Pro/10 Pro XL の公式ハードウェア諸元。 |
 | Pixel phone hardware tech specs（earlier models） | https://support.google.com/pixelphone/answer/16043605 | 2026-08-05 | Pixel 5 の公式ハードウェア諸元。 |
 | Learn when you'll get software updates on Google Pixel phones | https://support.google.com/pixelphone/answer/4457705 | 2026-08-05 | Pixel 5a以前はEOL、Pixel 6/7/Foldは5年、Pixel 8以降は7年の更新ポリシー。 |
 

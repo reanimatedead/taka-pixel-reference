@@ -1,6 +1,6 @@
 {
   "lastVerified": "2026-08-05",
-  "note": "Pixel 5/6/7/8/9 と Pro 系の主要諸元。サポート期限は Google の公式更新ポリシー（5年または7年）と発売世代からの目安。地域・容量構成は販売国で異なる。",
+  "note": "Pixel 5/6/7/8/9/10 と Pro 系の主要諸元。サポート期限は Google の公式更新ポリシー（5年または7年）と発売世代からの目安。地域・容量構成は販売国で異なる。",
   "models": [
     {
       "id": "pixel5",
@@ -181,6 +181,60 @@
       "network": "5G sub-6 / mmWaveは地域依存",
       "update": "7年保証（2031/8目安）",
       "codename": "komodo"
+    },
+    {
+      "id": "pixel10",
+      "filterKey": "10",
+      "name": "Pixel 10",
+      "series": "standard",
+      "year": "2025",
+      "launchOs": "Android 16",
+      "soc": "Google Tensor G5",
+      "ramStorage": "12GB / 128-256GB",
+      "display": "6.3\" Super Actua OLED 120Hz",
+      "battery": "4,970mAh",
+      "rearCamera": "48MP wide + 13MP ultrawide + 10.8MP telephoto",
+      "durability": "IP68",
+      "auth": "画面内指紋 + 顔",
+      "network": "5G sub-6 / mmWaveは地域依存",
+      "update": "7年保証（2032/8目安）",
+      "codename": "frankel"
+    },
+    {
+      "id": "pixel10pro",
+      "filterKey": "10pro",
+      "name": "Pixel 10 Pro",
+      "series": "pro",
+      "year": "2025",
+      "launchOs": "Android 16",
+      "soc": "Google Tensor G5",
+      "ramStorage": "16GB / 128GB-1TB",
+      "display": "6.3\" LTPO Super Actua OLED 120Hz",
+      "battery": "4,870mAh",
+      "rearCamera": "50MP wide + 48MP ultrawide + 48MP telephoto",
+      "durability": "IP68",
+      "auth": "画面内指紋 + 顔",
+      "network": "5G sub-6 / mmWaveは地域依存",
+      "update": "7年保証（2032/8目安）",
+      "codename": "blazer"
+    },
+    {
+      "id": "pixel10proxl",
+      "filterKey": "10proxl",
+      "name": "Pixel 10 Pro XL",
+      "series": "pro",
+      "year": "2025",
+      "launchOs": "Android 16",
+      "soc": "Google Tensor G5",
+      "ramStorage": "16GB / 256GB-1TB",
+      "display": "6.8\" LTPO Super Actua OLED 120Hz",
+      "battery": "5,200mAh",
+      "rearCamera": "50MP wide + 48MP ultrawide + 48MP telephoto",
+      "durability": "IP68",
+      "auth": "画面内指紋 + 顔",
+      "network": "5G sub-6 / mmWaveは地域依存",
+      "update": "7年保証（2032/8目安）",
+      "codename": "mustang"
     }
   ]
 }
