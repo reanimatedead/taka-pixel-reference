@@ -45,11 +45,9 @@ th,td{padding:10px 12px;text-align:left;border-bottom:1px solid #E7E9E4;vertical
 thead th{background:#EFF2EC;font-weight:700;position:sticky;top:0}
 tbody th{font-weight:500;color:#555b56;white-space:nowrap;background:#FBFCFA}
 td.hero{font-weight:700}
-.owned{background:#F0F6F0}
 .badge{display:inline-block;font-family:var(--mono);font-size:10px;padding:1px 7px;border-radius:99px;border:1px solid currentColor;margin-left:6px;vertical-align:middle}
 .badge.eol{color:var(--alert)}
 .badge.ok{color:var(--sage-deep)}
-.badge.own{color:#4a5f8a;border-color:#4a5f8a}
 .timeline{background:var(--card);border:1px solid var(--hazel);border-radius:14px;padding:24px 20px;position:relative}
 .tl-row{display:grid;grid-template-columns:110px 1fr;align-items:center;gap:12px;margin-bottom:12px}
 .tl-name{font-size:13px;font-weight:700;text-align:right}
@@ -114,6 +112,30 @@ pre .c{color:#8FA894}
 .flow-mini i{display:flex;align-items:center;color:var(--sage-deep);font-family:var(--mono);font-style:normal}
 .lineup-note{font-family:var(--mono);font-size:11px;color:#7d827c;margin-top:10px}
 .lineup-status{font-size:13px;color:#6a6f6a;padding:14px 16px}
+.anchor-alias{display:block;height:0;overflow:hidden;position:relative;top:-70px}
+.spec-shell{background:var(--card);border:1px solid var(--hazel);border-radius:14px;padding:16px;overflow:hidden}
+.spec-controls{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:12px}
+.spec-tabs{display:flex;gap:6px;overflow-x:auto;padding-bottom:4px;scrollbar-width:thin}
+.spec-tabs button,.spec-nav button{font-family:var(--mono);font-size:11px;border:1px solid var(--hazel);background:#FBFCFA;color:var(--charcoal);border-radius:999px;cursor:pointer}
+.spec-tabs button{padding:6px 10px;white-space:nowrap}
+.spec-tabs button.on{background:var(--sage-deep);border-color:var(--sage-deep);color:#fff}
+.spec-nav{display:flex;gap:8px;flex:none}
+.spec-nav button{min-width:36px;min-height:32px;font-size:18px;line-height:1}
+.spec-slider{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;padding:2px 2px 12px;scrollbar-width:thin}
+.spec-slide{flex:0 0 min(100%,360px);scroll-snap-align:start;border:1px solid var(--hazel);border-radius:14px;background:#FBFCFA;padding:16px;min-height:420px}
+.spec-slide h3{font-size:18px;margin-bottom:6px}
+.spec-meta{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.spec-chip{font-family:var(--mono);font-size:10px;border:1px solid currentColor;border-radius:999px;padding:1px 8px;color:var(--sage-deep)}
+.spec-chip.eol{color:var(--alert)}
+.spec-grid{display:grid;grid-template-columns:88px minmax(0,1fr);gap:6px 12px;font-size:13px}
+.spec-grid dt{font-family:var(--mono);font-size:10px;color:#7d827c;text-transform:uppercase;letter-spacing:.04em}
+.spec-grid dd{word-break:break-word}
+.spec-empty{padding:18px;color:#6a6f6a;font-size:13px}
+@media (max-width:640px){
+  .spec-controls{display:block}
+  .spec-nav{margin-top:10px}
+  .spec-slide{flex-basis:88vw;min-height:auto}
+}
 </style>
 </head>
 <body>
@@ -127,8 +149,7 @@ pre .c{color:#8FA894}
 
 <nav aria-label="ページ内リンク">
   <ul>
-    <li><a href="#specs">スペック比較</a></li>
-    <li><a href="#pixel-lineup">標準/Pro</a></li>
+    <li><a href="#specs">諸元スライド</a></li>
     <li><a href="#dev-options">開発者OP</a></li>
     <li><a href="#support">サポート期限</a></li>
     <li><a href="#fold">Fold系</a></li>
@@ -144,48 +165,22 @@ pre .c{color:#8FA894}
 <main>
 
 <section id="specs">
-  <h2>スペック比較（aシリーズ）</h2>
-  <p class="sec-note">横スクロール可。<span class="badge own">MY DEVICE</span> = 所有端末（4a）。<span class="badge eol">EOL</span> = アップデート提供終了。</p>
-  <div class="table-wrap">
-  <table>
-    <thead>
-      <tr>
-        <th>項目</th>
-        <th class="owned">Pixel 4a <span class="badge own">MY DEVICE</span></th>
-        <th>4a (5G)</th>
-        <th>5a (5G)</th>
-        <th>6a</th>
-        <th>7a</th>
-        <th>8a</th>
-        <th>9a</th>
-        <th>10a</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr><th>発売（日本）</th><td class="owned">2020/8</td><td>2020/10</td><td>2021/8</td><td>2022/7</td><td>2023/5</td><td>2024/5</td><td>2025/4</td><td>2026/4/14</td></tr>
-      <tr><th>SoC</th><td class="owned">Snapdragon 730G</td><td>Snapdragon 765G</td><td>Snapdragon 765G</td><td>Tensor G1</td><td>Tensor G2</td><td>Tensor G3</td><td>Tensor G4</td><td>Tensor G4</td></tr>
-      <tr><th>RAM / ROM</th><td class="owned">6GB / 128GB</td><td>6GB / 128GB</td><td>6GB / 128GB</td><td>6GB / 128GB</td><td>8GB / 128GB</td><td>8GB / 128–256GB</td><td>8GB / 128–256GB</td><td>8GB / 128–256GB</td></tr>
-      <tr><th>画面</th><td class="owned">5.81" OLED 60Hz</td><td>6.2" OLED 60Hz</td><td>6.34" OLED 60Hz</td><td>6.1" OLED 60Hz</td><td>6.1" OLED 90Hz</td><td>6.1" OLED 120Hz</td><td>6.3" OLED 120Hz</td><td>6.3" OLED 120Hz</td></tr>
-      <tr><th>バッテリー</th><td class="owned">3,140mAh</td><td>3,885mAh</td><td>4,680mAh</td><td>4,410mAh</td><td>4,385mAh<br>無線充電◯</td><td>4,492mAh<br>無線充電◯</td><td>5,100mAh<br>無線充電◯</td><td>約5,100mAh級<br>30時間+・急速充電</td></tr>
-      <tr><th>メインカメラ</th><td class="owned">12.2MP 単眼</td><td>12.2MP+超広角</td><td>12.2MP+超広角</td><td>12.2MP+超広角</td><td>64MP+超広角</td><td>64MP+超広角</td><td>48MP+超広角</td><td>48MP+超広角<br>背面フラット化</td></tr>
-      <tr><th>防水防塵</th><td class="owned">なし</td><td>なし</td><td>IP67</td><td>IP67</td><td>IP67</td><td>IP67</td><td>IP68</td><td>IP68</td></tr>
-      <tr><th>生体認証</th><td class="owned">背面指紋</td><td>背面指紋</td><td>背面指紋</td><td>画面内指紋</td><td>画面内指紋+顔</td><td>画面内指紋+顔</td><td>画面内指紋+顔</td><td>画面内指紋+顔</td></tr>
-      <tr><th>5G</th><td class="owned">非対応</td><td>対応</td><td>対応</td><td>対応</td><td>対応</td><td>対応</td><td>対応</td><td>対応</td></tr>
-      <tr><th>発売時価格</th><td class="owned">¥42,900</td><td>¥60,500</td><td>¥51,700</td><td>¥53,900</td><td>¥62,700</td><td>¥72,600</td><td>¥79,900</td><td>¥79,900 (128GB)<br>¥94,900 (256GB)</td></tr>
-      <tr><th>最終OS</th><td class="owned">Android 13</td><td>Android 13</td><td>Android 14</td><td>Android 17 系継続中</td><td>Android 17 系継続中</td><td>Android 17 系継続中</td><td>Android 17 系継続中</td><td>Android 17 系継続中</td></tr>
-      <tr><th>アップデート保証</th><td class="owned hero">終了 <span class="badge eol">EOL</span></td><td>終了 <span class="badge eol">EOL</span></td><td>終了 <span class="badge eol">EOL</span></td><td class="hero">2027/7 まで <span class="badge ok">残り約1年</span></td><td class="hero">2028/5 まで <span class="badge ok">OK</span></td><td class="hero">2031/5 まで <span class="badge ok">7年保証</span></td><td class="hero">2032/4 まで <span class="badge ok">7年保証</span></td><td class="hero">2033/4 まで <span class="badge ok">7年保証</span></td></tr>
-    </tbody>
-  </table>
+  <span id="pixel-lineup" class="anchor-alias" aria-hidden="true"></span>
+  <h2>Pixel 諸元スライド（a / 標準 / Pro）</h2>
+  <p class="sec-note">スペック比較（aシリーズ）と Pixel 標準 / Pro 諸元（5 → 10）を統合。タブ、左右ボタン、横スワイプで機種ごとの主要仕様を確認できます。</p>
+  <div class="spec-shell" id="pixel-spec-shell">
+    <div class="spec-controls">
+      <div class="spec-tabs" id="spec-tabs" role="group" aria-label="Pixel機種フィルタ"></div>
+      <div class="spec-nav" role="group" aria-label="Pixel諸元スライド操作">
+        <button id="spec-prev" type="button" aria-label="前の機種へ">‹</button>
+        <button id="spec-next" type="button" aria-label="次の機種へ">›</button>
+      </div>
+    </div>
+    <div class="spec-slider" id="pixel-spec-slider" tabindex="0" aria-label="Pixel機種諸元スライダー">
+      <div class="lineup-status">Pixel 諸元を読み込み中...</div>
+    </div>
   </div>
-</section>
-
-<section id="pixel-lineup">
-  <h2>Pixel 標準 / Pro 諸元（5 → 10）</h2>
-  <p class="sec-note">Pixel 5、Pixel 6/6 Pro、Pixel 7/7 Pro、Pixel 8/8 Pro、Pixel 9/9 Pro/9 Pro XL、Pixel 10/10 Pro/10 Pro XL を追加。容量・5G mmWave・販売時期は地域で差があるため、表は日本利用時の比較に必要な主要項目へ絞る。</p>
-  <div class="table-wrap" id="pixel-lineup-table">
-    <div class="lineup-status">Pixel 標準 / Pro 諸元を読み込み中...</div>
-  </div>
-  <p class="lineup-note">更新期限は Google 公式の更新ポリシー（Pixel 6/7/Fold = 5年、Pixel 8以降 = 7年）と発売世代からの目安。正確な提供タイミングは地域・キャリアで前後する。</p>
+  <p class="lineup-note">EOL = アップデート提供終了。更新期限は Google 公式の更新ポリシー（Pixel 6/7/Fold = 5年、Pixel 8以降 = 7年）と発売世代からの目安。正確な提供タイミングは地域・キャリアで前後する。</p>
 </section>
 
 <section id="dev-options">
@@ -532,7 +527,7 @@ pre .c{color:#8FA894}
   </details>
 
   <details open>
-    <summary><span><span class="ts-tag warn">4a</span>Pixel 4a（所有機）— EOL + バッテリー制限問題</span></summary>
+    <summary><span><span class="ts-tag warn">4a</span>Pixel 4a — EOL + バッテリー制限問題</span></summary>
     <div class="body">
       <p><strong>状態: 2023年に全アップデート終了。</strong>さらに2025年1月の最終「バッテリー性能アップデート」で、一部個体はバッテリー容量・充電速度が意図的に制限された（発火リスク対策）。対象個体はGoogleが交換/返金プログラムを提供していた。</p>
       <ul>
@@ -702,8 +697,11 @@ fastboot devices
 (function(){
   "use strict";
 
-  var target = document.getElementById("pixel-lineup-table");
-  if(!target) return;
+  var slider = document.getElementById("pixel-spec-slider");
+  var tabs = document.getElementById("spec-tabs");
+  var prev = document.getElementById("spec-prev");
+  var next = document.getElementById("spec-next");
+  if(!slider || !tabs) return;
 
   function esc(s){
     return String(s).replace(/[&<>"']/g, function(m){
@@ -711,12 +709,57 @@ fastboot devices
     });
   }
 
-  function render(data){
-    var models = (data.models || []).filter(function(m){
-      return m.series === "standard" || m.series === "pro";
+  function seriesLabel(series){
+    return {
+      "a": "a series",
+      "standard": "standard",
+      "pro": "Pro / XL"
+    }[series] || series || "model";
+  }
+
+  function motionMode(){
+    return window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth";
+  }
+
+  function currentIndex(){
+    var cards = Array.prototype.slice.call(slider.querySelectorAll(".spec-slide"));
+    if(!cards.length) return 0;
+    var left = slider.scrollLeft;
+    var best = 0;
+    var diff = Infinity;
+    cards.forEach(function(card, index){
+      var d = Math.abs(card.offsetLeft - left);
+      if(d < diff){
+        diff = d;
+        best = index;
+      }
     });
-    var rows = [
-      ["発売世代", "year"],
+    return best;
+  }
+
+  function setActive(index){
+    Array.prototype.forEach.call(tabs.querySelectorAll("button[data-index]"), function(btn){
+      var on = Number(btn.getAttribute("data-index")) === index;
+      btn.classList.toggle("on", on);
+      if(on){
+        btn.setAttribute("aria-current", "true");
+      }else{
+        btn.removeAttribute("aria-current");
+      }
+    });
+  }
+
+  function scrollToIndex(index){
+    var cards = slider.querySelectorAll(".spec-slide");
+    if(!cards.length) return;
+    var targetIndex = Math.max(0, Math.min(index, cards.length - 1));
+    cards[targetIndex].scrollIntoView({behavior:motionMode(), block:"nearest", inline:"start"});
+    setActive(targetIndex);
+  }
+
+  function cardHtml(model, index){
+    var fields = [
+      ["発売", "year"],
       ["発売時OS", "launchOs"],
       ["SoC", "soc"],
       ["RAM / ROM", "ramStorage"],
@@ -725,21 +768,56 @@ fastboot devices
       ["背面カメラ", "rearCamera"],
       ["防水防塵", "durability"],
       ["生体認証", "auth"],
-      ["5G", "network"],
-      ["アップデート", "update"],
+      ["通信", "network"],
+      ["発売時価格", "price"],
       ["コードネーム", "codename"]
     ];
-    var html = "<table><thead><tr><th>項目</th>"
-      + models.map(function(m){ return "<th>" + esc(m.name) + "</th>"; }).join("")
-      + "</tr></thead><tbody>"
-      + rows.map(function(row){
-        return "<tr><th>" + esc(row[0]) + "</th>"
-          + models.map(function(m){ return "<td>" + esc(m[row[1]] || "-") + "</td>"; }).join("")
-          + "</tr>";
+    var update = model.update || "-";
+    var updateClass = update.indexOf("EOL") === 0 ? "spec-chip eol" : "spec-chip";
+    return '<article class="spec-slide" data-index="' + index + '" aria-label="' + esc(model.name) + 'の主要諸元">'
+      + '<h3>' + esc(model.name) + '</h3>'
+      + '<div class="spec-meta">'
+      + '<span class="spec-chip">' + esc(seriesLabel(model.series)) + '</span>'
+      + '<span class="' + updateClass + '">' + esc(update) + '</span>'
+      + '</div>'
+      + '<dl class="spec-grid">'
+      + fields.map(function(field){
+        return '<dt>' + esc(field[0]) + '</dt><dd>' + esc(model[field[1]] || "-") + '</dd>';
       }).join("")
-      + "</tbody></table>";
-    target.innerHTML = html;
+      + '</dl></article>';
   }
+
+  function render(data){
+    var models = data.models || [];
+    if(!models.length){
+      slider.innerHTML = '<div class="spec-empty">Pixel 諸元データが見つかりません。</div>';
+      return;
+    }
+    tabs.innerHTML = models.map(function(model, index){
+      return '<button type="button" data-index="' + index + '" aria-label="' + esc(model.name) + 'へ移動">' + esc(model.filterKey || model.name) + '</button>';
+    }).join("");
+    slider.innerHTML = models.map(cardHtml).join("");
+    setActive(0);
+  }
+
+  tabs.addEventListener("click", function(event){
+    var button = event.target.closest && event.target.closest("button[data-index]");
+    if(!button) return;
+    scrollToIndex(Number(button.getAttribute("data-index")));
+  });
+
+  if(prev){
+    prev.addEventListener("click", function(){ scrollToIndex(currentIndex() - 1); });
+  }
+  if(next){
+    next.addEventListener("click", function(){ scrollToIndex(currentIndex() + 1); });
+  }
+
+  var scrollTimer;
+  slider.addEventListener("scroll", function(){
+    window.clearTimeout(scrollTimer);
+    scrollTimer = window.setTimeout(function(){ setActive(currentIndex()); }, 80);
+  }, {passive:true});
 
   fetch("data/pixel-lineup.json")
     .then(function(r){
@@ -748,7 +826,7 @@ fastboot devices
     })
     .then(render)
     .catch(function(err){
-      target.innerHTML = '<div class="lineup-status">Pixel 標準 / Pro 諸元の読み込みに失敗しました（' + esc(err.message) + '）。</div>';
+      slider.innerHTML = '<div class="lineup-status">Pixel 諸元の読み込みに失敗しました（' + esc(err.message) + '）。</div>';
     });
 })();
 </script>

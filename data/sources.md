@@ -1,6 +1,6 @@
 # OS別不具合マトリクス 出典記録（#os-bugs）
 
-## 2026-08-05 — Pixel標準 / Pro 諸元追加（#pixel-lineup / dict #model-specs）
+## 2026-08-05 — Pixel諸元スライド統合（#specs / dict #model-specs）
 
 | 項目 | URL | 確認日 | メモ |
 | --- | --- | --- | --- |
