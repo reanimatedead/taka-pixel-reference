@@ -155,8 +155,7 @@ pre .c{color:#8FA894}
     <li><a href="#links">公式ヘルプ</a></li>
     <li><a href="#features">電話 / Gmail 機能</a></li>
     <li><a href="#os-bugs">OS別不具合</a></li>
-    <li><a href="#ts">トラブルシューティング</a></li>
-    <li><a href="#ts-pro">専門TS</a></li>
+    <li><a href="#ts">トラブルシューティング / 復旧</a></li>
     <li><a href="pixel11/">Pixel 11（骨組み）↗</a></li>
     <li><a href="dict/">不具合辞書 ↗</a></li>
   </ul>
@@ -572,11 +571,11 @@ pre .c{color:#8FA894}
       </ul>
     </div>
   </details>
-</section>
 
-<section id="ts-pro">
-  <h2>専門TS（基本 → 診断 → ADB → 復旧）</h2>
-  <p class="sec-note">レベル順に並べた実務手順集。Lv2以降はPC（Mac）接続が前提。<strong class="lv danger">DATA LOSS</strong> 付きの操作はデータ消去を伴うため、実行前にバックアップ必須。</p>
+  <details id="phone-recovery">
+    <summary><span><span class="ts-tag warn">電話専用・復旧手順</span>旧・専門TS（基本 → 診断 → ADB → 復旧 / コードネーム表）</span></summary>
+    <div class="body">
+      <p class="sec-note" style="margin:12px 0">レベル順に並べた実務手順集。Lv2以降はPC（Mac）接続が前提。<strong class="lv danger">DATA LOSS</strong> 付きの操作はデータ消去を伴うため、実行前にバックアップ必須。（旧「専門TS」セクションをこの折りたたみへ移設。ADBコマンド／Factory Image／ARB警告／コードネーム表は内容不変で保全）</p>
 
   <details>
     <summary><span><span class="lv">Lv0</span>基本（端末単体で完結）</span></summary>
@@ -657,6 +656,8 @@ fastboot devices
         <li>Fold = <kbd>felix</kbd> <span class="vstate v">VERIFIED</span> / 9 Pro Fold = <kbd>comet</kbd> <span class="vstate v">VERIFIED</span> / 10 Pro Fold = <kbd>rango（リーク段階・公式Factory Image未掲載）</kbd> <span class="vstate u">UNVERIFIED</span></li>
       </ul>
       <p>配布元（公式のみ使用）: <a href="https://developers.google.com/android/images" target="_blank" rel="noopener">Factory Images</a> / <a href="https://developers.google.com/android/ota" target="_blank" rel="noopener">Full OTA Images</a></p>
+    </div>
+  </details>
     </div>
   </details>
 </section>
