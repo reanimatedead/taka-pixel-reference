@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pixel 11 諸元（骨組み・Mode A）</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --porcelain:#F6F7F4;
+  --charcoal:#2B2F2C;
+  --sage:#9DB8A2;
+  --sage-deep:#4F7059;
+  --hazel:#B7BCB4;
+  --alert:#C2542E;
+  --card:#FFFFFF;
+  --mono:'IBM Plex Mono',monospace;
+  --sans:'Zen Kaku Gothic New','Hiragino Kaku Gothic ProN',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{font-family:var(--sans);background:var(--porcelain);color:var(--charcoal);line-height:1.7;font-size:15px}
+a{color:var(--sage-deep)}
+a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var(--sage-deep);outline-offset:2px}
+header{padding:56px 24px 28px;max-width:1080px;margin:0 auto}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.18em;color:var(--sage-deep);text-transform:uppercase}
+h1{font-size:clamp(28px,5vw,44px);font-weight:700;letter-spacing:-.01em;margin:6px 0 10px}
+h1 .thin{font-weight:400;color:var(--hazel)}
+.lede{max-width:640px;color:#555b56}
+.updated{font-family:var(--mono);font-size:12px;color:#7d827c;margin-top:10px}
+nav{position:sticky;top:0;background:rgba(246,247,244,.92);backdrop-filter:blur(6px);border-bottom:1px solid var(--hazel);z-index:50}
+nav ul{display:flex;gap:4px;list-style:none;max-width:1080px;margin:0 auto;padding:0 16px;overflow-x:auto}
+nav a{display:block;padding:12px 14px;text-decoration:none;color:var(--charcoal);font-size:13px;font-weight:500;white-space:nowrap;border-bottom:3px solid transparent}
+nav a:hover{border-bottom-color:var(--sage)}
+main{max-width:1080px;margin:0 auto;padding:0 24px 96px}
+section{margin-top:64px}
+h2{font-size:22px;font-weight:700;display:flex;align-items:center;gap:10px;margin-bottom:6px}
+h2::before{content:"";width:14px;height:14px;border-radius:50%;background:var(--sage);flex:none}
+.sec-note{font-size:13px;color:#6a6f6a;margin-bottom:20px}
+.table-wrap{overflow-x:auto;border:1px solid var(--hazel);border-radius:14px;background:var(--card)}
+table{border-collapse:collapse;width:100%;min-width:980px;font-size:13px}
+th,td{padding:10px 12px;text-align:left;border-bottom:1px solid #E7E9E4;vertical-align:top}
+thead th{background:#EFF2EC;font-weight:700;position:sticky;top:0}
+tbody th{font-weight:500;color:#555b56;white-space:nowrap;background:#FBFCFA}
+td.hero{font-weight:700}
+.badge{display:inline-block;font-family:var(--mono);font-size:10px;padding:1px 7px;border-radius:99px;border:1px solid currentColor;margin-left:6px;vertical-align:middle}
+.badge.eol{color:var(--alert)}
+.badge.ok{color:var(--sage-deep)}
+.timeline{background:var(--card);border:1px solid var(--hazel);border-radius:14px;padding:24px 20px;position:relative}
+.tl-row{display:grid;grid-template-columns:110px 1fr;align-items:center;gap:12px;margin-bottom:12px}
+.tl-name{font-size:13px;font-weight:700;text-align:right}
+.tl-name small{display:block;font-family:var(--mono);font-size:10px;font-weight:400;color:#8a8f89}
+.tl-track{position:relative;height:22px;background:#F0F1EE;border-radius:6px}
+.tl-bar{position:absolute;top:0;height:100%;border-radius:6px;background:linear-gradient(90deg,var(--sage),var(--sage-deep));min-width:6px}
+.tl-bar.pending{background:repeating-linear-gradient(45deg,#E3E7DE,#E3E7DE 6px,#D5DBCE 6px,#D5DBCE 12px)}
+.tl-bar span{position:absolute;right:6px;top:50%;transform:translateY(-50%);font-family:var(--mono);font-size:10px;color:#fff;white-space:nowrap}
+.tl-bar.pending span{color:#6a6f6a}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px}
+.card{background:var(--card);border:1px solid var(--hazel);border-radius:14px;padding:16px 18px;text-decoration:none;color:inherit;display:block;transition:border-color .15s,transform .15s}
+.card:hover{border-color:var(--sage-deep);transform:translateY(-2px)}
+.card h3{font-size:14px;font-weight:700;margin-bottom:4px}
+.card p{font-size:12px;color:#6a6f6a}
+.card .url{font-family:var(--mono);font-size:10px;color:var(--sage-deep);word-break:break-all;display:block;margin-top:8px}
+.group-label{font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:#8a8f89;margin:22px 0 10px;text-transform:uppercase}
+.group-label:first-of-type{margin-top:0}
+.feature{background:var(--card);border:1px solid var(--hazel);border-radius:14px;padding:18px 20px;margin-bottom:14px}
+.feature h3{font-size:15px;font-weight:700;margin-bottom:6px}
+.feature .req{font-family:var(--mono);font-size:11px;color:var(--sage-deep);margin-bottom:8px}
+.feature ol{padding-left:20px;font-size:13px}
+.feature ol li{margin-bottom:4px}
+.feature .caveat{font-size:12px;color:var(--alert);margin-top:8px}
+details{background:var(--card);border:1px solid var(--hazel);border-radius:14px;margin-bottom:10px;overflow:hidden}
+summary{padding:14px 18px;cursor:pointer;font-weight:700;font-size:14px;list-style:none;display:flex;justify-content:space-between;align-items:center}
+summary::after{content:"+";font-family:var(--mono);color:var(--sage-deep);font-size:18px}
+details[open] summary::after{content:"−"}
+details .body{padding:0 18px 16px;font-size:13px;border-top:1px solid #EDEFE9}
+details .body p{margin:10px 0}
+details .body ul,details .body ol{padding-left:20px;margin:8px 0}
+details .body li{margin-bottom:4px}
+kbd{font-family:var(--mono);font-size:11px;background:#EFF2EC;border:1px solid var(--hazel);border-radius:5px;padding:1px 6px}
+.ts-tag{display:inline-block;font-family:var(--mono);font-size:10px;color:#fff;background:var(--sage-deep);border-radius:99px;padding:1px 8px;margin-right:8px}
+.ts-tag.warn{background:var(--alert)}
+.vstate{font-family:var(--mono);font-size:9px;padding:1px 6px;border-radius:4px;vertical-align:middle;margin-left:6px}
+.vstate.v{background:#E4EFE6;color:var(--sage-deep)}
+.vstate.u{background:#F4E6DE;color:var(--alert)}
+.vstate.p{background:#EDEFE9;color:#6a6f6a}
+.lv{display:inline-block;font-family:var(--mono);font-size:10px;color:#fff;background:#4a5f8a;border-radius:99px;padding:1px 8px;margin-right:8px}
+.alert-band{background:#FBEEE8;border:1px solid var(--alert);color:#8a3c20;border-radius:10px;padding:10px 14px;font-size:12px;margin:10px 0;font-weight:500}
+.info-band{background:#EAF0EB;border:1px solid var(--sage-deep);color:#33503b;border-radius:10px;padding:10px 14px;font-size:12px;margin:10px 0;font-weight:500}
+footer{max-width:1080px;margin:0 auto;padding:32px 24px;font-size:11px;color:#8a8f89;border-top:1px solid var(--hazel)}
+.lineup-note{font-family:var(--mono);font-size:11px;color:#7d827c;margin-top:10px}
+.lineup-status{font-size:13px;color:#6a6f6a;padding:14px 16px}
+.anchor-alias{display:block;height:0;overflow:hidden;position:relative;top:-70px}
+.spec-shell{background:var(--card);border:1px solid var(--hazel);border-radius:14px;padding:16px;overflow:hidden}
+.spec-controls{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:12px}
+.spec-tabs{display:flex;gap:6px;overflow-x:auto;padding-bottom:4px;scrollbar-width:thin}
+.spec-tabs button,.spec-nav button{font-family:var(--mono);font-size:11px;border:1px solid var(--hazel);background:#FBFCFA;color:var(--charcoal);border-radius:999px;cursor:pointer}
+.spec-tabs button{padding:6px 10px;white-space:nowrap}
+.spec-tabs button.on{background:var(--sage-deep);border-color:var(--sage-deep);color:#fff}
+.spec-nav{display:flex;gap:8px;flex:none}
+.spec-nav button{min-width:36px;min-height:32px;font-size:18px;line-height:1}
+.spec-slider{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;padding:2px 2px 12px;scrollbar-width:thin}
+.spec-slide{flex:0 0 min(100%,360px);scroll-snap-align:start;border:1px solid var(--hazel);border-radius:14px;background:#FBFCFA;padding:16px;min-height:420px}
+.spec-slide h3{font-size:18px;margin-bottom:6px}
+.spec-meta{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.spec-chip{font-family:var(--mono);font-size:10px;border:1px solid currentColor;border-radius:999px;padding:1px 8px;color:var(--sage-deep)}
+.spec-chip.eol{color:var(--alert)}
+.spec-grid{display:grid;grid-template-columns:88px minmax(0,1fr);gap:6px 12px;font-size:13px}
+.spec-grid dt{font-family:var(--mono);font-size:10px;color:#7d827c;text-transform:uppercase;letter-spacing:.04em}
+.spec-grid dd{word-break:break-word}
+.spec-empty{padding:18px;color:#6a6f6a;font-size:13px}
+@media (max-width:640px){
+  .spec-controls{display:block}
+  .spec-nav{margin-top:10px}
+  .spec-slide{flex-basis:88vw;min-height:auto}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="eyebrow">Personal Reference — Pixel 11 (Mode A / skeleton)</div>
+  <h1>Pixel 11 諸元 <span class="thin">— 骨組み</span></h1>
+  <p class="lede">Pixel 11 / 11 Pro / 11 Pro XL / 11 Pro Fold の 1 ページ・リファレンス。<strong>現時点は公式仕様が未公開のため骨組み（Mode A）</strong>で、確定しているスケジュール・ラインナップ・起動時OSのみを出典付きで掲載し、諸元セルは全て PENDING とする。判断基準は既存トップと同じ「今日、その端末を安全に使えるか」。</p>
+  <p class="updated">last verified: 2026-08-05 / MODE A（骨組み）: 確定情報のみ VERIFIED・諸元は PENDING（公式発表 2026-08-13）</p>
+</header>
+
+<nav aria-label="ページ内リンク">
+  <ul>
+    <li><a href="../">← 諸元トップ</a></li>
+    <li><a href="#specs">諸元スライド</a></li>
+    <li><a href="#dev-options">開発者OP</a></li>
+    <li><a href="#support">サポート期限</a></li>
+    <li><a href="#links">公式ヘルプ</a></li>
+    <li><a href="#features">電話 / Gmail 機能</a></li>
+    <li><a href="#os-bugs">OS別不具合</a></li>
+    <li><a href="#ts">トラブルシューティング</a></li>
+    <li><a href="#ts-pro">専門TS</a></li>
+    <li><a href="#dict">不具合辞書 ↗</a></li>
+  </ul>
+</nav>
+
+<main>
+
+<div class="alert-band" style="margin-top:24px">
+  <strong>MODE A（骨組み）</strong>: Pixel 11 の公式技術仕様は <strong>2026-08-13 の Made by Google 2026</strong> で発表予定。本ページはそれまで、確定したスケジュール・ラインナップ・起動時OS（Android 17）のみを掲載し、諸元（SoC / RAM / 電池 / カメラ / 対応バンド 等）は <span class="vstate p">PENDING</span> とする。<strong>リーク値は一切書き込まない。</strong>公式発表後に本指示文を再実行して Mode B（本番）へ切り替える。
+</div>
+
+<section id="specs">
+  <span id="pixel-lineup" class="anchor-alias" aria-hidden="true"></span>
+  <h2>Pixel 11 諸元スライド（11 / 11 Pro / 11 Pro XL / 11 Pro Fold）</h2>
+  <p class="sec-note">4 機種の諸元をスライドに統合。タブ・左右ボタン・横スワイプで切替。<strong>ハードウェア諸元は全て <span class="vstate p">PENDING — 公式発表 2026-08-13</span></strong>。数値・リーク値は掲載しない。</p>
+  <div class="spec-shell" id="pixel-spec-shell">
+    <div class="spec-controls">
+      <div class="spec-tabs" id="spec-tabs" role="group" aria-label="Pixel 11 機種フィルタ"></div>
+      <div class="spec-nav" role="group" aria-label="Pixel 11 諸元スライド操作">
+        <button id="spec-prev" type="button" aria-label="前の機種へ">‹</button>
+        <button id="spec-next" type="button" aria-label="次の機種へ">›</button>
+      </div>
+    </div>
+    <div class="spec-slider" id="pixel-spec-slider" tabindex="0" aria-label="Pixel 11 機種諸元スライダー">
+      <div class="lineup-status">Pixel 11 諸元を読み込み中...</div>
+    </div>
+  </div>
+  <p class="lineup-note">諸元セルの PENDING は「公式未発表につき数値未確定」を意味する。★リーク値は絶対に書き込まない★</p>
+
+  <div class="fold-notes">
+    <h3 style="font-size:15px;margin:22px 0 10px">確定しているスケジュール・ラインナップ（出典付き VERIFIED）</h3>
+    <details open>
+      <summary><span><span class="ts-tag">確定</span>発表・予約・発売・店舗</span></summary>
+      <div class="body">
+        <ul>
+          <li><strong>ラインナップ 4 機種</strong> <span class="vstate v">VERIFIED</span> — Pixel 11 / Pixel 11 Pro / Pixel 11 Pro XL / Pixel 11 Pro Fold（Google 公式ティザー表記）。うち <strong>Pro Fold は本体発売が Pro 系より遅い見込み（~2026年10月）</strong></li>
+          <li><strong>発表イベント Made by Google 2026</strong> <span class="vstate v">VERIFIED</span> — 日本時間 <strong>2026-08-13 7:00 JST</strong>（米国時間 8/12 18:00 ET と同時刻）</li>
+          <li><strong>予約開始</strong> <span class="vstate v">VERIFIED</span> — 日本は <strong>2026-08-13 7:00 JST</strong>（グローバルは 8/12 開始）</li>
+          <li><strong>発売見込み</strong> <span class="vstate u">UNVERIFIED</span> — 発表の数週間後（~8月下旬・目安 ~8/20）。正式な発売日は 8/13 の発表で確定</li>
+          <li><strong>Google Store 表参道オープン</strong> <span class="vstate v">VERIFIED</span> — 日本初の直営旗艦店が <strong>2026-08-13</strong> に東急プラザ表参道「オモカド」1F でオープン（端末購入・修理サポート・初期設定ヘルプ・ワークショップ）</li>
+          <li><strong>起動時 OS</strong> <span class="vstate v">VERIFIED</span> — <strong>Android 17</strong>（2026-06-16 配信済み）。初期不具合は <a href="#os-bugs">下の OS別不具合</a> 経由で既存 A17 マトリクスを参照</li>
+        </ul>
+      </div>
+    </details>
+    <div class="info-band">諸元（SoC / RAM / 電池 / カメラ / 対応バンド / 価格 / コードネーム）は 2026-08-13 の公式仕様ページ公開まで PENDING。公開後に本指示文を再実行し、Google ストア技術仕様と突合して VERIFIED で埋める。</div>
+  </div>
+</section>
+
+<section id="dev-options">
+  <h2>開発者オプション詳細（分類・項目・用途）</h2>
+  <p class="sec-note">開発者オプションは端末世代に依存しない共通機能のため、Pixel 11 でも既存トップの解説がそのまま適用される。ここで重複させず、正本へリンクする。Pixel 11 固有の追加項目が公式に確認できた場合のみ Mode B で追記する。</p>
+  <div class="alert-band">原則（既存と共通）: 不具合解析が終わったら USBデバッグ / ワイヤレスデバッグ / OEMロック解除 / GPU強制系 / アクティビティ破棄系 は元に戻す。</div>
+  <p><a href="../#dev-options">→ 開発者オプション詳細（諸元トップ・共通解説）を開く</a></p>
+</section>
+
+<section id="support">
+  <h2>サポート期限タイムライン</h2>
+  <p class="sec-note">Pixel 8 以降は 7 年保証世代。Pixel 11 も <strong>7 年保証見込み</strong>だが、正式な提供終了（EOL）目安は 8/13 の公式発表・更新ポリシー表への反映を待って Mode B で確定する。現時点は PENDING。</p>
+  <div class="timeline">
+    <div class="tl-row"><div class="tl-name">Pixel 11 系<small>2026/8〜</small></div><div class="tl-track"><div class="tl-bar pending" style="left:0;width:100%"><span>EOL 目安 PENDING（7年保証見込み・公式確認 2026-08-13）</span></div></div></div>
+  </div>
+  <p class="lineup-note">EOL = アップデート提供終了。Pixel 8以降 = 7年ポリシー。正確な期限は公式の <a href="https://support.google.com/pixelphone/answer/4457705" target="_blank" rel="noopener">更新提供期限表</a> への反映を一次ソースとする。<a href="../#support">既存機（4a〜10a）のタイムラインは諸元トップ</a>。</p>
+</section>
+
+<section id="links">
+  <h2>公式ヘルプ・リンク集</h2>
+  <p class="sec-note">全て Google 公式。<strong>Pixel 11 固有 URL はまだ存在しないため貼らない</strong>（汎用リンクのみ）。固有ヘルプが公開され次第 Mode B で追加する。</p>
+  <div class="group-label">Pixel 本体（汎用）</div>
+  <div class="cards">
+    <a class="card" href="https://support.google.com/pixelphone" target="_blank" rel="noopener"><h3>Pixel ヘルプ トップ</h3><p>本体・設定・修理の全ヘルプ入口（機種共通）</p><span class="url">support.google.com/pixelphone</span></a>
+    <a class="card" href="https://support.google.com/pixelphone/answer/4457705" target="_blank" rel="noopener"><h3>アップデート提供期限（公式表）</h3><p>機種別のOS/セキュリティ更新の保証期限一覧。Pixel 11 の EOL 確定はここへの反映が一次ソース</p><span class="url">…/answer/4457705</span></a>
+    <a class="card" href="https://developers.google.com/android/images" target="_blank" rel="noopener"><h3>Factory Images（開発者向け）</h3><p>復旧・初期化用の公式イメージ配布。Pixel 11 掲載を待って専門TSへ反映</p><span class="url">developers.google.com/android/images</span></a>
+  </div>
+</section>
+
+<section id="features">
+  <h2>電話 / Gmail 主要機能の対応状況と設定</h2>
+  <p class="sec-note">通話スクリーニング・レコーダー文字起こし・Gmail 自動仕分け・Gemini 切替などの機能解説は端末世代を跨ぐ共通内容のため、既存トップの正本を参照する。Pixel 11 固有の新機能は 8/13 発表後に確認できた分のみ Mode B で追記する。</p>
+  <p><a href="../#features">→ 電話 / Gmail 主要機能（諸元トップ・共通解説）を開く</a></p>
+</section>
+
+<section id="os-bugs">
+  <h2>OS別不具合マトリクス（起動時 Android 17）</h2>
+  <p class="sec-note">Pixel 11 の起動時 OS は <strong>Android 17</strong>（確定）。A17 の既知不具合マトリクスは既存トップに集約済みのため、ここで重複させず参照する。<span class="vstate p">PENDING</span> = Pixel 11 固有の初期不具合は発売後、公式/国内報道で確認できた分だけ VERIFIED/UNVERIFIED 明記で追記する（憶測で埋めない）。</p>
+  <div class="alert-band">Pixel 11 は起動時から Android 17。既存機で報告された A17 初期不具合（タッチ操作異常・通信不能・仕事用プロファイルのWi-Fi不可・再起動ループ 等）は本機にも波及しうる。購入直後は月例修正パッチ適用状況を確認。</div>
+  <details>
+    <summary><span><span class="ts-tag warn">PENDING</span>Pixel 11 固有の初期不具合（発売後に追記）</span></summary>
+    <div class="body">
+      <p>公式発表・発売前のため未掲載。<strong>リーク・憶測では埋めない。</strong>発売後、公式サポート告知または国内報道で確認できた事象のみ VERIFIED/UNVERIFIED を明記して追記する。</p>
+    </div>
+  </details>
+  <p><a href="../#os-bugs">→ Android 17 不具合マトリクス（諸元トップ・全機種共通）を開く</a></p>
+</section>
+
+<section id="ts">
+  <h2>トラブルシューティング（TS）</h2>
+  <p class="sec-note">基本 TS フロー（強制再起動・セーフモード・キャッシュ削除・ネットワークリセット・OS更新・初期化）は全機種共通のため既存トップを正本とする。Pixel 11 固有の手順が確認できた分のみ Mode B で追記する。</p>
+  <details>
+    <summary><span><span class="ts-tag">PENDING</span>Pixel 11 固有 TS（発売後に追記）</span></summary>
+    <div class="body">
+      <p>発売前のため未掲載。既存の共通 TS フローを土台に、Pixel 11 固有の症状・対処が確認できた分だけ追記する。</p>
+    </div>
+  </details>
+  <p><a href="../#ts">→ 基本 TS フロー（諸元トップ・全機種共通）を開く</a></p>
+</section>
+
+<section id="ts-pro">
+  <h2>専門TS（基本 → 診断 → ADB → 復旧）</h2>
+  <p class="sec-note">ADB・リカバリー・sideload・Factory Image の実務手順は既存トップの正本を参照。<strong>Pixel 11 のコードネーム / Factory Image は developers.google.com/android/images に未掲載（2026-08-05 実測）</strong>のため、存在しないコードネームは書かない。掲載確認後に Mode B で追記する。</p>
+  <details open>
+    <summary><span><span class="lv">表</span>コードネーム / Factory Image（Pixel 11）</span></summary>
+    <div class="body">
+      <ul>
+        <li>Pixel 11 = <kbd>PENDING — Factory Image 掲載待ち</kbd> <span class="vstate p">PENDING</span></li>
+        <li>Pixel 11 Pro = <kbd>PENDING — Factory Image 掲載待ち</kbd> <span class="vstate p">PENDING</span></li>
+        <li>Pixel 11 Pro XL = <kbd>PENDING — Factory Image 掲載待ち</kbd> <span class="vstate p">PENDING</span></li>
+        <li>Pixel 11 Pro Fold = <kbd>PENDING — Factory Image 掲載待ち</kbd> <span class="vstate p">PENDING</span></li>
+      </ul>
+      <p>配布元（公式のみ使用）: <a href="https://developers.google.com/android/images" target="_blank" rel="noopener">Factory Images</a> / <a href="https://developers.google.com/android/ota" target="_blank" rel="noopener">Full OTA Images</a>。掲載を確認するまで復旧手順に機種名を紐付けない。</p>
+    </div>
+  </details>
+  <p><a href="../#ts-pro">→ 専門TS（諸元トップ・既存機のコードネーム表含む）を開く</a></p>
+</section>
+
+<section id="dict">
+  <h2>不具合ビルド辞書（ビルド番号で引く）</h2>
+  <p class="sec-note">ビルドID・OTA・ARB（anti-rollback）警告の辞書レイヤ。Pixel 11 のビルドは月次自動収集が公式ソースから拾い次第、辞書側に反映される（本ページでは重複させない）。</p>
+  <p><a href="../dict/">→ 不具合ビルド辞書を開く ↗</a></p>
+</section>
+
+</main>
+
+<footer>
+  出典（確定情報）: Made by Google 2026 発表・予約日程 = 国内報道（gdm / ITmedia Mobile / ギズモード・ジャパン 2026-07-16）／ Google Store 表参道オープン = ITmedia Mobile・ガルマックス 2026-07-16／ ラインナップ・~10月 Pro Fold = Android Central / Droid Life 2026-07。諸元は 2026-08-13 の Google ストア技術仕様公開まで PENDING（リーク値不掲載）。モード判定実測: store.google.com/jp/product/pixel_11_specs = 未公開・developers.google.com/android/images = Pixel 11 未掲載（いずれも 2026-08-05 fetch）。個人用リファレンス。
+</footer>
+
+<script>
+(function(){
+  "use strict";
+
+  var slider = document.getElementById("pixel-spec-slider");
+  var tabs = document.getElementById("spec-tabs");
+  var prev = document.getElementById("spec-prev");
+  var next = document.getElementById("spec-next");
+  if(!slider || !tabs) return;
+
+  function esc(s){
+    return String(s).replace(/[&<>"']/g, function(m){
+      return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m];
+    });
+  }
+
+  function seriesLabel(series){
+    return {
+      "a": "a series",
+      "standard": "standard",
+      "pro": "Pro / XL",
+      "fold": "Fold / reference"
+    }[series] || series || "model";
+  }
+
+  function motionMode(){
+    return window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth";
+  }
+
+  function currentIndex(){
+    var cards = Array.prototype.slice.call(slider.querySelectorAll(".spec-slide"));
+    if(!cards.length) return 0;
+    var left = slider.scrollLeft;
+    var best = 0;
+    var diff = Infinity;
+    cards.forEach(function(card, index){
+      var d = Math.abs(card.offsetLeft - left);
+      if(d < diff){
+        diff = d;
+        best = index;
+      }
+    });
+    return best;
+  }
+
+  function setActive(index){
+    Array.prototype.forEach.call(tabs.querySelectorAll("button[data-index]"), function(btn){
+      var on = Number(btn.getAttribute("data-index")) === index;
+      btn.classList.toggle("on", on);
+      if(on){
+        btn.setAttribute("aria-current", "true");
+      }else{
+        btn.removeAttribute("aria-current");
+      }
+    });
+  }
+
+  function scrollToIndex(index){
+    var cards = slider.querySelectorAll(".spec-slide");
+    if(!cards.length) return;
+    var targetIndex = Math.max(0, Math.min(index, cards.length - 1));
+    cards[targetIndex].scrollIntoView({behavior:motionMode(), block:"nearest", inline:"start"});
+    setActive(targetIndex);
+  }
+
+  function cardHtml(model, index){
+    var fields = [
+      ["発売", "year"],
+      ["発売時OS", "launchOs"],
+      ["SoC", "soc"],
+      ["RAM / ROM", "ramStorage"],
+      ["画面", "display"],
+      ["バッテリー", "battery"],
+      ["特記", "special"],
+      ["背面カメラ", "rearCamera"],
+      ["防水防塵", "durability"],
+      ["生体認証", "auth"],
+      ["通信", "network"],
+      ["発売時価格", "price"],
+      ["コードネーム", "codename"]
+    ];
+    var update = model.update || "-";
+    var updateClass = update.indexOf("EOL") === 0 ? "spec-chip eol" : "spec-chip";
+    return '<article class="spec-slide" data-index="' + index + '" aria-label="' + esc(model.name) + 'の主要諸元">'
+      + '<h3>' + esc(model.name) + '</h3>'
+      + '<div class="spec-meta">'
+      + '<span class="spec-chip">' + esc(seriesLabel(model.series)) + '</span>'
+      + '<span class="' + updateClass + '">' + esc(update) + '</span>'
+      + '</div>'
+      + '<dl class="spec-grid">'
+      + fields.map(function(field){
+        return '<dt>' + esc(field[0]) + '</dt><dd>' + esc(model[field[1]] || "-") + '</dd>';
+      }).join("")
+      + '</dl></article>';
+  }
+
+  function render(data){
+    var models = data.models || [];
+    if(!models.length){
+      slider.innerHTML = '<div class="spec-empty">Pixel 11 諸元データが見つかりません。</div>';
+      return;
+    }
+    tabs.innerHTML = models.map(function(model, index){
+      return '<button type="button" data-index="' + index + '" aria-label="' + esc(model.name) + 'へ移動">' + esc(model.filterKey || model.name) + '</button>';
+    }).join("");
+    slider.innerHTML = models.map(cardHtml).join("");
+    setActive(0);
+  }
+
+  tabs.addEventListener("click", function(event){
+    var button = event.target.closest && event.target.closest("button[data-index]");
+    if(!button) return;
+    scrollToIndex(Number(button.getAttribute("data-index")));
+  });
+
+  if(prev){
+    prev.addEventListener("click", function(){ scrollToIndex(currentIndex() - 1); });
+  }
+  if(next){
+    next.addEventListener("click", function(){ scrollToIndex(currentIndex() + 1); });
+  }
+
+  var scrollTimer;
+  slider.addEventListener("scroll", function(){
+    window.clearTimeout(scrollTimer);
+    scrollTimer = window.setTimeout(function(){ setActive(currentIndex()); }, 80);
+  }, {passive:true});
+
+  fetch("data/pixel11-lineup.json")
+    .then(function(r){
+      if(!r.ok) throw new Error("HTTP " + r.status);
+      return r.json();
+    })
+    .then(render)
+    .catch(function(err){
+      slider.innerHTML = '<div class="lineup-status">Pixel 11 諸元の読み込みに失敗しました（' + esc(err.message) + '）。</div>';
+    });
+})();
+</script>
+
+</body>
+</html>
