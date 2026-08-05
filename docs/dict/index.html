@@ -109,7 +109,7 @@ footer{max-width:1080px;margin:0 auto;padding:32px 24px;font-size:11px;color:#8a
 .model-specs h2{font-size:14px;font-weight:700;margin-bottom:6px}
 .model-specs p{color:#555b56;margin-bottom:10px}
 .model-specs .table-scroll{overflow-x:auto;border:1px solid #E7E9E4;border-radius:10px}
-.model-specs table{border-collapse:collapse;width:100%;min-width:1240px;font-size:12px;background:#fff}
+.model-specs table{border-collapse:collapse;width:100%;min-width:1500px;font-size:12px;background:#fff}
 .model-specs th,.model-specs td{padding:8px 10px;text-align:left;border-bottom:1px solid #E7E9E4;vertical-align:top}
 .model-specs thead th{background:#EFF2EC}
 .model-specs tbody th{background:#FBFCFA;white-space:nowrap}
@@ -185,12 +185,12 @@ footer{max-width:1080px;margin:0 auto;padding:32px 24px;font-size:11px;color:#8a
   <div class="layer-legend" id="layer-legend"></div>
 </div>
 <div class="model-specs" id="model-specs">
-  <h2>Pixel 標準 / Pro 諸元（5 → 10）</h2>
-  <p>Pixel 5、Pixel 6/6 Pro、Pixel 7/7 Pro、Pixel 8/8 Pro、Pixel 9/9 Pro/9 Pro XL、Pixel 10/10 Pro/10 Pro XL を辞書側にも追加。機種フィルタは下の不具合一覧にも反映する。</p>
+  <h2>Pixel 標準 / Pro / Fold 諸元（5 → 10 / Fold）</h2>
+  <p>Pixel 5、Pixel 6/6 Pro、Pixel 7/7 Pro、Pixel 8/8 Pro、Pixel 9/9 Pro/9 Pro XL、Pixel 10/10 Pro/10 Pro XL、Pixel Fold / 9 Pro Fold / 10 Pro Fold を辞書側にも追加。機種フィルタは下の不具合一覧にも反映する。</p>
   <div class="table-scroll" id="model-specs-table">
-    <div class="status">Pixel 標準 / Pro 諸元を読み込み中...</div>
+    <div class="status">Pixel 標準 / Pro / Fold 諸元を読み込み中...</div>
   </div>
-  <div class="note">標準/Proの機種フィルタは、同世代のOS共通不具合を拾えるように世代単位でも照合する。個体・機種限定の不具合は該当機種タグを優先。</div>
+  <div class="note">標準/Proの機種フィルタは、同世代のOS共通不具合を拾えるように世代単位でも照合する。Fold系は折りたたみ固有の不具合タグと直接照合する。</div>
 </div>
 </div>
 
@@ -257,7 +257,7 @@ footer{max-width:1080px;margin:0 auto;padding:32px 24px;font-size:11px;color:#8a
 
   function render(data){
     var models = (data.models || []).filter(function(m){
-      return m.series === "standard" || m.series === "pro";
+      return m.series === "standard" || m.series === "pro" || m.series === "fold";
     });
     var rows = [
       ["発売世代", "year"],
@@ -291,7 +291,7 @@ footer{max-width:1080px;margin:0 auto;padding:32px 24px;font-size:11px;color:#8a
     })
     .then(render)
     .catch(function(err){
-      target.innerHTML = '<div class="status">Pixel 標準 / Pro 諸元の読み込みに失敗しました（' + esc(err.message) + '）。</div>';
+      target.innerHTML = '<div class="status">Pixel 標準 / Pro / Fold 諸元の読み込みに失敗しました（' + esc(err.message) + '）。</div>';
     });
 })();
 </script>

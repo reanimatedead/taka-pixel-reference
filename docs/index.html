@@ -166,8 +166,8 @@ pre .c{color:#8FA894}
 
 <section id="specs">
   <span id="pixel-lineup" class="anchor-alias" aria-hidden="true"></span>
-  <h2>Pixel 諸元スライド（a / 標準 / Pro）</h2>
-  <p class="sec-note">スペック比較（aシリーズ）と Pixel 標準 / Pro 諸元（5 → 10）を統合。タブ、左右ボタン、横スワイプで機種ごとの主要仕様を確認できます。</p>
+  <h2>Pixel 諸元スライド（a / 標準 / Pro / Fold）</h2>
+  <p class="sec-note">Pixel a シリーズ、標準モデル、Pro / Pro XL、Fold 系（折りたたみ・参考情報）の主要諸元を同じスライドに統合。タブ、左右ボタン、横スワイプで機種ごとの主要仕様を確認できます。</p>
   <div class="spec-shell" id="pixel-spec-shell">
     <div class="spec-controls">
       <div class="spec-tabs" id="spec-tabs" role="group" aria-label="Pixel機種フィルタ"></div>
@@ -301,7 +301,7 @@ pre .c{color:#8FA894}
 
 <section id="fold">
   <h2>Fold系（折りたたみ・参考情報）</h2>
-  <p class="sec-note">aシリーズとは別系統のフラッグシップ折りたたみ。価格はaシリーズ約3台分のため、本ページでは<strong>購入候補ではなく情報収集対象</strong>として掲載。判断基準は同じ「サポート期限」。</p>
+  <p class="sec-note">主要諸元は上の「Pixel 諸元スライド」に統合済み。ここでは折りたたみ固有のリスク、既知問題、資金判断を補足する。価格はaシリーズ約3台分のため、本ページでは<strong>購入候補ではなく情報収集対象</strong>として扱う。</p>
   <div class="table-wrap">
   <table>
     <thead>
@@ -713,7 +713,8 @@ fastboot devices
     return {
       "a": "a series",
       "standard": "standard",
-      "pro": "Pro / XL"
+      "pro": "Pro / XL",
+      "fold": "Fold / reference"
     }[series] || series || "model";
   }
 

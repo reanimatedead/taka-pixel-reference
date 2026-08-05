@@ -8,6 +8,8 @@
 | Pixel phone hardware tech specs（earlier models） | https://support.google.com/pixelphone/answer/16043605 | 2026-08-05 | Pixel 5 の公式ハードウェア諸元。 |
 | Learn when you'll get software updates on Google Pixel phones | https://support.google.com/pixelphone/answer/4457705 | 2026-08-05 | Pixel 5a以前はEOL、Pixel 6/7/Foldは5年、Pixel 8以降は7年の更新ポリシー。 |
 
+追記: 2026-08-05 に Fold 系 3機種（Pixel Fold / 9 Pro Fold / 10 Pro Fold）の既存 `#fold` 諸元を `docs/data/pixel-lineup.json` に統合し、`#specs` の諸元スライドと辞書側 `#model-specs` の表示対象へ追加。Fold 固有の詳細出典は下部「Fold系セクション 出典記録（#fold）」を継続参照。
+
 ## 2026-08-02 — 開発者オプション詳細（#dev-options）
 
 | 項目 | URL | 確認日 | メモ |
