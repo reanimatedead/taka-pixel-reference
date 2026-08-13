@@ -89,6 +89,7 @@ kbd{font-family:var(--mono);font-size:11px;background:#EFF2EC;border:1px solid v
 .vstate{font-family:var(--mono);font-size:9px;padding:1px 6px;border-radius:4px;vertical-align:middle;margin-left:6px}
 .vstate.v{background:#E4EFE6;color:var(--sage-deep)}
 .vstate.u{background:#F4E6DE;color:var(--alert)}
+.vstate.p{background:#EDEFE9;color:#6a6f6a}
 .alert-band{background:#FBEEE8;border:1px solid var(--alert);color:#8a3c20;border-radius:10px;padding:10px 14px;font-size:12px;margin:10px 0;font-weight:500}
 footer{max-width:1080px;margin:0 auto;padding:32px 24px;font-size:11px;color:#8a8f89;border-top:1px solid var(--hazel)}
 pre{background:#2B2F2C;color:#E8EAE5;font-family:var(--mono);font-size:12px;border-radius:10px;padding:14px 16px;overflow-x:auto;margin:8px 0;line-height:1.6}
@@ -144,7 +145,7 @@ pre .c{color:#8FA894}
   <div class="eyebrow">Personal Reference — Pixel specifications</div>
   <h1>Pixelの諸元</h1>
   <p class="lede">Pixel a シリーズ、標準モデル、Pro / Pro XL、Fold 系のスペック・サポート期限・公式ヘルプ・電話/Gmail 機能・OS別不具合・トラブルシューティングを 1 ページに集約。判断基準は「今日、その端末を安全に使えるか」。</p>
-  <p class="updated">last verified: 2026-08-05 / 出典: Google 公式ヘルプ + Google ストア + 国内報道</p>
+  <p class="updated">last verified: 2026-08-13 / 出典: Google 公式ヘルプ + Google ストア + Android Factory Images / Full OTA Images</p>
 </header>
 
 <nav aria-label="ページ内リンク">
@@ -156,7 +157,7 @@ pre .c{color:#8FA894}
     <li><a href="#features">電話 / Gmail 機能</a></li>
     <li><a href="#os-bugs">OS別不具合</a></li>
     <li><a href="#ts">トラブルシューティング / 復旧</a></li>
-    <li><a href="pixel11/">Pixel 11（骨組み）↗</a></li>
+    <li><a href="#pixel11">Pixel 11</a></li>
     <li><a href="dict/">不具合辞書 ↗</a></li>
   </ul>
 </nav>
@@ -165,8 +166,9 @@ pre .c{color:#8FA894}
 
 <section id="specs">
   <span id="pixel-lineup" class="anchor-alias" aria-hidden="true"></span>
+  <span id="pixel11" class="anchor-alias" aria-hidden="true"></span>
   <h2>Pixel 諸元スライド（a / 標準 / Pro / Fold）</h2>
-  <p class="sec-note">Pixel a シリーズ、標準モデル、Pro / Pro XL、Fold 系（折りたたみ・参考情報）の主要諸元を同じスライドに統合。タブ、左右ボタン、横スワイプで機種ごとの主要仕様を確認できます。</p>
+  <p class="sec-note">Pixel a シリーズ、標準モデル、Pro / Pro XL、Fold 系（折りたたみ・参考情報）に Pixel 11 系を統合。タブ、左右ボタン、横スワイプで機種ごとの主要仕様を確認できます。</p>
   <div class="spec-shell" id="pixel-spec-shell">
     <div class="spec-controls">
       <div class="spec-tabs" id="spec-tabs" role="group" aria-label="Pixel機種フィルタ"></div>
@@ -179,7 +181,7 @@ pre .c{color:#8FA894}
       <div class="lineup-status">Pixel 諸元を読み込み中...</div>
     </div>
   </div>
-  <p class="lineup-note">EOL = アップデート提供終了。更新期限は Google 公式の更新ポリシー（Pixel 6/7/Fold = 5年、Pixel 8以降 = 7年）と発売世代からの目安。正確な提供タイミングは地域・キャリアで前後する。</p>
+  <p class="lineup-note">EOL = アップデート提供終了。Pixel 11 系は Google 公式の Pixel 更新期限表と「米国 Google Store 販売開始月」ページに掲載済み。Factory Image / OTA 未掲載のコードネームは PENDING とする。</p>
 
   <div class="fold-notes">
     <h3>Fold固有の既知問題・資金判断</h3>
@@ -195,12 +197,13 @@ pre .c{color:#8FA894}
     </details>
 
     <details>
-      <summary><span><span class="ts-tag">9/10</span>9 Pro Fold / 10 Pro Fold — 現役世代</span></summary>
+      <summary><span><span class="ts-tag">9/10/11</span>9 Pro Fold / 10 Pro Fold / 11 Pro Fold — 現役世代</span></summary>
       <div class="body">
         <ul>
           <li><strong>9 Pro Fold:</strong> 初代の弱点（重量・画面耐久）を大幅改善した世代。防塵は非対応（IPX8）のまま</li>
           <li><strong>10 Pro Fold:</strong> 折りたたみ初のIP68防塵防水 <span class="vstate v">VERIFIED</span>。ギアレスヒンジで10年以上の折りたたみ動作に耐える設計 <span class="vstate v">VERIFIED</span>。Android 17 の不具合マトリクス（上）は本機にも適用される</li>
-          <li><strong>資金判断:</strong> 10 Pro Fold は ¥267,500〜 = 9a 約3.3台分。大画面2画面が業務生産性に直結する要件（例: 移動中の資料同時参照）がない限り、判定D（現時点購入非推奨・ウォッチのみ）</li>
+          <li><strong>11 Pro Fold:</strong> Google 公式仕様で 6.5インチ外側 + 8インチ内側、Tensor G6、16GB RAM、IP68、Pixelsnap Qi2.2 を確認 <span class="vstate v">VERIFIED</span>。コードネーム / Factory Image / OTA は未掲載 <span class="vstate p">PENDING</span></li>
+          <li><strong>資金判断:</strong> 10/11 Pro Fold は a シリーズ複数台分の価格帯。大画面2画面が業務生産性に直結する要件（例: 移動中の資料同時参照）がない限り、標準/Pro系と費用対効果を比較する</li>
         </ul>
       </div>
     </details>
@@ -307,10 +310,10 @@ pre .c{color:#8FA894}
 
 <section id="support">
   <h2>サポート期限タイムライン</h2>
-  <p class="sec-note">縦の赤線 = 今日（2026年7月）。赤線より左で終わっているバーの端末は、セキュリティ更新が来ない＝メイン機・銀行/決済用途は不可。保証区分は 3 つ：<strong>5a以前 = 終了済み / 6a・7a = 5年 / 8a以降 = 7年</strong>。</p>
+  <p class="sec-note">縦の赤線 = 今日（2026年8月13日）。赤線より左で終わっているバーの端末は、セキュリティ更新が来ない＝メイン機・銀行/決済用途は不可。保証区分は 3 つ：<strong>5a以前 = 終了済み / 6a・7a = 5年 / 8a以降 = 7年</strong>。Pixel 11 系は公式期限表に掲載済み。</p>
   <div class="timeline">
-    <div class="today-line" style="left:calc(122px + (100% - 142px) * 0.4643)"></div>
-    <div class="today-label" style="left:calc(122px + (100% - 142px) * 0.4643)">TODAY</div>
+    <div class="today-line" style="left:calc(122px + (100% - 142px) * 0.4702)"></div>
+    <div class="today-label" style="left:calc(122px + (100% - 142px) * 0.4702)">TODAY</div>
     <div class="tl-row"><div class="tl-name">4a<small>2020/8–2023/8</small></div><div class="tl-track"><div class="tl-bar eol" style="left:4.17%;width:17.86%"><span>EOL</span></div></div></div>
     <div class="tl-row"><div class="tl-name">4a (5G)<small>2020/10–2023/11</small></div><div class="tl-track"><div class="tl-bar eol" style="left:5.36%;width:18.45%"><span>EOL</span></div></div></div>
     <div class="tl-row"><div class="tl-name">5a (5G)<small>2021/8–2024/8</small></div><div class="tl-track"><div class="tl-bar eol" style="left:11.31%;width:17.86%"><span>EOL</span></div></div></div>
@@ -319,6 +322,10 @@ pre .c{color:#8FA894}
     <div class="tl-row"><div class="tl-name">8a<small>2024/5–2031/5</small></div><div class="tl-track"><div class="tl-bar" style="left:29.76%;width:41.67%"><span>2031/5</span></div></div></div>
     <div class="tl-row"><div class="tl-name">9a<small>2025/4–2032/4</small></div><div class="tl-track"><div class="tl-bar" style="left:36.31%;width:41.67%"><span>2032/4</span></div></div></div>
     <div class="tl-row"><div class="tl-name">10a<small>2026/4–2033/4</small></div><div class="tl-track"><div class="tl-bar" style="left:42.26%;width:41.67%"><span>2033/4</span></div></div></div>
+    <div class="tl-row"><div class="tl-name">11<small>2026/8–2033/8</small></div><div class="tl-track"><div class="tl-bar" style="left:47.02%;width:50%"><span>2033/8</span></div></div></div>
+    <div class="tl-row"><div class="tl-name">11 Pro<small>2026/8–2033/8</small></div><div class="tl-track"><div class="tl-bar" style="left:47.02%;width:50%"><span>2033/8</span></div></div></div>
+    <div class="tl-row"><div class="tl-name">11 Pro XL<small>2026/8–2033/8</small></div><div class="tl-track"><div class="tl-bar" style="left:47.02%;width:50%"><span>2033/8</span></div></div></div>
+    <div class="tl-row"><div class="tl-name">11 Pro Fold<small>2026/8–2033/8</small></div><div class="tl-track"><div class="tl-bar" style="left:47.02%;width:50%"><span>2033/8</span></div></div></div>
     <div class="tl-axis"><div></div><div class="ticks"><span>2020</span><span>2022</span><span>2024</span><span>2026</span><span>2028</span><span>2030</span><span>2032</span><span>2034</span></div></div>
   </div>
 </section>
@@ -330,8 +337,9 @@ pre .c{color:#8FA894}
   <div class="cards">
     <a class="card" href="https://support.google.com/pixelphone" target="_blank" rel="noopener"><h3>Pixel ヘルプ トップ</h3><p>本体・設定・修理の全ヘルプ入口</p><span class="url">support.google.com/pixelphone</span></a>
     <a class="card" href="https://support.google.com/pixelphone/answer/4457705" target="_blank" rel="noopener"><h3>アップデート提供期限（公式表）</h3><p>機種別のOS/セキュリティ更新の保証期限一覧。EOL判定の一次ソース</p><span class="url">…/answer/4457705</span></a>
-    <a class="card" href="https://support.google.com/pixelphone/answer/7158570" target="_blank" rel="noopener"><h3>システムアップデートの確認方法</h3><p>手動更新の手順・再起動が必要なケース</p><span class="url">…/answer/7158570</span></a>
+    <a class="card" href="https://support.google.com/pixelphone/answer/7158570" target="_blank" rel="noopener"><h3>Pixel ハードウェア技術仕様</h3><p>Pixel 11 系を含むディスプレイ・電池・カメラ・通信仕様の一次ソース</p><span class="url">…/answer/7158570</span></a>
     <a class="card" href="https://developers.google.com/android/images" target="_blank" rel="noopener"><h3>Factory Images（開発者向け）</h3><p>文鎮化からの復旧・初期化用の公式イメージ配布</p><span class="url">developers.google.com/android/images</span></a>
+    <a class="card" href="https://store.google.com/jp/category/phones?hl=ja" target="_blank" rel="noopener"><h3>Google Store Pixel 11 シリーズ</h3><p>日本価格・予約購入・ラインナップ・Google Store 比較表</p><span class="url">store.google.com/jp/category/phones</span></a>
     <a class="card" href="https://store.google.com/jp/product/pixel_10a_specs?hl=ja" target="_blank" rel="noopener"><h3>Pixel 10a 公式スペック</h3><p>Google ストアの技術仕様ページ（最新機の一次ソース）</p><span class="url">store.google.com/jp/product/pixel_10a_specs</span></a>
     <a class="card" href="https://support.google.com/pixelphone/answer/7173456" target="_blank" rel="noopener"><h3>修理・保証</h3><p>正規修理の申込み・保証確認</p><span class="url">…/answer/7173456</span></a>
   </div>
@@ -653,7 +661,8 @@ fastboot devices
         <li>7 = <kbd>panther</kbd> <span class="vstate v">VERIFIED</span> / 7 Pro = <kbd>cheetah</kbd> <span class="vstate v">VERIFIED</span> / 8 = <kbd>shiba</kbd> <span class="vstate v">VERIFIED</span> / 8 Pro = <kbd>husky</kbd> <span class="vstate v">VERIFIED</span></li>
         <li>9 = <kbd>tokay</kbd> <span class="vstate v">VERIFIED</span> / 9 Pro = <kbd>caiman</kbd> <span class="vstate v">VERIFIED</span> / 9 Pro XL = <kbd>komodo</kbd> <span class="vstate v">VERIFIED</span></li>
         <li>10 = <kbd>frankel</kbd> <span class="vstate v">VERIFIED</span> / 10 Pro = <kbd>blazer</kbd> <span class="vstate v">VERIFIED</span> / 10 Pro XL = <kbd>mustang</kbd> <span class="vstate v">VERIFIED</span></li>
-        <li>Fold = <kbd>felix</kbd> <span class="vstate v">VERIFIED</span> / 9 Pro Fold = <kbd>comet</kbd> <span class="vstate v">VERIFIED</span> / 10 Pro Fold = <kbd>rango（リーク段階・公式Factory Image未掲載）</kbd> <span class="vstate u">UNVERIFIED</span></li>
+        <li>Fold = <kbd>felix</kbd> <span class="vstate v">VERIFIED</span> / 9 Pro Fold = <kbd>comet</kbd> <span class="vstate v">VERIFIED</span> / 10 Pro Fold = <kbd>rango</kbd> <span class="vstate v">VERIFIED</span></li>
+        <li>11 / 11 Pro / 11 Pro XL / 11 Pro Fold = <kbd>PENDING — Factory Image 掲載待ち</kbd> <span class="vstate p">PENDING</span></li>
       </ul>
       <p>配布元（公式のみ使用）: <a href="https://developers.google.com/android/images" target="_blank" rel="noopener">Factory Images</a> / <a href="https://developers.google.com/android/ota" target="_blank" rel="noopener">Full OTA Images</a></p>
     </div>
@@ -665,7 +674,7 @@ fastboot devices
 </main>
 
 <footer>
-  主な出典: Google Pixel ヘルプ「ソフトウェア アップデートが提供されるタイミング」(support.google.com/pixelphone/answer/4457705) / Google Pixel ハードウェア技術仕様 / Google ストア Pixel 10a 技術仕様 / Android 17 配信・不具合は2026年6〜7月の国内報道複数。価格は発売時のGoogleストア税込価格。個人用リファレンス。 / Fold系は2025年8月発表時報道
+  主な出典: Google Pixel ヘルプ「ソフトウェア アップデートが提供されるタイミング」(support.google.com/pixelphone/answer/4457705) / Google Pixel ハードウェア技術仕様 (support.google.com/pixelphone/answer/7158570) / Google ストア Pixel 11 シリーズ / Android Factory Images / Full OTA Images。Pixel 11 系のコードネームは 2026-08-13 時点で Factory / OTA 未掲載のため PENDING。価格はGoogleストア税込価格。個人用リファレンス。
 </footer>
 
 <script>
@@ -751,7 +760,7 @@ fastboot devices
     ];
     var update = model.update || "-";
     var updateClass = update.indexOf("EOL") === 0 ? "spec-chip eol" : "spec-chip";
-    return '<article class="spec-slide" data-index="' + index + '" aria-label="' + esc(model.name) + 'の主要諸元">'
+    return '<article class="spec-slide" id="model-' + esc(model.id || index) + '" data-index="' + index + '" aria-label="' + esc(model.name) + 'の主要諸元">'
       + '<h3>' + esc(model.name) + '</h3>'
       + '<div class="spec-meta">'
       + '<span class="spec-chip">' + esc(seriesLabel(model.series)) + '</span>'
@@ -762,6 +771,23 @@ fastboot devices
         return '<dt>' + esc(field[0]) + '</dt><dd>' + esc(model[field[1]] || "-") + '</dd>';
       }).join("")
       + '</dl></article>';
+  }
+
+  function syncHashTarget(models){
+    var hash = window.location.hash ? decodeURIComponent(window.location.hash.slice(1)) : "";
+    if(!hash) return;
+    var targetIndex = -1;
+    models.some(function(model, index){
+      var id = model.id || "";
+      if(id === hash || ("model-" + id) === hash || (hash === "pixel11" && id.indexOf("pixel11") === 0)){
+        targetIndex = index;
+        return true;
+      }
+      return false;
+    });
+    if(targetIndex >= 0){
+      window.setTimeout(function(){ scrollToIndex(targetIndex); }, 60);
+    }
   }
 
   function render(data){
@@ -775,6 +801,7 @@ fastboot devices
     }).join("");
     slider.innerHTML = models.map(cardHtml).join("");
     setActive(0);
+    syncHashTarget(models);
   }
 
   tabs.addEventListener("click", function(event){
