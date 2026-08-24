@@ -82,7 +82,8 @@ def main():
     builds = {b["build_id"]: b for b in doc["builds"]}
     # 基準値 66→67: Agent 1 (2nd iteration: ARB Historian) が BP1A.250505.005
     # (Android 15 世代 ARB 例外収載) を追加 (2026-07-30)。件数非減少の思想は維持。
-    check("data: builds.json has 67 records", len(builds) == 67,
+    # 67→69: 2026-08 月例更新到達で CP2A.260805.005 と .A1 (Rogers) が追加 (2026-08-24)。
+    check("data: builds.json has 69 records", len(builds) == 69,
           f"actual {len(builds)}")
 
     data_expected = {

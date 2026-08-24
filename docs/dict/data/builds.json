@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-30",
+  "generated_at": "2026-08-24",
   "builds": [
     {
       "build_id": "BD1A.250702.001",
@@ -2281,6 +2281,77 @@
         "https://support.google.com/pixelphone/thread/448470698",
         "https://www.droid-life.com/2026/07/07/2026-july-pixel-update-available-for-your-pixel-phone/"
       ]
+    },
+    {
+      "build_id": "CP2A.260805.005",
+      "os": "Android 17",
+      "track": "monthly",
+      "base_month": "2026-08",
+      "release_date": "2026-08",
+      "security_patch": "2026-08-05",
+      "devices": [
+        "akita",
+        "blazer",
+        "caiman",
+        "comet",
+        "frankel",
+        "husky",
+        "komodo",
+        "mustang",
+        "rango",
+        "shiba",
+        "stallion",
+        "tegu",
+        "tokay"
+      ],
+      "region_scope": "global",
+      "anti_rollback": {
+        "incremented": false,
+        "note": ""
+      },
+      "official_fixes": [],
+      "sources": [
+        "https://developers.google.com/android/images",
+        "https://developers.google.com/android/ota",
+        "https://source.android.com/docs/security/bulletin/pixel"
+      ],
+      "verify_state": "UNVERIFIED",
+      "confidence": "SINGLE_SOURCE",
+      "confidence_sources": []
+    },
+    {
+      "build_id": "CP2A.260805.005.A1",
+      "os": "Android 17",
+      "track": "monthly",
+      "base_month": "2026-08",
+      "release_date": "2026-08",
+      "security_patch": "2026-08-05",
+      "devices": [
+        "blazer",
+        "caiman",
+        "comet",
+        "frankel",
+        "komodo",
+        "mustang",
+        "rango",
+        "stallion",
+        "tokay"
+      ],
+      "region_scope": "Rogers",
+      "parent_build_id": "CP2A.260805.005",
+      "anti_rollback": {
+        "incremented": false,
+        "note": ""
+      },
+      "official_fixes": [],
+      "sources": [
+        "https://developers.google.com/android/images",
+        "https://developers.google.com/android/ota",
+        "https://source.android.com/docs/security/bulletin/pixel"
+      ],
+      "verify_state": "UNVERIFIED",
+      "confidence": "SINGLE_SOURCE",
+      "confidence_sources": []
     }
   ]
 }

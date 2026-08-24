@@ -441,3 +441,45 @@ ota/images/bulletin を含まない検証用取得物が誤って最新スナッ
 - PXD-0023 の sources を Wayback URL へ差し替え（date は再確認日 2026-07-31 に更新）。
   ソースは削除ではなく差し替えのため evidence_level=OFFICIAL（support.google.com 公式含む4ソース）は不変。
   builds.json の confidence への影響もなし。
+
+
+## Opus 4.7 (1M context) — Pixel 11 系リリース対応 (2026-08-24)
+
+### 判断
+- 凍結 (2026-07-31) 中の taka-pixel-reference について、`docs/FROZEN.md` の再開条件に **条件 3「新 Pixel 世代のリリース」** を追加した。
+- 動機: Pixel 11 系 (2026-08 発売) はコードネームと Factory Image / OTA が Google 公式に順次掲載される新機種だが、既存 2 条件では拾えない。既存条件 2「Android 18 リリース」は新プレフィックス世代 (BQ1A 等) 追加ケース専用で、Android 17 継続下の新機種追加は対象外。ポリシー proxy がずれていたための是正。
+- ポリシー変更は人間承認済み (2026-08-24)。手コピー禁止・正規パイプライン (`scripts/monthly_collect.sh` → `scripts/parse_builds.py` → 3 テストランナー) 経由でのみ builds.json を更新した。
+
+### 出典 URL
+- developers.google.com/android/images (Factory Images 一次ソース・cookie `devsite_wall_acks=nexus-image-tos`)
+- developers.google.com/android/ota (Full OTA Images 一次ソース・cookie `devsite_wall_acks=nexus-ota-tos`)
+- source.android.com/docs/security/bulletin/pixel (Pixel Bulletin 一次ソース)
+- support.google.com/pixelphone/answer/4457705 (Pixel 更新期限表)
+
+### 実行手順
+1. `docs/FROZEN.md` の再開条件に条件 3 と再開履歴を追記。
+2. 本判断ログ (`data/build-dict-decisions.md`) に追記。
+3. `scripts/monthly_collect.sh` を実行 (`data/raw/2026-08-24/` に 4 ソース保存 → parse_builds.py で builds.json 再生成 → 3 テストランナー実行)。
+4. builds.json の差分点検 (Pixel 11 系の新規 build エントリ追加を実測)。
+5. `docs/index.html` の「11 = PENDING」箇所を実測結果に応じて更新 (一次ソース掲載済なら VERIFIED 化、未掲載なら PENDING 維持)。
+
+### 結果
+- 実行結果は `data/logs/monthly-collect-2026-08-24.log` および本追記の後続に記録する。
+
+### 実行結果 (2026-08-24 19:16 実測)
+
+**取得**: 4 ソース全て成功 (ota 666KB / images 1.2MB / bulletin 332KB / help 1.6MB)。
+
+**パース**: total=69 (67→69, +2件) / parents=18 (+0) / variants=51 (+2) / human_review=0 / anti_rollback 3件 (既存)。
+- 新規追加: `CP2A.260805.005` (global, Android 17 の 2026-08 月例更新) と `CP2A.260805.005.A1` (Rogers)。
+- devices は akita/blazer/caiman/comet/frankel/husky/komodo/mustang/rango/shiba/stallion/tegu/tokay = **Pixel 9/10 系のみ**。
+
+**Pixel 11 系コードネーム (cubs/grizzly/kodiak/yogi 等) は 2026-08-24 時点で Google Factory Image / OTA に未掲載**。docs/index.html の PENDING 記載を維持する。
+
+**バグ修正・データ訂正** (FROZEN.md line 47 に基づき記載必須):
+1. `scripts/parse_builds.py` の TRACK_TABLE に `("CP2A", "2026-08"): "monthly"` を 1 行追加 (2026-08 月例更新用アンカー)。既存の月次追加パターンに準拠。
+2. `tests/test_suffix_map.py` の期待レコード数を 67 → 69 に更新 (件数非減少の思想を維持)。
+
+**テスト結果**: test_contract 24/24 ✓ / test_suffix_map 23/23 ✓ / test_suffix_fallback 13/13 ✓ = **60/60 全緑**。decay_warning は stale=False (generated_at=2026-08-24)。
+
+**docs/index.html**: 既に 2026-08-13 時点で「Pixel 11 系のコードネーム / Factory Image / OTA は未掲載のため PENDING」と記載済み。本日実測でも未掲載を再確認したため記載事実は不変 = 触らない。ARB (`anti_rollback.incremented=true`) も新規 CP2A.260805 系では発動なし。

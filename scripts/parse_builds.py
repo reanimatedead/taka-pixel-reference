@@ -77,6 +77,7 @@ TRACK_TABLE = {
     ("CP1A", "2026-05"): "monthly",
     ("CP2A", "2026-06"): "stable",   # Android 17 初版
     ("CP2A", "2026-07"): "monthly",
+    ("CP2A", "2026-08"): "monthly",  # 2026-08 月例更新 (Pixel 9/10 系向け・実測 2026-08-24)
     # Pixel 10 系デバイスローンチ列 (メインライン合流前のデバイス専用ビルド)
     ("BD1A", "2025-08"): "stable",   # Pixel 10/10 Pro/10 Pro XL ローンチ
     ("BD3A", "2025-08"): "stable",
