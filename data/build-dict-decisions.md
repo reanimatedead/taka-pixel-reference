@@ -483,3 +483,29 @@ ota/images/bulletin を含まない検証用取得物が誤って最新スナッ
 **テスト結果**: test_contract 24/24 ✓ / test_suffix_map 23/23 ✓ / test_suffix_fallback 13/13 ✓ = **60/60 全緑**。decay_warning は stale=False (generated_at=2026-08-24)。
 
 **docs/index.html**: 既に 2026-08-13 時点で「Pixel 11 系のコードネーム / Factory Image / OTA は未掲載のため PENDING」と記載済み。本日実測でも未掲載を再確認したため記載事実は不変 = 触らない。ARB (`anti_rollback.incremented=true`) も新規 CP2A.260805 系では発動なし。
+
+
+## Opus 4.7 (1M context) — PENDING再取得 + 再凍結 (2026-08-25)
+
+### 判断
+- Job3 (PENDING再取得タスク) の一環で reference の凍結表記を是正し再凍結を確定する。
+- `docs/FROZEN.md` 再開条件 2 を「Android 18 リリース」から「新 Android メジャー版のリリース（Android 18 等）」へ一般化。旧表記は特定バージョン固執で proxy がずれていたため（Android 19 等の後続メジャー版で拾えない）。
+- Pixel 11 系対応 (Job1 の CP2A.260805.005 + .A1 収載) は完了しているため、本日以降は再凍結状態に戻す (月2回自動収集と鮮度バナーのみで運用)。
+- Deck 6 ラボへの二層テンプレ適用 (Job2) は本体反映済みだが、reference (PXL / DICT) への同適用は `docs/two-lens-proposed-diff.md` として提案止まりで、次回再開ゲート発動時に一括判断する。builds.json / entries.json / index.html / dict/index.html は本ジョブでは無改変。
+
+### 出典 URL
+- developers.google.com/android/images (Pixel 11 系コードネーム掲載監視・Job1 で使用継続)
+- developers.google.com/android/ota (同上)
+- support.google.com/pixelphone/answer/4457705 (Pixel 更新期限表)
+- source.android.com/docs/security/bulletin/pixel (Pixel Bulletin)
+
+### 変更対象
+- docs/FROZEN.md (再開条件 2 の表記一般化 + 再凍結履歴追加)
+- data/build-dict-decisions.md (本判断ログ追記)
+- 本ジョブでは builds.json・entries.json・docs/index.html・docs/dict/index.html は一切改変しない (git status で確認)
+
+### 残 PENDING (公式反映後に反映)
+- Pixel 11 系のコードネーム (cubs/grizzly/kodiak/yogi 等) — Factory Image / OTA 未掲載継続
+- Pixel 11 系の機種別 EOL 日付 — support.google.com/pixelphone/answer/4457705 の 7 年保証記述のみで機種別日付なし
+- Pixel 11 系の ARB 有無 — CP2A.260805 系では発動なし、Pixel 11 個別機種の一次確認取れず
+- 上記は次回 monthly_collect.sh 実行時に自動反映される見込み (再凍結状態でも自動収集は継続)
