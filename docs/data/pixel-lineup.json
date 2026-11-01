@@ -1,6 +1,6 @@
 {
-  "lastVerified": "2026-08-13",
-  "note": "Pixel a シリーズ、Pixel 5/6/7/8/9/10/11、Pro 系、Fold 系の主要諸元。Pixel 11 系は Google Store / Pixel 公式ヘルプ / Android Factory Images / Full OTA Images の一次ソースで確認できた値のみ掲載。公式未反映の値は PENDING とする。地域・容量構成は販売国で異なる。",
+  "lastVerified": "2026-11-01",
+  "note": "Pixel a シリーズ、Pixel 5/6/7/8/9/10/11、Pro 系、Fold 系の主要諸元。Pixel 11 系は Google Store / Pixel 公式ヘルプ / Android Factory Images / Full OTA Images の一次ソースで確認できた値のみ掲載。公式未反映の値は PENDING、二次情報のみの値は UNVERIFIED と明記する。更新期限は米国 Google Store の販売開始月が基準。地域・容量構成は販売国で異なる。",
   "models": [
     {
       "id": "pixel4a",
@@ -140,19 +140,19 @@
       "filterKey": "10a",
       "name": "Pixel 10a",
       "series": "a",
-      "year": "2026/4",
+      "year": "2026/3（米国）/ 2026/4/14（日本）",
       "launchOs": "Android 16",
       "soc": "Google Tensor G4",
       "ramStorage": "8GB / 128-256GB",
       "display": "6.3\" OLED 120Hz",
-      "battery": "約5,100mAh級 / 急速充電",
+      "battery": "5,100mAh（typical）/ 45W有線で約30分50% / Qiワイヤレス",
       "rearCamera": "48MP wide + ultrawide",
       "durability": "IP68",
       "auth": "画面内指紋 + 顔",
       "network": "5G",
-      "update": "7年保証（2033/4目安）",
+      "update": "7年保証（2033/3目安）",
       "codename": "stallion",
-      "price": "¥79,900 (128GB) / ¥94,900 (256GB)"
+      "price": "¥92,800 (128GB) / ¥107,800 (256GB)（2026/10/1改定。発売時 ¥79,900 / ¥94,900）"
     },
     {
       "id": "pixel5",
@@ -187,7 +187,7 @@
       "durability": "IP68",
       "auth": "画面内指紋",
       "network": "5G sub-6",
-      "update": "5年保証（2026/10目安）",
+      "update": "5年保証（2026/10で期限到達。2026年10月更新が最終とみられる）",
       "codename": "oriole"
     },
     {
@@ -205,7 +205,7 @@
       "durability": "IP68",
       "auth": "画面内指紋",
       "network": "5G sub-6 / mmWaveは地域依存",
-      "update": "5年保証（2026/10目安）",
+      "update": "5年保証（2026/10で期限到達。2026年10月更新が最終とみられる）",
       "codename": "raven"
     },
     {
@@ -453,7 +453,7 @@
       "filterKey": "11",
       "name": "Pixel 11",
       "series": "standard",
-      "year": "2026/8（予約購入中 / 日本発売日PENDING）",
+      "year": "2026/8（日本発売 2026/8/20・予約 8/12〜 ※日本の日付は報道ベース UNVERIFIED）",
       "launchOs": "Android 17",
       "soc": "Google Tensor G6 + Titan M3",
       "ramStorage": "12GB / 256-512GB",
@@ -465,15 +465,15 @@
       "auth": "画面内指紋 + 顔",
       "network": "5G sub-6 / Wi-Fi 6E / Bluetooth 6 / NFC / FeliCa / nanoSIM+eSIM",
       "update": "7年保証（2033/8・公式表掲載）",
-      "codename": "PENDING — Factory Image 掲載待ち",
-      "price": "¥136,800〜"
+      "codename": "cubs",
+      "price": "¥136,800 (256GB) / ¥156,800 (512GB)"
     },
     {
       "id": "pixel11pro",
       "filterKey": "11 Pro",
       "name": "Pixel 11 Pro",
       "series": "pro",
-      "year": "2026/8（予約購入中 / 日本発売日PENDING）",
+      "year": "2026/8（日本発売 2026/8/20・予約 8/12〜 ※日本の日付は報道ベース UNVERIFIED）",
       "launchOs": "Android 17",
       "soc": "Google Tensor G6 + Titan M3",
       "ramStorage": "12GB(256GB) / 16GB(512GB-1TB)",
@@ -485,15 +485,15 @@
       "auth": "画面内指紋 + 顔",
       "network": "5G sub-6 / Wi-Fi 7 / Bluetooth 6 / NFC / UWB / FeliCa / nanoSIM+eSIM",
       "update": "7年保証（2033/8・公式表掲載）",
-      "codename": "PENDING — Factory Image 掲載待ち",
-      "price": "¥174,800〜"
+      "codename": "grizzly",
+      "price": "¥174,800 (256GB) / ¥194,800 (512GB) / ¥234,800 (1TB)"
     },
     {
       "id": "pixel11proxl",
       "filterKey": "11 Pro XL",
       "name": "Pixel 11 Pro XL",
       "series": "pro",
-      "year": "2026/8（予約購入中 / 日本発売日PENDING）",
+      "year": "2026/8（日本発売 2026/8/20・予約 8/12〜 ※日本の日付は報道ベース UNVERIFIED）",
       "launchOs": "Android 17",
       "soc": "Google Tensor G6 + Titan M3",
       "ramStorage": "12GB(256GB) / 16GB(512GB-1TB)",
@@ -505,18 +505,18 @@
       "auth": "画面内指紋 + 顔",
       "network": "5G sub-6 / Wi-Fi 7 / Bluetooth 6 / NFC / UWB / FeliCa / nanoSIM+eSIM",
       "update": "7年保証（2033/8・公式表掲載）",
-      "codename": "PENDING — Factory Image 掲載待ち",
-      "price": "PENDING — Google Store個別価格の公式確認待ち（Pro共通ページは¥174,800〜）"
+      "codename": "kodiak",
+      "price": "¥207,800〜（容量別価格は未取得）"
     },
     {
       "id": "pixel11profold",
       "filterKey": "11 Pro Fold",
       "name": "Pixel 11 Pro Fold",
       "series": "fold",
-      "year": "2026/8（予約購入中 / 日本発売日PENDING）",
+      "year": "2026/8（日本発売 2026/8/20・予約 8/12〜 ※日本の日付は報道ベース UNVERIFIED）",
       "launchOs": "Android 17",
       "soc": "Google Tensor G6 + Titan M3",
-      "ramStorage": "16GB / 256GB-1TB（地域差あり）",
+      "ramStorage": "16GB / 256-512GB（日本）。1TBは米国のみ",
       "display": "外側6.5\" + 内側8\" LTPO OLED 1-120Hz / 最大3,600ニト",
       "battery": "4,806mAh / 24時間+ / 有線30分50% / Pixelsnap Qi2.2 25W",
       "special": "HiLight / Gemini Intelligence / Satellite SOS / Super Zoom 30x",
@@ -525,8 +525,8 @@
       "auth": "指紋 + 顔",
       "network": "5G / Wi-Fi 7 / Bluetooth 6 / NFC / UWB / FeliCa / nanoSIM+eSIM",
       "update": "7年保証（2033/8・公式表掲載）",
-      "codename": "PENDING — Factory Image 掲載待ち",
-      "price": "¥279,900〜"
+      "codename": "yogi",
+      "price": "¥279,900 (256GB) / ¥299,900 (512GB)（日本は1TBなし）"
     }
   ]
 }

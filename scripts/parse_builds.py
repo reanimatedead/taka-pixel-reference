@@ -50,7 +50,7 @@ BUILD_RE = re.compile(r"^[A-Z]{2}[0-9A-Z]{2}\.[0-9]{6}\.[0-9]{3}(\.[A-Z][0-9])?$
 VARIANT_SUFFIX_RE = re.compile(r"\.[A-Z][0-9]$")
 
 # スコープ対象プレフィックス (Android 16 世代 2025-06 以降)
-SCOPE_PREFIXES = ("BP2A", "BP3A", "BP4A", "CP1A", "CP2A", "BD1A", "BD3A", "BD6A")
+SCOPE_PREFIXES = ("BP2A", "BP3A", "BP4A", "CP1A", "CP2A", "CP3A", "BD1A", "BD3A", "BD6A", "CD1A")
 
 MONTHS = {m: i + 1 for i, m in enumerate(
     ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"])}
@@ -78,6 +78,10 @@ TRACK_TABLE = {
     ("CP2A", "2026-06"): "stable",   # Android 17 初版
     ("CP2A", "2026-07"): "monthly",
     ("CP2A", "2026-08"): "monthly",  # 2026-08 月例更新 (Pixel 9/10 系向け・実測 2026-08-24)
+    # 2026-11-01 追加: CP3A は 2026-09 初出の新メインライン列 (BP3A.2509=QPR1 と同じ位置)。
+    # 初月 = qpr、以降 = monthly の既存外挿規則に従う (判断ログ D-2026-11-01 参照)。
+    ("CP3A", "2026-09"): "qpr",
+    ("CP3A", "2026-10"): "monthly",
     # Pixel 10 系デバイスローンチ列 (メインライン合流前のデバイス専用ビルド)
     ("BD1A", "2025-08"): "stable",   # Pixel 10/10 Pro/10 Pro XL ローンチ
     ("BD3A", "2025-08"): "stable",
@@ -85,6 +89,11 @@ TRACK_TABLE = {
     ("BD3A", "2025-10"): "monthly",
     ("BD3A", "2025-11"): "monthly",
     ("BD6A", "2026-03"): "stable",   # Pixel 10a (stallion) ローンチ
+    # Pixel 11 系デバイスローンチ列 (cubs/grizzly/kodiak/yogi)。2026-08 収集時に
+    # SCOPE_PREFIXES 未登録で黙って除外されていた (判断ログ D-2026-11-01 参照)。
+    ("CD1A", "2026-08"): "stable",
+    ("CD1A", "2026-09"): "monthly",
+    ("CD1A", "2026-10"): "monthly",
 }
 
 # ---- タスク3: 既知の確定値 (アンカー) ----

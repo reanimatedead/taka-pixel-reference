@@ -114,7 +114,7 @@
   {
     "id": "PXD-0003",
     "title_ja": "Wi-Fi接続時のみ一部アプリが通信不可",
-    "title_en": "App connectivity failure on Wi-Fi (work profile)",
+    "title_en": "App connectivity failure on Wi-Fi only",
     "yomi": "わいふぁいせつぞくじのみいちぶあぷりがつうしんふか",
     "category": "通信",
     "severity": "medium",
@@ -128,17 +128,17 @@
     "affected_os": [
       "17"
     ],
-    "symptom": "Wi-Fi接続時のみ一部アプリが通信できない。仕事用プロファイル利用環境で発生。",
-    "cause": "仕事用プロファイル利用環境で発生するバグと Google が公式に認め修正を明言。",
+    "symptom": "Wi-Fi接続時のみ一部アプリが通信できない（接続表示はあるが読み込めない）。",
+    "cause": "原因は Google 未公表。旧記載の「仕事用プロファイルのバグと Google が公式に認めた」は誤帰属（その Google 発言は同時期のウィジェット消失バグについてのもの。cybernews 原文で確認 2026-11-01）。",
     "workaround": [
       "スーパーバッテリーセーバーを一度ON→OFF",
       "対象アプリのキャッシュ削除+無効化→再有効化",
-      "仕事用プロファイルの一時無効化"
+      "ルーター側で IPv6 を有効化（解決例の報告あり）"
     ],
     "fix_status": "open",
     "first_seen": "2026-06",
-    "last_checked": "2026-07-24",
-    "verify_state": "VERIFIED",
+    "last_checked": "2026-11-01",
+    "verify_state": "UNVERIFIED",
     "sources": [
       {
         "url": "https://cybernews.com/tech/android-17-bug-google-pixel/",
@@ -151,20 +151,24 @@
       {
         "url": "https://www.androidpolice.com/android-17-wi-fi-issues/",
         "date": "2026-07-24"
+      },
+      {
+        "url": "https://www.androidauthority.com/android-17-wi-fi-3678670/",
+        "date": "2026-11-01"
       }
     ],
     "layer": "framework",
     "mechanism": {
-      "text": "Work Profile と Android 17 の連携不良。Google が公式に表明: \"We are aware of this bug affecting Work Profile users, and a fix will be rolled out in a software update soon\"。IPv6有効化で解決した例があり、IPv6単独が原因ではない。",
-      "confidence": "confirmed"
+      "text": "原因不明。Google の公式表明なし。IPv6 有効化で解決した例があるが単独原因ではない。2026年7〜10月の更新に直接の修正記載なし。",
+      "confidence": "unknown"
     },
-    "diagram": "flowchart TD\n  A[\"Android 17 更新\"] --> B[\"Work Profile とのネットワーク連携不良\"]\n  B --> C[\"Wi-Fi接続時のみ仕事用プロファイル内アプリが通信不可\"]\n  C --> D[\"IPv6 有効化で解決する環境あり＝単独原因ではない\"]\n  B --> E[\"Google が修正表明（時期未定）\"]",
+    "diagram": "flowchart TD\n  A[\"Android 17 更新\"] --> B[\"原因不明（Google 未公表）\"]\n  B --> C[\"Wi-Fi接続時のみ一部アプリが通信不可\"]\n  C --> D[\"IPv6 有効化で解決する環境あり＝単独原因ではない\"]",
     "build_link": {
       "first_seen": {
         "build_id": "CP2A.260605.012",
         "confidence": "inferred"
       },
-      "still_open_as_of": "CP2A.260705.006"
+      "still_open_as_of": "CP3A.261005.005"
     },
     "evidence_level": "MULTI_SOURCE"
   },

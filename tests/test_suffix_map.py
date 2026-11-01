@@ -83,7 +83,9 @@ def main():
     # 基準値 66→67: Agent 1 (2nd iteration: ARB Historian) が BP1A.250505.005
     # (Android 15 世代 ARB 例外収載) を追加 (2026-07-30)。件数非減少の思想は維持。
     # 67→69: 2026-08 月例更新到達で CP2A.260805.005 と .A1 (Rogers) が追加 (2026-08-24)。
-    check("data: builds.json has 69 records", len(builds) == 69,
+    # 69→80: 2026-11-01 収集で CP3A (2026-09/10, 3件) と Pixel 11 系 CD1A (8件) を収載。
+    #   CD1A は 2026-08 から公開済みだったが SCOPE_PREFIXES 未登録で黙って除外されていた。
+    check("data: builds.json has 80 records", len(builds) == 80,
           f"actual {len(builds)}")
 
     data_expected = {

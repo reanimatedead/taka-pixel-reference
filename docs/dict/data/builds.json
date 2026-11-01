@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-24",
+  "generated_at": "2026-11-01",
   "builds": [
     {
       "build_id": "BD1A.250702.001",
@@ -1768,6 +1768,229 @@
       ]
     },
     {
+      "build_id": "CD1A.260618.001.A7",
+      "os": "Android 17",
+      "track": "stable",
+      "base_month": "2026-06",
+      "release_date": "2026-08",
+      "security_patch": "2026-08-05",
+      "devices": [
+        "cubs",
+        "grizzly",
+        "kodiak"
+      ],
+      "region_scope": "global",
+      "parent_build_id": "CD1A.260618.001",
+      "anti_rollback": {
+        "incremented": false,
+        "note": ""
+      },
+      "official_fixes": [],
+      "sources": [
+        "https://developers.google.com/android/images",
+        "https://developers.google.com/android/ota",
+        "https://source.android.com/docs/security/bulletin/pixel"
+      ],
+      "verify_state": "UNVERIFIED",
+      "confidence": "SINGLE_SOURCE",
+      "confidence_sources": []
+    },
+    {
+      "build_id": "CD1A.260618.001.A9",
+      "os": "Android 17",
+      "track": "stable",
+      "base_month": "2026-06",
+      "release_date": "2026-08",
+      "security_patch": "2026-08-05",
+      "devices": [
+        "yogi"
+      ],
+      "region_scope": "global",
+      "parent_build_id": "CD1A.260618.001",
+      "anti_rollback": {
+        "incremented": false,
+        "note": ""
+      },
+      "official_fixes": [],
+      "sources": [
+        "https://developers.google.com/android/images",
+        "https://developers.google.com/android/ota",
+        "https://source.android.com/docs/security/bulletin/pixel"
+      ],
+      "verify_state": "UNVERIFIED",
+      "confidence": "SINGLE_SOURCE",
+      "confidence_sources": []
+    },
+    {
+      "build_id": "CD1A.260618.001.C2",
+      "os": "Android 17",
+      "track": "stable",
+      "base_month": "2026-06",
+      "release_date": "2026-08",
+      "security_patch": "2026-08-05",
+      "devices": [
+        "cubs",
+        "grizzly",
+        "kodiak"
+      ],
+      "region_scope": "global",
+      "parent_build_id": "CD1A.260618.001",
+      "anti_rollback": {
+        "incremented": false,
+        "note": ""
+      },
+      "official_fixes": [],
+      "sources": [
+        "https://developers.google.com/android/images",
+        "https://developers.google.com/android/ota",
+        "https://source.android.com/docs/security/bulletin/pixel"
+      ],
+      "verify_state": "UNVERIFIED",
+      "confidence": "SINGLE_SOURCE",
+      "confidence_sources": []
+    },
+    {
+      "build_id": "CD1A.260618.001.C3",
+      "os": "Android 17",
+      "track": "stable",
+      "base_month": "2026-06",
+      "release_date": "2026-08",
+      "security_patch": "2026-08-05",
+      "devices": [
+        "yogi"
+      ],
+      "region_scope": "global",
+      "parent_build_id": "CD1A.260618.001",
+      "anti_rollback": {
+        "incremented": false,
+        "note": ""
+      },
+      "official_fixes": [],
+      "sources": [
+        "https://developers.google.com/android/images",
+        "https://developers.google.com/android/ota",
+        "https://source.android.com/docs/security/bulletin/pixel"
+      ],
+      "verify_state": "UNVERIFIED",
+      "confidence": "SINGLE_SOURCE",
+      "confidence_sources": []
+    },
+    {
+      "build_id": "CD1A.260714.001.A9",
+      "os": "Android 17",
+      "track": "stable",
+      "base_month": "2026-07",
+      "release_date": "2026-08",
+      "security_patch": "2026-08-05",
+      "devices": [
+        "cubs",
+        "grizzly",
+        "kodiak",
+        "yogi"
+      ],
+      "region_scope": "global",
+      "parent_build_id": "CD1A.260714.001",
+      "anti_rollback": {
+        "incremented": false,
+        "note": ""
+      },
+      "official_fixes": [],
+      "sources": [
+        "https://developers.google.com/android/images",
+        "https://developers.google.com/android/ota",
+        "https://source.android.com/docs/security/bulletin/pixel"
+      ],
+      "verify_state": "UNVERIFIED",
+      "confidence": "SINGLE_SOURCE",
+      "confidence_sources": []
+    },
+    {
+      "build_id": "CD1A.260905.001.B1",
+      "os": "Android 17",
+      "track": "monthly",
+      "base_month": "2026-09",
+      "release_date": "2026-09",
+      "security_patch": "2026-09-05",
+      "devices": [
+        "cubs",
+        "grizzly",
+        "kodiak",
+        "yogi"
+      ],
+      "region_scope": "global",
+      "parent_build_id": "CD1A.260905.001",
+      "anti_rollback": {
+        "incremented": false,
+        "note": ""
+      },
+      "official_fixes": [],
+      "sources": [
+        "https://developers.google.com/android/images",
+        "https://developers.google.com/android/ota",
+        "https://source.android.com/docs/security/bulletin/pixel"
+      ],
+      "verify_state": "UNVERIFIED",
+      "confidence": "SINGLE_SOURCE",
+      "confidence_sources": []
+    },
+    {
+      "build_id": "CD1A.261005.003",
+      "os": "Android 17",
+      "track": "monthly",
+      "base_month": "2026-10",
+      "release_date": "2026-10",
+      "security_patch": "2026-10-05",
+      "devices": [
+        "cubs",
+        "grizzly",
+        "kodiak",
+        "yogi"
+      ],
+      "region_scope": "global",
+      "anti_rollback": {
+        "incremented": false,
+        "note": ""
+      },
+      "official_fixes": [],
+      "sources": [
+        "https://developers.google.com/android/images",
+        "https://developers.google.com/android/ota",
+        "https://source.android.com/docs/security/bulletin/pixel"
+      ],
+      "verify_state": "UNVERIFIED",
+      "confidence": "SINGLE_SOURCE",
+      "confidence_sources": []
+    },
+    {
+      "build_id": "CD1A.261005.003.B1",
+      "os": "Android 17",
+      "track": "monthly",
+      "base_month": "2026-10",
+      "release_date": "2026-10",
+      "security_patch": "2026-10-05",
+      "devices": [
+        "cubs",
+        "grizzly",
+        "kodiak",
+        "yogi"
+      ],
+      "region_scope": "SB",
+      "parent_build_id": "CD1A.261005.003",
+      "anti_rollback": {
+        "incremented": false,
+        "note": ""
+      },
+      "official_fixes": [],
+      "sources": [
+        "https://developers.google.com/android/images",
+        "https://developers.google.com/android/ota",
+        "https://source.android.com/docs/security/bulletin/pixel"
+      ],
+      "verify_state": "UNVERIFIED",
+      "confidence": "SINGLE_SOURCE",
+      "confidence_sources": []
+    },
+    {
       "build_id": "CP1A.260305.018",
       "os": "Android 16",
       "track": "qpr",
@@ -2339,6 +2562,121 @@
       ],
       "region_scope": "Rogers",
       "parent_build_id": "CP2A.260805.005",
+      "anti_rollback": {
+        "incremented": false,
+        "note": ""
+      },
+      "official_fixes": [],
+      "sources": [
+        "https://developers.google.com/android/images",
+        "https://developers.google.com/android/ota",
+        "https://source.android.com/docs/security/bulletin/pixel"
+      ],
+      "verify_state": "UNVERIFIED",
+      "confidence": "SINGLE_SOURCE",
+      "confidence_sources": []
+    },
+    {
+      "build_id": "CP3A.260905.009",
+      "os": "Android 17",
+      "track": "qpr",
+      "base_month": "2026-09",
+      "release_date": "2026-09",
+      "security_patch": "2026-09-05",
+      "devices": [
+        "akita",
+        "blazer",
+        "bluejay",
+        "caiman",
+        "cheetah",
+        "comet",
+        "felix",
+        "frankel",
+        "husky",
+        "komodo",
+        "lynx",
+        "mustang",
+        "oriole",
+        "panther",
+        "rango",
+        "raven",
+        "shiba",
+        "stallion",
+        "tangorpro",
+        "tegu",
+        "tokay"
+      ],
+      "region_scope": "global",
+      "anti_rollback": {
+        "incremented": false,
+        "note": ""
+      },
+      "official_fixes": [],
+      "sources": [
+        "https://developers.google.com/android/images",
+        "https://developers.google.com/android/ota",
+        "https://source.android.com/docs/security/bulletin/pixel"
+      ],
+      "verify_state": "UNVERIFIED",
+      "confidence": "SINGLE_SOURCE",
+      "confidence_sources": []
+    },
+    {
+      "build_id": "CP3A.261005.002.A1",
+      "os": "Android 17",
+      "track": "monthly",
+      "base_month": "2026-10",
+      "release_date": "2026-10",
+      "security_patch": "2026-10-05",
+      "devices": [
+        "bluejay",
+        "cheetah",
+        "felix",
+        "lynx",
+        "oriole",
+        "panther",
+        "raven",
+        "tangorpro"
+      ],
+      "region_scope": "global",
+      "parent_build_id": "CP3A.261005.002",
+      "anti_rollback": {
+        "incremented": false,
+        "note": ""
+      },
+      "official_fixes": [],
+      "sources": [
+        "https://developers.google.com/android/images",
+        "https://developers.google.com/android/ota",
+        "https://source.android.com/docs/security/bulletin/pixel"
+      ],
+      "verify_state": "UNVERIFIED",
+      "confidence": "SINGLE_SOURCE",
+      "confidence_sources": []
+    },
+    {
+      "build_id": "CP3A.261005.005",
+      "os": "Android 17",
+      "track": "monthly",
+      "base_month": "2026-10",
+      "release_date": "2026-10",
+      "security_patch": "2026-10-05",
+      "devices": [
+        "akita",
+        "blazer",
+        "caiman",
+        "comet",
+        "frankel",
+        "husky",
+        "komodo",
+        "mustang",
+        "rango",
+        "shiba",
+        "stallion",
+        "tegu",
+        "tokay"
+      ],
+      "region_scope": "global",
       "anti_rollback": {
         "incremented": false,
         "note": ""

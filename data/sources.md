@@ -151,3 +151,36 @@ JavaScript で動的挿入される構造。今回利用した取得系（HTML�
 
 - 既存9件の VERIFIED は Google 公式一次ソース単独ではなく、Android Police 一覧・LineageOS wiki・AOSP build docs の**community 照合**（3ソース一致）による。
 - 10 Pro Fold = rango はリーク段階のため表に名称は記載しつつ UNVERIFIED を維持した。
+
+---
+
+# 2026-11-01 全面再検証（本体ページ）
+
+| 項目 | 結論 | 出典 | 確認日 |
+| --- | --- | --- | --- |
+| Pixel 11 系コードネーム cubs / grizzly / kodiak / yogi | VERIFIED（一次） | developers.google.com/android/ota, /images（data/raw/2026-11-01） | 2026-11-01 |
+| 10a 更新期限 2033/3（米国販売開始 2026/3） | 訂正 | https://support.google.com/pixelphone/answer/15738422 | 2026-11-01 |
+| 10a 日本価格 ¥92,800 / ¥107,800（10/1改定） | VERIFIED | Google Store JP / https://gazlog.jp/entry/google-pixel-10a-price-up/ | 2026-11-01 |
+| 11 系日本価格・11 Pro XL ¥207,800〜 | VERIFIED | Google Store JP config ページ | 2026-11-01 |
+| 11 系日本発売 8/20・予約 8/12 | UNVERIFIED（報道のみ） | https://k-tai.watch.impress.co.jp/docs/news/2132520.html | 2026-11-01 |
+| A17 月例: 8月 CP2A.260805.005（6a/7a 配信なし）/ 9月 QPR1 CP3A.260905.009（9/15）/ 10月 CP3A.261005.002.A1・.005・CD1A.261005.003 | VERIFIED | source.android.com bulletin + 9to5google / droid-life 各月記事 | 2026-11-01 |
+| A17 ブートループ修正（7月）・ウィジェット消失修正（9月）・拡大+スワイプ逆転修正（9月）・モバイル接続修正（9月） | VERIFIED | https://www.androidcentral.com/phones/google-pixel/the-first-post-android-17-update-is-rolling-out-for-pixels-with-security-and-bug-fixes / https://9to5google.com/2026/09/15/android-17-september-pixel-update/ | 2026-11-01 |
+| A17 Wi-Fi のみ通信不可 =「仕事用プロファイル・Google 公認」 | 誤帰属 → UNVERIFIED | https://cybernews.com/tech/android-17-bug-google-pixel/ | 2026-11-01 |
+| Pixel 6 / 6 Pro 期限到達（2026/10） | VERIFIED（期限）/ 最終更新は報道 | 15738422 / https://www.droid-life.com/2026/10/21/pixel-6-pixel-7-updates-schedule-missing/ | 2026-11-01 |
+| 通話スクリーニング: 日本は手動のみ | 訂正 | https://support.google.com/phoneapp/answer/9118387 | 2026-11-01 |
+| 詐欺検出: 日本は Pixel 9 以降・a シリーズ対象外 | 訂正 | https://support.google.com/phoneapp/answer/15654065 | 2026-11-01 |
+| 通話メモ: Pixel 9 以降・a 対象外 | 追記 | https://support.google.com/phoneapp/answer/15257579 | 2026-11-01 |
+| レコーダー日本語: Pixel 3 以降（2021/12〜） | 訂正 | https://www.bcnretail.com/topics_detail8/20211229_258396.html / https://s-max.jp/archives/1812166.html | 2026-11-01 |
+| スマホ版アシスタント → Gemini 強制移行（2026/9/4〜） | UNVERIFIED（告知メール+報道） | https://www.itmedia.co.jp/mobile/articles/2608/06/news064.html | 2026-11-01 |
+| Gmailify / POP 取得終了（新規 2026Q1 後不可、既存 2027/1 まで） | 追記 | https://support.google.com/mail/answer/16604719 | 2026-11-01 |
+| answer/7126229 は設定値ページではなく「外部クライアント追加」方針ページ | 説明訂正 | https://support.google.com/mail/answer/7126229 | 2026-11-01 |
+| 旧リンク answer/7173456 の中身がインドの修理拠点ページ | 差し替え（9004345 / 9218411） | https://support.google.com/pixelphone/answer/9004345 | 2026-11-01 |
+| 4a バッテリー性能プログラム 2026-01-08 終了・日本対象外 | VERIFIED | https://support.google.com/pixelphone/answer/15701861 | 2026-11-01 |
+| 6a バッテリー性能プログラム（400回超で制限・2026-07-08 終了） | VERIFIED | https://support.google.com/pixelphone/answer/16340779 | 2026-11-01 |
+| 7a 電池膨張 延長修理（購入日から3年・日本対象） | VERIFIED | https://support.google.com/pixelphone/answer/16043453 | 2026-11-01 |
+| 9a「一部ロットで出荷前対策」 | 根拠なし → 削除（健全性アシスタント強制へ差し替え） | https://www.androidauthority.com/google-pixel-9a-battery-health-assistance-3540234 | 2026-11-01 |
+| 修理モード（名称・Android 14 2023/12 更新以降の Pixel） | 訂正 | https://support.google.com/pixelphone/answer/14266732?hl=ja | 2026-11-01 |
+| アンロック → 決済不可は「恒久」ではない（再ロックで回復） | 訂正 | https://developer.android.com/google/play/integrity/verdicts / https://support.google.com/wallet/answer/12200245?hl=ja | 2026-11-01 |
+| ARB: 2026-05 以降の新警告なし。10a は警告対象外 | VERIFIED | https://developers.google.com/android/images | 2026-11-01 |
+| `brew install --cask android-platform-tools` | VERIFIED | https://formulae.brew.sh/cask/android-platform-tools | 2026-11-01 |
+| サポート期限バーの幅（168か月軸で約5/6に縮んでいた） | 描画バグ修正 | 計算: (終了月−開始月)/168 | 2026-11-01 |

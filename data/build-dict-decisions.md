@@ -509,3 +509,24 @@ ota/images/bulletin を含まない検証用取得物が誤って最新スナッ
 - Pixel 11 系の機種別 EOL 日付 — support.google.com/pixelphone/answer/4457705 の 7 年保証記述のみで機種別日付なし
 - Pixel 11 系の ARB 有無 — CP2A.260805 系では発動なし、Pixel 11 個別機種の一次確認取れず
 - 上記は次回 monthly_collect.sh 実行時に自動反映される見込み (再凍結状態でも自動収集は継続)
+
+## D-2026-11-01 — 2.5か月分の取りこぼし是正 + 本体ページ全面再検証
+
+### 判断
+- 月2回の自動収集（launchd）は 2026-08-25 以降も未設置のままで、9月・10月の収集が 1 回も走っていなかった（status.json の last_collected=2026-08-24）。本日 `monthly_collect.sh` を手動で正規実行した。
+- **黙った取りこぼし（silent failure）を発見**: パーサの `SCOPE_PREFIXES` が許可リスト方式で、新プレフィックスを警告なしに捨てていた。
+  - `CD1A`（Pixel 11 系 cubs/grizzly/kodiak/yogi のデバイスローンチ列）は 2026-08 時点で OTA/Factory に掲載済みだったが除外されていた。前回 (2026-08-24/25) の「Pixel 11 対応完了」「コードネーム PENDING」は、この除外が原因の誤判定。
+  - `CP3A`（2026-09 初出。9/15 配信の Android 17 QPR1）も除外されていた。
+- 対処（バグ修正扱い・機能追加ではない）: `SCOPE_PREFIXES` に CP3A / CD1A を追加し、`TRACK_TABLE` に CP3A 2026-09=qpr / 2026-10=monthly、CD1A 2026-08=stable / 2026-09,10=monthly を既存の外挿規則どおり追加。builds.json 69→80 件。`tests/test_suffix_map.py` の件数基準を 80 に更新。3 ランナー 60/60 PASS。
+- `CD1A.261005.003.B1` の region 表記 "SB" はソース原文のまま残した（SoftBank の略と推測できるが、推測で正規化しない方針を維持）。
+- 再発防止の残課題（凍結方針上、本ジョブでは未実装）: 未知プレフィックスのビルドIDが ota.html にあるのに builds.json に 1 件も入らない場合に非0終了するチェック。次回の再開ゲートで判断する。
+- 不具合辞書 PXD-0003 をデータ訂正: 「仕事用プロファイルのバグと Google が公式に認めた」は誤帰属（Google 発言はウィジェット消失バグについて。cybernews 原文で確認）。verify_state を UNVERIFIED、mechanism.confidence を unknown に下げた。
+
+### 出典 URL
+- https://developers.google.com/android/ota / https://developers.google.com/android/images（data/raw/2026-11-01/）
+- https://source.android.com/docs/security/bulletin/pixel
+- https://cybernews.com/tech/android-17-bug-google-pixel/（PXD-0003 誤帰属の確認）
+- https://9to5google.com/2026/09/15/android-17-september-pixel-update/（CP3A = QPR1）
+
+### 変更対象
+- scripts/parse_builds.py / tests/test_suffix_map.py / docs/dict/data/builds.json / status.json / entries.json（PXD-0003）/ docs/index.html / docs/data/pixel-lineup.json / data/sources.md / docs/FROZEN.md
