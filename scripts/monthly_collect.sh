@@ -7,7 +7,10 @@
 #   2. scripts/parse_builds.py で docs/dict/data/builds.json を再生成
 #   3. tests/test_contract.py + scripts/decay_warning.py で検証
 #
-# git 操作は一切含めない（収集のみ。commit/push は人間が検証ゲートを通して行う）。
+# 4. （2026-11-17 追加）検証を全部通過し、docs/dict/data に差分があるときだけ commit して push する。
+#    本人指示「OS・システムアップデートがあれば随時変更し、台帳か git に記録する」による。
+#    それ以前は「git 操作は一切含めない（commit/push は人間）」だったが、常駐の設置ごと
+#    人間の残タスクのままで自動収集が一度も動かず（8/24・11/1 は手動実行）、検証ゲート通過を条件に自動化した。
 # ログは data/logs/monthly-collect-YYYY-MM-DD.log に常に残す。失敗時は非0で終了。
 set -euo pipefail
 
@@ -72,5 +75,17 @@ python3 "$REPO/tests/test_contract.py"
 python3 "$REPO/tests/test_suffix_map.py"
 python3 "$REPO/tests/test_suffix_fallback.py"
 python3 "$REPO/scripts/decay_warning.py"
+
+# --- 4. 記録（検証ゲートを全部通過したときだけここに来る: set -e） ------------
+cd "$REPO"
+if [ -z "$(git status --porcelain -- docs/dict/data)" ]; then
+  echo "record: docs/dict/data に差分なし（記録するものがない）"
+else
+  NEW_BUILDS="$(git diff --unified=0 -- docs/dict/data/builds.json | grep -cE '^\+.*"build_id"' || true)"
+  git add docs/dict/data
+  git commit -q -m "feat(dict): 自動収集 $TODAY（検証ゲート通過・新規ビルド行 ${NEW_BUILDS}）"
+  git push -q origin HEAD
+  echo "record: $(git log -1 --format='%h %s')"
+fi
 
 echo "=== monthly_collect done $(date '+%Y-%m-%d %H:%M:%S') ==="

@@ -17,7 +17,7 @@
 
 ## 月次自動収集の仕組み
 
-実体は `scripts/monthly_collect.sh`（収集のみ。git 操作は一切含めない。commit/push は人間が検証ゲートを通して行う）。
+実体は `scripts/monthly_collect.sh`。2026-11-17 から、検証を全部通過し `docs/dict/data` に差分があるときだけ自動で commit / push する（それ以前は「git 操作は一切含めない。commit/push は人間」）。
 
 1. **スナップショット取得**: 4 ソースを `data/raw/$(date +%F)/` に保存する。
    - `developers.google.com/android/ota` → `ota.html`（同意壁回避のため cookie `devsite_wall_acks=nexus-ota-tos` を付与）
@@ -35,6 +35,7 @@
 - **毎月 10 日 03:00 と 20 日 03:00 の月 2 回**（StartCalendarInterval の 2 要素配列）。月 2 回化は 2026-07-30 変更で、A17 正式版 6/16・Feature Drop 11/11・QPR2 2 次更新 12/19 など 10 日単発では拾えない月中〜月末配信の取りこぼし防止が理由。
 - 実行コマンドは `/bin/bash -c 'exec "$HOME/taka-pixel-reference/scripts/monthly_collect.sh"'`（launchd は StandardOutPath 等で環境変数を展開しないため、stdout/stderr は `/tmp/com.taka.pixel-builds-monthly.{out,err}.log` 固定）。
 - 注意: plist の LaunchAgents への設置（`launchctl bootstrap`）は人間ゲート運用で、**凍結時点では未設置**（MEMORY: launchd 月2回版設置は人間の残タスク）。
+- **2026-11-17 設置済み**: 上の残タスクが実行されず、自動収集は一度も動いていなかった（2026-08-24 と 2026-11-01 は手動実行。台帳の「登録されていない設定ファイル」検知で発見）。本人指示で `~/Library/LaunchAgents/` に設置し `launchctl bootstrap` した。
 
 ## 鮮度バナー
 
@@ -59,3 +60,4 @@
 - **2026-08-24 (Pixel 11 系リリース対応)**: 再開条件 3 を追加。Android 17 は既存プレフィックス継続（新プレフィックス無し）だが、Pixel 11 系の新機種コードネームが Factory Image / OTA に掲載されたため、条件 2 のみでは拾えず条件 3 を追加した。ポリシー変更は人間承認済み。手コピー禁止・正規パイプライン (monthly_collect.sh → parse_builds.py → 3 テストランナー) を通し、判断ログ (data/build-dict-decisions.md) に反映する。
 - **2026-08-25 (再凍結・条件表記の是正)**: 条件 2 を「Android 18 リリース」から「新 Android メジャー版のリリース（Android 18 等）」へ一般化した。旧表記は特定バージョンに固執し、Android 19 等の後続メジャー版で拾えなくなる proxy ずれのため。Pixel 11 系対応の更新 (Job1 の CP2A.260805.005 + .A1 収載) は完了、本日以降は再凍結状態 (月2回自動収集と鮮度バナーのみで運用)。人間承認済み。Deck 6 ラボへの二層テンプレ適用 (Job2) は本体反映済みだが、reference (PXL / DICT) への同適用は `docs/two-lens-proposed-diff.md` として提案止まりで、次回再開ゲート発動時に一括判断する。
 - **2026-11-01 (取りこぼし是正・バグ修正)**: launchd 未設置のため 9〜10 月の収集が未実行だった。手動で正規パイプラインを実行し、パーサの許可リストが CP3A（Android 17 QPR1）と CD1A（Pixel 11 系）を黙って除外していたバグを修正（69→80 件、60/60 PASS）。凍結方針は維持（機能追加なし）。詳細は判断ログ D-2026-11-01。
+- **2026-11-17 (運用方針の変更・機能追加ではない)**: 本人指示「Pixel は OS・システムアップデートがあれば随時変更し、台帳か git に記録する」。2026-11-01 の手動実行で内容は追いついていたが、常駐は未設置のままだった。対応は (1) 月 2 回収集の常駐を設置、(2) 検証ゲート通過かつ差分ありのときの自動 commit / push を `monthly_collect.sh` に追加、の 2 点。スキーマ・UI・ソースは変えていない。検知は月 2 回の見に行き方式のままなので、配信から反映まで最長で約 20 日遅れる（Google 側に通知の仕組みが無く、アクセス回数は増やさない判断）。
